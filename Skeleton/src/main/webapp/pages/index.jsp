@@ -28,7 +28,7 @@
             <label class="control-label" for="field-password-login">Password</label>
 
             <div class="controls">
-                <form:input path="password" id="field-password-login" tabindex="1" maxlength="45" placeholder="Password"/>
+                <form:password path="password" id="field-password-login" tabindex="1" maxlength="45" placeholder="Password"/>
                 <form:errors path="password" cssClass="help-inline" element="span"/>
             </div>
         </div>

@@ -17,6 +17,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String password; //TODO: cascade 1 to 1?
     
     @OneToOne(cascade = {CascadeType.ALL})
     private Address address; 
@@ -61,6 +62,15 @@ public class User {
 		this.address = address;
 	}
 
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+	
+	public String getPassword()
+	{
+		return password;
+	}
     
 	
 	

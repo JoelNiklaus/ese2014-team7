@@ -9,6 +9,8 @@ public class SignupForm {
     private Long id;
     private String firstName;
     private String lastName;
+    
+    //TODO: add password and address and save them to db!
 
 
     @NotNull
