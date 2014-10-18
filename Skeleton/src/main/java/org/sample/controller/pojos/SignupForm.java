@@ -10,13 +10,15 @@ public class SignupForm {
     private String firstName;
     private String lastName;
     
-    //TODO: add password and address and save them to db!
+    //TODO: maybe add a password table?
 
 
     @NotNull
     @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", 
     message = "Must be valid email address")
     private String email;
+    
+    private String password;
 
     public String getFirstName() {
         return firstName;
@@ -48,5 +50,15 @@ public class SignupForm {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public void setPassword(String password)
+    {
+    	this.password = password;
+    }
+    
+    public String getPassword()
+    {
+    	return password;
     }
 }

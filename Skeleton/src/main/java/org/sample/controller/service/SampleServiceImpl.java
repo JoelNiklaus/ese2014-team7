@@ -39,6 +39,7 @@ public class SampleServiceImpl implements SampleService {
         user.setEmail(signupForm.getEmail());
         user.setLastName(signupForm.getLastName());
         user.setAddress(address);
+        user.setPassword(signupForm.getPassword());
         
         user = userDao.save(user);   // save object to DB
         

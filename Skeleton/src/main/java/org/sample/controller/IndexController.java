@@ -6,6 +6,7 @@ import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.SampleService;
+import org.sample.model.User;
 import org.sample.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,9 +50,20 @@ public class IndexController {
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@Valid LoginForm loginForm, BindingResult result, RedirectAttributes redirectAttributes) {
-    	
+    	ModelAndView model;
     	//TODO: try and get User by login data. If fails, return invalid user model
-    	ModelAndView model = new ModelAndView("profile");
+    	try
+    	{
+    		User user = sampleService.getUser(loginForm);
+    		model = new ModelAndView("profile");
+    	}
+    	catch(InvalidUserException ex)
+    	{
+    		model = new ModelAndView("index");
+        	model.addObject("signupForm", new SignupForm());
+        	model.addObject("loginForm", new LoginForm());
+    	}
+    	 
     	return model;
     }
     

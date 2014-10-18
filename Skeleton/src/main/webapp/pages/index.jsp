@@ -24,6 +24,7 @@
             </div>
         </div>
         
+        <%-- TODO: not sure what that emailErrors does, but probably not appropriate here... --%>
         <div class="control-group<c:if test="${not empty emailErrors}"> error</c:if>">
             <label class="control-label" for="field-password-login">Password</label>
 
@@ -70,6 +71,18 @@
                 <form:errors path="lastName" cssClass="help-inline" element="span"/>
             </div>
         </div>
+        
+        <%-- TODO: not sure what that emailErrors does, but probably not appropriate here... --%>
+        <%-- TODO: maybe check for some pw rules, such as length, using number etc. --%>
+        <div class="control-group<c:if test="${not empty emailErrors}"> error</c:if>">
+            <label class="control-label" for="field-password">Password</label>
+
+            <div class="controls">
+                <form:password path="password" id="field-password" tabindex="1" maxlength="45" placeholder="Password"/>
+                <form:errors path="password" cssClass="help-inline" element="span"/>
+            </div>
+        </div>
+        
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Sign up</button>
             <button type="button" class="btn">Cancel</button>
