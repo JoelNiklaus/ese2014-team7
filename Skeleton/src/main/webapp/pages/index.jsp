@@ -7,12 +7,43 @@
 <c:import url="template/header.jsp" />
 
 
-<h1>Sign Up Here!</h1>
+<h1>Login or Register</h1>
 
 
-<form:form method="post" modelAttribute="signupForm" action="create" id="signupForm" cssClass="form-horizontal"  autocomplete="off">
+<form:form method="post" modelAttribute="loginForm" action="login" id="signupForm" cssClass="form-horizontal"  autocomplete="off">
     <fieldset>
-        <legend>Enter Your Information</legend>
+        <legend>Login:</legend>
+
+        <c:set var="emailErrors"><form:errors path="email"/></c:set>
+        <div class="control-group<c:if test="${not empty emailErrors}"> error</c:if>">
+            <label class="control-label" for="field-email">Email</label>
+
+            <div class="controls">
+                <form:input path="email" id="field-email-login" tabindex="1" maxlength="45" placeholder="Email"/>
+                <form:errors path="email" cssClass="help-inline" element="span"/>
+            </div>
+        </div>
+        
+        <div class="control-group<c:if test="${not empty emailErrors}"> error</c:if>">
+            <label class="control-label" for="field-password-login">Password</label>
+
+            <div class="controls">
+                <form:input path="password" id="field-password-login" tabindex="1" maxlength="45" placeholder="Password"/>
+                <form:errors path="password" cssClass="help-inline" element="span"/>
+            </div>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="button" class="btn">Cancel</button>
+        </div>
+    </fieldset>
+</form:form>
+
+
+<form:form method="post" modelAttribute="signupForm" action="register" id="signupForm" cssClass="form-horizontal"  autocomplete="off">
+    <fieldset>
+        <legend>Not a member? Register here:</legend>
 
         <c:set var="emailErrors"><form:errors path="email"/></c:set>
         <div class="control-group<c:if test="${not empty emailErrors}"> error</c:if>">
@@ -45,6 +76,7 @@
         </div>
     </fieldset>
 </form:form>
+
 
 
 

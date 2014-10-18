@@ -3,6 +3,7 @@ package org.sample.controller;
 import javax.validation.Valid;
 
 import org.sample.controller.exceptions.InvalidUserException;
+import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +24,18 @@ public class IndexController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
     	ModelAndView model = new ModelAndView("index");
-    	model.addObject("signupForm", new SignupForm());    	
+    	model.addObject("signupForm", new SignupForm());
+    	model.addObject("loginForm", new LoginForm());
         return model;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView create(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelAndView register(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;    	
     	if (!result.hasErrors()) {
             try {
             	sampleService.saveFrom(signupForm);
-            	model = new ModelAndView("show");
+            	model = new ModelAndView("profile");
             } catch (InvalidUserException e) {
             	model = new ModelAndView("index");
             	model.addObject("page_error", e.getMessage());
@@ -43,6 +45,14 @@ public class IndexController {
         }   	
     	return model;
     }
+    
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ModelAndView login(@Valid LoginForm loginForm, BindingResult result, RedirectAttributes redirectAttributes) {
+    	ModelAndView model = new ModelAndView("profile");
+    	return model;
+    }
+    
+    
     
     @RequestMapping(value = "/security-error", method = RequestMethod.GET)
     public String securityError(RedirectAttributes redirectAttributes) {
