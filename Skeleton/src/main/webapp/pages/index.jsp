@@ -84,9 +84,18 @@
         </div>
         
         <div class="control-group">
+            <label class="control-label" for="field-password">Confirm Password</label>
+
+            <div class="controls">
+                <form:password path="passwordConfirm" id="field-password-confirm" tabindex="7" maxlength="45" placeholder="Confirm Password"/>
+                <form:errors path="passwordConfirm" cssClass="help-inline" element="span"/>
+            </div>
+        </div>
+        
+        <div class="control-group">
             <label class="control-label" for="field-street">Street</label>
             <div class="controls">
-                <form:input path="street" id="field-street" tabindex="7" maxlength="45" placeholder="Street"/>
+                <form:input path="street" id="field-street" tabindex="8" maxlength="45" placeholder="Street"/>
                 <form:errors path="street" cssClass="help-inline" element="span"/>
             </div>
         </div>
@@ -94,7 +103,7 @@
          <div class="control-group">
             <label class="control-label" for="field-houseNr">House Nr.</label>
             <div class="controls">
-                <form:input path="houseNr" id="field-houseNr" tabindex="8" maxlength="45" placeholder="House Nr."/>
+                <form:input path="houseNr" id="field-houseNr" tabindex="9" maxlength="45" placeholder="House Nr."/>
                 <form:errors path="houseNr" cssClass="help-inline" element="span"/>
             </div>
         </div>
@@ -102,7 +111,7 @@
          <div class="control-group">
             <label class="control-label" for="field-city">City</label>
             <div class="controls">
-                <form:input path="city" id="field-city" tabindex="9" maxlength="45" placeholder="City"/>
+                <form:input path="city" id="field-city" tabindex="10" maxlength="45" placeholder="City"/>
                 <form:errors path="city" cssClass="help-inline" element="span"/>
             </div>
         </div>
@@ -110,7 +119,7 @@
         <div class="control-group">
             <label class="control-label" for="field-zip">Zip Code</label>
             <div class="controls">
-                <form:input path="zip" id="field-zip" tabindex="10" maxlength="45" placeholder="ZIP"/>
+                <form:input path="zip" id="field-zip" tabindex="11" maxlength="45" placeholder="ZIP"/>
                 <form:errors path="zip" cssClass="help-inline" element="span"/>
             </div>
         </div>

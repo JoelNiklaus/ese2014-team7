@@ -19,7 +19,11 @@ public class SignupForm {
     private String email;
     
     private String password;
-    private String street;
+    private String passwordConfirm;
+    
+   
+
+	private String street;
     private int houseNr;
     private String city;
     private int zip;
@@ -97,4 +101,12 @@ public class SignupForm {
     {
     	return password;
     }
+    
+    public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
 }

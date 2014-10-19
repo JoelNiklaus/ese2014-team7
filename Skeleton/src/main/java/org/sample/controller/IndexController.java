@@ -35,8 +35,11 @@ public class IndexController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;    	
-    	if (!result.hasErrors()) {
+    	if (!result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())) {
             try {
+            	//TODO: for password mismatch: can we put other, valid info as default when returning to register page, 
+            	//so user doesn't have to start all over?
+            	
             	sampleService.saveFrom(signupForm);
             	
             	LoginForm loginForm = registerToLogin(signupForm);
@@ -51,6 +54,8 @@ public class IndexController {
             }
         } else {
         	model = new ModelAndView("index");
+        	model.addObject("signupForm", new SignupForm());
+        	model.addObject("loginForm", new LoginForm());
         }   	
     	return model;
     }
