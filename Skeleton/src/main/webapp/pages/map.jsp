@@ -21,34 +21,31 @@
 		var geocoder;
 		var map;
 
-	  function loadMap() {
-		  geocoder = new google.maps.Geocoder();
+		function loadMap() {
+			geocoder = new google.maps.Geocoder();
 
-	    var latlng = new google.maps.LatLng(46.9512905,7.4385747);
-	    var myOptions = {
-	      zoom: 17,
-	      center: latlng,
-	      mapTypeId: google.maps.MapTypeId.ROADMAP
-	    };
-	    map = new google.maps.Map(document.getElementById("map_container"),myOptions);
+			var latlng = new google.maps.LatLng(46.9512905,7.4385747);
+			var mapOptions = {
+				zoom: 17,
+				center: latlng,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			map = new google.maps.Map(document.getElementById("map_container"),mapOptions);
 	 
-	    var address = "${Address}";
-  	  	var geocoder = geocoder.geocode( { 'address': address}, function(results, status) {
-	  	    if (status == google.maps.GeocoderStatus.OK) {
-	  	      map.setCenter(results[0].geometry.location);
-	  	      var marker = new google.maps.Marker({
-	  	          map: map,
-	  	          position: results[0].geometry.location,
-	  	          title: "${Address}"
-	  	      });
-	  	    } else {
-	  	      alert('Geocode was not successful for the following reason: ' + status);
-	  	    }
-	
-		   });
-
-	 
-	  }
+			var address = "${Address}";
+			var geocoder = geocoder.geocode( { 'address': address}, function(results, status) {
+		  	    if (status == google.maps.GeocoderStatus.OK) {
+					map.setCenter(results[0].geometry.location);
+					var marker = new google.maps.Marker({
+						map: map,
+						position: results[0].geometry.location,
+						title: "${Address}"
+					});
+				} else {
+					alert('Geocode was not successful for the following reason: ' + status);
+				}
+			});
+		}
 	</script>
 	 
 	<body onload="loadMap()">
