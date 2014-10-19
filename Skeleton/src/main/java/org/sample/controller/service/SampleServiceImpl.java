@@ -31,14 +31,12 @@ public class SampleServiceImpl implements SampleService {
         }
 
 
-        Address address = new Address();
-        address.setStreet("TestStreet-foo");
+        
         
         User user = new User();
         user.setFirstName(signupForm.getFirstName());
         user.setEmail(signupForm.getEmail());
         user.setLastName(signupForm.getLastName());
-        user.setAddress(address);
         user.setPassword(signupForm.getPassword());
         
         user = userDao.save(user);   // save object to DB
@@ -46,6 +44,14 @@ public class SampleServiceImpl implements SampleService {
        // Iterable<Address> addresses = addDao.findAll();  // find all 
        //Address anAddress = addDao.findOne((long)3); // find by ID
         
+        Address address = new Address();
+        address.setId(user.getId());
+        address.setStreet(signupForm.getStreet());
+        address.setHouseNr(signupForm.getHouseNr());
+        address.setCity(signupForm.getCity());
+        address.setZip(signupForm.getZip());
+        address = addDao.save(address);
+     
         
         signupForm.setId(user.getId());
 
@@ -63,6 +69,14 @@ public class SampleServiceImpl implements SampleService {
     		throw new InvalidUserException("E-Mail or password incorrect");
     	
     	return user;
+    }
+    
+    @Transactional 
+    public Address getAddress(long userID)
+    {
+    	Address add = new Address();
+    	add = addDao.findOne(userID);
+    	return add;
     }
     
     private User filterResults(Iterable<User> users, String email, String password)

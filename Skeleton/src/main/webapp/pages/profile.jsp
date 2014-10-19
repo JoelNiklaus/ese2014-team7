@@ -26,11 +26,11 @@
 		</tr>
 		<tr>
 			<td><strong>Street</strong></td> 
-			<td>[TBA]</td>
+			<td><c:out value="${address.street}"/>, <c:out value="${address.houseNr}"/></td>
 		</tr>
 		<tr>
 			<td><strong>City</strong></td> 
-			<td>[TBA]</td>
+			<td><c:out value="${address.city}"/>, <c:out value="${address.zip}"/></td>
 		</tr>
 	</table>
 

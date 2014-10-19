@@ -15,6 +15,7 @@ public class LoginForm {
     
     private String password;
     
+    
     //TODO: what happens with incomplete entries?
 
     public String getEmail() {

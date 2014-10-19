@@ -6,6 +6,7 @@ import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.SampleService;
+import org.sample.model.Address;
 import org.sample.model.User;
 import org.sample.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +35,27 @@ public class IndexController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;    	
-    	if (!result.hasErrors()) {
+    	if (!result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())) {
             try {
+            	//TODO: for password mismatch: can we put other, valid info as default when returning to register page, 
+            	//so user doesn't have to start all over?
+            	
             	sampleService.saveFrom(signupForm);
+            	
+            	LoginForm loginForm = registerToLogin(signupForm);
+            	User user = sampleService.getUser(loginForm);
+        		Address add = sampleService.getAddress(user.getId());
             	model = new ModelAndView("profile");
+            	model.addObject("user", user);
+        		model.addObject("address", add);
             } catch (InvalidUserException e) {
             	model = new ModelAndView("index");
             	model.addObject("page_error", e.getMessage());
             }
         } else {
         	model = new ModelAndView("index");
+        	model.addObject("signupForm", new SignupForm());
+        	model.addObject("loginForm", new LoginForm());
         }   	
     	return model;
     }
@@ -54,15 +66,11 @@ public class IndexController {
     	try
     	{
     		User user = sampleService.getUser(loginForm);
-    		System.out.println(user.getEmail());
-    		model = new ModelAndView("profile");
+    		Address add = sampleService.getAddress(user.getId());
     		
-    		
+    		model = new ModelAndView("profile");   		
     		model.addObject("user", user);
-    		model.addObject("email", user.getEmail());
-    		//model.addObject("password", user.getPassword());
-    		//model.addObject("firstName", user.getFirstName());
-    		//model.addObject("lastName", user.getLastName());
+    		model.addObject("address", add);
     	}
     	catch(InvalidUserException ex)
     	{
@@ -73,6 +81,14 @@ public class IndexController {
     	return model;
     }
     
+    
+    private LoginForm registerToLogin(SignupForm signupForm)
+    {
+    	LoginForm login = new LoginForm();
+    	login.setEmail(signupForm.getEmail());
+    	login.setPassword(signupForm.getPassword());
+    	return login;
+    }
     
     
     @RequestMapping(value = "/security-error", method = RequestMethod.GET)
