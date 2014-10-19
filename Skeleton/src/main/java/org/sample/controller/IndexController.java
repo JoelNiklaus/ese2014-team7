@@ -35,7 +35,7 @@ public class IndexController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;    	
-    	if (!result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())) {
+    	if (signupIsOkay(result, signupForm)) {
             try {
             	//TODO: for password mismatch: can we put other, valid info as default when returning to register page, 
             	//so user doesn't have to start all over?
@@ -95,6 +95,14 @@ public class IndexController {
     public String securityError(RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("page_error", "You do have have permission to do that!");
         return "redirect:/";
+    }
+    
+    private boolean signupIsOkay(BindingResult result, SignupForm signupForm)
+    {
+    	boolean okay = !result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())
+    				&& !sampleService.emailAlreadyExists(signupForm.getEmail()) && !signupForm.hasNull();
+    	System.out.println("okay: " + okay);
+    	return okay;
     }
 
 }

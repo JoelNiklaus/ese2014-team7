@@ -29,8 +29,6 @@ public class SampleServiceImpl implements SampleService {
         if(!StringUtils.isEmpty(firstName) && "ESE".equalsIgnoreCase(firstName)) {
             throw new InvalidUserException("Sorry, ESE is not a valid name");   // throw exception
         }
-
-
         
         
         User user = new User();
@@ -89,5 +87,25 @@ public class SampleServiceImpl implements SampleService {
     			user = u;
     	}
     	return user;
+    }
+    
+    public boolean emailAlreadyExists(String email)
+    {
+    	boolean exists = false;
+    	
+    	Iterable<User> users = userDao.findAll();
+    	
+    	SEARCH_MATCH:
+    	for(User u: users)
+    	{
+    		if((u.getEmail().equals(email)))
+    		{
+    			exists = true;
+    			break SEARCH_MATCH;
+    		}
+    			
+    	}
+    	
+    	return exists;
     }
 }

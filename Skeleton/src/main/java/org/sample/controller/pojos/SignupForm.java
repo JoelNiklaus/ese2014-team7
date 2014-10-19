@@ -20,8 +20,7 @@ public class SignupForm {
     
     private String password;
     private String passwordConfirm;
-    
-   
+
 
 	private String street;
     private int houseNr;
@@ -108,5 +107,19 @@ public class SignupForm {
 
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
+	}
+	
+	/**
+	 * Checks if one of the mandatory properties (email, password...) is null
+	 * 
+	 * @return true if at least one mandatory property is null, false else
+	 */
+	public boolean hasNull()
+	{
+		boolean hasNull = (email == "") || (firstName == "") || (lastName == "") || (password == "") 
+					   || (street == "")  || (houseNr == 0)  || (city == "")  || (zip == 0);
+		System.out.println("has null: " + hasNull);
+		System.out.println("city: " + city);
+		return hasNull;
 	}
 }

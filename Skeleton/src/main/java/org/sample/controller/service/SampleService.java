@@ -13,5 +13,7 @@ public interface SampleService {
     public User getUser(LoginForm loginForm) throws InvalidUserException;
     
     public Address getAddress(long userID);
+    
+    public boolean emailAlreadyExists(String email);
 
 }

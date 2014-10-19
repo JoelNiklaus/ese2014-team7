@@ -117,7 +117,7 @@
         </div>
         
         <div class="control-group">
-            <label class="control-label" for="field-zip">Zip Code</label>
+            <label class="control-label" for="field-zip">ZIP Code</label>
             <div class="controls">
                 <form:input path="zip" id="field-zip" tabindex="11" maxlength="45" placeholder="ZIP"/>
                 <form:errors path="zip" cssClass="help-inline" element="span"/>
