@@ -1,0 +1,18 @@
+2014-10-19 19:00:52,795 [Worker-3] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: Skeleton:Skeleton:1.0 @ /Users/joelniklaus/Google Drive/Studium/Informatik/Einführung in Software Engineering/Uebungen/team7/Skeleton/pom.xml.
+2014-10-19 19:00:53,177 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-10-19 19:00:53,179 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/joelniklaus/Google Drive/Studium/Informatik/Einführung in Software Engineering/Uebungen/team7/Skeleton/src/main/resources
+2014-10-19 19:00:53,180 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/joelniklaus/Google Drive/Studium/Informatik/Einführung in Software Engineering/Uebungen/team7/Skeleton/src/main/resources
+2014-10-19 19:00:53,183 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-10-19 19:00:53,183 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/joelniklaus/Google Drive/Studium/Informatik/Einführung in Software Engineering/Uebungen/team7/Skeleton/src/test/resources
+2014-10-19 19:00:57,811 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-10-19 19:00:57,812 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/joelniklaus/Google Drive/Studium/Informatik/Einführung in Software Engineering/Uebungen/team7/Skeleton/src/main/resources
+2014-10-19 19:00:57,812 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/joelniklaus/Google Drive/Studium/Informatik/Einführung in Software Engineering/Uebungen/team7/Skeleton/src/main/resources
+2014-10-19 19:00:57,813 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-10-19 19:00:57,813 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/joelniklaus/Google Drive/Studium/Informatik/Einführung in Software Engineering/Uebungen/team7/Skeleton/src/test/resources
+2014-10-19 19:01:00,197 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-10-19 19:01:00,198 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/joelniklaus/Google Drive/Studium/Informatik/Einführung in Software Engineering/Uebungen/team7/Skeleton/src/main/resources
+2014-10-19 19:01:00,198 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/joelniklaus/Google Drive/Studium/Informatik/Einführung in Software Engineering/Uebungen/team7/Skeleton/src/main/resources
+2014-10-19 19:01:00,199 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-10-19 19:01:00,200 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/joelniklaus/Google Drive/Studium/Informatik/Einführung in Software Engineering/Uebungen/team7/Skeleton/src/test/resources
+2014-10-19 19:01:27,244 [Worker-7] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/joelniklaus/Google Drive/Studium/Informatik/Einführung in Software Engineering/Uebungen/team7/Skeleton
+2014-10-19 19:01:27,245 [Worker-7] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B jetty:stop jetty:run
