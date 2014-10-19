@@ -6,6 +6,7 @@ import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.SampleService;
+import org.sample.model.Address;
 import org.sample.model.User;
 import org.sample.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,13 @@ public class IndexController {
     	if (!result.hasErrors()) {
             try {
             	sampleService.saveFrom(signupForm);
+            	
+            	LoginForm loginForm = registerToLogin(signupForm);
+            	User user = sampleService.getUser(loginForm);
+        		Address add = sampleService.getAddress(user.getId());
             	model = new ModelAndView("profile");
+            	model.addObject("user", user);
+        		model.addObject("address", add);
             } catch (InvalidUserException e) {
             	model = new ModelAndView("index");
             	model.addObject("page_error", e.getMessage());
@@ -54,15 +61,11 @@ public class IndexController {
     	try
     	{
     		User user = sampleService.getUser(loginForm);
-    		System.out.println(user.getEmail());
-    		model = new ModelAndView("profile");
+    		Address add = sampleService.getAddress(user.getId());
     		
-    		
+    		model = new ModelAndView("profile");   		
     		model.addObject("user", user);
-    		model.addObject("email", user.getEmail());
-    		//model.addObject("password", user.getPassword());
-    		//model.addObject("firstName", user.getFirstName());
-    		//model.addObject("lastName", user.getLastName());
+    		model.addObject("address", add);
     	}
     	catch(InvalidUserException ex)
     	{
@@ -73,6 +76,14 @@ public class IndexController {
     	return model;
     }
     
+    
+    private LoginForm registerToLogin(SignupForm signupForm)
+    {
+    	LoginForm login = new LoginForm();
+    	login.setEmail(signupForm.getEmail());
+    	login.setPassword(signupForm.getPassword());
+    	return login;
+    }
     
     
     @RequestMapping(value = "/security-error", method = RequestMethod.GET)
