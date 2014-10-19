@@ -62,7 +62,7 @@ public class SampleServiceImpl implements SampleService {
     	if(user == null)
     		throw new InvalidUserException("E-Mail or password incorrect");
     	
-    	return null;
+    	return user;
     }
     
     private User filterResults(Iterable<User> users, String email, String password)
@@ -74,8 +74,6 @@ public class SampleServiceImpl implements SampleService {
     		if((u.getEmail().equals(email)) && (u.getPassword().equals(password)))
     			user = u;
     	}
-  
-    	//TODO: find user to match name/pw combination and return it. Return null if doesn't exist.
     	return user;
     }
 }

@@ -51,11 +51,18 @@ public class IndexController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@Valid LoginForm loginForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;
-    	//TODO: try and get User by login data. If fails, return invalid user model
     	try
     	{
     		User user = sampleService.getUser(loginForm);
+    		System.out.println(user.getEmail());
     		model = new ModelAndView("profile");
+    		
+    		
+    		model.addObject("user", user);
+    		model.addObject("email", user.getEmail());
+    		//model.addObject("password", user.getPassword());
+    		//model.addObject("firstName", user.getFirstName());
+    		//model.addObject("lastName", user.getLastName());
     	}
     	catch(InvalidUserException ex)
     	{
@@ -63,7 +70,6 @@ public class IndexController {
         	model.addObject("signupForm", new SignupForm());
         	model.addObject("loginForm", new LoginForm());
     	}
-    	 
     	return model;
     }
     
