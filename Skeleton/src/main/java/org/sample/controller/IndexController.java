@@ -32,17 +32,7 @@ public class IndexController {
         return model;
     }
 
-    @RequestMapping(value = "/createAd", method = RequestMethod.POST)
-    public ModelAndView createAd(@Valid AdForm adForm, BindingResult result, RedirectAttributes redirectAttributes){
-    	ModelAndView model;
-    	if (!result.hasErrors()){
-    			sampleService.saveFrom(adForm);
-        		model = new ModelAndView("adCreated");	
-    	}else{
-    		model = new ModelAndView("createAd");
-    	}
-    	return model;
-    }
+
     
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
