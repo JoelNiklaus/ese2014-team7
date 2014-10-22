@@ -25,17 +25,7 @@ public interface LoginService {
 	 * @param 	adForm									the filled out form from the ad creation
 	 * @return 	the adForm after DB transaction
 	 */
-    public AdForm saveFrom(AdForm adForm);
     
-    /**
-     * Fetches user from DB by information entered into login form.
-     * 
-     * @param 	loginForm					the filled out form containing the
-     * 										login information
-     * @return	the user matching the login information (i.e. email/password combination)
-     * @throws 	InvalidUserException		if requested email/password combination doesn't
-     * 										exist.
-     */
     public User getUser(LoginForm loginForm) throws InvalidUserException;
     
     /**
