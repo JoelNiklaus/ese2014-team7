@@ -1,6 +1,7 @@
 package org.sample.controller.service;
 
 import org.sample.controller.exceptions.InvalidUserException;
+import org.sample.controller.pojos.AdForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.model.Address;
@@ -16,6 +17,14 @@ public interface SampleService {
 	 * @throws 	InvalidUserException					if first name is "ESE"
 	 */
     public SignupForm saveFrom(SignupForm signupForm) throws InvalidUserException;
+    
+    /**
+	 * Saves Data from AdForm to DB.
+	 * 
+	 * @param 	adForm									the filled out form from the ad creation
+	 * @return 	the adForm after DB transaction
+	 */
+    public AdForm saveFrom(AdForm adForm);
     
     /**
      * Fetches user from DB by information entered into login form.

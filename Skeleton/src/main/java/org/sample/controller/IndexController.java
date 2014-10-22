@@ -3,12 +3,12 @@ package org.sample.controller;
 import javax.validation.Valid;
 
 import org.sample.controller.exceptions.InvalidUserException;
+import org.sample.controller.pojos.AdForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.SampleService;
 import org.sample.model.Address;
 import org.sample.model.User;
-import org.sample.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -32,6 +32,18 @@ public class IndexController {
         return model;
     }
 
+    @RequestMapping(value = "/createAd", method = RequestMethod.POST)
+    public ModelAndView createAd(@Valid AdForm adForm, BindingResult result, RedirectAttributes redirectAttributes){
+    	ModelAndView model;
+    	if (!result.hasErrors()){
+    			sampleService.saveFrom(adForm);
+        		model = new ModelAndView("adCreated");	
+    	}else{
+    		model = new ModelAndView("createAd");
+    	}
+    	return model;
+    }
+    
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;    	
@@ -80,7 +92,6 @@ public class IndexController {
     	}
     	return model;
     }
-    
     
     private LoginForm registerToLogin(SignupForm signupForm)
     {
