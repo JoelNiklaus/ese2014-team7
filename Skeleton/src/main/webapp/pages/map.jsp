@@ -19,11 +19,11 @@
 			height:450px;
 		}
 	</style>
-		<div id="map"></div>
+	<div id="map"></div>
 	<script>
 	
 		// create a map in the "map" div, set the view to a given place and zoom
-			var map = L.map('map').setView(["${Coordinates.lat}]", "${Coordinates.lon}]"], 15);
+			var map = L.map('map').setView([46.9467726,7.4442328], 15);
 		
 
 
@@ -33,19 +33,31 @@
 		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(map);
 
-		// add a marker in the given location, attach some popup content to it and open the popup
-		L.marker(["${Coordinates.lat}]","${Coordinates.lon}]"]).addTo(map)
-		    .bindPopup("${shortDescription}")
-		    .openPopup();
-		
+		function setMarker(lat, lon, shortDescriptoin) {
+			L.marker([lat,lon]).addTo(map)
+			    .bindPopup(shortDescriptoin);
+			    //.openPopup();
+		};
+
+
 		// center marker on click
 		map.on('popupopen', function(e) {
 		    var px = map.project(e.popup._latlng);
 		    px.y -= e.popup._container.clientHeight/2
 		    map.panTo(map.unproject(px),{animate: true});
+		    
+		   
 		});
 			
 	</script>
+	<c:if test="${not empty adList}">
+		<c:forEach var="ad" items="${adList}">
+			<script type="text/javascript">
+				setMarker("${ad.lat}","${ad.lon}","<b>${ad.title}</b> <br /> ${ad.street} ${ad.houseNr} <br /> ${ad.city} ${ad.zip} <br /> <a href='ad?adId=${ad.ad_Id}'>open</a>");
+			</script>
+		</c:forEach>
+	</c:if>
+
 
 	<c:if test="${page_error != null }">
         <div class="alert alert-error">
