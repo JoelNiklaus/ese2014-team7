@@ -8,49 +8,7 @@
 
 
 <h1>Map</h1>
-<!--
-	<style type="text/css">
-	div#map_container{
-		width:100%;
-		height:450px;
-	}
-	</style>
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
-	 
-	<script type="text/javascript">
-		var geocoder;
-		var map;
-
-		function loadMap() {
-			geocoder = new google.maps.Geocoder();
-
-			var latlng = new google.maps.LatLng(46.9512905,7.4385747);
-			var mapOptions = {
-				zoom: 17,
-				center: latlng,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-			map = new google.maps.Map(document.getElementById("map_container"),mapOptions);
-	 
-			var address = "${Address}";
-			var geocoder = geocoder.geocode( { 'address': address}, function(results, status) {
-		  	    if (status == google.maps.GeocoderStatus.OK) {
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker({
-						map: map,
-						position: results[0].geometry.location,
-						title: "${Address}"
-					});
-				} else {
-					alert('Geocode was not successful for the following reason: ' + status);
-				}
-			});
-		}
-	</script>
-	 
-	<body onload="loadMap()">
-	<div id="map_container"></div>-->
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 	<link rel="stylesheet" href="/Skeleton/css/Control.Geocoder.css" />
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>

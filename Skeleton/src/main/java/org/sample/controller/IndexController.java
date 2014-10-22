@@ -7,7 +7,6 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 import org.sample.controller.exceptions.InvalidUserException;
-import org.sample.controller.pojos.AdForm;
 import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;

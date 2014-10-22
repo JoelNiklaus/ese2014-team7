@@ -28,6 +28,8 @@ public class Ad {
 	private String description;
 	private String us;
 	private String you;
+	private String lat;
+	private String lon;
 
 	public Long getAd_Id(){
         return ad_id;
@@ -157,5 +159,21 @@ public class Ad {
 
 	public void setRoomSize(Long roomSize) {
 		this.roomSize = roomSize;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLon() {
+		return lon;
+	}
+
+	public void setLon(String lon) {
+		this.lon = lon;
 	}
 }
