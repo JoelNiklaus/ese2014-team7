@@ -3,6 +3,7 @@ package org.sample.controller.service;
 import java.sql.Timestamp;
 
 import org.sample.controller.exceptions.InvalidUserException;
+import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.pojos.AdForm;
@@ -57,6 +58,23 @@ public class SampleServiceImpl implements SampleService {
         signupForm.setId(user.getId());
 
         return signupForm;
+    }
+    
+    @Transactional
+    public User getUser(ForgotPasswordForm forgotPasswordForm) {
+    	Iterable<User> users = userDao.findAll();
+    	User user = null;
+    	String email = forgotPasswordForm.getEmail();
+    	
+    	for(User u: users) {
+    		if((u.getEmail().equals(email)))
+    			user = u;
+    	}
+    	
+    	if(user == null)
+    		throw new InvalidUserException("No User with this E-Mail exists.");
+    	
+    	return user;
     }
     
     @Transactional

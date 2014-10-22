@@ -10,7 +10,7 @@
 <h1>Login or Register</h1>
 
 
-<form:form method="post" modelAttribute="loginForm" action="login" id="signupForm" cssClass="form-horizontal"  autocomplete="off">
+<form:form method="post" modelAttribute="loginForm" action="login" id="loginForm" cssClass="form-horizontal"  autocomplete="off">
     <fieldset>
         <legend>Login:</legend>
 
@@ -36,7 +36,9 @@
         
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Login</button>
-            <button type="button" class="btn">Cancel</button>
+            <button type="reset" class="btn">Reset</button>
+            <spring:url value="/forgot" context="${pageContext.servletContext.contextPath}" var="forgot_url" />
+			<a href="${forgot_url}">Forgot Password?</a>
         </div>
     </fieldset>
 </form:form>
@@ -126,7 +128,7 @@
         
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Sign up</button>
-            <button type="button" class="btn">Cancel</button>
+            <button type="reset" class="btn">Reset</button>
         </div>
     </fieldset>
 </form:form>

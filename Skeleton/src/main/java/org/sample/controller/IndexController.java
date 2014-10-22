@@ -2,8 +2,13 @@ package org.sample.controller;
 
 import javax.validation.Valid;
 
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.AdForm;
+import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.SampleService;
@@ -101,6 +106,57 @@ public class IndexController {
     	return login;
     }
     
+    @RequestMapping(value = "/forgot", method = RequestMethod.GET)
+    public ModelAndView forgot() {
+    	ModelAndView model = new ModelAndView("forgot");
+    	model.addObject("forgotPasswordForm", new ForgotPasswordForm());
+    	return model;
+    }
+    
+    @RequestMapping(value = "/mailPassword", method = RequestMethod.POST)
+    public ModelAndView mailPassword(@Valid ForgotPasswordForm forgotPasswordForm) {
+    	ModelAndView model;
+    	try {
+    		User user = sampleService.getUser(forgotPasswordForm);
+    		
+    		String email = user.getEmail();
+    		String password = user.getPassword();
+    		String firstName = user.getFirstName();
+    		String lastName = user.getLastName();
+    		String subject = "Sending Password";
+    		String message = "Dear " + firstName + " " + lastName + "\n\n"
+    				+ "You requested your password: " + password + "\n\nYours sincerely,\nteam7";
+    		
+    		model = new ModelAndView("mailPassword");
+    		
+    		try {
+    			sendMail(email, subject, message);
+    			
+    			model.addObject("success", "Password successfully delivered");
+    		} catch (EmailException e) {
+    			model.addObject("error", "Password could not be sent:" + e.getMessage());
+    			e.printStackTrace();
+    		}
+    		
+    	} catch(InvalidUserException e) {
+    		model = new ModelAndView("forgot");
+    	}
+    	    	
+    	return model;
+    }
+    
+    private void sendMail(String email, String subject, String message) throws EmailException {
+    	Email simpleEmail = new SimpleEmail();
+    	simpleEmail.setHostName("mailtrap.io");
+    	simpleEmail.setSmtpPort(465);
+    	simpleEmail.setAuthenticator(new DefaultAuthenticator("25490b88e52ba93b3", "5f10b93f61b80f"));
+    	simpleEmail.setSSLOnConnect(false);
+    	simpleEmail.setFrom("demo@mailtrap.io");
+    	simpleEmail.setSubject(subject);
+    	simpleEmail.setMsg(message);
+    	simpleEmail.addTo(email);
+    	simpleEmail.send();
+    }
     
     @RequestMapping(value = "/security-error", method = RequestMethod.GET)
     public String securityError(RedirectAttributes redirectAttributes) {
