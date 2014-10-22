@@ -65,7 +65,7 @@
 	<script>
 	
 		// create a map in the "map" div, set the view to a given place and zoom
-			var map = L.map('map').setView(["${lat}]", "${lon}]"], 15);
+			var map = L.map('map').setView(["${Coordinates.lat}]", "${Coordinates.lon}]"], 15);
 		
 
 
@@ -76,7 +76,7 @@
 		}).addTo(map);
 
 		// add a marker in the given location, attach some popup content to it and open the popup
-		L.marker(["${lat}]","${lon}]"]).addTo(map)
+		L.marker(["${Coordinates.lat}]","${Coordinates.lon}]"]).addTo(map)
 		    .bindPopup("${shortDescription}")
 		    .openPopup();
 		

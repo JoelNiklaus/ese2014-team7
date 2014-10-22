@@ -8,7 +8,7 @@ import org.sample.controller.pojos.SignupForm;
 import org.sample.model.Address;
 import org.sample.model.User;
 
-public interface SampleService {
+public interface LoginService {
 
 	/**
 	 * Saves Data from SignupForm to DB.
