@@ -6,7 +6,7 @@ import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.AdForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
-import org.sample.controller.service.SampleService;
+import org.sample.controller.service.LoginService;
 import org.sample.model.Address;
 import org.sample.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class IndexController {
 
     @Autowired
-    SampleService sampleService;
+    LoginService sampleService;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

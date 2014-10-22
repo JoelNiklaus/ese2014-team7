@@ -4,7 +4,7 @@ package org.sample.controller;
 import javax.validation.Valid;
 
 import org.sample.controller.pojos.AdForm;
-import org.sample.controller.service.SampleService;
+import org.sample.controller.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AdController {
 
     @Autowired
-    SampleService sampleService;
+    LoginService sampleService;
 
     @RequestMapping(value = "/createAd", method = RequestMethod.POST)
     public ModelAndView createAd(@Valid AdForm adForm, BindingResult result, RedirectAttributes redirectAttributes){

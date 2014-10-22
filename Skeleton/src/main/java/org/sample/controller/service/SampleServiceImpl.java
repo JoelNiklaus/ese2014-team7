@@ -19,7 +19,7 @@ import org.springframework.util.StringUtils;
 
 
 @Service
-public class SampleServiceImpl implements SampleService {
+public class SampleServiceImpl implements LoginService {
 
     @Autowired    UserDao userDao;
     @Autowired    AddressDao addDao;
