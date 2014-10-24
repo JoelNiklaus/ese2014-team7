@@ -35,8 +35,6 @@ public class IndexController {
     	model.addObject("loginForm", new LoginForm());
         return model;
     }
-
-
     
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
@@ -66,6 +64,15 @@ public class IndexController {
     	return model;
     }
     
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login() {
+    	ModelAndView model = new ModelAndView("login");
+    	model.addObject("loginForm", new LoginForm());
+    	model.addObject("forgotPasswordForm", new ForgotPasswordForm());
+    	model.addObject("signupForm", new SignupForm());
+    	return model;
+    }
+    
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@Valid LoginForm loginForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;
@@ -87,24 +94,16 @@ public class IndexController {
     	return model;
     }
     
-    private LoginForm registerToLogin(SignupForm signupForm)
-    {
+    private LoginForm registerToLogin(SignupForm signupForm) {
     	LoginForm login = new LoginForm();
     	login.setEmail(signupForm.getEmail());
     	login.setPassword(signupForm.getPassword());
     	return login;
     }
     
-    @RequestMapping(value = "/forgot", method = RequestMethod.GET)
-    public ModelAndView forgot() {
+    @RequestMapping(value = "/forgot", method = RequestMethod.POST)
+    public ModelAndView forgot(@Valid ForgotPasswordForm forgotPasswordForm) {
     	ModelAndView model = new ModelAndView("forgot");
-    	model.addObject("forgotPasswordForm", new ForgotPasswordForm());
-    	return model;
-    }
-    
-    @RequestMapping(value = "/mailPassword", method = RequestMethod.POST)
-    public ModelAndView mailPassword(@Valid ForgotPasswordForm forgotPasswordForm) {
-    	ModelAndView model;
     	try {
     		User user = sampleService.getUser(forgotPasswordForm);
     		
@@ -115,20 +114,18 @@ public class IndexController {
     		String subject = "Sending Password";
     		String message = "Dear " + firstName + " " + lastName + "\n\n"
     				+ "You requested your password: " + password + "\n\nYours sincerely,\nteam7";
-    		
-    		model = new ModelAndView("mailPassword");
-    		
+    		    		
     		try {
     			sendMail(email, subject, message);
     			
     			model.addObject("success", "Password successfully delivered");
     		} catch (EmailException e) {
-    			model.addObject("error", "Password could not be sent:" + e.getMessage());
+    			model.addObject("error", "Password could not be sent: " + e.getMessage());
     			e.printStackTrace();
     		}
     		
     	} catch(InvalidUserException e) {
-    		model = new ModelAndView("forgot");
+    		model.addObject("error", "No User with this E-Mail found: " + e.getMessage());
     	}
     	    	
     	return model;
