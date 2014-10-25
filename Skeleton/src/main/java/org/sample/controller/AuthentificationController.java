@@ -78,7 +78,7 @@ public class AuthentificationController {
     		session.setUser(user);
     		
     		model = new ModelAndView("profile");   	
-    		model.addObject("Session", session);
+    		model.addObject("session", session);
     		model.addObject("address", add);
     	} catch(InvalidUserException ex) {
     		model = new ModelAndView("index");
