@@ -51,10 +51,15 @@
 			padding: 2px;
 	  	}
 	</style>
-
+	<div class="panel">
 	<h2 class="form-heading">Search</h2>
 	<br />
 	<br />
+	
+			
+		
+		
+		
 	<form:form method="post" modelAttribute="searchForm" action="search" id="searchForm" cssClass="form-horizontal" autocomplete="off">
 		<fieldset>
 			<div class="row">
@@ -80,14 +85,14 @@
 			<form:input type="hidden" path="priceMax" id="field-priceMax" maxlength="45"/>
 			<form:input type="hidden" path="roomSizeMin" id="field-roomSizeMin" maxlength="45"/>
 			<form:input type="hidden" path="roomSizeMax" id="field-roomSizeMax" maxlength="45"/>
-	
-			<div class="form-actions">
-				<button type="button" class="btn">Save</button>
-				<button type="submit" class="btn btn-primary">Search</button>
+			<div class="pull-right">
+						<button type="button" class="btn">Save</button>
+						<button type="submit" class="btn btn-primary">Search</button>
+
 			</div>
 		</fieldset>
 	</form:form>
-		
+	</div>
 	<br>
 
 	
