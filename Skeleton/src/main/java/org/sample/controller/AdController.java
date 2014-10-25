@@ -57,9 +57,9 @@ public class AdController {
 
 
     @RequestMapping("ad")
-    public ModelAndView findUser(@RequestParam String adId) {
+    public ModelAndView findUser(@RequestParam String id) {
     	ModelAndView model = new ModelAndView("ad");
-	    Ad ad = adRepositry.findOne(new Long(adId));
+	    Ad ad = adRepositry.findOne(new Long(id));
 	    
 	    if(ad != null){
 	    	model.addObject("ad", ad);

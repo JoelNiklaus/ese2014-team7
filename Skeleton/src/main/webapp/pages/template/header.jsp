@@ -216,6 +216,12 @@
                           <span>Map</span>
                       </a>
                   </li>
+                  <li class="mt">
+                      <a href="${pageContext.servletContext.contextPath}/search">
+                      	  <i class="fa fa-search"></i>
+                          <span>Search</span>
+                      </a>
+                  </li>
 
                   <li class="sub-menu">
                       <a href="javascript:;" >

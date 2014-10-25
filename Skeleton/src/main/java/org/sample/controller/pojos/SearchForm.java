@@ -1,22 +1,47 @@
 package org.sample.controller.pojos;
 
 public class SearchForm {
-	private String minPrice;
-	private String maxPrice;
+	private String priceMin;
+	private String priceMax;
+	private String roomSizeMin;
+	private String roomSizeMax;
 	
+
+	public String getRoomSizeMin() {
+		return roomSizeMin;
+	}
+	public void setRoomSizeMin(String roomSizeMin) {
+		this.roomSizeMin = roomSizeMin;
+	}
+	public String getRoomSizeMax() {
+		return roomSizeMax;
+	}
+	public void setRoomSizeMax(String roomSizeMax) {
+		this.roomSizeMax = roomSizeMax;
+	}
+	public String getPriceMin() {
+		return priceMin;
+	}
+	public void setPriceMin(String priceMin) {
+		this.priceMin = priceMin;
+	}
+	public String getPriceMax() {
+		return priceMax;
+	}
+	public void setPriceMax(String priceMax) {
+		this.priceMax = priceMax;
+	}
 	
-	public String getMinPrice() {
-		return minPrice;
+	public Long getPriceMinAsLong(){
+		return Long.parseLong(priceMin);
 	}
-	public void setMinPrice(String minPrice) {
-		this.minPrice = minPrice;
+	public Long getPriceMaxAsLong(){
+		return Long.parseLong(priceMax);
 	}
-	public String getMaxPrice() {
-		return maxPrice;
+	public Long getRoomSizeMinAsLong(){
+		return Long.parseLong(roomSizeMin);
 	}
-	public void setMaxPrice(String maxPrice) {
-		this.maxPrice = maxPrice;
+	public Long getRoomSizeMaxAsLong(){
+		return Long.parseLong(roomSizeMax);
 	}
-	
-	
 }

@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 public class AdForm {
 	
-	private Long ad_id;
+	private Long id;
 	private Timestamp timestamp;
 	@NotNull
 	private String title;
@@ -85,11 +85,11 @@ public class AdForm {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Long getAd_id() {
-		return ad_id;
+	public Long getId() {
+		return id;
 	}
-	public void setAd_id(Long ad_id) {
-		this.ad_id = ad_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public void setDescription(String description) {

@@ -3,6 +3,7 @@ package org.sample.controller;
 import javax.validation.Valid;
 
 import org.sample.controller.pojos.SearchForm;
+import org.sample.model.Ad;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,28 @@ public class SearchController {
     
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ModelAndView createAd(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes){
+    	
+    	Long priceMin = searchForm.getPriceMinAsLong();
+    	Long priceMax = searchForm.getPriceMaxAsLong();
+    	Long roomSizeMin = searchForm.getRoomSizeMinAsLong();
+    	Long roomSizeMax = searchForm.getRoomSizeMaxAsLong();
+    	
+    	Iterable<Ad> searchResults;
+    	
+    	//TODO Replace magic Number by config file
+    	if(priceMax == 3000){
+    		searchResults = adRepositry.findByRentGreaterThanAndRoomSizeBetween(priceMin-1, roomSizeMin, roomSizeMax);
+    	} else if(roomSizeMax==300){
+    		searchResults = adRepositry.findByRentBetweenAndRoomSizeGreaterThan(priceMin, priceMax, roomSizeMin-1);
+    	} else if((roomSizeMax == 300) && (priceMax == 3000)){
+    		searchResults = adRepositry.findByRentGreaterThanAndRoomSizeGreaterThan(priceMin, roomSizeMin);
+    	} else {
+    		searchResults = adRepositry.findByRentBetweenAndRoomSizeBetween(priceMin, priceMax, roomSizeMin, roomSizeMax);
+    	}
     	ModelAndView model = new ModelAndView("search");
+
+    	if(searchResults != null)
+    		model.addObject("searchResults", searchResults);
     	
     	return model;
     }
@@ -29,6 +51,10 @@ public class SearchController {
     public ModelAndView index() {
     	ModelAndView model = new ModelAndView("search");
 		model.addObject("searchForm", new SearchForm());
+		
+		Iterable<Ad> searchResults = adRepositry.findAll();
+    	if(searchResults != null)
+    		model.addObject("searchResults", searchResults);
         return model;
     }
 

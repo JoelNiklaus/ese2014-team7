@@ -12,7 +12,7 @@ public class Ad {
 	
 	@Id
     @GeneratedValue
-    private Long ad_id;
+    private Long id;
 	private Timestamp timestamp;
 	private String title;
 	private String street;
@@ -31,12 +31,12 @@ public class Ad {
 	private String lat;
 	private String lon;
 
-	public Long getAd_Id(){
-        return ad_id;
+	public Long getId(){
+        return id;
     }
     
-	public void setAd_Id(Long ad_id){
-        this.ad_id = ad_id;
+	public void setId(Long id){
+        this.id = id;
     } 
 	
     public Timestamp getTimestamp(){

@@ -136,7 +136,7 @@ public class LoginServiceImpl implements LoginService {
 	    
     	Ad ad = new Ad();
     	
-	    ad.setAd_Id(adForm.getAd_id());
+	    ad.setId(adForm.getId());
 	    Timestamp timestamp  = new Timestamp(System.currentTimeMillis());
 		ad.setTimestamp(timestamp);
 	    ad.setTitle(adForm.getTitle());

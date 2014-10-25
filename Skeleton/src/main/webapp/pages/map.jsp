@@ -91,7 +91,7 @@
 	<c:if test="${not empty adList}">
 		<c:forEach var="ad" items="${adList}">
 			<script type="text/javascript">
-				populate("${ad.lat}","${ad.lon}","<b>${ad.title}</b> <br /> ${ad.street} ${ad.houseNr} <br /> ${ad.city} ${ad.zip} <br /> <a href='ad?adId=${ad.ad_Id}'>open</a>");
+				populate("${ad.lat}","${ad.lon}","	<a class='pull-left' ><img class='media-object' src='/Skeleton/img/house1.jpeg' height='80px'></a><b>${ad.title}</b> <br /> ${ad.street} ${ad.houseNr} <br /> ${ad.city} ${ad.zip} <br /> <a href='ad?id=${ad.id}'>open</a>");
 			</script>
 		</c:forEach>
 		<script type="text/javascript">
