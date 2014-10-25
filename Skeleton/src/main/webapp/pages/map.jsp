@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/MarkerCluster.Default.css" />
 	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/Control.Geocoder.css" />
 	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.js"></script>
-	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.markercluster-src.js"></script>
+	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.markercluster.js"></script>
 	<script src="/Skeleton/lib/leaflet-0.7.3/Control.Geocoder.js"></script>
 	
 	<style type="text/css">
