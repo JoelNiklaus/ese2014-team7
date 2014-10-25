@@ -11,6 +11,7 @@ import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.LoginService;
+import org.sample.controller.service.Session;
 import org.sample.model.Address;
 import org.sample.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,14 @@ public class AuthentificationController {
             	
             	sampleService.saveFrom(signupForm);
             	
-            	LoginForm loginForm = registerToLogin(signupForm);
+            	LoginForm loginForm = registerFormToLoginForm(signupForm);
             	User user = sampleService.getUser(loginForm);
         		Address add = sampleService.getAddress(user.getId());
+        		Session session = new Session();
+        		session.setUser(user);
+        		
             	model = new ModelAndView("profile");
-            	model.addObject("user", user);
+            	model.addObject("session", session);
         		model.addObject("address", add);
             } catch (InvalidUserException e) {
             	model = new ModelAndView("index");
@@ -70,9 +74,11 @@ public class AuthentificationController {
     	try {
     		User user = sampleService.getUser(loginForm);
     		Address add = sampleService.getAddress(user.getId());
+    		Session session = new Session();
+    		session.setUser(user);
     		
-    		model = new ModelAndView("profile");   		
-    		model.addObject("user", user);
+    		model = new ModelAndView("profile");   	
+    		model.addObject("Session", session);
     		model.addObject("address", add);
     	} catch(InvalidUserException ex) {
     		model = new ModelAndView("index");
@@ -82,7 +88,7 @@ public class AuthentificationController {
     	return model;
     }
     
-    private LoginForm registerToLogin(SignupForm signupForm) {
+    private LoginForm registerFormToLoginForm(SignupForm signupForm) {
     	LoginForm login = new LoginForm();
     	login.setEmail(signupForm.getEmail());
     	login.setPassword(signupForm.getPassword());

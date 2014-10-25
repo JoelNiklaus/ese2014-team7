@@ -1,22 +1,26 @@
 package org.sample.controller.service;
 
+import javax.persistence.Entity;
+
 import org.sample.model.User;
 
+@Entity
 public class Session {
 
 	private static User user;
 	
-	public static User getUser()
+	public  User getUser()
 	{
 		return user;
 	}
 	
-	public static void setUser(User user)
+	@SuppressWarnings("static-access")
+	public  void setUser(User user)
 	{
-		Session.user = user;
+		this.user = user;
 	}
 	
-	public static void resetUser()
+	public  void resetUser()
 	{
 		user = null;
 	}

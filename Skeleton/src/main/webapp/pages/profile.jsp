@@ -14,15 +14,15 @@
 	<table cellpadding="5">
 		<tr>
 			<td><strong>First Name</strong></td> 
-			<td><c:out value="${user.firstName}"/></td>
+			<td><c:out value="${session.user.firstName}"/></td>
 		</tr>
 		<tr>
 			<td><strong>Last Name</strong></td> 
-			<td><c:out value="${user.lastName}"/></td>
+			<td><c:out value="${session.user.lastName}"/></td>
 		</tr>
 		<tr>
 			<td><strong>E-Mail</strong></td> 
-			<td><c:out value="${user.email}"/></td>
+			<td><c:out value="${session.user.email}"/></td>
 		</tr>
 		<tr>
 			<td><strong>Street</strong></td> 
