@@ -48,6 +48,9 @@
 		            <form:password class="form-control" path="password" id="field-password-login" maxlength="45" placeholder="Password"/>
                 	<form:errors path="password" cssClass="help-inline" element="span"/>
 		            <label class="checkbox">
+		            	<span class="pull-left">
+		                    <a href="${pageContext.servletContext.contextPath}/">Back to the home page</a>
+		                </span>
 		                <span class="pull-right">
 		                    <a data-toggle="modal" href="#forgot">Forgot Password ?</a>
 		                </span>
@@ -55,11 +58,11 @@
 		            <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
 		            <hr>
 		            
-		            <div class="login-social-link centered">
-		            <p>or you can sign in via your social network</p>
-		                <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
-		                <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
-		            </div>
+<!-- 		            <div class="login-social-link centered"> -->
+<!-- 		            <p>or you can sign in via your social network</p> -->
+<!-- 		                <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button> -->
+<!-- 		                <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button> -->
+<!-- 		            </div> -->
 		            <div class="registration">
 		                Don't have an account yet?<br/>
 		                <a data-toggle="modal" href="#register">Create an account</a>

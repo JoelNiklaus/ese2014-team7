@@ -132,7 +132,7 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired AdDao adDao;
     
     @Transactional
-	public AdForm saveFrom(AdForm adForm) {
+	private AdForm saveFrom(AdForm adForm) {
 	    
     	Ad ad = new Ad();
     	

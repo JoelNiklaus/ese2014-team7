@@ -61,6 +61,14 @@ public class AuthentificationController {
     	return model;
     }
     
+    private boolean signupIsOkay(BindingResult result, SignupForm signupForm)
+    {
+    	boolean okay = !result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())
+    				&& !loginService.emailAlreadyExists(signupForm.getEmail()) && !signupForm.hasNull();
+    	System.out.println("okay: " + okay);
+    	return okay;
+    }
+    
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login() {
     	ModelAndView model = new ModelAndView("login");
@@ -141,14 +149,6 @@ public class AuthentificationController {
     	simpleEmail.setMsg(message);
     	simpleEmail.addTo(email);
     	simpleEmail.send();
-    }
-        
-    private boolean signupIsOkay(BindingResult result, SignupForm signupForm)
-    {
-    	boolean okay = !result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())
-    				&& !loginService.emailAlreadyExists(signupForm.getEmail()) && !signupForm.hasNull();
-    	System.out.println("okay: " + okay);
-    	return okay;
     }
 
 }
