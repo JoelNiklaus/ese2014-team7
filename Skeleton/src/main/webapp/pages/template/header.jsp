@@ -20,8 +20,6 @@
     <!-- Custom styles for this template -->
     <link href="/Skeleton/dashgum/css/style.css" rel="stylesheet">
     <link href="/Skeleton/dashgum/css/style-responsive.css" rel="stylesheet">
-
-    <script src="/Skeleton/dashgum/js/chart-master/Chart.js"></script>
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

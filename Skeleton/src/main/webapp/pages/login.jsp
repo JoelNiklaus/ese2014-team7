@@ -80,7 +80,7 @@
 		                      </div>
 		                      <div class="modal-body">
 		                          <p>Enter your e-mail address below to reset your password.</p>
-		                          <form:input class="form-control placeholder-no-fix" path="email" id="field-email-login" maxlength="45" placeholder="E-Mail"/>
+		                          <form:input class="form-control placeholder-no-fix" path="email" maxlength="45" placeholder="E-Mail"/>
                					  <form:errors path="email" cssClass="help-inline" element="span"/>
 		                      </div>
 		                      <div class="modal-footer">
@@ -97,19 +97,47 @@
 	          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="register" class="modal fade">
 	              <div class="modal-dialog">
 	                  <div class="modal-content">
-	                      <div class="modal-header">
-	                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	                          <h4 class="modal-title">Register</h4>
-	                      </div>
-	                      <div class="modal-body">
-	                          <p>Enter your e-mail address below to reset your password.</p>
-	                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
-	
-	                      </div>
-	                      <div class="modal-footer">
-	                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-	                          <button class="btn btn-theme" type="button">Submit</button>
-	                      </div>
+	                      <form:form method="post" modelAttribute="signupForm" action="register" id="signupForm" autocomplete="off">
+		                      <div class="modal-header">
+		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                          <h4 class="modal-title">Create new account</h4>
+		                      </div>
+		                      <div class="modal-body">
+		                      
+									<form:input class="form-control" path="email" maxlength="45" placeholder="Email"/>
+					                <form:errors path="email" cssClass="help-inline" element="span"/>
+		                      		<br>
+		                      		<form:input class="form-control" path="firstName" maxlength="35" placeholder="First Name"/>
+              					  	<form:errors path="firstName" cssClass="help-inline" element="span"/>
+              					  	<br>
+              					  	<form:input class="form-control" path="lastName" maxlength="35" placeholder="Last Name"/>
+                					<form:errors path="lastName" cssClass="help-inline" element="span"/>
+                					<br>
+                					<form:password class="form-control" path="password" maxlength="45" placeholder="Password"/>
+               						<form:errors path="password" cssClass="help-inline" element="span"/>
+               						<br>
+               						<form:password class="form-control" path="passwordConfirm" maxlength="45" placeholder="Confirm Password"/>
+                					<form:errors path="passwordConfirm" cssClass="help-inline" element="span"/>
+                					<br>
+                					<form:input class="form-control" path="street" maxlength="45" placeholder="Street"/>
+					                <form:errors path="street" cssClass="help-inline" element="span"/>
+					                <br>
+					                <form:input class="form-control" path="houseNr" maxlength="45" placeholder="House Nr."/>
+                					<form:errors path="houseNr" cssClass="help-inline" element="span"/>
+                					<br>
+                					<form:input class="form-control" path="zip" maxlength="45" placeholder="ZIP"/>
+					                <form:errors path="zip" cssClass="help-inline" element="span"/>
+						            <br>
+                					<form:input class="form-control" path="city" maxlength="45" placeholder="City"/>
+               						<form:errors path="city" cssClass="help-inline" element="span"/>
+                					<br>
+                					
+		                      </div>
+		                      <div class="modal-footer">
+		                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+		                          <button class="btn btn-theme" type="submit">Submit</button>
+		                      </div>
+	                      </form:form>
 	                  </div>
 	              </div>
 	          </div>

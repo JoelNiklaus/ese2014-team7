@@ -26,7 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AuthentificationController {
 
     @Autowired
-    LoginService sampleService;
+    LoginService loginService;
     
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
@@ -36,11 +36,13 @@ public class AuthentificationController {
             	//TODO: for password mismatch: can we put other, valid info as default when returning to register page, 
             	//so user doesn't have to start all over?
             	
-            	sampleService.saveFrom(signupForm);
+            	// save to DB
+            	loginService.saveFrom(signupForm);
             	
+            	// get User and create Session
             	LoginForm loginForm = registerFormToLoginForm(signupForm);
-            	User user = sampleService.getUser(loginForm);
-        		Address add = sampleService.getAddress(user.getId());
+            	User user = loginService.getUser(loginForm);
+        		Address add = loginService.getAddress(user.getId());
         		Session session = new Session();
         		session.setUser(user);
         		
@@ -72,8 +74,9 @@ public class AuthentificationController {
     public ModelAndView login(@Valid LoginForm loginForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;
     	try {
-    		User user = sampleService.getUser(loginForm);
-    		Address add = sampleService.getAddress(user.getId());
+    		// get User and create Session
+    		User user = loginService.getUser(loginForm);
+    		Address add = loginService.getAddress(user.getId());
     		Session session = new Session();
     		session.setUser(user);
     		
@@ -95,13 +98,14 @@ public class AuthentificationController {
     	return login;
     }
     
-    //TODO Bug: Displays not existent form Forgot Password...
+    //TODO Bug: Displays not existent form Forgot Password... ???
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)
     public ModelAndView forgot(@Valid ForgotPasswordForm forgotPasswordForm) {
     	ModelAndView model = new ModelAndView("forgot");
     	try {
-    		User user = sampleService.getUser(forgotPasswordForm);
+    		User user = loginService.getUser(forgotPasswordForm);
     		
+    		// compose E-Mail
     		String email = user.getEmail();
     		String password = user.getPassword();
     		String firstName = user.getFirstName();
@@ -118,7 +122,7 @@ public class AuthentificationController {
     			model.addObject("error", "Password could not be sent: " + e.getMessage());
     			e.printStackTrace();
     		}
-    		
+
     	} catch(InvalidUserException e) {
     		model.addObject("error", "No User with this E-Mail found: " + e.getMessage());
     	}
@@ -142,7 +146,7 @@ public class AuthentificationController {
     private boolean signupIsOkay(BindingResult result, SignupForm signupForm)
     {
     	boolean okay = !result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())
-    				&& !sampleService.emailAlreadyExists(signupForm.getEmail()) && !signupForm.hasNull();
+    				&& !loginService.emailAlreadyExists(signupForm.getEmail()) && !signupForm.hasNull();
     	System.out.println("okay: " + okay);
     	return okay;
     }
