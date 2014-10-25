@@ -24,7 +24,7 @@
 			height:450px;
 		}
 	</style>
-	<div id="map"></div>
+	<div class="well well-sm"><div id="map"></div></div>
 	<script type="text/javascript">
 	
 		// create a map in the "map" div, set the view to a given place and zoom

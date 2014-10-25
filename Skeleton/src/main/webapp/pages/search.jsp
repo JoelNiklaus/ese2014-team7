@@ -61,18 +61,19 @@
 				<div class="col-md-2">
 					<label for="field-price">Price</label>
 				</div>
-				
 				<div class="col-md-3" id="priceSlider"></div>
-			</div>
-			<br />
-			<br />
-	
-			<br />
-			<div class="row">
+				<div class="col-md-1"></div>
 				<div class="col-md-2">
 					<label for="field-rooms">Room Size</label>
 				</div>
 				<div class="col-md-3" id="roomSizeSlider"></div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-2">
+					<label for="field-city">City</label>
+				</div>
+				<form:input path="city" id="field-city" tabindex="5" maxlength="35"/>
 			</div>
 	
 			<form:input type="hidden" path="priceMin" id="field-priceMin" maxlength="45"/>

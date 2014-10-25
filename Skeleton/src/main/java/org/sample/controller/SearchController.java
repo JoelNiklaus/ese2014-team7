@@ -26,18 +26,30 @@ public class SearchController {
     	Long priceMax = searchForm.getPriceMaxAsLong();
     	Long roomSizeMin = searchForm.getRoomSizeMinAsLong();
     	Long roomSizeMax = searchForm.getRoomSizeMaxAsLong();
-    	
+    	String city = searchForm.getCity();
     	Iterable<Ad> searchResults;
     	
     	//TODO Replace magic Number by config file
-    	if(priceMax == 3000){
-    		searchResults = adRepositry.findByRentGreaterThanAndRoomSizeBetween(priceMin-1, roomSizeMin, roomSizeMax);
-    	} else if(roomSizeMax==300){
-    		searchResults = adRepositry.findByRentBetweenAndRoomSizeGreaterThan(priceMin, priceMax, roomSizeMin-1);
-    	} else if((roomSizeMax == 300) && (priceMax == 3000)){
-    		searchResults = adRepositry.findByRentGreaterThanAndRoomSizeGreaterThan(priceMin, roomSizeMin);
+    	if(city.equals("")){
+	    	if(priceMax == 3000){
+	    		searchResults = adRepositry.findByRentGreaterThanAndRoomSizeBetween(priceMin-1, roomSizeMin, roomSizeMax);
+	    	} else if(roomSizeMax==300){
+	    		searchResults = adRepositry.findByRentBetweenAndRoomSizeGreaterThan(priceMin, priceMax, roomSizeMin-1);
+	    	} else if((roomSizeMax == 300) && (priceMax == 3000)){
+	    		searchResults = adRepositry.findByRentGreaterThanAndRoomSizeGreaterThan(priceMin, roomSizeMin);
+	    	} else {
+	    		searchResults = adRepositry.findByRentBetweenAndRoomSizeBetween(priceMin, priceMax, roomSizeMin, roomSizeMax);
+	    	}
     	} else {
-    		searchResults = adRepositry.findByRentBetweenAndRoomSizeBetween(priceMin, priceMax, roomSizeMin, roomSizeMax);
+	    	if(priceMax == 3000){
+	    		searchResults = adRepositry.findByRentGreaterThanAndRoomSizeBetweenAndCityLike(priceMin, roomSizeMin, roomSizeMax, city);
+	    	} else if(roomSizeMax==300){
+	    		searchResults = adRepositry.findByRentBetweenAndRoomSizeGreaterThanAndCityLike(priceMin, priceMax, roomSizeMin, city);
+	    	} else if((roomSizeMax == 300) && (priceMax == 3000)){
+	    		searchResults = adRepositry.findByRentGreaterThanAndRoomSizeGreaterThanAndCityLike(priceMin, roomSizeMin, city);
+	    	} else {
+	    		searchResults = adRepositry.findByRentBetweenAndRoomSizeBetweenAndCityLike(priceMin, priceMax, roomSizeMin, roomSizeMax, city);
+	    	}
     	}
     	ModelAndView model = new ModelAndView("search");
 

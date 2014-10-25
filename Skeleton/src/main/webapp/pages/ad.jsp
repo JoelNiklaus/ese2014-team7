@@ -17,36 +17,16 @@
 			height:450px;
 		}
 	</style>
-	   <div id="map"></div>
-	<script>
+	  
 	
-		// create a map in the "map" div, set the view to a given place and zoom
-			var map = L.map('map').setView(["${ad.lat}]", "${ad.lon}]"], 15);
-		
-
-
-		//map.locate({setView: true, maxZoom: 16});
-		// add an OpenStreetMap tile layer
-		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-		}).addTo(map);
-
-		// add a marker in the given location, attach some popup content to it and open the popup
-		L.marker(["${ad.lat}]","${ad.lon}]"]).addTo(map)
-		    .bindPopup("${shortDescription}")
-		    .openPopup();
-		
-		// center marker on click
-		map.on('popupopen', function(e) {
-		    var px = map.project(e.popup._latlng);
-		    px.y -= e.popup._container.clientHeight/2
-		    map.panTo(map.unproject(px),{animate: true});
-		});
-			
-	</script>
 	
     <div class="main">
- 
+    	
+ 		<a class="pull-left" >
+		    <img class="media-object" src="/Skeleton/img/house1.jpeg" height="100px">
+		</a>
+	
+		
     	<table class="smalltable">
     		<tr>
     			<td><legend>Title</legend>
@@ -109,8 +89,33 @@
     	</table>
     </div>	
     
- 
+ <div class="well well-sm"> <div id="map"></div></div>
+	<script>
+	
+		// create a map in the "map" div, set the view to a given place and zoom
+			var map = L.map('map').setView(["${ad.lat}]", "${ad.lon}]"], 15);
+		
 
+
+		//map.locate({setView: true, maxZoom: 16});
+		// add an OpenStreetMap tile layer
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
+
+		// add a marker in the given location, attach some popup content to it and open the popup
+		L.marker(["${ad.lat}]","${ad.lon}]"]).addTo(map)
+		    .bindPopup("${shortDescription}")
+		    .openPopup();
+		
+		// center marker on click
+		map.on('popupopen', function(e) {
+		    var px = map.project(e.popup._latlng);
+		    px.y -= e.popup._container.clientHeight/2
+		    map.panTo(map.unproject(px),{animate: true});
+		});
+			
+	</script>
 
 
 
