@@ -47,6 +47,7 @@ public class AuthentificationController {
         		session.setUser(user);
         		
             	model = new ModelAndView("profile");
+            	model.addObject("profileForm", new SignupForm());
             	model.addObject("session", session);
         		model.addObject("address", add);
             } catch (InvalidUserException e) {
@@ -54,19 +55,23 @@ public class AuthentificationController {
             	model.addObject("page_error", e.getMessage());
             }
         } else {
-        	model = new ModelAndView("index");
-        	model.addObject("signupForm", new SignupForm());
-        	model.addObject("loginForm", new LoginForm());
+        	model = login();
         }   	
     	return model;
     }
     
-    private boolean signupIsOkay(BindingResult result, SignupForm signupForm)
-    {
+    private boolean signupIsOkay(BindingResult result, SignupForm signupForm) {
     	boolean okay = !result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())
     				&& !loginService.emailAlreadyExists(signupForm.getEmail()) && !signupForm.hasNull();
     	System.out.println("okay: " + okay);
     	return okay;
+    }
+    
+    private LoginForm registerFormToLoginForm(SignupForm signupForm) {
+    	LoginForm login = new LoginForm();
+    	login.setEmail(signupForm.getEmail());
+    	login.setPassword(signupForm.getPassword());
+    	return login;
     }
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -79,7 +84,7 @@ public class AuthentificationController {
     }
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(@Valid LoginForm loginForm, BindingResult result, RedirectAttributes redirectAttributes) {
+    public ModelAndView login(@Valid LoginForm loginForm) {
     	ModelAndView model;
     	try {
     		// get User and create Session
@@ -88,22 +93,14 @@ public class AuthentificationController {
     		Session session = new Session();
     		session.setUser(user);
     		
-    		model = new ModelAndView("profile");   	
+    		model = new ModelAndView("profile");
+    		model.addObject("profileForm", new SignupForm());
     		model.addObject("session", session);
     		model.addObject("address", add);
     	} catch(InvalidUserException ex) {
-    		model = new ModelAndView("index");
-        	model.addObject("signupForm", new SignupForm());
-        	model.addObject("loginForm", new LoginForm());
+    		model = login();
     	}
     	return model;
-    }
-    
-    private LoginForm registerFormToLoginForm(SignupForm signupForm) {
-    	LoginForm login = new LoginForm();
-    	login.setEmail(signupForm.getEmail());
-    	login.setPassword(signupForm.getPassword());
-    	return login;
     }
     
     //TODO Bug: Displays not existent form Forgot Password... ???
@@ -150,5 +147,43 @@ public class AuthentificationController {
     	simpleEmail.addTo(email);
     	simpleEmail.send();
     }
+    
+    @RequestMapping(value = "/profileChange", method = RequestMethod.POST)
+    public ModelAndView profileChange(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
+    	ModelAndView model;
+    	if (profileChangeIsOkay(result, signupForm)) {
+            try {
+            	//TODO: for password mismatch: can we put other, valid info as default when returning to register page, 
+            	//so user doesn't have to start all over?
+            	
+            	// save to DB
+            	loginService.saveFrom(signupForm);
+            	
+            	// get User and create Session
+            	LoginForm loginForm = registerFormToLoginForm(signupForm);
+            	User user = loginService.getUser(loginForm);
+        		Address add = loginService.getAddress(user.getId());
+        		Session session = new Session();
+        		session.setUser(user);
+        		
+            	model = new ModelAndView("profile");
+            	model.addObject("profileForm", new SignupForm());
+            	model.addObject("session", session);
+        		model.addObject("address", add);
+            } catch (InvalidUserException e) {
+            	model = new ModelAndView("index");
+            	model.addObject("page_error", e.getMessage());
+            }
+        } else {
+        	model = login();
+        }   	
+    	return model;
+    }
 
+    private boolean profileChangeIsOkay(BindingResult result, SignupForm signupForm) {
+    	boolean okay = !result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())
+    			&& !signupForm.hasNull();
+    	System.out.println("okay: " + okay);
+    	return okay;
+    }
 }
