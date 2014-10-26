@@ -84,7 +84,7 @@ public class AuthentificationController {
     }
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(@Valid LoginForm loginForm) {
+    public ModelAndView login(@Valid LoginForm loginForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;
     	try {
     		// get User and create Session
