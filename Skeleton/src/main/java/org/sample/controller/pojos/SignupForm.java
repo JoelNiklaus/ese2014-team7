@@ -118,8 +118,6 @@ public class SignupForm {
 	{
 		boolean hasNull = (email == "") || (firstName == "") || (lastName == "") || (password == "") 
 					   || (street == "")  || (houseNr == 0)  || (city == "")  || (zip == 0);
-		System.out.println("has null: " + hasNull);
-		System.out.println("city: " + city);
 		return hasNull;
 	}
 }
