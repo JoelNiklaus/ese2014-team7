@@ -4,12 +4,14 @@ import javax.validation.Valid;
 
 import org.sample.controller.pojos.SearchForm;
 import org.sample.model.Ad;
+import org.sample.model.Search;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -20,7 +22,9 @@ public class SearchController {
     AdDao adRepositry;
     
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView createAd(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes){
+    
+    public ModelAndView createAd(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){
+
     	
     	Long priceMin = searchForm.getPriceMinAsLong();
     	Long priceMax = searchForm.getPriceMaxAsLong();
@@ -28,6 +32,19 @@ public class SearchController {
     	Long roomSizeMax = searchForm.getRoomSizeMaxAsLong();
     	String city = searchForm.getCity();
     	Iterable<Ad> searchResults;
+    	
+    	ModelAndView model = new ModelAndView("search");
+    	Search searchAttributes;
+    	if(searchId != null){
+    		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
+    	} else {
+    		// get search from Id
+    		searchAttributes = new Search(new Long(0), priceMin, priceMax, roomSizeMin, roomSizeMax, city);
+    	}
+    	
+    	model.addObject("searchAttributes", searchAttributes);
+    	    	
+
     	
     	//TODO Replace magic Number by config file
     	if(city.equals("")){
@@ -51,7 +68,6 @@ public class SearchController {
 	    		searchResults = adRepositry.findByRentBetweenAndRoomSizeBetweenAndCityLike(priceMin, priceMax, roomSizeMin, roomSizeMax, city);
 	    	}
     	}
-    	ModelAndView model = new ModelAndView("search");
 
     	if(searchResults != null)
     		model.addObject("searchResults", searchResults);

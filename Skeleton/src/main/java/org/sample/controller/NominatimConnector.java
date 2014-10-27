@@ -38,9 +38,11 @@ public class NominatimConnector {
 
 	  public static Coordinates getCoordinatesFromAddress(String street, String number, String place, String plz) throws JSONException, IOException
 	  {
+		    
 	    	String url = "http://nominatim.openstreetmap.org/search?q="+place+",+"+street+"+"+number+"&format=json&polygon=0&addressdetails=1";
 	    	
 	    	JSONObject request = NominatimConnector.readJsonFromUrl(url);
+	    	
 	    	
 	    	return new Coordinates((String)request.get("lat"),(String)request.get("lon"));
 	    	 

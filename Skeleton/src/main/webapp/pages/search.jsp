@@ -56,10 +56,7 @@
 	<br />
 	<br />
 	
-			
-		
-		
-		
+
 	<form:form method="post" modelAttribute="searchForm" action="search" id="searchForm" cssClass="form-horizontal" autocomplete="off">
 		<fieldset>
 			<div class="row">
@@ -86,7 +83,7 @@
 			<form:input type="hidden" path="roomSizeMin" id="field-roomSizeMin" maxlength="45"/>
 			<form:input type="hidden" path="roomSizeMax" id="field-roomSizeMax" maxlength="45"/>
 			<div class="pull-right">
-						<button type="button" class="btn">Save</button>
+						<button type="button" id="save" class="btn">Save</button>
 						<button type="submit" class="btn btn-primary">Search</button>
 
 			</div>
@@ -94,8 +91,6 @@
 	</form:form>
 	</div>
 	<br>
-
-	
 
 	<c:forEach items="${searchResults}" var="ad">
 		<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${ad.id}'">
@@ -118,6 +113,7 @@
 	 * Search Sliders 
 	 *
 	 */
+	 
 		$("#priceSlider").noUiSlider({
 			start: [0, 3000],
 			behaviour: 'drag-tap',
@@ -158,6 +154,7 @@
 		$("#priceSlider").Link('upper').to('-inline-<div class="priceSliderTooltip" ></div>', function ( value ) {
 		
 
+			
 			if(value==3000)
 			{
 				$(this).html(
@@ -216,8 +213,14 @@
 						'<strong>Max: </strong>' +
 						'<span>' + value + '</span>'
 					);
-			}
 
+			}
+			
+		});
+		
+		$(document).ready(function(){			
+			$("#priceSlider").val(20,30);
+			$("#field-city").val("${searchAttributes.city}");
 		});
 	</script>		
 

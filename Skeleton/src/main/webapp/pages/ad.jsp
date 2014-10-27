@@ -6,7 +6,7 @@
 
 <c:import url="template/header.jsp" />
 
-<h1>Ads</h1>
+<h1>${ad.title}</h1>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 	<link rel="stylesheet" href="/Skeleton/css/Control.Geocoder.css" />
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -22,71 +22,80 @@
 	
     <div class="main">
     	
- 		<a class="pull-left" >
-		    <img class="media-object" src="/Skeleton/img/house1.jpeg" height="100px">
-		</a>
-	
+
+	<div class="row">
+
+			<div class="col-md-2"> 		
+				<a class="pull-left" >
+				    <img class="media-object" src="/Skeleton/img/house1.jpeg" height="200px">
+				</a>
+			</div>
+			<div class="col-md-2"> 		
+				<table class="smalltable">
 		
-    	<table class="smalltable">
-    		<tr>
-    			<td><legend>Title</legend>
-    			<td><legend>${ad.title}</legend>
-    		</tr>
-    		<tr>
-    			<td>Street&nbsp;&nbsp;
-    			<td>${ad.street}
-    		</tr>
-    		<tr>
-    			<td>House Nr.&nbsp;&nbsp;
-    			<td>${ad.houseNr}
-    		</tr>
-    		<tr>
-    			<td>City&nbsp;&nbsp;
-    			<td>${ad.city}
-    		</tr>
-    		<tr>
-    			<td>ZIP&nbsp;&nbsp;
-    			<td>${ad.zip}
-    		</tr>
-    		<tr>
-    			<td>Rent&nbsp;&nbsp;
-    			<td>${ad.rent}
-    		</tr>
-    		<tr>
-    			<td>Additional Cost&nbsp;&nbsp;
-    			<td>${ad.addCost}
-    		</tr>
-    		<tr>
-    			<td>Move In Date&nbsp;&nbsp;
-    			<td>${ad.dateIn}
-    		</tr>
-    		<tr>
-    			<td>Move Out Date&nbsp;&nbsp;
-    			<td>${ad.dateOut}
-    		</tr>
-    		<tr>
-    			<td>Type&nbsp;&nbsp;
-    			<td>${ad.type}
-    		</tr>
-    		<tr>
-    			<td>Room Size&nbsp;&nbsp;
-    			<td>${ad.roomSize}
-    		</tr>
-    		<tr>
-    			<td>Description&nbsp;&nbsp;
-    			<td>${ad.description}
-    		</tr>
-    		<tr>
-    			<td>About Us&nbsp;&nbsp;
-    			<td>${ad.us}
-    		</tr>
-    		<tr>
-    			<td>Ideal Roomie&nbsp;&nbsp;
-    			<td>${ad.you}
-    		</tr>
-    		<tr>
-  
-    	</table>
+		    		<tr>
+		    			<td>Street&nbsp;&nbsp;
+		    			<td>${ad.street}
+		    		</tr>
+		    		<tr>
+		    			<td>House Nr.&nbsp;&nbsp;
+		    			<td>${ad.houseNr}
+		    		</tr>
+		    		<tr>
+		    			<td>City&nbsp;&nbsp;
+		    			<td>${ad.city}
+		    		</tr>
+		    		<tr>
+		    			<td>ZIP&nbsp;&nbsp;
+		    			<td>${ad.zip}
+		    		</tr>
+		    		<tr>
+		    			<td>Rent&nbsp;&nbsp;
+		    			<td>${ad.rent}
+		    		</tr>
+		    		<tr>
+		    			<td>Additional Cost&nbsp;&nbsp;
+		    			<td>${ad.addCost}
+		    		</tr>
+		    		<tr>
+		    			<td>Move In Date&nbsp;&nbsp;
+		    			<td>${ad.dateIn}
+		    		</tr>
+		    		<tr>
+		    			<td>Move Out Date&nbsp;&nbsp;
+		    			<td>${ad.dateOut}
+		    		</tr>
+		    		<tr>
+		    			<td>Type&nbsp;&nbsp;
+		    			<td>${ad.type}
+		    		</tr>
+		    		<tr>
+		    			<td>Room Size&nbsp;&nbsp;
+		    			<td>${ad.roomSize}
+		    		</tr>
+		    		<tr>
+		    			<td>Description&nbsp;&nbsp;
+		    			<td>${ad.description}
+		    		</tr>
+		    		<tr>
+		    			<td>About Us&nbsp;&nbsp;
+		    			<td>${ad.us}
+		    		</tr>
+		    		<tr>
+		    			<td>Ideal Roomie&nbsp;&nbsp;
+		    			<td>${ad.you}
+		    		</tr>
+		    		<tr>
+		  
+	    	</table>
+			</div>
+
+	</div>
+
+
+
+
+    	
     </div>	
     
  <div class="well well-sm"> <div id="map"></div></div>
