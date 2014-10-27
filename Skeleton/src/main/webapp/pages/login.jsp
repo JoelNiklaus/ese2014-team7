@@ -38,7 +38,6 @@
 
 	  <div id="login-page">
 	  	<div class="container">
-	  	
 		      <form:form class="form-login" method="post" modelAttribute="loginForm" action="login" id="loginForm" autocomplete="off">
 		        <h2 class="form-login-heading">sign in now</h2>
 		        <div class="login-wrap">

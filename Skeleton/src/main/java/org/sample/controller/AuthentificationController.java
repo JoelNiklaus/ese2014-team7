@@ -56,6 +56,13 @@ public class AuthentificationController {
             }
         } else {
         	model = login();
+        	
+        	//Reset password in signup form
+        	signupForm.setPassword("");
+        	signupForm.setPasswordConfirm("");
+        	
+        	//add current signup form
+        	model.addObject("signupForm", signupForm);
         }   	
     	return model;
     }
@@ -63,7 +70,6 @@ public class AuthentificationController {
     private boolean signupIsOkay(BindingResult result, SignupForm signupForm) {
     	boolean okay = !result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())
     				&& !loginService.emailAlreadyExists(signupForm.getEmail()) && !signupForm.hasNull();
-    	System.out.println("okay: " + okay);
     	return okay;
     }
     
@@ -84,7 +90,7 @@ public class AuthentificationController {
     }
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(@Valid LoginForm loginForm) {
+    public ModelAndView login(@Valid LoginForm loginForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;
     	try {
     		// get User and create Session
@@ -183,7 +189,6 @@ public class AuthentificationController {
     private boolean profileChangeIsOkay(BindingResult result, SignupForm signupForm) {
     	boolean okay = !result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())
     			&& !signupForm.hasNull();
-    	System.out.println("okay: " + okay);
     	return okay;
     }
 }

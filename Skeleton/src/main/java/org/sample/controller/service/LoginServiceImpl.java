@@ -124,7 +124,7 @@ public class LoginServiceImpl implements LoginService {
     			break SEARCH_MATCH;
     		}
     			
-    	}
+    	}	
     	
     	return exists;
     }
