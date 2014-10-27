@@ -7,24 +7,38 @@ public class SignupForm {
 
 
     private Long id;
-    private String firstName;
-    private String lastName;
     
-    //TODO: maybe add a password table?
-
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z]*", 
+    	    message = "Enter your first name")
+    private String firstName;
+    
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z]*", 
+    	    message = "Enter your last name")
+    private String lastName;
 
     @NotNull
     @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", 
     message = "Must be valid email address")
     private String email;
     
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-]*", 
+    	    message = "Password must be at leat 3 characters long")
     private String password;
+    
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-]*", 
+    	    message = "Password must be at leat 3 characters long")
     private String passwordConfirm;
 
-
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z]*", 
+    	    message = "Enter your street")
 	private String street;
+    
     private int houseNr;
+    
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z]*", 
+    	    message = "Enter your city")
     private String city;
+    
     private int zip;
 
     public String getStreet() {
