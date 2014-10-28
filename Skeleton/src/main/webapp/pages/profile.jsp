@@ -7,7 +7,9 @@
 
   <c:import url="template/header.jsp" />  
 
-  <h1>My Profile</h1>  
+  <h1>My Profile</h1>
+  
+  <p>${message}</p>  
 
 <h2>User Information</h2>
 

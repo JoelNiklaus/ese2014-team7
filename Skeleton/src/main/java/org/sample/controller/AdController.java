@@ -4,9 +4,11 @@ package org.sample.controller;
 import javax.validation.Valid;
 
 import org.sample.controller.pojos.AdForm;
+import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.AdService;
 import org.sample.controller.service.LoginService;
 import org.sample.model.Ad;
+import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AdController {
 
     @Autowired
-    LoginService sampleService;
+    LoginService loginService;
     @Autowired
     AdService adService;
     @Autowired
@@ -40,7 +42,7 @@ public class AdController {
     }
     
     @RequestMapping(value = "/createAd", method = RequestMethod.GET)
-    public ModelAndView index() {
+    public ModelAndView createAd() {
     	ModelAndView model = new ModelAndView("createAd");
 		model.addObject("adForm", new AdForm());
         return model;
@@ -53,7 +55,6 @@ public class AdController {
     	return model;
 
     }
-
 
     @RequestMapping("ad")
     public ModelAndView findUser(@RequestParam String id) {
@@ -69,5 +70,18 @@ public class AdController {
 	    }
 	    return model;
     }
-
+    
+    @RequestMapping(value = "/bookmark", method = RequestMethod.GET)
+    public ModelAndView index(@RequestParam String id) {
+    	ModelAndView model = new ModelAndView("profile");
+    	
+    	//TODO Bookmarking happens here
+    	// I need User to save connection between user and ad! 	
+    	Ad ad = adRepositry.findOne(new Long(id));
+    	User user;
+    	
+    	model.addObject("profileForm", new SignupForm());
+		model.addObject("message", "Ad not yet successfully bookmarked.");
+        return model;
+    }
 }

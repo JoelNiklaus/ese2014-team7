@@ -187,7 +187,7 @@
 					<li><a href="${pageContext.servletContext.contextPath}/adView">View
 							Ads</a></li>
 					<li><a
-						href="${pageContext.servletContext.contextPath}/ad?adId=1">View
+						href="${pageContext.servletContext.contextPath}/ad?id=1">View
 							Ad</a></li>
 				</ul></li>
 
