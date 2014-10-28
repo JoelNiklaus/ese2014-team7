@@ -166,6 +166,18 @@
 			</a></li>
 
 			<li class="sub-menu"><a href="javascript:;"> <i
+					class="fa fa-star"></i> <span>My TestApp</span>
+			</a>
+				<ul class="sub">
+					<li><a
+						href="${pageContext.servletContext.contextPath}/profile">My Profile</a></li>
+					<li><a 
+						href="${pageContext.servletContext.contextPath}/404">My Bookmarked Ads</a></li>
+					<li><a
+						href="${pageContext.servletContext.contextPath}/404">My Enquirires</a></li>
+			</ul></li>
+
+			<li class="sub-menu"><a href="javascript:;"> <i
 					class="fa fa-desktop"></i> <span>Ads</span>
 			</a>
 				<ul class="sub">
