@@ -13,11 +13,13 @@ import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.Session;
 import org.sample.model.Ad;
+import org.sample.model.Enquiry;
 import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.sample.model.dao.EnquiryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +34,7 @@ public class EnquiryController {
     	AdDao adRepository;
     	
     	@Autowired
-    	EnquiryDao enquiryRepositroy;
+    	EnquiryDao enquiryRepository;
     	
     	@Autowired
         EnquiryService enquiryService;
@@ -94,7 +96,14 @@ public class EnquiryController {
 		   
 		   //TODO: Session is going to be obsolete!
 			Session session = new Session();
-			if(session.getUser() == null)
+			if(session.getUser() != null)
+			{
+				//TODO: add received enquiries
+				//TODO: add Ad to Enquiry, in order to access data in enquiries.jsp
+				Iterable<Enquiry> results = enquiryService.findSentEnquiries();
+				model.addObject("sentEnquiries", results);
+			}
+			else
 			{
 				model = new ModelAndView("login");
 				model.addObject("loginForm", new LoginForm());

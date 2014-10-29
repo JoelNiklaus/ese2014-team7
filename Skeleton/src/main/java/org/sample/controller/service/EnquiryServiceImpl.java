@@ -2,6 +2,7 @@ package org.sample.controller.service;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.LinkedList;
 
 import org.json.JSONException;
 import org.sample.controller.NominatimConnector;
@@ -28,6 +29,8 @@ import org.springframework.util.StringUtils;
 @Service
 public class EnquiryServiceImpl implements EnquiryService {
 
+	private long hardcodedSenderId = 0;
+	
 	@Autowired EnquiryDao enquiryDao; //TODO: @Silas: what does autowired annotation actually do?
 
 	@Transactional //TODO: @Silas: what does transactional annotation actually do?
@@ -41,6 +44,27 @@ public class EnquiryServiceImpl implements EnquiryService {
 		
 		enquiryDao.save(enquiry);
 		
+		return null;
+	}
+
+	@Transactional
+	public Iterable<Enquiry> findSentEnquiries() {
+		Iterable<Enquiry> allEnquiries = enquiryDao.findAll();
+		LinkedList<Enquiry> results = new LinkedList<Enquiry>();
+		
+		for(Enquiry e : allEnquiries)
+		{
+			if(e.getSenderId() == hardcodedSenderId)
+				results.add(e);
+		}
+		
+		System.out.println("Results: " + results.size());
+		
+		return (Iterable<Enquiry>)results;
+	}
+
+	public Iterable<Enquiry> findReceivedEnquiries() {
+		// TODO Auto-generated method stub
 		return null;
 	}
     

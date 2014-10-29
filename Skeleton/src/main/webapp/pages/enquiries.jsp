@@ -11,6 +11,18 @@
 You have 0 enquiries.
 
 <h2>Sent</h2>
-You have not yet sent any enquirires.
+<c:forEach items="${sentEnquiries}" var="enquiry">
+	<div class="panel panel-primary">
+		
+			<div class="panel-heading"><h5>Enquiry</h5></div>
+			<div class="panel-body" >
+				<a class="pull-left" >
+		    		<img class="media-object" src="/Skeleton/img/house1.jpeg" height="100px">
+		  		</a>
+		  		<p>${enquiry.messageText}</p>
+				
+			</div>
+		</div>
+</c:forEach>
 
 <c:import url="template/footer.jsp" />
