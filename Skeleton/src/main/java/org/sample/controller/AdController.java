@@ -58,16 +58,23 @@ public class AdController {
 
     @RequestMapping("ad")
     public ModelAndView findUser(@RequestParam String id) {
-    	ModelAndView model;
-	    Ad ad = adRepositry.findOne(new Long(id));
+    	
+    	ModelAndView model = new ModelAndView("ad");
 	    
-	    if(ad != null){
-	    	model = new ModelAndView("ad");
-	    	model.addObject("ad", ad);
-	    	model.addObject("shortDescription", "<b>"+ad.getTitle()+"</b><br />"+ad.getStreet()+" "+ad.getHouseNr()+"<br />" +ad.getZip()+" "+ad.getCity());
-	    } else {
+	    try{
+	    	Ad ad = adRepositry.findOne(new Long(id));
+	    	
+	    	 if(ad != null){
+	 	    	
+	 	    	model.addObject("ad", ad);
+	 	    	model.addObject("shortDescription", "<b>"+ad.getTitle()+"</b><br />"+ad.getStreet()+" "+ad.getHouseNr()+"<br />" +ad.getZip()+" "+ad.getCity());
+	 	    } else {
+	 	    	model = new ModelAndView("404");
+	 	    }
+	    }catch(NumberFormatException ex){
 	    	model = new ModelAndView("404");
 	    }
+	    
 	    return model;
     }
     
