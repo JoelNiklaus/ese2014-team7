@@ -21,9 +21,9 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private String password; //TODO: cascade 1 to 1?
+    private String password;
     
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL}) //TODO: @Silas: what does this do?
     private Address address; 
     
     @OneToMany(cascade = {CascadeType.ALL})
