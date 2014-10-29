@@ -172,9 +172,9 @@
 					<li><a
 						href="${pageContext.servletContext.contextPath}/profile">My Profile</a></li>
 					<li><a 
-						href="${pageContext.servletContext.contextPath}/404">My Bookmarked Ads</a></li>
+						href="${pageContext.servletContext.contextPath}/bookmarks">My Bookmarked Ads</a></li>
 					<li><a
-						href="${pageContext.servletContext.contextPath}/404">My Enquirires</a></li>
+						href="${pageContext.servletContext.contextPath}/enquiries">My Enquirires</a></li>
 			</ul></li>
 
 			<li class="sub-menu"><a href="javascript:;"> <i
