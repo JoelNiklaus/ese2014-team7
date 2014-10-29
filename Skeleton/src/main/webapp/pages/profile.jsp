@@ -56,10 +56,4 @@
 	<button class="btn btn-theme" type="submit">Submit</button>
  </form:form>
 
-<h2>Bookmarked Ads</h2>
-
-
-<h2>Enquiries</h2>
-
-
 <c:import url="template/footer.jsp" />
