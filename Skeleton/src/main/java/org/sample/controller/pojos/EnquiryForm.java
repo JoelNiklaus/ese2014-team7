@@ -7,6 +7,9 @@ public class EnquiryForm {
 
 
 	@NotNull
+	private Long enquiryId;
+
+	@NotNull
 	private Long senderId; //TODO: not sure if this is going to be used here...
 
     @NotNull
@@ -14,6 +17,14 @@ public class EnquiryForm {
     
     private String messageText;
 
+    
+    public Long getEnquiryId() {
+		return enquiryId;
+	}
+
+	public void setEnquiryId(Long enquiryId) {
+		this.enquiryId = enquiryId;
+	}
     
 	public String getMessageText() {
 		return messageText;

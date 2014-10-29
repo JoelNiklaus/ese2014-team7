@@ -4,7 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
-
+<c:import url="template/header.jsp" />
 
 <h1>HTTP 404</h1>
 
@@ -33,3 +33,5 @@ The room numbers remained in the error codes in the official release of HTTP (Hy
 <br />
 <br />
 Source: <a href="http://www.room404.com/page.php?pg=homepage">www.room404.com</a>
+
+<c:import url="template/footer.jsp" />

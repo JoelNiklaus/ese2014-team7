@@ -13,6 +13,7 @@ import org.sample.controller.service.Session;
 import org.sample.model.Ad;
 import org.sample.model.User;
 import org.sample.model.dao.AdDao;
+import org.sample.model.dao.EnquiryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,8 +26,36 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class EnquiryController {
 
+    	@Autowired
+    	AdDao adRepository;
+    	
+    	@Autowired
+    	EnquiryDao enquiryRepositroy;
+	
+	   @RequestMapping("/sendEnquiry")
+	   public ModelAndView sendEnquiry(@RequestParam String id)
+	   {
+		   ModelAndView model = new ModelAndView("enquiryMask");
+		   long adId = 0L;
+		   
+		   try{
+			   adId = new Long(id);
+			   Ad ad = adRepository.findOne(adId);
+			   
+			   if(ad == null)
+				   model = new ModelAndView("404");
+			   else 
+				   model.addObject("ad", ad);
+		   }
+		   catch(NumberFormatException ex){
+			   model = new ModelAndView("404");
+		   }
+		  
+		   return model;
+	   }
+	
 	   @RequestMapping("/enquiries")
-	   public ModelAndView showBookmarks()
+	   public ModelAndView showEnquiries()
 	   {
 		   ModelAndView model = new ModelAndView("enquiries");
 		   

@@ -13,6 +13,7 @@ public class Ad {
 	@Id
     @GeneratedValue
     private Long id;
+	private Long placerId;
 	private Timestamp timestamp;
 	private String title;
 	private String street;
@@ -34,6 +35,14 @@ public class Ad {
 	public Long getId(){
         return id;
     }
+	
+	public Long getPlacerId() {
+		return placerId;
+	}
+
+	public void setPlacerId(Long placerId) {
+		this.placerId = placerId;
+	}
     
 	public void setId(Long id){
         this.id = id;

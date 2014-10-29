@@ -1,14 +1,28 @@
 package org.sample.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Enquiry {
 
-    private Long senderId;
+	@Id
+    @GeneratedValue
+	private Long enquiryId;
+
+	private Long senderId;
     private Long receiverId;
     private String messageText;
     
+    
+    public Long getEnquiryId() {
+		return enquiryId;
+	}
+
+	public void setEnquiryId(Long enquiryId) {
+		this.enquiryId = enquiryId;
+	}
     
     public Long getSenderId() {
         return senderId;
@@ -34,6 +48,5 @@ public class Enquiry {
 		this.messageText = messageText;
 	}
     
-	
 	
 }
