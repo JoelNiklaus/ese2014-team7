@@ -28,16 +28,18 @@ import org.springframework.util.StringUtils;
 @Service
 public class EnquiryServiceImpl implements EnquiryService {
 
-	@Autowired EnquiryDao enquiryDao; //TODO: @Silas: what does autowired annotation do?
+	@Autowired EnquiryDao enquiryDao; //TODO: @Silas: what does autowired annotation actually do?
 
-	@Transactional //TODO: @Silas: what does transactional annotation do?
-	public EnquiryForm sendEnquiry(EnquiryForm enquiryForm) {
+	@Transactional //TODO: @Silas: what does transactional annotation actually do?
+	public EnquiryForm submit(EnquiryForm enquiryForm) {
 		Enquiry enquiry = new Enquiry();
 		
 		//TODO: handle IDs in an appropriate way for now, change when login works
 		enquiry.setSenderId(0L);
 		enquiry.setReceiverId(1L);
 		enquiry.setMessageText(enquiryForm.getMessageText());
+		
+		enquiryDao.save(enquiry);
 		
 		return null;
 	}

@@ -5,7 +5,7 @@
 
 <c:import url="template/header.jsp" />
 
-<h1>My Enquirires</h1>
+<h1>My Enquiries</h1>
 
 <h2>Inbox</h2>
 You have 0 enquiries.

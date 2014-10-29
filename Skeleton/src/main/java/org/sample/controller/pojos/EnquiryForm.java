@@ -5,14 +5,12 @@ import javax.validation.constraints.Pattern;
 
 public class EnquiryForm {
 
-
-	@NotNull
+	//TODO: validation, when login works
+	
 	private Long enquiryId;
 
-	@NotNull
 	private Long senderId; //TODO: not sure if this is going to be used here...
 
-    @NotNull
     private Long receiverId; //TODO: not sure if this is going to be used here...
     
     private String messageText;

@@ -4,7 +4,7 @@ import org.sample.controller.pojos.EnquiryForm;
 
 public interface EnquiryService {
 
-    public EnquiryForm sendEnquiry(EnquiryForm enquiryForm);
+    public EnquiryForm submit(EnquiryForm enquiryForm);
 
 
 }

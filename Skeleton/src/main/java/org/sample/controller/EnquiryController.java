@@ -4,10 +4,12 @@ package org.sample.controller;
 import javax.validation.Valid;
 
 import org.sample.controller.pojos.AdForm;
+import org.sample.controller.pojos.EnquiryForm;
 import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.AdService;
+import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.Session;
 import org.sample.model.Ad;
@@ -31,9 +33,16 @@ public class EnquiryController {
     	
     	@Autowired
     	EnquiryDao enquiryRepositroy;
+    	
+    	@Autowired
+        EnquiryService enquiryService;
+    	
+    	private String defaultMsg = "Hi guys, \n\n"
+    			                  + "I'm interested in your room. Let's meet and see if I'm going to be your new roomie.\n\n"
+    			                  + "Cheers!";
 	
 	   @RequestMapping("/sendEnquiry")
-	   public ModelAndView sendEnquiry(@RequestParam String id)
+	   public ModelAndView createEnquiry(@RequestParam String id)
 	   {
 		   ModelAndView model = new ModelAndView("enquiryMask");
 		   long adId = 0L;
@@ -45,7 +54,13 @@ public class EnquiryController {
 			   if(ad == null)
 				   model = new ModelAndView("404");
 			   else 
+			   {
 				   model.addObject("ad", ad);
+				   EnquiryForm enquiryForm = new EnquiryForm();
+				   enquiryForm.setMessageText(defaultMsg);
+				   model.addObject("enquiryForm", enquiryForm);
+			   }
+				  
 		   }
 		   catch(NumberFormatException ex){
 			   model = new ModelAndView("404");
@@ -53,6 +68,24 @@ public class EnquiryController {
 		  
 		   return model;
 	   }
+	   
+	   
+	   @RequestMapping(value = "/submitEnquiry", method = RequestMethod.POST) //TODO: experiment
+	   public ModelAndView submitEnquiry(@Valid EnquiryForm enquiryForm, BindingResult result, RedirectAttributes redirectAttributes)
+	   {
+		   ModelAndView model = new ModelAndView("enquiries");
+		   
+		   if(result.hasErrors())
+		   {
+			   model = new ModelAndView("404");
+			   System.out.println(result.getFieldError());
+		   }   
+		   else
+			   enquiryService.submit(enquiryForm);
+		   
+		   return model;
+	   }
+	   
 	
 	   @RequestMapping("/enquiries")
 	   public ModelAndView showEnquiries()
