@@ -30,6 +30,7 @@ import org.springframework.util.StringUtils;
 public class EnquiryServiceImpl implements EnquiryService {
 
 	private long hardcodedSenderId = 0;
+	private long hardcodedReceiverId = 0;
 	
 	@Autowired EnquiryDao enquiryDao; //TODO: @Silas: what does autowired annotation actually do?
 
@@ -38,13 +39,14 @@ public class EnquiryServiceImpl implements EnquiryService {
 		Enquiry enquiry = new Enquiry();
 		
 		//TODO: handle IDs in an appropriate way for now, change when login works
-		enquiry.setSenderId(0L);
-		enquiry.setReceiverId(1L);
+		enquiry.setSenderId(hardcodedSenderId);
+		Long receiverId = hardcodedReceiverId; //TODO: this should be the ad placer ID
+		enquiry.setReceiverId(receiverId);
 		enquiry.setMessageText(enquiryForm.getMessageText());
 		
 		enquiryDao.save(enquiry);
 		
-		return null;
+		return enquiryForm;
 	}
 
 	@Transactional
@@ -54,7 +56,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 		
 		for(Enquiry e : allEnquiries)
 		{
-			if(e.getSenderId() == hardcodedSenderId)
+			if(e.getSenderId() == hardcodedSenderId) //TODO: HARDCODED!
 				results.add(e);
 		}
 		
@@ -64,8 +66,18 @@ public class EnquiryServiceImpl implements EnquiryService {
 	}
 
 	public Iterable<Enquiry> findReceivedEnquiries() {
-		// TODO Auto-generated method stub
-		return null;
+		Iterable<Enquiry> allEnquiries = enquiryDao.findAll();
+		LinkedList<Enquiry> results = new LinkedList<Enquiry>();
+		
+		for(Enquiry e : allEnquiries)
+		{
+			if(e.getReceiverId() == hardcodedReceiverId) //TODO: HARDCODED!
+				results.add(e);
+		}
+		
+		System.out.println("Results: " + results.size());
+		
+		return (Iterable<Enquiry>)results;
 	}
     
     

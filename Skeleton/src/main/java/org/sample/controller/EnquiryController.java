@@ -50,16 +50,20 @@ public class EnquiryController {
 		   long adId = 0L;
 		   
 		   try{
-			   adId = new Long(id);
+			   adId = Long.parseLong(id);
 			   Ad ad = adRepository.findOne(adId);
 			   
 			   if(ad == null)
 				   model = new ModelAndView("404");
 			   else 
 			   {
-				   model.addObject("ad", ad);
 				   EnquiryForm enquiryForm = new EnquiryForm();
 				   enquiryForm.setMessageText(defaultMsg);
+				   
+				   long placerID = ad.getPlacerId();
+				   enquiryForm.setReceiverId(placerID);
+				   
+				   model.addObject("ad", ad);
 				   model.addObject("enquiryForm", enquiryForm);
 			   }
 				  
@@ -83,7 +87,12 @@ public class EnquiryController {
 			   System.out.println(result.getFieldError());
 		   }   
 		   else
+		   {
 			   enquiryService.submit(enquiryForm);
+			   Iterable<Enquiry> results = enquiryService.findSentEnquiries();
+			   model.addObject("sentEnquiries", results);
+		   }
+			   
 		   
 		   return model;
 	   }
@@ -100,8 +109,10 @@ public class EnquiryController {
 			{
 				//TODO: add received enquiries
 				//TODO: add Ad to Enquiry, in order to access data in enquiries.jsp
-				Iterable<Enquiry> results = enquiryService.findSentEnquiries();
-				model.addObject("sentEnquiries", results);
+				Iterable<Enquiry> receivedEnquiries = enquiryService.findReceivedEnquiries();
+				Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
+				model.addObject("receivedEnquiries", receivedEnquiries);
+				model.addObject("sentEnquiries", sentEnquiries);
 			}
 			else
 			{

@@ -41,6 +41,7 @@ public class AdServiceImpl implements AdService {
 			e.printStackTrace();
 		} 
 	    ad.setId(adForm.getId());
+	    ad.setPlacerId(0L); //TODO: hardcoded id!
 	    Timestamp timestamp  = new Timestamp(System.currentTimeMillis());
 		ad.setTimestamp(timestamp);
 	    ad.setTitle(adForm.getTitle());

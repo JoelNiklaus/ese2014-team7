@@ -3,6 +3,8 @@ package org.sample.controller.pojos;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.sample.model.Ad;
+
 public class EnquiryForm {
 
 	//TODO: validation, when login works
@@ -14,6 +16,8 @@ public class EnquiryForm {
     private Long receiverId; //TODO: not sure if this is going to be used here...
     
     private String messageText;
+    
+    private Ad ad;
 
     
     public Long getEnquiryId() {
@@ -46,6 +50,14 @@ public class EnquiryForm {
 
 	public void setReceiverId(Long receiverId) {
 		this.receiverId = receiverId;
+	}
+
+	public Ad getAd() {
+		return ad;
+	}
+
+	public void setAd(Ad ad) {
+		this.ad = ad;
 	}
 	
 	

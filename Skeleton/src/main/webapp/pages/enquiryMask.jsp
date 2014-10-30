@@ -29,6 +29,12 @@
  
  	<fieldset>
  		<div class="control-group<c:if test="${not empty descriptionErrors}"> error</c:if>">
+ 			<label class="control-label" for="ascdas">Receiver ID:</label>
+			<div class="controls">
+				<form:textarea path="receiverId" id="field-rec-id" tabindex="2" maxlength="255" placeholder="ID" />
+				<form:errors path="messageText" cssClass="help-inline" element="span" />
+			</div>
+ 		
 			<label class="control-label" for="field-description">Enter your enquiry message:</label>
 			<div class="controls">
 				<form:textarea path="messageText" id="field-message-text" tabindex="1" maxlength="255" placeholder="Enquiry Message" />

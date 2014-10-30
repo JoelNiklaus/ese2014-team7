@@ -8,7 +8,19 @@
 <h1>My Enquiries</h1>
 
 <h2>Inbox</h2>
-You have 0 enquiries.
+<c:forEach items="${receivedEnquiries}" var="enquiry">
+	<div class="panel panel-primary">
+		
+			<div class="panel-heading"><h5>Enquiry</h5></div>
+			<div class="panel-body" >
+				<a class="pull-left" >
+		    		<img class="media-object" src="/Skeleton/img/house1.jpeg" height="100px">
+		  		</a>
+		  		<p>${enquiry.messageText}</p>
+				
+			</div>
+		</div>
+</c:forEach>
 
 <h2>Sent</h2>
 <c:forEach items="${sentEnquiries}" var="enquiry">
