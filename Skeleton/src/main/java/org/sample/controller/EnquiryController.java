@@ -40,8 +40,8 @@ public class EnquiryController {
     	
     	@Autowired
         EnquiryService enquiryService;
-    	
-    	private LoginService loginService;
+    	@Autowired
+    	LoginService loginService;
     	
     	private String defaultMsg = "Hi guys, \n\n"
     			                  + "I'm interested in your room. Let's meet and see if I'm going to be your new roomie.\n\n"
@@ -75,7 +75,7 @@ public class EnquiryController {
 		   catch(NumberFormatException ex){
 			   model = new ModelAndView("404");
 		   }
-		  
+		   model.addObject("loggedInUser", loginService.getLoggedInUser());
 		   return model;
 	   }
 	   
@@ -97,7 +97,7 @@ public class EnquiryController {
 			   model.addObject("sentEnquiries", results);
 		   }
 			   
-		   
+		   model.addObject("loggedInUser", loginService.getLoggedInUser());
 		   return model;
 	   }
 	   
@@ -125,6 +125,10 @@ public class EnquiryController {
 		    	model.addObject("forgotPasswordForm", new ForgotPasswordForm());
 		    	model.addObject("signupForm", new SignupForm());
 			}
+	    	try{
+	    		model.addObject("loggedInUser", loginService.getLoggedInUser());
+	    	} catch (Exception e){
+	    	}
 		   return model;
 	   }
 }

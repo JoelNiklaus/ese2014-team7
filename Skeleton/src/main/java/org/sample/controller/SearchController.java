@@ -3,8 +3,10 @@ package org.sample.controller;
 import javax.validation.Valid;
 
 import org.sample.controller.pojos.SearchForm;
+import org.sample.controller.service.LoginService;
 import org.sample.model.Ad;
 import org.sample.model.Search;
+import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +22,10 @@ public class SearchController {
 
     @Autowired
     AdDao adRepositry;
+    @Autowired
+    LoginService loginService;
     
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
-    
+    @RequestMapping(value = "/search", method = RequestMethod.POST)    
     public ModelAndView createAd(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){
 
     	
@@ -41,7 +44,7 @@ public class SearchController {
     		// get search from Id
     		searchAttributes = new Search(new Long(0), priceMin, priceMax, roomSizeMin, roomSizeMax, city);
     	}
-    	
+    	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	model.addObject("searchAttributes", searchAttributes);
     	    	
 
@@ -79,7 +82,7 @@ public class SearchController {
     public ModelAndView index() {
     	ModelAndView model = new ModelAndView("search");
 		model.addObject("searchForm", new SearchForm());
-		
+		model.addObject("loggedInUser", loginService.getLoggedInUser());
 		Iterable<Ad> searchResults = adRepositry.findAll();
     	if(searchResults != null)
     		model.addObject("searchResults", searchResults);

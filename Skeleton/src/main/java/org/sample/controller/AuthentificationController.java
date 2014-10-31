@@ -30,9 +30,11 @@ public class AuthentificationController {
     
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView index() {
-    ModelAndView model = new ModelAndView("register");
-    model.addObject("signupForm", new SignupForm());
-    return model;
+	    ModelAndView model = new ModelAndView("register");
+	    model.addObject("signupForm", new SignupForm());
+	    model.addObject("loggedInUser", loginService.getLoggedInUser());
+    	return model;
+    
     }
     
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -50,7 +52,7 @@ public class AuthentificationController {
     	} else {
     		model = new ModelAndView("register");
     	} 
-	
+    	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	return model;
     }
     
@@ -101,7 +103,7 @@ public class AuthentificationController {
     	} catch(InvalidUserException e) {
     		model.addObject("error", "No User with this E-Mail found: " + e.getMessage());
     	}
-    	    	
+    	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	return model;
     }
     
@@ -124,7 +126,7 @@ public class AuthentificationController {
     	// save to DB
     	loginService.saveFrom(signupForm);
     	model = new ModelAndView("profile");
-    	
+    	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	return model;
     }
 

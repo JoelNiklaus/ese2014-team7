@@ -80,6 +80,7 @@ public class AdController {
     	}else{
     		model = new ModelAndView("createAd");
     	}
+    	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	return model;
     }
     
@@ -87,6 +88,7 @@ public class AdController {
     public ModelAndView createAd() {
     	ModelAndView model = new ModelAndView("createAd");
 		model.addObject("adForm", new AdForm());
+		model.addObject("loggedInUser", loginService.getLoggedInUser());
         return model;
     }
     
@@ -95,6 +97,7 @@ public class AdController {
     public ModelAndView adView() {
     	ModelAndView model = new ModelAndView("adView");
     	model.addObject("adView",adService.adCatcher());
+    	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	return model;
 
     }
@@ -120,7 +123,7 @@ public class AdController {
 	    }catch(NumberFormatException ex){
 	    	model = new ModelAndView("404");
 	    }
-	    
+	    model.addObject("loggedInUser", loginService.getLoggedInUser());
 	    return model;
     }
     
@@ -135,6 +138,7 @@ public class AdController {
     	
     	model.addObject("profileForm", new SignupForm());
 		model.addObject("message", "Ad not yet successfully bookmarked.");
+		model.addObject("loggedInUser", loginService.getLoggedInUser());
         return model;
     }
 }

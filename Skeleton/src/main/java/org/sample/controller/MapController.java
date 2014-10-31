@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.sample.controller.service.LoginService;
 import org.sample.model.Ad;
+import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +23,14 @@ public class MapController {
     @Autowired
     AdDao adRepositry;
 
+    @Autowired
+    LoginService loginService;
     @RequestMapping(value = "/map", method = RequestMethod.GET)
     public ModelAndView index() {
     	ModelAndView model = new ModelAndView("map");
     	model.addObject("adList", adRepositry.findAll());
+    	model.addObject("loggedInUser", loginService.getLoggedInUser());
+
         return model;
     }
 

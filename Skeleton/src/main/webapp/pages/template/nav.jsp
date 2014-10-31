@@ -125,11 +125,11 @@
 	</div>
 	<div class="top-menu">
 		<ul class="nav pull-right top-menu">
-			<c:if test="${empty session.user}">
+			<c:if test="${empty loggedInUser}">
 				<li><a class="logout" href="${pageContext.servletContext.contextPath}/login">Login</a></li>
 			</c:if>
-			<c:if test="${not empty session.user}">
-			<li><a class="logout" href="${pageContext.servletContext.contextPath}/">Logout</a></li>
+			<c:if test="${not empty loggedInUser}">
+			<li><a class="logout" href="${pageContext.servletContext.contextPath}/logout">Logout</a></li>
 			</c:if>
 		</ul>
 	</div>

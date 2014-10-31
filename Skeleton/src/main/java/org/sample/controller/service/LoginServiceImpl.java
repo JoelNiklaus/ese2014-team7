@@ -181,7 +181,7 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
 	}
 
 	public User getLoggedInUser() {
-		return userDao.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
 
+		return userDao.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
 	}
 }
