@@ -91,7 +91,6 @@ public class AdController {
     }
     
     
-    //to adjust
     @RequestMapping(value = "/adView", method = RequestMethod.GET)
     public ModelAndView adView() {
     	ModelAndView model = new ModelAndView("adView");
@@ -104,7 +103,7 @@ public class AdController {
     public ModelAndView findUser(@RequestParam String id) {
     	
     	ModelAndView model = new ModelAndView("ad");
-    	Long adId = Long.parseLong(id);
+    	//Long adId = Long.parseLong(id);
 	    
 	    try{
 	    	Ad ad = adRepositry.findOne(new Long(id));
@@ -112,9 +111,9 @@ public class AdController {
 	    	 if(ad != null){
 	 	    	model.addObject("ad", ad);
 	 	    	model.addObject("shortDescription", "<b>"+ad.getTitle()+"</b><br />"+ad.getStreet()+" "+ad.getHouseNr()+"<br />" +ad.getZip()+" "+ad.getCity());
-	 	    	model.addObject("newAdProfile", adService.getAd(adId));
-	 			model.addObject("pictureIds", adService.getAdPictureIds(adId));
-	 			model.addObject("mainPic", adService.getAdMainPic(adId));
+	 	    	//model.addObject("newAdProfile", adService.getAd(adId));
+	 			//model.addObject("pictureIds", adService.getAdPictureIds(adId));
+	 			//model.addObject("mainPic", adService.getAdMainPic(adId));
 	 	    } else {
 	 	    	model = new ModelAndView("404");
 	 	    }
