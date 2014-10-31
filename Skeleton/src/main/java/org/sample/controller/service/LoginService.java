@@ -54,4 +54,6 @@ public interface LoginService {
      */
     public boolean emailAlreadyExists(String email);
 
+	public Object getLoggedInUser();
+
 }

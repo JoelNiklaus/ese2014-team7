@@ -1,6 +1,7 @@
 package org.sample.controller;
 
 
+
 import javax.validation.Valid;
 
 import org.sample.controller.pojos.AdForm;
@@ -33,11 +34,14 @@ public class EnquiryController {
     	@Autowired
     	AdDao adRepository;
     	
+    	
     	@Autowired
     	EnquiryDao enquiryRepository;
     	
     	@Autowired
         EnquiryService enquiryService;
+    	
+    	private LoginService loginService;
     	
     	private String defaultMsg = "Hi guys, \n\n"
     			                  + "I'm interested in your room. Let's meet and see if I'm going to be your new roomie.\n\n"
@@ -121,7 +125,6 @@ public class EnquiryController {
 		    	model.addObject("forgotPasswordForm", new ForgotPasswordForm());
 		    	model.addObject("signupForm", new SignupForm());
 			}
-		   
 		   return model;
 	   }
 }

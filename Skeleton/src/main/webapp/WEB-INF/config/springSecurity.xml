@@ -8,17 +8,20 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<security:http auto-config="true" use-expressions="true" access-denied-page="/access-denied">
-		<security:intercept-url pattern="/login" access="permitAll" />		
+		<security:intercept-url pattern="/login" access="permitAll" />	
+		<security:intercept-url pattern="/createAd" access="hasRole('ROLE_USER')"/>	
+		<security:intercept-url pattern="/profile" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/enquiries" access="hasRole('ROLE_USER')" />
 		<security:form-login login-page="/login" authentication-failure-url="/login?error=true" default-target-url="/" />
 		<security:logout invalidate-session="true" logout-success-url="/" logout-url="/logout" />
 	</security:http>
 
+
 	<!-- Declare an authentication-manager to use a custom userDetailsService -->
 	<security:authentication-manager>
-		<!-- .... -->
-	</security:authentication-manager>
-
-	
-	
+	 <security:authentication-provider user-service-ref="loginServiceImpl" >
+		<security:password-encoder hash="bcrypt" />
+	</security:authentication-provider>
+	</security:authentication-manager> 
 
 </beans>
