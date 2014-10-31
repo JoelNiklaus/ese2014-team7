@@ -133,7 +133,7 @@
 
 		<legend>Additional Information</legend>
 
-		<c:set var="typeErrors">
+		<!--<c:set var="typeErrors">
 			<form:errors path="type" />
 		</c:set>
 		<div
@@ -146,6 +146,7 @@
 				</form:select>
 			</div>
 		</div>
+		-->
 
 		<c:set var="roomSizeErrors">
 			<form:errors path="roomSize" />
@@ -205,8 +206,7 @@
 
 		<table border="1" cellpadding="5" width="700">
 				<tr>
-					<label for="image"> Image (in JPEG format only, and
-						max 5MB):</label>
+					<label for="image"> Image (in JPEG format only, and max 5MB):</label>
 					<input name="image" type="file" />
 					</br>
 				</tr>

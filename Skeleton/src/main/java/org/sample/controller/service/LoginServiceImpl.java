@@ -129,7 +129,9 @@ public class LoginServiceImpl implements LoginService {
     	return exists;
     }
 
+	/*
 	@Autowired AdDao adDao;
+	
     
     @Transactional
 	private AdForm saveFrom(AdForm adForm) {
@@ -148,7 +150,7 @@ public class LoginServiceImpl implements LoginService {
 	    ad.setAddCost(adForm.getAddCost());
 	    ad.setDateIn(adForm.getDateIn());
 	    ad.setDateOut(adForm.getDateOut());
-	    ad.setType(adForm.getType());
+	    //ad.setType(adForm.getType());
 	    ad.setRoomSize(adForm.getRoomSize());
 	    ad.setDescription(adForm.getDescription());
 	    ad.setUs(adForm.getUs());
@@ -158,4 +160,5 @@ public class LoginServiceImpl implements LoginService {
 		
 	    return  adForm;
 	}
+	*/
 }

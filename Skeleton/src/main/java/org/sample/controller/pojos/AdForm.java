@@ -24,7 +24,7 @@ public class AdForm {
 	private String dateIn;
 	private String dateOut;
 	@NotNull
-	private String type;
+	//private String type;
 	private Long roomSize;
 	private String description;
 	private String us;
@@ -36,6 +36,8 @@ public class AdForm {
 	private String img_three;
 	private String img_four;
 	*/
+	
+	private Long placerId;
 	
 
 	public Timestamp getTimestamp() {
@@ -86,12 +88,14 @@ public class AdForm {
 	public void setAddCost(Long addCost) {
 		this.addCost = addCost;
 	}
+	/*
 	public String getType() {
 		return type;
 	}
 	public void setType(String type) {
 		this.type = type;
 	}
+	*/
 	public Long getId() {
 		return id;
 	}
@@ -161,6 +165,13 @@ public class AdForm {
 		this.img_four = img_four;
 	}
 	*/
+	
+	public Long getPlacerId() {
+		return placerId;
+	}
+	public void setPlacerId(Long placerId) {
+		this.placerId = placerId;
+	}
 	
 
 }

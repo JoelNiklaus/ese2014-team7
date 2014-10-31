@@ -47,6 +47,8 @@ public class AdServiceImpl implements AdService {
 			
 			e.printStackTrace();
 		} 
+		
+		//Pictures
 		Set<Picture> pictures = new HashSet<Picture>();
 		Picture pic1 = new Picture();
 		//Picture pic2 = new Picture();
@@ -83,7 +85,7 @@ public class AdServiceImpl implements AdService {
 		*/
 		
 	    ad.setId(adForm.getId());
-	    ad.setPlacerId(0L); //TODO: hardcoded id!
+	    ad.setPlacerId(1337L); //TODO: hardcoded id!
 	    Timestamp timestamp  = new Timestamp(System.currentTimeMillis());
 		ad.setTimestamp(timestamp);
 	    ad.setTitle(adForm.getTitle());
@@ -95,7 +97,7 @@ public class AdServiceImpl implements AdService {
 	    ad.setAddCost(adForm.getAddCost());
 	    ad.setDateIn(adForm.getDateIn());
 	    ad.setDateOut(adForm.getDateOut());
-	    ad.setType(adForm.getType());
+	    //ad.setType(adForm.getType());
 	    ad.setRoomSize(adForm.getRoomSize());
 	    ad.setDescription(adForm.getDescription());
 	    ad.setUs(adForm.getUs());

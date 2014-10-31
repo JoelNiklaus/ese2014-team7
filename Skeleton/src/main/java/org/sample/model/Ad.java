@@ -32,7 +32,7 @@ public class Ad {
 	private Long addCost;
 	private String dateIn;
 	private String dateOut;
-	private String type;
+	//private String type;
 	private Long roomSize;
 	private String description;
 	private String us;
@@ -57,14 +57,6 @@ public class Ad {
 	public Long getId(){
         return id;
     }
-	
-	public Long getPlacerId() {
-		return placerId;
-	}
-
-	public void setPlacerId(Long placerId) {
-		this.placerId = placerId;
-	}
     
 	public void setId(Long id){
         this.id = id;
@@ -118,6 +110,7 @@ public class Ad {
     	this.addCost = addCost;
     }
     
+    /*
     public String getType(){
     	return type;
     }
@@ -125,6 +118,7 @@ public class Ad {
     public void setType(String type){
     	this.type = type;
     }
+    */
 
 	
     public String getStreet() {
@@ -206,5 +200,13 @@ public class Ad {
 
 	public void setLon(String lon) {
 		this.lon = lon;
+	}
+
+	public Long getPlacerId() {
+		return placerId;
+	}
+
+	public void setPlacerId(Long placerId) {
+		this.placerId = placerId;
 	}
 }
