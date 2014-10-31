@@ -133,21 +133,6 @@
 
 		<legend>Additional Information</legend>
 
-		<!--<c:set var="typeErrors">
-			<form:errors path="type" />
-		</c:set>
-		<div
-			class="control-group<c:if test="${not empty typeErrors}"> error</c:if>">
-			<label class="control-label" for="field-adType">Type</label>
-			<div class="controls">
-				<form:select path="type" id="field-adType" tabindex="10">
-					<option value="House">House</option>
-					<option value="Apartment">Apartment</option>
-				</form:select>
-			</div>
-		</div>
-		-->
-
 		<c:set var="roomSizeErrors">
 			<form:errors path="roomSize" />
 		</c:set>

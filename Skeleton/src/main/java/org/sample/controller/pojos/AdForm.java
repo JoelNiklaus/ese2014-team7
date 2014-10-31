@@ -23,8 +23,6 @@ public class AdForm {
 	@NotNull
 	private String dateIn;
 	private String dateOut;
-	//@NotNull
-	//private String type;
 	private Long roomSize;
 	private String description;
 	private String us;
@@ -88,14 +86,7 @@ public class AdForm {
 	public void setAddCost(Long addCost) {
 		this.addCost = addCost;
 	}
-	/*
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	*/
+	
 	public Long getId() {
 		return id;
 	}

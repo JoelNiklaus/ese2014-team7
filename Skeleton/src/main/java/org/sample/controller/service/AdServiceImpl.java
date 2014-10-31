@@ -97,7 +97,6 @@ public class AdServiceImpl implements AdService {
 	    ad.setAddCost(adForm.getAddCost());
 	    ad.setDateIn(adForm.getDateIn());
 	    ad.setDateOut(adForm.getDateOut());
-	    //ad.setType(adForm.getType());
 	    ad.setRoomSize(adForm.getRoomSize());
 	    ad.setDescription(adForm.getDescription());
 	    ad.setUs(adForm.getUs());
