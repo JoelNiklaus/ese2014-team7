@@ -68,10 +68,6 @@
 		    			<td>${ad.dateOut}
 		    		</tr>
 		    		<tr>
-		    			<td>Type&nbsp;&nbsp;
-		    			<td>${ad.type}
-		    		</tr>
-		    		<tr>
 		    			<td>Room Size&nbsp;&nbsp;
 		    			<td>${ad.roomSize}
 		    		</tr>

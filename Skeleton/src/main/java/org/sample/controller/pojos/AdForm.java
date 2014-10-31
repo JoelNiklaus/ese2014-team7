@@ -23,7 +23,7 @@ public class AdForm {
 	@NotNull
 	private String dateIn;
 	private String dateOut;
-	@NotNull
+	//@NotNull
 	//private String type;
 	private Long roomSize;
 	private String description;
