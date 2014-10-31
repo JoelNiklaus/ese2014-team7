@@ -1,6 +1,7 @@
 package org.sample.controller.service;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 
 import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.ForgotPasswordForm;
@@ -14,13 +15,19 @@ import org.sample.model.dao.AddressDao;
 import org.sample.model.dao.UserDao;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 
 @Service
-public class LoginServiceImpl implements LoginService {
+public class LoginServiceImpl implements LoginService, UserDetailsService {
 
     @Autowired    UserDao userDao;
     @Autowired    AddressDao addDao;
@@ -39,7 +46,10 @@ public class LoginServiceImpl implements LoginService {
         user.setFirstName(signupForm.getFirstName());
         user.setEmail(signupForm.getEmail());
         user.setLastName(signupForm.getLastName());
-        user.setPassword(signupForm.getPassword());
+        
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(signupForm.getPassword());
+        user.setPassword(hashedPassword);
         
         user = userDao.save(user);   // save object to DB
         
@@ -157,5 +167,17 @@ public class LoginServiceImpl implements LoginService {
 	    ad = adDao.save(ad);
 		
 	    return  adForm;
+	}
+
+	public UserDetails loadUserByUsername(String arg0)
+			throws UsernameNotFoundException {
+		User user = userDao.findByEmail(arg0);
+		
+		return user;
+	}
+
+	public User getLoggedInUser() {
+		return userDao.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+
 	}
 }

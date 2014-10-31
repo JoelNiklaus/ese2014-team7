@@ -1,27 +1,41 @@
 package org.sample.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 
 @Entity
-public class User {
+public class User implements UserDetails{
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue
     private Long id;
 
     private String firstName;
     private String lastName;
+
     private String email;
-    private String password; //TODO: cascade 1 to 1?
+    private String password; 
     
     @OneToOne(cascade = {CascadeType.ALL})
     private Address address; 
@@ -32,7 +46,7 @@ public class User {
     public Long getId() {
         return id;
     }
-
+    
     public void setId(Long id) {
         this.id = id;
     }
@@ -77,6 +91,39 @@ public class User {
 	public String getPassword()
 	{
 		return password;
+	}
+
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		 List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		 authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+		return authorities;
+	}
+
+
+	public String getUsername() {
+
+		return email;
+	}
+
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
     
 	

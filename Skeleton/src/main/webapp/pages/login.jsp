@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
+<%-- <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -162,3 +162,34 @@
 
   </body>
 </html>
+ --%>
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+
+<c:import url="template/header.jsp" />
+
+<div>Login</div>
+        <form name="f" action="<c:url value="/j_spring_security_check"/>" method="POST">
+            <label for="password">Username</label>&nbsp;<input type="text" id="j_username" name="j_username"><br/>
+            <label for="password">Password</label>&nbsp;<input type="password" id="j_password" name="j_password"><br/>
+            <input type="submit" value="Validate">&nbsp;<input name="reset" type="reset">
+            <input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+        <hr/>
+        <c:if test="${param.error != null}">
+            <div>
+                Failed to login.
+                <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+                  Reason: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+                </c:if>
+            </div>
+        </c:if>
+        <hr/>
+        <input type="button" value="Echo" id="echo" name="echo" onclick="AppController.echo();">
+        <div id="echoContainer"></div>
+
+ <c:import url="template/footer.jsp" />
+ 

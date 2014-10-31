@@ -11,11 +11,11 @@ import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.LoginService;
-import org.sample.controller.service.Session;
 import org.sample.model.Address;
 import org.sample.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,86 +28,50 @@ public class AuthentificationController {
     @Autowired
     LoginService loginService;
     
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public ModelAndView index() {
+    ModelAndView model = new ModelAndView("register");
+    model.addObject("signupForm", new SignupForm());
+    return model;
+    }
+    
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;    	
-    	if (signupIsOkay(result, signupForm)) {
-            try {
-            	//TODO: for password mismatch: can we put other, valid info as default when returning to register page, 
-            	//so user doesn't have to start all over?
-            	
-            	// save to DB
-            	loginService.saveFrom(signupForm);
-            	
-            	// get User and create Session
-            	LoginForm loginForm = registerFormToLoginForm(signupForm);
-            	User user = loginService.getUser(loginForm);
-        		Address add = loginService.getAddress(user.getId());
-        		Session session = new Session();
-        		session.setUser(user);
-        		
-            	model = new ModelAndView("profile");
-            	model.addObject("profileForm", new SignupForm());
-            	model.addObject("session", session);
-        		model.addObject("address", add);
-            } catch (InvalidUserException e) {
-            	model = new ModelAndView("index");
-            	model.addObject("page_error", e.getMessage());
-            }
-        } else {
-        	model = login();
-        	
-        	//Reset password in signup form
-        	signupForm.setPassword("");
-        	signupForm.setPasswordConfirm("");
-        	
-        	//add current signup form
-        	model.addObject("signupForm", signupForm);
-        }   	
+
+    	if (!result.hasErrors()) {
+    		 try {
+    			 loginService.saveFrom(signupForm);
+    			 model = new ModelAndView("index");
+    		 } catch (InvalidUserException e) {
+    			 model = new ModelAndView("register");
+    			 model.addObject("page_error", e.getMessage());
+    		 }
+    	} else {
+    		model = new ModelAndView("register");
+    	} 
+	
     	return model;
     }
     
-    private boolean signupIsOkay(BindingResult result, SignupForm signupForm) {
-    	boolean okay = !result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())
-    				&& !loginService.emailAlreadyExists(signupForm.getEmail()) && !signupForm.hasNull();
-    	return okay;
-    }
     
-    private LoginForm registerFormToLoginForm(SignupForm signupForm) {
-    	LoginForm login = new LoginForm();
-    	login.setEmail(signupForm.getEmail());
-    	login.setPassword(signupForm.getPassword());
-    	return login;
-    }
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login() {
-    	ModelAndView model = new ModelAndView("login");
-    	model.addObject("loginForm", new LoginForm());
-    	model.addObject("forgotPasswordForm", new ForgotPasswordForm());
-    	model.addObject("signupForm", new SignupForm());
-    	return model;
+    public String login(ModelMap model) {
+        return "login";
     }
-    
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(@Valid LoginForm loginForm, BindingResult result, RedirectAttributes redirectAttributes) {
-    	ModelAndView model;
-    	try {
-    		// get User and create Session
-    		User user = loginService.getUser(loginForm);
-    		Address add = loginService.getAddress(user.getId());
-    		Session session = new Session();
-    		session.setUser(user);
-    		
-    		model = new ModelAndView("profile");
-    		model.addObject("profileForm", new SignupForm());
-    		model.addObject("session", session);
-    		model.addObject("address", add);
-    	} catch(InvalidUserException ex) {
-    		model = login();
-    	}
-    	return model;
+ 
+    @RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
+    public String loginerror(ModelMap model) {
+        model.addAttribute("error", "true");
+        return "denied";
     }
+ 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(ModelMap model) {
+        return "logout";
+    }
+
     
     //TODO Bug: Displays not existent form Forgot Password... ???
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)
@@ -157,38 +121,11 @@ public class AuthentificationController {
     @RequestMapping(value = "/profileChange", method = RequestMethod.POST)
     public ModelAndView profileChange(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;
-    	if (profileChangeIsOkay(result, signupForm)) {
-            try {
-            	//TODO: for password mismatch: can we put other, valid info as default when returning to register page, 
-            	//so user doesn't have to start all over?
-            	
-            	// save to DB
-            	loginService.saveFrom(signupForm);
-            	
-            	// get User and create Session
-            	LoginForm loginForm = registerFormToLoginForm(signupForm);
-            	User user = loginService.getUser(loginForm);
-        		Address add = loginService.getAddress(user.getId());
-        		Session session = new Session();
-        		session.setUser(user);
-        		
-            	model = new ModelAndView("profile");
-            	model.addObject("profileForm", new SignupForm());
-            	model.addObject("session", session);
-        		model.addObject("address", add);
-            } catch (InvalidUserException e) {
-            	model = new ModelAndView("index");
-            	model.addObject("page_error", e.getMessage());
-            }
-        } else {
-        	model = login();
-        }   	
+    	// save to DB
+    	loginService.saveFrom(signupForm);
+    	model = new ModelAndView("profile");
+    	
     	return model;
     }
 
-    private boolean profileChangeIsOkay(BindingResult result, SignupForm signupForm) {
-    	boolean okay = !result.hasErrors() && signupForm.getPassword().equals(signupForm.getPasswordConfirm())
-    			&& !signupForm.hasNull();
-    	return okay;
-    }
 }
