@@ -84,6 +84,9 @@ public class SearchController {
 		model.addObject("searchForm", new SearchForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 		Iterable<Ad> searchResults = adRepositry.findAll();
+		Search searchAttributes;
+		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
+		model.addObject("searchAttributes", searchAttributes);
     	if(searchResults != null)
     		model.addObject("searchResults", searchResults);
         return model;

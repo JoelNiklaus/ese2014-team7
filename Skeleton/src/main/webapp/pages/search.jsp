@@ -219,7 +219,8 @@
 		});
 		
 		$(document).ready(function(){			
-			$("#priceSlider").val(20,30);
+			$("#priceSlider").val(["${searchAttributes.priceMin}","${searchAttributes.priceMax}"]);
+			$("#roomSizeSlider").val(["${searchAttributes.roomSizeMin}","${searchAttributes.roomSizeMax}"]);
 			$("#field-city").val("${searchAttributes.city}");
 		});
 	</script>		
