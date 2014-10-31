@@ -11,7 +11,7 @@
 <h1>Create Ad</h1>
 
 <form:form method="post" modelAttribute="adForm" action="createAd"
-	id="adForm" cssClass="form-horizontal" autocomplete="off">
+	id="adForm" cssClass="form-horizontal" autocomplete="off" enctype="multipart/form-data">
 	<fieldset>
 
 		<legend>General Information</legend>
@@ -73,14 +73,19 @@
 		<c:set var="rentErrors">
 			<form:errors path="rent" />
 		</c:set>
-		<div
-			class="control-group<c:if test="${not empty rentErrors}"> error</c:if>">
+		<div class="control-group<c:if test="${not empty rentErrors}"> error</c:if>">
 			<label class="control-label" for="field-rent">Rent</label>
 			<div class="controls">
 				<form:input path="rent" id="field-rent" tabindex="6" maxlength="6"
 					placeholder="0" />
 				<form:errors path="rent" cssClass="help-inline" element="span" />
 			</div>
+		</div>
+		
+		<div class="input-group">
+  			<span class="input-group-addon">CHF</span>
+  				<input type="text" class="form-control">
+  			<span class="input-group-addon">.00</span>
 		</div>
 
 		<c:set var="addCostErrors">
@@ -198,7 +203,35 @@
 
 		<legend>Images</legend>
 
+		<table border="1" cellpadding="5" width="700">
+				<tr>
+					<label for="image"> Image (in JPEG format only, and
+						max 5MB):</label>
+					<input name="image" type="file" />
+					</br>
+				</tr>
+				<!--
+				<tr>
+					<label for="image"> Ad Image 1 (in JPEG format only, and
+						max 700kb):</label>
+					<input name="image" type="file" />
+					</br>
+				</tr>
+				<tr>
+					<label for="image">Ad Image 2 (in JPEG format only, and max
+						700kb):</label>
+					<input name="image" type="file" />
+					</br>
+				</tr>
+				<tr>
+					<label for="image">Ad Image 3 (in JPEG format only, and max
+						700kb):</label>
+					<input name="image" type="file" />
+					</br>
+				</tr>
+				-->
 
+			</table>
 
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary">Create Ad</button>

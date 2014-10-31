@@ -1,11 +1,19 @@
 package org.sample.model;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import org.sample.model.Ad;
+import org.sample.model.Picture;
 
 @Entity
 public class Ad {
@@ -31,6 +39,20 @@ public class Ad {
 	private String you;
 	private String lat;
 	private String lon;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	private Set<Picture> pictures;
+	
+	@ManyToOne
+	private Ad ad;
+
+	public Set<Picture> getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(Set<Picture> pictures) {
+		this.pictures = pictures;
+	}
 
 	public Long getId(){
         return id;

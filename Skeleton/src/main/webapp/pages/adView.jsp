@@ -14,6 +14,7 @@
     			<td><legend>Title</legend>
     			<td><legend>${ad.title}</legend>
     		</tr>
+    		<img class="media-object" src="/Skeleton/img/<c:out value="${ad.street}${ad.houseNr}.jpeg"/>" width="200px">
     		<tr>
     			<td>Street&nbsp;&nbsp;
     			<td>${ad.street}

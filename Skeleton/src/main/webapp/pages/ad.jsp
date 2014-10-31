@@ -27,7 +27,9 @@
 
 			<div class="col-md-2"> 		
 				<a class="pull-left" >
-				    <img class="media-object" src="/Skeleton/img/house1.jpeg" height="200px">
+				    <!-- <img class="media-object" src="/Skeleton/img/house1.jpeg" height="200px">-->
+				    <img class="media-object" src="/Skeleton/img/<c:out value="${ad.street}${ad.houseNr}.jpeg"/>" width="200px">
+				    
 				</a>
 			</div>
 			<div class="col-md-2"> 		
