@@ -2,6 +2,8 @@ package org.sample.controller;
 
 
 
+import java.util.Collections;
+
 import javax.validation.Valid;
 
 import org.sample.controller.exceptions.InvalidAdException;
@@ -68,8 +70,7 @@ public class EnquiryController {
 					   
 					   model.addObject("ad", ad);
 					   model.addObject("enquiryForm", enquiryForm);
-				   }
-					  
+				   }  
 			   }
 			   catch(NumberFormatException ex){
 				   model = new ModelAndView("404");
@@ -123,6 +124,7 @@ public class EnquiryController {
 			{
 				Iterable<Enquiry> receivedEnquiries = enquiryService.findReceivedEnquiries();
 				Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
+				
 				model.addObject("receivedEnquiries", receivedEnquiries);
 				model.addObject("sentEnquiries", sentEnquiries);
 			}

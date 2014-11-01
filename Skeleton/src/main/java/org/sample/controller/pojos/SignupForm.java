@@ -3,20 +3,29 @@ package org.sample.controller.pojos;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.sample.controller.exceptions.InvalidUserException;
+import org.sample.controller.service.LoginService;
+import org.sample.controller.service.LoginServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+
+@Configurable
 public class SignupForm {
 
+	@Autowired
+	LoginService loginService;
 
     private Long id;
     
-    @Pattern(regexp = "[a-zA-Z][a-zA-Z]*", 
+    @Pattern(regexp = "[a-zA-Z\\s]+", 
     	    message = "Enter your first name")
     private String firstName;
     
-    @Pattern(regexp = "[a-zA-Z][a-zA-Z]*", 
+    @Pattern(regexp = "[a-zA-Z\\s]+", 
     	    message = "Enter your last name")
     private String lastName;
 
-    @NotNull
+    @NotNull(message="E-Mail already exists")
     @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", 
     message = "Must be valid email address")
     private String email;
@@ -29,13 +38,13 @@ public class SignupForm {
     	    message = "Password must be at leat 3 characters long")
     private String passwordConfirm;
 
-    @Pattern(regexp = "[a-zA-Z][a-zA-Z]*", 
+    @Pattern(regexp = "[a-zA-Z\\s]+", 
     	    message = "Enter your street")
 	private String street;
     
     private int houseNr;
     
-    @Pattern(regexp = "[a-zA-Z][a-zA-Z]*", 
+    @Pattern(regexp = "[a-zA-Z]+", 
     	    message = "Enter your city")
     private String city;
     
@@ -46,7 +55,8 @@ public class SignupForm {
 	}
 
 	public void setStreet(String street) {
-		this.street = street;
+		street = street.trim();
+		this.street = street; //TODO: test this
 	}
 
 	public int getHouseNr() {
@@ -62,6 +72,7 @@ public class SignupForm {
 	}
 
 	public void setCity(String city) {
+		city = city.trim();
 		this.city = city;
 	}
 
@@ -78,6 +89,7 @@ public class SignupForm {
     }
 
     public void setFirstName(String firstName) {
+    	firstName = firstName.trim();
         this.firstName = firstName;
     }
 
@@ -86,6 +98,7 @@ public class SignupForm {
     }
 
     public void setLastName(String lastName) {
+    	lastName = lastName.trim();
         this.lastName = lastName;
     }
 
@@ -94,7 +107,7 @@ public class SignupForm {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+    	this.email = email;
     }
 
     public Long getId() {

@@ -1,7 +1,7 @@
 package org.sample.controller.pojos;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import org.sample.model.Ad;
 
@@ -9,6 +9,7 @@ public class EnquiryForm {
 
 	//TODO: validation, when login works
 	
+	private Timestamp timestamp;
 	private Long enquiryId;
 	private Long senderId; 
     private Long receiverId; 
@@ -63,6 +64,14 @@ public class EnquiryForm {
 
 	public void setAdId(long adId) {
 		this.adId = adId;
+	}
+
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 	
 	

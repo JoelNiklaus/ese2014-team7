@@ -1,10 +1,13 @@
 package org.sample.controller.service;
 
+import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.LinkedList;
 
 import org.sample.controller.exceptions.InvalidAdException;
 import org.sample.controller.pojos.EnquiryForm;
 import org.sample.model.Enquiry;
+import org.sample.model.EnquiryComparator;
 import org.sample.model.dao.AdDao;
 import org.sample.model.dao.EnquiryDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +31,12 @@ public class EnquiryServiceImpl implements EnquiryService {
 			throw new InvalidAdException("This ad doesn't exist");
 			
 		/* Update enquiry FORM: set sender to logged in user, receiver to ad placer ID */
+		enquiryForm.setTimestamp(new Timestamp(System.currentTimeMillis()));
 		enquiryForm.setSenderId(loginService.getLoggedInUser().getId());
 		enquiryForm.setReceiverId(enquiryForm.getAd().getPlacerId());
 		
 		/* Fill in enquiry from completed enquiry form */
+		enquiry.setTimestamp(enquiryForm.getTimestamp());
 		enquiry.setSenderId(enquiryForm.getSenderId());
 		enquiry.setReceiverId(enquiryForm.getReceiverId());
 		enquiry.setMessageText(enquiryForm.getMessageText());
@@ -52,6 +57,8 @@ public class EnquiryServiceImpl implements EnquiryService {
 				results.add(e);
 		}
 		
+		Collections.sort(results, new EnquiryComparator());
+		
 		return (Iterable<Enquiry>)results;
 	}
 
@@ -65,6 +72,8 @@ public class EnquiryServiceImpl implements EnquiryService {
 			if(e.getReceiverId() == loginService.getLoggedInUser().getId())
 				results.add(e);
 		}
+		
+		Collections.sort(results, new EnquiryComparator());
 		
 		return (Iterable<Enquiry>)results;
 	}

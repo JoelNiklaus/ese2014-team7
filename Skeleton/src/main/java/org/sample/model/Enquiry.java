@@ -1,16 +1,19 @@
 package org.sample.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Enquiry {
+public class Enquiry{
 
 	@Id
     @GeneratedValue
 	private Long enquiryId;
 
+	private Timestamp timestamp;
 	private Long senderId;
     private Long receiverId;
     private String messageText;
@@ -47,6 +50,13 @@ public class Enquiry {
 	public void setMessageText(String messageText) {
 		this.messageText = messageText;
 	}
-    
+
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
+	}
 	
 }

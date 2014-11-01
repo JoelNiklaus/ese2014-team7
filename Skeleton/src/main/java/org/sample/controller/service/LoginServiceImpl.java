@@ -1,21 +1,14 @@
 package org.sample.controller.service;
 
-import java.sql.Timestamp;
-import java.util.Collection;
-
 import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
-import org.sample.controller.pojos.AdForm;
 import org.sample.model.Address;
 import org.sample.model.User;
-import org.sample.model.Ad;
 import org.sample.model.dao.AddressDao;
 import org.sample.model.dao.UserDao;
-import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -50,11 +43,7 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(signupForm.getPassword());
         user.setPassword(hashedPassword);
-        
         user = userDao.save(user);   // save object to DB
-        
-       // Iterable<Address> addresses = addDao.findAll();  // find all 
-       //Address anAddress = addDao.findOne((long)3); // find by ID
         
         Address address = new Address();
         address.setId(user.getId());
