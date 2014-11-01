@@ -33,15 +33,16 @@ public class EnquiryServiceImpl implements EnquiryService {
 	private long hardcodedReceiverId = 0;
 	
 	@Autowired EnquiryDao enquiryDao; //TODO: @Silas: what does autowired annotation actually do?
+	@Autowired LoginService loginService;
 
 	@Transactional //TODO: @Silas: what does transactional annotation actually do?
 	public EnquiryForm submit(EnquiryForm enquiryForm) {
 		Enquiry enquiry = new Enquiry();
 		
 		//TODO: handle IDs in an appropriate way for now, change when login works
-		enquiry.setSenderId(hardcodedSenderId);
-		Long receiverId = hardcodedReceiverId; //TODO: this should be the ad placer ID
-		enquiry.setReceiverId(receiverId);
+		enquiry.setSenderId(loginService.getLoggedInUser().getId());
+		//Long receiverId = enquiryForm.getReceiverId(); //TODO: this should be the ad placer ID
+		enquiry.setReceiverId(enquiryForm.getReceiverId());
 		enquiry.setMessageText(enquiryForm.getMessageText());
 		
 		enquiryDao.save(enquiry);
@@ -60,11 +61,10 @@ public class EnquiryServiceImpl implements EnquiryService {
 				results.add(e);
 		}
 		
-		System.out.println("Results: " + results.size());
-		
 		return (Iterable<Enquiry>)results;
 	}
 
+	@Transactional
 	public Iterable<Enquiry> findReceivedEnquiries() {
 		Iterable<Enquiry> allEnquiries = enquiryDao.findAll();
 		LinkedList<Enquiry> results = new LinkedList<Enquiry>();
@@ -74,8 +74,6 @@ public class EnquiryServiceImpl implements EnquiryService {
 			if(e.getReceiverId() == hardcodedReceiverId) //TODO: HARDCODED!
 				results.add(e);
 		}
-		
-		System.out.println("Results: " + results.size());
 		
 		return (Iterable<Enquiry>)results;
 	}

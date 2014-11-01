@@ -40,6 +40,7 @@ public class EnquiryController {
     	
     	@Autowired
         EnquiryService enquiryService;
+    	
     	@Autowired
     	LoginService loginService;
     	
@@ -53,29 +54,37 @@ public class EnquiryController {
 		   ModelAndView model = new ModelAndView("enquiryMask");
 		   long adId = 0L;
 		   
-		   try{
-			   adId = Long.parseLong(id);
-			   Ad ad = adRepository.findOne(adId);
-			   
-			   if(ad == null)
-				   model = new ModelAndView("404");
-			   else 
-			   {
-				   EnquiryForm enquiryForm = new EnquiryForm();
-				   enquiryForm.setMessageText(defaultMsg);
+		   
+		   if(loginService.getLoggedInUser() != null){
+			   try{
+				   adId = Long.parseLong(id);
+				   Ad ad = adRepository.findOne(adId);
 				   
-				   long placerID = ad.getPlacerId();
-				   enquiryForm.setReceiverId(placerID);
-				   
-				   model.addObject("ad", ad);
-				   model.addObject("enquiryForm", enquiryForm);
+				   if(ad == null)
+					   model = new ModelAndView("404");
+				   else 
+				   {
+					   EnquiryForm enquiryForm = new EnquiryForm();
+					   enquiryForm.setMessageText(defaultMsg);
+					   
+					   long placerID = ad.getPlacerId();
+					   enquiryForm.setReceiverId(placerID);
+					   
+					   model.addObject("ad", ad);
+					   model.addObject("enquiryForm", enquiryForm);
+				   }
+					  
 			   }
-				  
+			   catch(NumberFormatException ex){
+				   model = new ModelAndView("404");
+			   } 
 		   }
-		   catch(NumberFormatException ex){
-			   model = new ModelAndView("404");
+		   else
+		   {
+			   model = new ModelAndView("login");
+			   model.addObject("loginForm", new LoginForm());
 		   }
-		   model.addObject("loggedInUser", loginService.getLoggedInUser());
+		
 		   return model;
 	   }
 	   
@@ -83,18 +92,24 @@ public class EnquiryController {
 	   @RequestMapping(value = "/submitEnquiry", method = RequestMethod.POST) //TODO: experiment
 	   public ModelAndView submitEnquiry(@Valid EnquiryForm enquiryForm, BindingResult result, RedirectAttributes redirectAttributes)
 	   {
-		   ModelAndView model = new ModelAndView("enquiries");
+		   ModelAndView model = new ModelAndView("enquiries");		   
 		   
-		   if(result.hasErrors())
+		   if(result == null)
+			   System.out.println("Result is null!");
+			   
+		   if(!result.hasErrors())
 		   {
-			   model = new ModelAndView("404");
-			   System.out.println(result.getFieldError());
+			   System.out.println("EQ/submit: no errors in binding result");
+			   enquiryService.submit(enquiryForm);
+			   Iterable<Enquiry> results = enquiryService.findSentEnquiries();
+			   
+			   model.addObject("sentEnquiries", results);
 		   }   
 		   else
 		   {
-			   enquiryService.submit(enquiryForm);
-			   Iterable<Enquiry> results = enquiryService.findSentEnquiries();
-			   model.addObject("sentEnquiries", results);
+			   System.out.println("EQ/submit: ERRORS binding result");
+			   model = new ModelAndView("404");
+			   System.out.println(result.getFieldError());
 		   }
 			   
 		   model.addObject("loggedInUser", loginService.getLoggedInUser());
