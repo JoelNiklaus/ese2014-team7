@@ -44,7 +44,8 @@ public class AuthentificationController {
     	if (!result.hasErrors()) {
     		 try {
     			 loginService.saveFrom(signupForm);
-    			 model = new ModelAndView("index");
+    			 model = new ModelAndView("login");
+    			 model.addObject(new LoginForm());
     		 } catch (InvalidUserException e) {
     			 model = new ModelAndView("register");
     			 model.addObject("page_error", e.getMessage());
