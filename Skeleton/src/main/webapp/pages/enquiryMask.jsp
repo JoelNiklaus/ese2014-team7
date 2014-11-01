@@ -16,7 +16,7 @@
 			<div class="panel-heading"><h5>${ad.title}</h5></div>
 			<div class="panel-body" >
 				<a class="pull-left" >
-		    		<img class="media-object" src="/Skeleton/img/house1.jpeg" height="100px">
+		    		<img class="media-object" src="/Skeleton/img/<c:out value="${ad.street}${ad.houseNr}.jpeg"/>" width="200px">
 		  		</a>
 		  		<p>${ad.description}</p>
 				
