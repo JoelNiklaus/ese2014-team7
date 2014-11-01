@@ -9,7 +9,7 @@
 
 <h2>Inbox</h2>
 <c:forEach items="${receivedEnquiries}" var="enquiry">
-	<div class="panel panel-primary">
+	<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${enquiry.adId}'">
 		
 			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
 			<div class="panel-body" >
@@ -25,7 +25,7 @@
 
 <h2>Sent</h2>
 <c:forEach items="${sentEnquiries}" var="enquiry">
-	<div class="panel panel-primary">
+	<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${enquiry.adId}'">
 		
 			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
 			<div class="panel-body" >
