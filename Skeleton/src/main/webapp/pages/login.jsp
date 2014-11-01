@@ -175,7 +175,7 @@
         <form name="f" action="<c:url value="/j_spring_security_check"/>" method="POST">
             <label for="password">Username</label>&nbsp;<input type="text" id="j_username" name="j_username"><br/>
             <label for="password">Password</label>&nbsp;<input type="password" id="j_password" name="j_password"><br/>
-            <input type="submit" value="Validate">&nbsp;<input name="reset" type="reset">
+            <input type="submit" value="Login">&nbsp;<input name="reset" type="reset">
             <input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
         <hr/>
@@ -188,8 +188,7 @@
             </div>
         </c:if>
         <hr/>
-        <input type="button" value="Echo" id="echo" name="echo" onclick="AppController.echo();">
-        <div id="echoContainer"></div>
+
 
  <c:import url="template/footer.jsp" />
  
