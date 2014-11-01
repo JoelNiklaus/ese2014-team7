@@ -61,8 +61,7 @@ public class EnquiryController {
 					   EnquiryForm enquiryForm = new EnquiryForm();
 					   enquiryForm.setMessageText(defaultMsg);
 					   
-					   long placerID = ad.getPlacerId();
-					   enquiryForm.setReceiverId(placerID);
+					   enquiryForm.setReceiverId(ad.getPlacerId());
 					   
 					   model.addObject("ad", ad);
 					   model.addObject("enquiryForm", enquiryForm);
