@@ -11,14 +11,15 @@
 <c:forEach items="${receivedEnquiries}" var="enquiry">
 	<div class="panel panel-primary">
 		
-			<div class="panel-heading"><h5>Enquiry</h5></div>
+			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
 			<div class="panel-body" >
 				<a class="pull-left" >
 		    		<img class="media-object" src="/Skeleton/img/house1.jpeg" height="100px">
 		  		</a>
 		  		<p>${enquiry.messageText}</p>
-				
 			</div>
+			
+			<div class="panel-footer"><b>Price:</b> CHF ${enquiry.ad.rent}  <b>Room Size:</b> ${enquiry.ad.roomSize}m²</div>
 		</div>
 </c:forEach>
 
@@ -26,14 +27,15 @@
 <c:forEach items="${sentEnquiries}" var="enquiry">
 	<div class="panel panel-primary">
 		
-			<div class="panel-heading"><h5>Enquiry</h5></div>
+			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
 			<div class="panel-body" >
 				<a class="pull-left" >
 		    		<img class="media-object" src="/Skeleton/img/house1.jpeg" height="100px">
 		  		</a>
 		  		<p>${enquiry.messageText}</p>
-				
 			</div>
+			
+			<div class="panel-footer"><b>Price:</b> CHF ${enquiry.ad.rent}  <b>Room Size:</b> ${enquiry.ad.roomSize}m²</div>
 		</div>
 </c:forEach>
 

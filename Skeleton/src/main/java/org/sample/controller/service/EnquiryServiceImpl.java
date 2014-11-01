@@ -37,6 +37,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 		
 		/* Fill in enquiry from completed enquiry form */
 		enquiry.setTimestamp(enquiryForm.getTimestamp());
+		enquiry.setAdId(enquiryForm.getAdId());
 		enquiry.setSenderId(enquiryForm.getSenderId());
 		enquiry.setReceiverId(enquiryForm.getReceiverId());
 		enquiry.setMessageText(enquiryForm.getMessageText());
@@ -54,7 +55,11 @@ public class EnquiryServiceImpl implements EnquiryService {
 		for(Enquiry e : allEnquiries)
 		{
 			if(e.getSenderId() == loginService.getLoggedInUser().getId())
+			{
+				e.setAd(adDao.findOne(e.getAdId()));
 				results.add(e);
+			}
+				
 		}
 		
 		Collections.sort(results, new EnquiryComparator());
@@ -70,7 +75,10 @@ public class EnquiryServiceImpl implements EnquiryService {
 		for(Enquiry e : allEnquiries)
 		{
 			if(e.getReceiverId() == loginService.getLoggedInUser().getId())
+			{
+				e.setAd(adDao.findOne(e.getAdId()));
 				results.add(e);
+			}
 		}
 		
 		Collections.sort(results, new EnquiryComparator());

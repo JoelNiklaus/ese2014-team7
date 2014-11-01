@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
 
 @Entity
 public class Enquiry{
@@ -13,10 +15,14 @@ public class Enquiry{
     @GeneratedValue
 	private Long enquiryId;
 
+	private Long adId;
 	private Timestamp timestamp;
 	private Long senderId;
     private Long receiverId;
     private String messageText;
+    
+    @Transient
+    private Ad ad;
     
     
     public Long getEnquiryId() {
@@ -57,6 +63,22 @@ public class Enquiry{
 
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public Ad getAd() {
+		return ad;
+	}
+
+	public void setAd(Ad ad) {
+		this.ad = ad;
+	}
+
+	public Long getAdId() {
+		return adId;
+	}
+
+	public void setAdId(Long adId) {
+		this.adId = adId;
 	}
 	
 }
