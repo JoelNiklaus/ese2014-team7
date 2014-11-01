@@ -105,7 +105,7 @@ public class EnquiryController {
 	   
 	
 	   @RequestMapping("/enquiries")
-	   public ModelAndView showEnquiries()
+	   public ModelAndView showEnquiries() //TODO: add Ad to this, to display relevant data
 	   {
 		   ModelAndView model = new ModelAndView("enquiries");
 		   
