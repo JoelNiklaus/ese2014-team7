@@ -4,6 +4,7 @@ package org.sample.controller;
 
 import javax.validation.Valid;
 
+import org.sample.controller.exceptions.InvalidAdException;
 import org.sample.controller.pojos.EnquiryForm;
 import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
@@ -48,7 +49,7 @@ public class EnquiryController {
 		   ModelAndView model = new ModelAndView("enquiryMask");
 		   long adId = 0L;
 		   
-		   
+		   //TODO: eliminate adId
 		   if(loginService.getLoggedInUser() != null){
 			   try{
 				   adId = Long.parseLong(id);
@@ -59,9 +60,11 @@ public class EnquiryController {
 				   else 
 				   {
 					   EnquiryForm enquiryForm = new EnquiryForm();
+					   enquiryForm.setAdId(ad.getId());
 					   enquiryForm.setMessageText(defaultMsg);
 					   
 					   enquiryForm.setReceiverId(ad.getPlacerId());
+					   enquiryForm.setAd(ad);		
 					   
 					   model.addObject("ad", ad);
 					   model.addObject("enquiryForm", enquiryForm);
@@ -86,20 +89,27 @@ public class EnquiryController {
 	   public ModelAndView submitEnquiry(@Valid EnquiryForm enquiryForm, BindingResult result, RedirectAttributes redirectAttributes)
 	   {
 		   ModelAndView model = new ModelAndView("enquiries");		   
-			   
-		   if(!result.hasErrors())
+		   try
 		   {
-			   enquiryService.submit(enquiryForm);
-			   Iterable<Enquiry> results = enquiryService.findSentEnquiries();
-			   
-			   model.addObject("sentEnquiries", results);
-		   }   
-		   else
+			   if(!result.hasErrors())
+			   {
+				   enquiryService.submit(enquiryForm);
+				   Iterable<Enquiry> results = enquiryService.findSentEnquiries();
+				   
+				   model.addObject("sentEnquiries", results);
+			   }   
+			   else
+			   {
+				   model = new ModelAndView("404");
+			   }
+				   
+			   model.addObject("loggedInUser", loginService.getLoggedInUser());
+		   }
+		   catch(InvalidAdException ex)
 		   {
 			   model = new ModelAndView("404");
 		   }
-			   
-		   model.addObject("loggedInUser", loginService.getLoggedInUser());
+
 		   return model;
 	   }
 	   

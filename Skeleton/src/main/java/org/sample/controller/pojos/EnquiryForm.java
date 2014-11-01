@@ -10,14 +10,11 @@ public class EnquiryForm {
 	//TODO: validation, when login works
 	
 	private Long enquiryId;
-
-	private Long senderId; //TODO: not sure if this is going to be used here...
-
-    private Long receiverId; //TODO: not sure if this is going to be used here...
-    
+	private Long senderId; 
+    private Long receiverId; 
     private String messageText;
-    
     private Ad ad;
+    private long adId;
 
     
     public Long getEnquiryId() {
@@ -58,6 +55,14 @@ public class EnquiryForm {
 
 	public void setAd(Ad ad) {
 		this.ad = ad;
+	}
+
+	public long getAdId() {
+		return adId;
+	}
+
+	public void setAdId(long adId) {
+		this.adId = adId;
 	}
 	
 	

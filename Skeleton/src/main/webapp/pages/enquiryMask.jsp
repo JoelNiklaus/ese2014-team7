@@ -30,7 +30,7 @@
  	<fieldset>
  		<div class="control-group<c:if test="${not empty descriptionErrors}"> error</c:if>">
 			<div class="controls">
-				<form:hidden path="receiverId" id="field-rec-id" tabindex="2" maxlength="255" placeholder="ID" />
+				<form:hidden path="adId" id="field-ad-id" tabindex="2" maxlength="255" placeholder="ID" />
 			</div>
  		
 			<label class="control-label" for="field-description">Enter your enquiry message:</label>
