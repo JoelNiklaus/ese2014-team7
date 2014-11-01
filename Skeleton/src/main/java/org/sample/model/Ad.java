@@ -32,7 +32,6 @@ public class Ad {
 	private Long addCost;
 	private String dateIn;
 	private String dateOut;
-	//private String type;
 	private Long roomSize;
 	private String description;
 	private String us;
