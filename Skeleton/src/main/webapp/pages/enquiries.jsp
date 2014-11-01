@@ -14,7 +14,7 @@
 			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
 			<div class="panel-body" >
 				<a class="pull-left" >
-		    		<img class="media-object" src="/Skeleton/img/house1.jpeg" height="100px">
+		    		<img class="media-object" src="/Skeleton/img/<c:out value="${enquiry.ad.street}${enquiry.ad.houseNr}.jpeg"/>" height="100px">
 		  		</a>
 		  		<p>${enquiry.messageText}</p>
 			</div>
@@ -30,7 +30,7 @@
 			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
 			<div class="panel-body" >
 				<a class="pull-left" >
-		    		<img class="media-object" src="/Skeleton/img/house1.jpeg" height="100px">
+		    		<img class="media-object" src="/Skeleton/img/<c:out value="${enquiry.ad.street}${enquiry.ad.houseNr}.jpeg"/>" height="100px">
 		  		</a>
 		  		<p>${enquiry.messageText}</p>
 			</div>
