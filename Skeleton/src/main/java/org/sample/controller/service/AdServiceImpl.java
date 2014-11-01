@@ -33,6 +33,7 @@ public class AdServiceImpl implements AdService {
 	@Autowired AdDao adDao;
 	@Autowired PictureDao pictureDao;
 	@Autowired UserDao userDao;
+	@Autowired LoginService loginService;
     
     @Transactional
 	public AdForm saveFrom(AdForm adForm) {
@@ -85,7 +86,7 @@ public class AdServiceImpl implements AdService {
 		*/
 		
 	    ad.setId(adForm.getId());
-	    ad.setPlacerId(1337L); //TODO: hardcoded id!
+	    ad.setPlacerId(loginService.getLoggedInUser().getId());
 	    Timestamp timestamp  = new Timestamp(System.currentTimeMillis());
 		ad.setTimestamp(timestamp);
 	    ad.setTitle(adForm.getTitle());
