@@ -2,15 +2,11 @@ package org.sample.controller;
 
 
 
-import java.util.Collections;
-
 import javax.validation.Valid;
 
 import org.sample.controller.exceptions.InvalidAdException;
 import org.sample.controller.pojos.EnquiryForm;
-import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
-import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
 import org.sample.model.Ad;
@@ -49,38 +45,34 @@ public class EnquiryController {
 	   public ModelAndView createEnquiry(@RequestParam String id)
 	   {
 		   ModelAndView model = new ModelAndView("enquiryMask");
+		   model.addObject("loggedInUser", loginService.getLoggedInUser());
+		   
 		   long adId = 0L;
 		   
 		   //TODO: eliminate adId
-		   if(loginService.getLoggedInUser() != null){
-			   try{
-				   adId = Long.parseLong(id);
-				   Ad ad = adRepository.findOne(adId);
+
+		   try{
+			   adId = Long.parseLong(id);
+			   Ad ad = adRepository.findOne(adId);
 				   
-				   if(ad == null)
-					   model = new ModelAndView("404");
-				   else 
-				   {
-					   EnquiryForm enquiryForm = new EnquiryForm();
-					   enquiryForm.setAdId(ad.getId());
-					   enquiryForm.setMessageText(defaultMsg);
-					   
-					   enquiryForm.setReceiverId(ad.getPlacerId());
-					   enquiryForm.setAd(ad);		
-					   
-					   model.addObject("ad", ad);
-					   model.addObject("enquiryForm", enquiryForm);
-				   }  
-			   }
-			   catch(NumberFormatException ex){
+			   if(ad == null)
 				   model = new ModelAndView("404");
-			   } 
+			   else 
+			   {
+				   EnquiryForm enquiryForm = new EnquiryForm();
+				   enquiryForm.setAdId(ad.getId());
+				   enquiryForm.setMessageText(defaultMsg);
+					   
+				   enquiryForm.setReceiverId(ad.getPlacerId());
+				   enquiryForm.setAd(ad);		
+					   
+				   model.addObject("ad", ad);
+				   model.addObject("enquiryForm", enquiryForm);
+			   }  
 		   }
-		   else
-		   {
-			   model = new ModelAndView("login");
-			   model.addObject("loginForm", new LoginForm());
-		   }
+		   catch(NumberFormatException ex){
+			   model = new ModelAndView("404");
+		   } 
 		
 		   return model;
 	   }
@@ -89,7 +81,9 @@ public class EnquiryController {
 	   @RequestMapping(value = "/submitEnquiry", method = RequestMethod.POST) 
 	   public ModelAndView submitEnquiry(@Valid EnquiryForm enquiryForm, BindingResult result, RedirectAttributes redirectAttributes)
 	   {
-		   ModelAndView model = new ModelAndView("enquiries");		   
+		   ModelAndView model = new ModelAndView("enquiries");
+		   model.addObject("loggedInUser", loginService.getLoggedInUser());
+		   
 		   try
 		   {
 			   if(!result.hasErrors())
@@ -104,7 +98,7 @@ public class EnquiryController {
 				   model = new ModelAndView("404");
 			   }
 				   
-			   model.addObject("loggedInUser", loginService.getLoggedInUser());
+			  
 		   }
 		   catch(InvalidAdException ex)
 		   {
@@ -119,26 +113,16 @@ public class EnquiryController {
 	   public ModelAndView showEnquiries()
 	   {
 		   ModelAndView model = new ModelAndView("enquiries");
+		   model.addObject("loggedInUser", loginService.getLoggedInUser());
 		   
-			if(loginService.getLoggedInUser() != null)
-			{
-				Iterable<Enquiry> receivedEnquiries = enquiryService.findReceivedEnquiries();
-				Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
+
+		   Iterable<Enquiry> receivedEnquiries = enquiryService.findReceivedEnquiries();
+		   Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
 				
-				model.addObject("receivedEnquiries", receivedEnquiries);
-				model.addObject("sentEnquiries", sentEnquiries);
-			}
-			else
-			{
-				model = new ModelAndView("login");
-				model.addObject("loginForm", new LoginForm());
-		    	model.addObject("forgotPasswordForm", new ForgotPasswordForm());
-		    	model.addObject("signupForm", new SignupForm());
-			}
-	    	try{
-	    		model.addObject("loggedInUser", loginService.getLoggedInUser());
-	    	} catch (Exception e){
-	    	}
+		   model.addObject("loggedInUser", loginService.getLoggedInUser());
+		   model.addObject("receivedEnquiries", receivedEnquiries);
+		   model.addObject("sentEnquiries", sentEnquiries);
+	
 		   return model;
 	   }
 }
