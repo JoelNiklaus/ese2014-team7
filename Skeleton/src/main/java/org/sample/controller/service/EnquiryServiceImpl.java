@@ -1,47 +1,24 @@
 package org.sample.controller.service;
 
-import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.LinkedList;
-
-import org.json.JSONException;
-import org.sample.controller.NominatimConnector;
-import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.EnquiryForm;
-import org.sample.controller.pojos.LoginForm;
-import org.sample.controller.pojos.SignupForm;
-import org.sample.controller.pojos.AdForm;
-import org.sample.model.Address;
-import org.sample.model.Coordinates;
 import org.sample.model.Enquiry;
-import org.sample.model.User;
-import org.sample.model.Ad;
-import org.sample.model.dao.AddressDao;
 import org.sample.model.dao.EnquiryDao;
-import org.sample.model.dao.UserDao;
-import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
-
 
 @Service
 public class EnquiryServiceImpl implements EnquiryService {
-
-	private long hardcodedSenderId = 0;
-	private long hardcodedReceiverId = 0;
 	
-	@Autowired EnquiryDao enquiryDao; //TODO: @Silas: what does autowired annotation actually do?
+	@Autowired EnquiryDao enquiryDao;
 	@Autowired LoginService loginService;
 
-	@Transactional //TODO: @Silas: what does transactional annotation actually do?
+	@Transactional 
 	public EnquiryForm submit(EnquiryForm enquiryForm) {
 		Enquiry enquiry = new Enquiry();
 		
-		//TODO: handle IDs in an appropriate way for now, change when login works
 		enquiry.setSenderId(loginService.getLoggedInUser().getId());
-		//Long receiverId = enquiryForm.getReceiverId(); //TODO: this should be the ad placer ID
 		enquiry.setReceiverId(enquiryForm.getReceiverId());
 		enquiry.setMessageText(enquiryForm.getMessageText());
 		
@@ -57,7 +34,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 		
 		for(Enquiry e : allEnquiries)
 		{
-			if(e.getSenderId() == hardcodedSenderId) //TODO: HARDCODED!
+			if(e.getSenderId() == loginService.getLoggedInUser().getId())
 				results.add(e);
 		}
 		
@@ -71,7 +48,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 		
 		for(Enquiry e : allEnquiries)
 		{
-			if(e.getReceiverId() == hardcodedReceiverId) //TODO: HARDCODED!
+			if(e.getReceiverId() == loginService.getLoggedInUser().getId())
 				results.add(e);
 		}
 		
