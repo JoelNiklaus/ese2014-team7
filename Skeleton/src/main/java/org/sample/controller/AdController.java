@@ -126,19 +126,4 @@ public class AdController {
 	    model.addObject("loggedInUser", loginService.getLoggedInUser());
 	    return model;
     }
-    
-    @RequestMapping(value = "/bookmark", method = RequestMethod.GET)
-    public ModelAndView index(@RequestParam String id) {
-    	ModelAndView model = new ModelAndView("profile");
-    	
-    	//TODO Bookmarking happens here
-    	// I need User to save connection between user and ad! 	
-    	Ad ad = adRepositry.findOne(new Long(id));
-    	User user;
-    	
-    	model.addObject("profileForm", new SignupForm());
-		model.addObject("message", "Ad not yet successfully bookmarked.");
-		model.addObject("loggedInUser", loginService.getLoggedInUser());
-        return model;
-    }
 }

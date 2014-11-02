@@ -37,7 +37,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="/Skeleton/">Brand</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -48,14 +48,14 @@ $(document).ready(function () {
         <c:if test="${not empty loggedInUser}">
 	        <li><a href="createAd">Create Ad</a></li>
 	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <span class="caret"></span></a>
+	          <a href="profile" class="dropdown-toggle" data-toggle="dropdown">Profile <span class="caret"></span></a>
 	          <ul class="dropdown-menu" role="menu">
 	            <li><a href="profile">Settings</a></li>
 	            <li class="divider"></li>
 	            <li><a href="enquiries">Enquiry</a></li>
 	            <li><a href="bookmarks">Bookmarks</a></li>
 	            <li class="divider"></li>
-	            <li><a href="#">Ads</a></li>
+	            <li><a href="ad?id=1">Ads</a></li>
 	          </ul>
 	        </li>
         </c:if>
