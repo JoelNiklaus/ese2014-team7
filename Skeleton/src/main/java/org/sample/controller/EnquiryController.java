@@ -1,7 +1,5 @@
 package org.sample.controller;
 
-
-
 import javax.validation.Valid;
 
 import org.sample.controller.exceptions.InvalidAdException;
@@ -41,6 +39,14 @@ public class EnquiryController {
     			                  + "I'm interested in your room. Let's meet and see if I'm going to be your new roomie.\n\n"
     			                  + "Cheers, ";
 	
+    	/**
+    	 * Builds an enquiry creation form, providing a summary of the ad to send an enquiry for,
+    	 * as well as an input text box displaying a standard message.
+    	 * 
+    	 * @param id	the id of the ad to send an enquiry for
+    	 * @return		enquiry creation for or 404 model, for bad id parameter
+    	 * 				(non-existing, non-numerical)
+    	 */
 	   @RequestMapping("/sendEnquiry")
 	   public ModelAndView createEnquiry(@RequestParam String id)
 	   {
@@ -78,11 +84,18 @@ public class EnquiryController {
 			   model.addObject("loginForm", new LoginForm());
 		   }
 		  
-		
 		   return model;
 	   }
 	   
 	   
+	   /**
+	    * Manages processing of submitted enquiries and returns enquiries page model, in case of success.
+	    * 
+	    * @param enquiryForm			the filled in form to be processed
+	    * @param result					the binding result
+	    * @param redirectAttributes		the redirected attributes
+	    * @return						enquiries model or 404 model, in case of errors in binding results
+	    */
 	   @RequestMapping(value = "/submitEnquiry", method = RequestMethod.POST) 
 	   public ModelAndView submitEnquiry(@Valid EnquiryForm enquiryForm, BindingResult result, RedirectAttributes redirectAttributes)
 	   {
@@ -101,9 +114,7 @@ public class EnquiryController {
 			   else
 			   {
 				   model = new ModelAndView("404");
-			   }
-				   
-			  
+			   }	  
 		   }
 		   catch(InvalidAdException ex)
 		   {
@@ -114,6 +125,11 @@ public class EnquiryController {
 	   }
 	   
 	
+	   /**
+	    * Returns a model presenting sent and received enquiries.
+	    * 
+	    * @return	model presenting sent and received enquiries
+	    */
 	   @RequestMapping("/enquiries")
 	   public ModelAndView showEnquiries()
 	   {

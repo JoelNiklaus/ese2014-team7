@@ -21,6 +21,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 	@Autowired LoginService loginService;
 	@Autowired AdDao adDao;
 
+
 	@Transactional //TODO: throw exception for null Ads to load 404 in Enquiry controller
 	public EnquiryForm submit(EnquiryForm enquiryForm) {
 		Enquiry enquiry = new Enquiry();
@@ -47,6 +48,8 @@ public class EnquiryServiceImpl implements EnquiryService {
 		return enquiryForm;
 	}
 
+	
+	
 	@Transactional
 	public Iterable<Enquiry> findSentEnquiries() {
 		Iterable<Enquiry> allEnquiries = enquiryDao.findAll();
@@ -67,6 +70,8 @@ public class EnquiryServiceImpl implements EnquiryService {
 		return (Iterable<Enquiry>)results;
 	}
 
+	
+	
 	@Transactional
 	public Iterable<Enquiry> findReceivedEnquiries() {
 		Iterable<Enquiry> allEnquiries = enquiryDao.findAll();
