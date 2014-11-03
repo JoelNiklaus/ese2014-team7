@@ -3,17 +3,21 @@ package org.sample.controller.pojos;
 import java.sql.Timestamp;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class AdForm {
 	
 	private Long id;
 	private Timestamp timestamp;
 	@NotNull
+	@Pattern(regexp = "[a-zA-Z\\s]+", message = "Enter a descriptive title\n")
 	private String title;
 	@NotNull
+	@Pattern(regexp = "[a-zA-Z\\s]+", message = "Enter the street of the apartment\n")
 	private String street;
 	private Long houseNr;
 	@NotNull
+	@Pattern(regexp = "[a-zA-Z\\s]+", message = "Enter the city of the apartment\n")
 	private String city;
 	@NotNull
 	private Long zip;
@@ -24,6 +28,8 @@ public class AdForm {
 	private String dateIn;
 	private String dateOut;
 	private Long roomSize;
+	@NotNull
+	@Pattern(regexp = "[a-zA-Z\\s]+", message = "Enter a description about the room\n")
 	private String description;
 	private String us;
 	private String you;

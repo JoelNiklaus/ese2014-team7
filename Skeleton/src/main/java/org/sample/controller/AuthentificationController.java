@@ -120,15 +120,5 @@ public class AuthentificationController {
     	simpleEmail.addTo(email);
     	simpleEmail.send();
     }
-    
-    @RequestMapping(value = "/profileChange", method = RequestMethod.POST)
-    public ModelAndView profileChange(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
-    	ModelAndView model;
-    	// save to DB
-    	loginService.saveFrom(signupForm);
-    	model = new ModelAndView("profile");
-    	model.addObject("loggedInUser", loginService.getLoggedInUser());
-    	return model;
-    }
 
 }
