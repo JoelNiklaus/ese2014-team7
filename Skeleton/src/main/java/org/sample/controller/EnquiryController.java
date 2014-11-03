@@ -39,40 +39,45 @@ public class EnquiryController {
     	
     	private String defaultMsg = "Hi guys, \n\n"
     			                  + "I'm interested in your room. Let's meet and see if I'm going to be your new roomie.\n\n"
-    			                  + "Cheers!";
+    			                  + "Cheers, ";
 	
 	   @RequestMapping("/sendEnquiry")
 	   public ModelAndView createEnquiry(@RequestParam String id)
 	   {
 		   ModelAndView model = new ModelAndView("enquiryMask");
-		   model.addObject("loggedInUser", loginService.getLoggedInUser());
 		   
-		   long adId = 0L;
-		   
-		   //TODO: eliminate adId
+		   if(loginService.getLoggedInUser() != null)
+		   {
+			   model.addObject("loggedInUser", loginService.getLoggedInUser());
 
-		   try{
-			   adId = Long.parseLong(id);
-			   Ad ad = adRepository.findOne(adId);
-				   
-			   if(ad == null)
+			   try{
+				   Ad ad = adRepository.findOne(Long.parseLong(id));
+					   
+				   if(ad == null)
+					   model = new ModelAndView("404");
+				   else 
+				   {
+					   EnquiryForm enquiryForm = new EnquiryForm();
+					   enquiryForm.setAdId(ad.getId());
+					   enquiryForm.setMessageText(defaultMsg + loginService.getLoggedInUser().getFirstName());
+						   
+					   enquiryForm.setReceiverId(ad.getPlacerId());
+					   enquiryForm.setAd(ad);		
+						   
+					   model.addObject("ad", ad);
+					   model.addObject("enquiryForm", enquiryForm);
+				   }  
+			   }
+			   catch(NumberFormatException ex){
 				   model = new ModelAndView("404");
-			   else 
-			   {
-				   EnquiryForm enquiryForm = new EnquiryForm();
-				   enquiryForm.setAdId(ad.getId());
-				   enquiryForm.setMessageText(defaultMsg);
-					   
-				   enquiryForm.setReceiverId(ad.getPlacerId());
-				   enquiryForm.setAd(ad);		
-					   
-				   model.addObject("ad", ad);
-				   model.addObject("enquiryForm", enquiryForm);
-			   }  
+			   } 
 		   }
-		   catch(NumberFormatException ex){
-			   model = new ModelAndView("404");
-		   } 
+		   else
+		   {
+			   model = new ModelAndView("login");
+			   model.addObject("loginForm", new LoginForm());
+		   }
+		  
 		
 		   return model;
 	   }
