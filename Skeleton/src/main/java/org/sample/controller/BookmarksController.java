@@ -35,7 +35,6 @@ public class BookmarksController {
 		model.addObject("bookmarks", bookmarkService.findBookmarks(user));
 		model.addObject("loggedInUser", user);
 		return model;
-
 	}
 
 	@RequestMapping(value = "/removeBookmark", method = RequestMethod.GET)
@@ -58,7 +57,6 @@ public class BookmarksController {
 			model = new ModelAndView("404");
 		}
 		return model;
-
 	}
 
 	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)

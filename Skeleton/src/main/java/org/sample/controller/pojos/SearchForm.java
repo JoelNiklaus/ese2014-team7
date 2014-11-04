@@ -1,6 +1,7 @@
 package org.sample.controller.pojos;
 
 public class SearchForm {
+	
 	private String priceMin;
 	private String priceMax;
 	private String roomSizeMin;

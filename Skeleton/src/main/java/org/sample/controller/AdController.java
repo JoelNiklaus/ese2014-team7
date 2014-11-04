@@ -36,7 +36,7 @@ public class AdController {
     @Autowired
     AdService adService;
     @Autowired
-    AdDao adRepositry;
+    AdDao adRepository;
     @Autowired
     ServletContext servletContext;
     
@@ -109,7 +109,7 @@ public class AdController {
     	//Long adId = Long.parseLong(id);
 	    
 	    try{
-	    	Ad ad = adRepositry.findOne(new Long(id));
+	    	Ad ad = adRepository.findOne(new Long(id));
 	    	
 	    	 if(ad != null){
 	 	    	model.addObject("ad", ad);

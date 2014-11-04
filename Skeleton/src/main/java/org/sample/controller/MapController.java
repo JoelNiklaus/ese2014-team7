@@ -21,14 +21,14 @@ public class MapController {
     @Autowired
     LoginService sampleService;
     @Autowired
-    AdDao adRepositry;
+    AdDao adRepository;
 
     @Autowired
     LoginService loginService;
     @RequestMapping(value = "/map", method = RequestMethod.GET)
     public ModelAndView index() {
     	ModelAndView model = new ModelAndView("map");
-    	model.addObject("adList", adRepositry.findAll());
+    	model.addObject("adList", adRepository.findAll());
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
 
         return model;

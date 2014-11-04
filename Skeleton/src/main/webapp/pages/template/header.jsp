@@ -52,8 +52,9 @@ $(document).ready(function () {
 	          <ul class="dropdown-menu" role="menu">
 	            <li><a href="profile">Settings</a></li>
 	            <li class="divider"></li>
-	            <li><a href="enquiries">Enquiry</a></li>
+	            <li><a href="enquiries">Enquiries</a></li>
 	            <li><a href="bookmarks">Bookmarks</a></li>
+	            <li><a href="searches">Searches</a></li>
 	            <li class="divider"></li>
 	            <li><a href="ad?id=1">Ads</a></li>
 	          </ul>

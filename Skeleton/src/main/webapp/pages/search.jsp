@@ -53,11 +53,12 @@
 	</style>
 	<div class="panel">
 	<h2 class="form-heading">Search</h2>
+	<p>${message}</p>
 	<br />
 	<br />
 	
 
-	<form:form method="post" modelAttribute="searchForm" action="search" id="searchForm" cssClass="form-horizontal" autocomplete="off">
+	<form:form method="post" modelAttribute="searchForm" id="searchForm" cssClass="form-horizontal" autocomplete="off">
 		<fieldset>
 			<div class="row">
 				<div class="col-md-2">
@@ -82,10 +83,10 @@
 			<form:input type="hidden" path="priceMax" id="field-priceMax" maxlength="45"/>
 			<form:input type="hidden" path="roomSizeMin" id="field-roomSizeMin" maxlength="45"/>
 			<form:input type="hidden" path="roomSizeMax" id="field-roomSizeMax" maxlength="45"/>
+			
 			<div class="pull-right">
-						<button type="button" id="save" class="btn">Save</button>
-						<button type="submit" class="btn btn-primary">Search</button>
-
+				<button type="submit" onclick="javascript: form.action='search';" class="btn btn-primary">Search</button>
+				<button type="submit" onclick="javascript: form.action='saveSearch';" id="save" class="btn">Save</button>
 			</div>
 		</fieldset>
 	</form:form>

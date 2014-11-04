@@ -14,7 +14,11 @@ public class Search {
 	private Long priceMax;
 	private Long roomSizeMin;
 	private Long roomSizeMax;
+	
 	private String city;
+	
+	private Long userId;
+	
 	public Long getId() {
 		return id;
 	}
@@ -51,6 +55,17 @@ public class Search {
 	public void setCity(String city) {
 		this.city = city;
 	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	
+	public Search() {
+		
+	}
+
 	public Search(Long id, Long priceMin, Long priceMax, Long roomSizeMin,
 			Long roomSizeMax, String city) {
 		super();
@@ -61,7 +76,5 @@ public class Search {
 		this.roomSizeMax = roomSizeMax;
 		this.city = city;
 	}
-
-	
 	   
 }
