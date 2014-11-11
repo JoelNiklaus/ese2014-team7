@@ -1,6 +1,7 @@
 package org.sample.controller.service;
 
 import org.sample.controller.pojos.EnquiryForm;
+import org.sample.controller.pojos.EnquiryRatingForm;
 import org.sample.model.Enquiry;
 
 public interface EnquiryService {
@@ -28,5 +29,6 @@ public interface EnquiryService {
 	 */
     public Iterable<Enquiry> findReceivedEnquiries();
 
+    public EnquiryRatingForm submitRating(EnquiryRatingForm form);
 
 }
