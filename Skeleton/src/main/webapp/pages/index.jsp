@@ -7,7 +7,7 @@
 
 <h1>Welcome to the Apartments Finder!</h1>
 
-<p>Blabla.</p>
+<p>You can now search for a shared apartment. To manage your search or place an ad, please login or register.</p>
 
 
 <%-- <form:form method="post" modelAttribute="loginForm" action="login" id="loginForm" cssClass="form-horizontal"  autocomplete="off"> --%>
