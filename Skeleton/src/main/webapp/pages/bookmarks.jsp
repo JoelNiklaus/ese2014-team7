@@ -8,7 +8,11 @@
 
 <h1>My Bookmarked Ads</h1>
 
-${message}
+	<c:if test="${not empty message}">
+	<div class="alert alert-success" role="alert">
+		${message}
+	</div>
+	</c:if>
 
 <c:forEach items="${bookmarks}" var="bookmark">
 	<div class="panel panel-primary"

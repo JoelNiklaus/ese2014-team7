@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import org.sample.controller.exceptions.InvalidAdException;
 import org.sample.controller.pojos.EnquiryForm;
 import org.sample.controller.pojos.EnquiryRatingForm;
+import org.sample.model.Bookmark;
 import org.sample.model.Enquiry;
 import org.sample.model.EnquiryComparator;
 import org.sample.model.EnquiryComparatorRating;
@@ -127,6 +128,11 @@ public class EnquiryServiceImpl implements EnquiryService {
 		return form;
 	}
     
-    
+	@Transactional
+	public Enquiry removeEnquiry(Enquiry enquiry) {
+		enquiryDao.delete(enquiry);
+		
+		return enquiry;
+	}
 
 }

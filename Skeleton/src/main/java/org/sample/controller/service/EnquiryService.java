@@ -38,4 +38,5 @@ public interface EnquiryService {
 
     public EnquiryRatingForm submitRating(EnquiryRatingForm form);
 
+    public Enquiry removeEnquiry(Enquiry enquiry);
 }

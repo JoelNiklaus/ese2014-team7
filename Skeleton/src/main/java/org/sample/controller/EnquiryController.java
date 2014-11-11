@@ -12,7 +12,9 @@ import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
 import org.sample.model.Ad;
+import org.sample.model.Bookmark;
 import org.sample.model.Enquiry;
+import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.sample.model.dao.EnquiryDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -202,6 +204,27 @@ public class EnquiryController {
 		   return model;
 	   }
 	   
+		@RequestMapping(value = "/removeEnquiry", method = RequestMethod.GET)
+		public ModelAndView removeEnquiry(@RequestParam String id) {
+			ModelAndView model = showEnquiries();
+
+			try {
+				long enquiryId = Long.parseLong(id);
+				Enquiry enquiry = enquiryRepository.findOne(enquiryId);
+
+				User user = loginService.getLoggedInUser();
+				enquiryService.removeEnquiry(enquiry);
+				// update enquiry list
+				model = showEnquiries();
+				model.addObject("message", "enquiry successfully deleted.");
+				enquiryViewAddModelAttributes(model);
+			} catch(NumberFormatException ex){
+				model = new ModelAndView("404");
+			} catch(IllegalArgumentException e) {
+				model = new ModelAndView("404");
+			}
+			return model;
+		}
 	   
 	   private void enquiryViewAddModelAttributes(ModelAndView model)
 	   {

@@ -7,12 +7,21 @@
 
 <h1>My Enquiries</h1>
 
+	<c:if test="${not empty message}">
+	<div class="alert alert-success" role="alert">
+		${message}
+	</div>
+	</c:if>
+
 <h2>Inbox</h2>
 <p>${newEmpty}</p>
 <c:forEach items="${newReceivedEnquiries}" var="enquiry">
 	<div class="panel panel-primary" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
 		
-			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
+			<div class="panel-heading">
+				<h5>${enquiry.ad.title}</h5>
+				<a class="btn btn-primary" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
+			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
 		    		<img class="media-object" src="/Skeleton/img/<c:out value="${enquiry.ad.street}${enquiry.ad.houseNr}.jpeg"/>" height="100px">
@@ -30,7 +39,10 @@
 <c:forEach items="${ratedReceivedEnquiries}" var="enquiry">
 	<div class="panel panel-primary" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
 		
-			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
+			<div class="panel-heading">
+				<h5>${enquiry.ad.title}</h5>
+				<a class="btn btn-primary" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
+			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
 		    		<img class="media-object" src="/Skeleton/img/<c:out value="${enquiry.ad.street}${enquiry.ad.houseNr}.jpeg"/>" height="100px">
@@ -48,7 +60,10 @@
 <c:forEach items="${sentEnquiries}" var="enquiry">
 	<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${enquiry.adId}'">
 		
-			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
+			<div class="panel-heading">
+				<h5>${enquiry.ad.title}</h5>
+				<a class="btn btn-primary" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
+			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
 		    		<img class="media-object" src="/Skeleton/img/<c:out value="${enquiry.ad.street}${enquiry.ad.houseNr}.jpeg"/>" height="100px">
