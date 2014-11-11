@@ -27,9 +27,13 @@ public class UserDaoIntegrationTest {
     	String EMAIL =  "bla@bla.bla";
     	
     	User user = new User();
+    	user.setFirstName("Test");
+    
     	user.setEmail(EMAIL);
+    	
         user =  userDao.save(user);        
         User findUser = userDao.findByEmail(EMAIL);
+        System.out.println(user.getFirstName());
         assertEquals(findUser.getEmail(), EMAIL);
     }
 

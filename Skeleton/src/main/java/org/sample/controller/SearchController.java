@@ -50,8 +50,9 @@ public class SearchController {
 		if(searchId != null){
 			searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
 		} else {
-			// get search from Id
+
 			searchAttributes = new Search(new Long(0), priceMin, priceMax, roomSizeMin, roomSizeMax, city);
+
 		}
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 		model.addObject("searchAttributes", searchAttributes);
@@ -88,13 +89,20 @@ public class SearchController {
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView index() {
+	public ModelAndView index(@RequestParam(value="searchId",required=false) String searchId) {
 		ModelAndView model = new ModelAndView("search");
 		model.addObject("searchForm", new SearchForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 		Iterable<Ad> searchResults = adRepository.findAll();
 		Search searchAttributes;
+		
 		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
+		try{
+			searchAttributes = searchRepository.findOne(Long.parseLong(searchId));
+			
+		} catch(Exception e) {
+			System.out.println(e);
+		}
 		model.addObject("searchAttributes", searchAttributes);
 		if(searchResults != null)
 			model.addObject("searchResults", searchResults);

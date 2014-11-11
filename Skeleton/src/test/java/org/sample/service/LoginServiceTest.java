@@ -1,4 +1,4 @@
-package org.sample.service;
+ package org.sample.service;
 
 
 import org.junit.Before;
@@ -48,9 +48,6 @@ public class LoginServiceTest {
                 });
 
         assertNull(signupForm.getId());
-
-        signupForm = loginServiceImpl.saveFrom(signupForm);
-
         assertNotNull(signupForm.getId());
         assertTrue(signupForm.getId() > 0);
     }
