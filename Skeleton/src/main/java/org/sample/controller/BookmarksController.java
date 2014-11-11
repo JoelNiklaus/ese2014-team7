@@ -59,6 +59,7 @@ public class BookmarksController {
 		return model;
 	}
 
+	
 	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)
 	public ModelAndView bookmark(@RequestParam String id) {
 		ModelAndView model = showBookmarks();
