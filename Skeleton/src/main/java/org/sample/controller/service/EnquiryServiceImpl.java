@@ -9,6 +9,7 @@ import org.sample.controller.pojos.EnquiryForm;
 import org.sample.controller.pojos.EnquiryRatingForm;
 import org.sample.model.Enquiry;
 import org.sample.model.EnquiryComparator;
+import org.sample.model.EnquiryComparatorRating;
 import org.sample.model.dao.AdDao;
 import org.sample.model.dao.EnquiryDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +88,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 			}
 		}
 		
-		Collections.sort(results, new EnquiryComparator());
+		Collections.sort(results, new EnquiryComparatorRating());
 		
 		return (Iterable<Enquiry>)results;
 	}

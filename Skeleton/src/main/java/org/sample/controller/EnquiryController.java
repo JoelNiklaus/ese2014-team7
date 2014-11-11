@@ -179,25 +179,30 @@ public class EnquiryController {
 	   
 	   @RequestMapping(value="/submitRating", method = RequestMethod.POST)
 	   public ModelAndView submitRating(@Valid EnquiryRatingForm form, BindingResult result, RedirectAttributes redirectAttributes)
-	   {
-		   //TODO: security
-		   
+	   {   
 		   ModelAndView model = new ModelAndView("enquiries");
-		  
-		   if(form==null)
-			   System.out.println("form null!");
-		   enquiryService.submitRating(form);
-		   
-		   
 		   model.addObject("loggedInUser", loginService.getLoggedInUser());
+		   
+		   if(form!=null || !result.hasErrors())
+		   {
+			   if(form==null)
+				   System.out.println("form null!");
+			   enquiryService.submitRating(form);
+			   
 
-		   Iterable<Enquiry> receivedEnquiries = enquiryService.findReceivedEnquiries();
-		   Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
-				
-		   model.addObject("loggedInUser", loginService.getLoggedInUser());
-		   model.addObject("receivedEnquiries", receivedEnquiries);
-		   model.addObject("sentEnquiries", sentEnquiries);
-		   
+			   Iterable<Enquiry> receivedEnquiries = enquiryService.findReceivedEnquiries();
+			   Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
+					
+			   model.addObject("loggedInUser", loginService.getLoggedInUser());
+			   model.addObject("receivedEnquiries", receivedEnquiries);
+			   model.addObject("sentEnquiries", sentEnquiries);
+		   }
+		   else
+		   {
+			   model = new ModelAndView("404");
+			   model.addObject("loggedInUser", loginService.getLoggedInUser());
+		   }
+
 		   return model;
 	   }
 }
