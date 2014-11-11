@@ -24,6 +24,7 @@ public class AdServiceImpl implements AdService {
 	@Autowired PictureDao pictureDao;
 	@Autowired UserDao userDao;
 	@Autowired LoginService loginService;
+    @Autowired NotificationService notificationService;
     
     @Transactional
 	public AdForm saveFrom(AdForm adForm) {
@@ -94,6 +95,10 @@ public class AdServiceImpl implements AdService {
 	    ad.setYou(adForm.getYou());
 
 	    ad = adDao.save(ad);
+	    
+		// Ad successfully saved to DB
+		// can now send notifications to users
+		notificationService.saveNotificationsToAffectedUsers(ad);
 		
 	    return  adForm;
 	}
