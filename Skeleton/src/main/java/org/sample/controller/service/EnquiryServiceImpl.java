@@ -75,13 +75,32 @@ public class EnquiryServiceImpl implements EnquiryService {
 	
 	
 	@Transactional
-	public Iterable<Enquiry> findReceivedEnquiries() {
+	public Iterable<Enquiry> findNewReceivedEnquiries() {
 		Iterable<Enquiry> allEnquiries = enquiryDao.findAll();
 		LinkedList<Enquiry> results = new LinkedList<Enquiry>();
 		
 		for(Enquiry e : allEnquiries)
 		{
-			if(e.getReceiverId() == loginService.getLoggedInUser().getId())
+			if((e.getReceiverId() == loginService.getLoggedInUser().getId()) && e.getRating() == 0)
+			{
+				e.setAd(adDao.findOne(e.getAdId()));
+				results.add(e);
+			}
+		}
+		
+		Collections.sort(results, new EnquiryComparatorRating());
+		
+		return (Iterable<Enquiry>)results;
+	}
+	
+	@Transactional
+	public Iterable<Enquiry> findRatedReceivedEnquiries() {
+		Iterable<Enquiry> allEnquiries = enquiryDao.findAll();
+		LinkedList<Enquiry> results = new LinkedList<Enquiry>();
+		
+		for(Enquiry e : allEnquiries)
+		{
+			if((e.getReceiverId() == loginService.getLoggedInUser().getId()) && e.getRating() != 0)
 			{
 				e.setAd(adDao.findOne(e.getAdId()));
 				results.add(e);

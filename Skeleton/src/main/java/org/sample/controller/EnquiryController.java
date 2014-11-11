@@ -139,13 +139,17 @@ public class EnquiryController {
 	   {
 		   ModelAndView model = new ModelAndView("enquiries");
 		   model.addObject("loggedInUser", loginService.getLoggedInUser());
+		  
 		   
-
-		   Iterable<Enquiry> receivedEnquiries = enquiryService.findReceivedEnquiries();
+		   Iterable<Enquiry> newReceivedEnquiries = enquiryService.findNewReceivedEnquiries();
+		   Iterable<Enquiry> ratedReceivedEnquiries = enquiryService.findRatedReceivedEnquiries();
 		   Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
 				
+		   addEmptyMessages(model, newReceivedEnquiries, ratedReceivedEnquiries, sentEnquiries);
+		   
 		   model.addObject("loggedInUser", loginService.getLoggedInUser());
-		   model.addObject("receivedEnquiries", receivedEnquiries);
+		   model.addObject("newReceivedEnquiries", newReceivedEnquiries);
+		   model.addObject("ratedReceivedEnquiries", ratedReceivedEnquiries);
 		   model.addObject("sentEnquiries", sentEnquiries);
 	
 		   return model;
@@ -188,13 +192,17 @@ public class EnquiryController {
 			   if(form==null)
 				   System.out.println("form null!");
 			   enquiryService.submitRating(form);
-			   
 
-			   Iterable<Enquiry> receivedEnquiries = enquiryService.findReceivedEnquiries();
+			   
+			   Iterable<Enquiry> newReceivedEnquiries = enquiryService.findNewReceivedEnquiries();
+			   Iterable<Enquiry> ratedReceivedEnquiries = enquiryService.findRatedReceivedEnquiries();
 			   Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
+			   
+			  addEmptyMessages(model, newReceivedEnquiries, ratedReceivedEnquiries, sentEnquiries);
 					
 			   model.addObject("loggedInUser", loginService.getLoggedInUser());
-			   model.addObject("receivedEnquiries", receivedEnquiries);
+			   model.addObject("newReceivedEnquiries", newReceivedEnquiries);
+			   model.addObject("ratedReceivedEnquiries", ratedReceivedEnquiries);
 			   model.addObject("sentEnquiries", sentEnquiries);
 		   }
 		   else
@@ -204,5 +212,18 @@ public class EnquiryController {
 		   }
 
 		   return model;
+	   }
+	   
+	   
+	   private void addEmptyMessages(ModelAndView model, Iterable<Enquiry> newReceivedEnquiries, Iterable<Enquiry> ratedReceivedEnquiries, Iterable<Enquiry> sentEnquiries)
+	   {
+		   if(!newReceivedEnquiries.iterator().hasNext())
+			   model.addObject("newEmpty", "No new enquiries");
+		   
+		   if(!ratedReceivedEnquiries.iterator().hasNext())
+			   model.addObject("ratedEmpty", "No rated enquiries");
+		   
+		   if(!sentEnquiries.iterator().hasNext())
+			   model.addObject("sentEmpty", "No sent enquiries");
 	   }
 }

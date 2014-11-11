@@ -8,7 +8,26 @@
 <h1>My Enquiries</h1>
 
 <h2>Inbox</h2>
-<c:forEach items="${receivedEnquiries}" var="enquiry">
+<p>${newEmpty}</p>
+<c:forEach items="${newReceivedEnquiries}" var="enquiry">
+	<div class="panel panel-primary" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
+		
+			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
+			<div class="panel-body" >
+				<a class="pull-left" >
+		    		<img class="media-object" src="/Skeleton/img/<c:out value="${enquiry.ad.street}${enquiry.ad.houseNr}.jpeg"/>" height="100px">
+		  		</a>
+		  		<p>${enquiry.messageText}</p>
+		  		
+			</div>		
+			
+			<div class="panel-footer"><b>This enquiry has not yet been rated</b> (click on enquiry to rate it)</div>
+		</div>
+</c:forEach>
+
+<h2>Rated enquiries</h2>
+<p>${ratedEmpty}</p>
+<c:forEach items="${ratedReceivedEnquiries}" var="enquiry">
 	<div class="panel panel-primary" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
 		
 			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
@@ -25,6 +44,7 @@
 </c:forEach>
 
 <h2>Sent</h2>
+<p>${sentEmpty}</p>
 <c:forEach items="${sentEnquiries}" var="enquiry">
 	<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${enquiry.adId}'">
 		

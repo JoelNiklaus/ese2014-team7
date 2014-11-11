@@ -23,11 +23,18 @@ public interface EnquiryService {
     public Iterable<Enquiry> findSentEnquiries();
     
     /**
-	 * Compiles an iterable of all enquiries received for the logged in user.
+	 * Compiles an iterable of all enquiries received for the logged in user that have aöready been rated.
 	 * 
 	 * @return iterable of received enquiries
 	 */
-    public Iterable<Enquiry> findReceivedEnquiries();
+    public Iterable<Enquiry> findRatedReceivedEnquiries();
+    
+    /**
+	 * Compiles an iterable of all enquiries received for the logged in user that haven't been rated yet.
+	 * 
+	 * @return iterable of received enquiries
+	 */
+    public Iterable<Enquiry> findNewReceivedEnquiries();
 
     public EnquiryRatingForm submitRating(EnquiryRatingForm form);
 
