@@ -15,6 +15,7 @@ import org.sample.controller.pojos.AdForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.AdService;
 import org.sample.controller.service.LoginService;
+import org.sample.controller.service.NotificationService;
 import org.sample.model.Ad;
 import org.sample.model.User;
 import org.sample.model.dao.AdDao;
@@ -75,8 +76,9 @@ public class AdController {
 
     	ModelAndView model;
     	if (!result.hasErrors()){
-    			adService.saveFrom(adForm);
-        		model = new ModelAndView("adCreated");	
+			adService.saveFrom(adForm);
+			
+    		model = new ModelAndView("adCreated");
     	}else{
     		model = new ModelAndView("createAd");
     	}
