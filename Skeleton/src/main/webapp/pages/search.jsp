@@ -53,7 +53,11 @@
 	</style>
 	<div class="panel">
 	<h2 class="form-heading">Search</h2>
-	<p>${message}</p>
+	<c:if test="${not empty message}">
+	<div class="alert alert-success" role="alert">
+		${message}
+	</div>
+	</c:if>
 	<br />
 	<br />
 	

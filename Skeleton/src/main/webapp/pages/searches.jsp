@@ -7,8 +7,11 @@
 <c:import url="template/header.jsp" />
 
 <h1>My Saved Searches</h1>
-
-${message}
+	<c:if test="${not empty message}">
+	<div class="alert alert-success" role="alert">
+		${message}
+	</div>
+	</c:if>
 
 <c:forEach items="${searches}" var="search">
 		<div class="panel panel-primary" onclick="javascript:location.href='search?searchId=${search.id}'">
@@ -21,7 +24,7 @@ ${message}
 				City: ${search.city}<br>
 			</div>
 			<div class="panel-footer">
-				<a class="btn btn-primary" href="removeSearch?id=${search.id}">Remove Search</a>
+				 <button type="button" class="btn btn-primary" href='search?searchId=${search.id}'>Search</button><a class="btn btn-danger" href="removeSearch?id=${search.id}">Remove Search</a>
 			</div>
 		</div>
 </c:forEach>
