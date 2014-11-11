@@ -34,7 +34,6 @@ public class AuthentificationController {
 	    model.addObject("signupForm", new SignupForm());
 	    model.addObject("loggedInUser", loginService.getLoggedInUser());
     	return model;
-    
     }
     
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -74,9 +73,15 @@ public class AuthentificationController {
     public String logout(ModelMap model) {
         return "logout";
     }
-
     
-    //TODO Bug: Displays not existent form Forgot Password... ???
+    @RequestMapping(value = "/forgot", method = RequestMethod.GET)
+    public ModelAndView forgot() {
+	    ModelAndView model = new ModelAndView("forgot");
+	    model.addObject("forgotPasswordForm", new ForgotPasswordForm());
+	    model.addObject("loggedInUser", loginService.getLoggedInUser());
+    	return model;
+    }
+    
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)
     public ModelAndView forgot(@Valid ForgotPasswordForm forgotPasswordForm) {
     	ModelAndView model = new ModelAndView("forgot");
