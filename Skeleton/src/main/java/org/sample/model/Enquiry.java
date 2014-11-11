@@ -20,6 +20,7 @@ public class Enquiry{
 	private Long senderId;
     private Long receiverId;
     private String messageText;
+    private int rating;
     
     @Transient
     private Ad ad;
@@ -79,6 +80,14 @@ public class Enquiry{
 
 	public void setAdId(Long adId) {
 		this.adId = adId;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 	
 }

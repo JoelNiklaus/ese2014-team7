@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import org.sample.controller.exceptions.InvalidAdException;
 import org.sample.controller.pojos.EnquiryForm;
+import org.sample.controller.pojos.EnquiryRatingForm;
 import org.sample.model.Enquiry;
 import org.sample.model.EnquiryComparator;
 import org.sample.model.dao.AdDao;
@@ -89,6 +90,14 @@ public class EnquiryServiceImpl implements EnquiryService {
 		Collections.sort(results, new EnquiryComparator());
 		
 		return (Iterable<Enquiry>)results;
+	}
+
+
+
+	public EnquiryRatingForm submitRating(Enquiry enquiry, EnquiryRatingForm form) {
+		enquiry.setRating(form.getRating());
+		enquiryDao.save(enquiry);
+		return form;
 	}
     
     

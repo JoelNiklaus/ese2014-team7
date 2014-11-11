@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.sample.controller.exceptions.InvalidAdException;
 import org.sample.controller.pojos.EnquiryForm;
+import org.sample.controller.pojos.EnquiryRatingForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
@@ -143,7 +144,26 @@ public class EnquiryController {
 		   model.addObject("loggedInUser", loginService.getLoggedInUser());
 		   model.addObject("receivedEnquiries", receivedEnquiries);
 		   model.addObject("sentEnquiries", sentEnquiries);
+		   model.addObject("ratingForm", new EnquiryRatingForm());
 	
+		   return model;
+	   }
+	   
+	   
+	   @RequestMapping("/updateRating")
+	   public ModelAndView updateRating(@Valid EnquiryRatingForm ratingForm, BindingResult result, RedirectAttributes redirectAttributes)
+	   {
+		   ModelAndView model = new ModelAndView("enquiries");
+		   
+		   if(ratingForm.getRating()!=0 && !result.hasErrors())
+		   {
+			   	//enquiryService.submitRating(enquiry, form)
+		   }   
+		   else
+		   {
+			   model = new ModelAndView("404");
+		   }	  
+		   
 		   return model;
 	   }
 }
