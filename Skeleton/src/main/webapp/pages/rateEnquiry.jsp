@@ -30,7 +30,7 @@
 						</div>
 					
 						<div class="form-actions">
-							<button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-star-empty"></i> RATE</button>
+							<button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-envelope"></i> RATE</button>
 						</div>
 				 	</fieldset>
 	 		</form:form>

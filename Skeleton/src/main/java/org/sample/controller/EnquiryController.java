@@ -155,18 +155,26 @@ public class EnquiryController {
 		   model.addObject("loggedInUser", loginService.getLoggedInUser());
 		   
 		   Enquiry enquiry = enquiryRepository.findOne(id);
-		   enquiry.setAd(adRepository.findOne(enquiry.getAdId()));
 		   
-		   List<Integer> numberList = new ArrayList<Integer>();
-		   for(int i=1; i<=10; i++)
-			   numberList.add(i);
-		   
-		   model.addObject("numberList", numberList);
-		   
-		   model.addObject("enquiry", enquiry);
-		   EnquiryRatingForm enquiryRatingForm = new EnquiryRatingForm();
-		   enquiryRatingForm.setEnquiryId(enquiry.getEnquiryId());
-		   model.addObject("ratingForm", enquiryRatingForm);
+		   if(enquiry != null)
+		   {
+			   enquiry.setAd(adRepository.findOne(enquiry.getAdId()));
+			   
+			   List<Integer> numberList = new ArrayList<Integer>();
+			   for(int i=1; i<=10; i++)
+				   numberList.add(i);
+			   
+			   model.addObject("numberList", numberList);
+			   
+			   model.addObject("enquiry", enquiry);
+			   EnquiryRatingForm enquiryRatingForm = new EnquiryRatingForm();
+			   enquiryRatingForm.setEnquiryId(enquiry.getEnquiryId());
+			   model.addObject("ratingForm", enquiryRatingForm);
+		   }
+		   else
+		   {
+			   model = new ModelAndView("404");
+		   }
 		   
 		   return model;
 	   }
