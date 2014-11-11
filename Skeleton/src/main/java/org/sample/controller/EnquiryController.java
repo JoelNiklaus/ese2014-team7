@@ -1,5 +1,8 @@
 package org.sample.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.sample.controller.exceptions.InvalidAdException;
@@ -144,25 +147,56 @@ public class EnquiryController {
 		   model.addObject("loggedInUser", loginService.getLoggedInUser());
 		   model.addObject("receivedEnquiries", receivedEnquiries);
 		   model.addObject("sentEnquiries", sentEnquiries);
-		   model.addObject("ratingForm", new EnquiryRatingForm());
 	
 		   return model;
 	   }
 	   
 	   
-	   @RequestMapping("/updateRating")
-	   public ModelAndView updateRating(@Valid EnquiryRatingForm ratingForm, BindingResult result, RedirectAttributes redirectAttributes)
+	   @RequestMapping(value="/rateEnquiry")
+	   public ModelAndView rateEnquiry(@RequestParam long id)
 	   {
-		   ModelAndView model = new ModelAndView("enquiries");
+		   //TODO: security
 		   
-		   if(ratingForm.getRating()!=0 && !result.hasErrors())
-		   {
-			   	//enquiryService.submitRating(enquiry, form)
-		   }   
-		   else
-		   {
-			   model = new ModelAndView("404");
-		   }	  
+		   ModelAndView model = new ModelAndView("rateEnquiry");
+		   model.addObject("loggedInUser", loginService.getLoggedInUser());
+		   
+		   Enquiry enquiry = enquiryRepository.findOne(id);
+		   enquiry.setAd(adRepository.findOne(enquiry.getAdId()));
+		   
+		   List<Integer> numberList = new ArrayList<Integer>();
+		   for(int i=1; i<=10; i++)
+			   numberList.add(i);
+		   
+		   model.addObject("numberList", numberList);
+		   
+		   model.addObject("enquiry", enquiry);
+		   EnquiryRatingForm enquiryRatingForm = new EnquiryRatingForm();
+		   enquiryRatingForm.setEnquiryId(enquiry.getEnquiryId());
+		   model.addObject("ratingForm", enquiryRatingForm);
+		   
+		   return model;
+	   }
+	   
+	   @RequestMapping(value="/submitRating", method = RequestMethod.POST)
+	   public ModelAndView submitRating(@Valid EnquiryRatingForm form, BindingResult result, RedirectAttributes redirectAttributes)
+	   {
+		   //TODO: security
+		   
+		   ModelAndView model = new ModelAndView("enquiries");
+		  
+		   if(form==null)
+			   System.out.println("form null!");
+		   enquiryService.submitRating(form);
+		   
+		   
+		   model.addObject("loggedInUser", loginService.getLoggedInUser());
+
+		   Iterable<Enquiry> receivedEnquiries = enquiryService.findReceivedEnquiries();
+		   Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
+				
+		   model.addObject("loggedInUser", loginService.getLoggedInUser());
+		   model.addObject("receivedEnquiries", receivedEnquiries);
+		   model.addObject("sentEnquiries", sentEnquiries);
 		   
 		   return model;
 	   }

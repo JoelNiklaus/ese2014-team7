@@ -1,11 +1,13 @@
 package org.sample.controller.pojos;
 
 import org.sample.model.Ad;
+import org.sample.model.Enquiry;
 
 public class EnquiryRatingForm {
 
 	private int rating;
-	private Ad ad;
+	private Enquiry enquiry;
+	private long enquiryId;
 
 	public int getRating() {
 		return rating;
@@ -15,12 +17,20 @@ public class EnquiryRatingForm {
 		this.rating = rating;
 	}
 
-	public Ad getAd() {
-		return ad;
+	public Enquiry getEnquiry() {
+		return enquiry;
 	}
 
-	public void setAd(Ad ad) {
-		this.ad = ad;
+	public void setEnquiry(Enquiry enquiry) {
+		this.enquiry = enquiry;
+	}
+
+	public long getEnquiryId() {
+		return enquiryId;
+	}
+
+	public void setEnquiryId(long enquiryId) {
+		this.enquiryId = enquiryId;
 	}
 	
 }

@@ -29,6 +29,6 @@ public interface EnquiryService {
 	 */
     public Iterable<Enquiry> findReceivedEnquiries();
 
-    public EnquiryRatingForm submitRating(Enquiry enquiry, EnquiryRatingForm form);
+    public EnquiryRatingForm submitRating(EnquiryRatingForm form);
 
 }

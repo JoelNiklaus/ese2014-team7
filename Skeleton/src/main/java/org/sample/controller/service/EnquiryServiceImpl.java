@@ -94,7 +94,14 @@ public class EnquiryServiceImpl implements EnquiryService {
 
 
 
-	public EnquiryRatingForm submitRating(Enquiry enquiry, EnquiryRatingForm form) {
+	public EnquiryRatingForm submitRating(EnquiryRatingForm form) {
+		
+		Enquiry enquiry = enquiryDao.findOne(form.getEnquiryId());
+		form.setEnquiry(enquiry);
+		
+		if(enquiry==null)
+				System.out.println("Service: no enquiry added!");
+		
 		enquiry.setRating(form.getRating());
 		enquiryDao.save(enquiry);
 		return form;
