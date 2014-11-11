@@ -14,9 +14,4 @@ public interface SearchService {
     
     public Search removeSearch(Search search);
     
-    // TODO Maybe needs to be moved in AdController
-    /**
-     * Notifies User when new Ad is created that matches his saved search criteria.
-     */
-    //public Search notifyUser();
 }

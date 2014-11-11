@@ -55,6 +55,7 @@ $(document).ready(function () {
 	            <li><a href="enquiries">Enquiries</a></li>
 	            <li><a href="bookmarks">Bookmarks</a></li>
 	            <li><a href="searches">Searches</a></li>
+	            <li><a href="notifications">Notifications</a></li>
 	            <li class="divider"></li>
 	            <li><a href="ad?id=1">Ads</a></li>
 	          </ul>
