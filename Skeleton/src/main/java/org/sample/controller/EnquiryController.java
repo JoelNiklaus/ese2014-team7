@@ -140,17 +140,7 @@ public class EnquiryController {
 		   ModelAndView model = new ModelAndView("enquiries");
 		   model.addObject("loggedInUser", loginService.getLoggedInUser());
 		  
-		   
-		   Iterable<Enquiry> newReceivedEnquiries = enquiryService.findNewReceivedEnquiries();
-		   Iterable<Enquiry> ratedReceivedEnquiries = enquiryService.findRatedReceivedEnquiries();
-		   Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
-				
-		   addEmptyMessages(model, newReceivedEnquiries, ratedReceivedEnquiries, sentEnquiries);
-		   
-		   model.addObject("loggedInUser", loginService.getLoggedInUser());
-		   model.addObject("newReceivedEnquiries", newReceivedEnquiries);
-		   model.addObject("ratedReceivedEnquiries", ratedReceivedEnquiries);
-		   model.addObject("sentEnquiries", sentEnquiries);
+		   enquiryViewAddModelAttributes(model);
 	
 		   return model;
 	   }
@@ -193,17 +183,7 @@ public class EnquiryController {
 				   System.out.println("form null!");
 			   enquiryService.submitRating(form);
 
-			   
-			   Iterable<Enquiry> newReceivedEnquiries = enquiryService.findNewReceivedEnquiries();
-			   Iterable<Enquiry> ratedReceivedEnquiries = enquiryService.findRatedReceivedEnquiries();
-			   Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
-			   
-			  addEmptyMessages(model, newReceivedEnquiries, ratedReceivedEnquiries, sentEnquiries);
-					
-			   model.addObject("loggedInUser", loginService.getLoggedInUser());
-			   model.addObject("newReceivedEnquiries", newReceivedEnquiries);
-			   model.addObject("ratedReceivedEnquiries", ratedReceivedEnquiries);
-			   model.addObject("sentEnquiries", sentEnquiries);
+			   enquiryViewAddModelAttributes(model);
 		   }
 		   else
 		   {
@@ -212,6 +192,21 @@ public class EnquiryController {
 		   }
 
 		   return model;
+	   }
+	   
+	   
+	   private void enquiryViewAddModelAttributes(ModelAndView model)
+	   {
+		   Iterable<Enquiry> newReceivedEnquiries = enquiryService.findNewReceivedEnquiries();
+		   Iterable<Enquiry> ratedReceivedEnquiries = enquiryService.findRatedReceivedEnquiries();
+		   Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
+		   
+		   addEmptyMessages(model, newReceivedEnquiries, ratedReceivedEnquiries, sentEnquiries);
+				
+		   model.addObject("loggedInUser", loginService.getLoggedInUser());
+		   model.addObject("newReceivedEnquiries", newReceivedEnquiries);
+		   model.addObject("ratedReceivedEnquiries", ratedReceivedEnquiries);
+		   model.addObject("sentEnquiries", sentEnquiries);
 	   }
 	   
 	   
