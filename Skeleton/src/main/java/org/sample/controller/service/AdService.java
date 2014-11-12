@@ -17,17 +17,52 @@ public interface AdService {
 	 */
     public AdForm saveFrom(AdForm adForm);
     
+    /**
+     * Fetches all the ads from the DB
+     * 
+     * @return all ads
+     */
     public Iterable<Ad> adCatcher();
     
-	public Ad getAd(Long id);
+	/**
+	 * Gets ad by id.
+	 * 
+	 * @param id
+	 * @return Ad
+	 */
+    public Ad getAd(Long id);
 	
-	public String getPicture(Long picId);
+	/**
+	 * Return the filepath to opening a saved image
+	 * 
+	 * @param picId
+	 * @return filepath
+	 */
+    public String getPicture(Long picId);
 	
-	public ArrayList<Long> getAdPictureIds(Long adId);
+	/**
+	 * Return all the picture ids to one ad
+	 * 
+	 * @param adId
+	 * @return gets all the picture Ids of one Ad
+	 */
+    public ArrayList<Long> getAdPictureIds(Long adId);
 	
-	public long getAdMainPic(Long adId);
+	/**
+	 * Returns Id of the main picture of the Ad
+	 * 
+	 * @param adId
+	 * @return mainPic_id
+	 */
+    public long getAdMainPic(Long adId);
 	
-	public ArrayList<Picture> getAdPictures(Long adId);
+	/**
+	 * Returns all pictures to one ad
+	 * 
+	 * @param adId
+	 * @return Pictures
+	 */
+    public ArrayList<Picture> getAdPictures(Long adId);
 
 
 }

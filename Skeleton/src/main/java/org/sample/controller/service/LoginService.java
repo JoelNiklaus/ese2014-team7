@@ -49,7 +49,12 @@ public interface LoginService {
      */
     public boolean emailAlreadyExists(String email);
 
-	public User getLoggedInUser();
+	/**
+	 * Return active user
+	 * 
+	 * @return User
+	 */
+    public User getLoggedInUser();
 	
 
 }
