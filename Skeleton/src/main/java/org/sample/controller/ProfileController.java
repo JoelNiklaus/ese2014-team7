@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.LoginService;
-import org.sample.model.Address;
 import org.sample.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +35,6 @@ public class ProfileController {
     @RequestMapping(value = "/profileChange", method = RequestMethod.POST)
     public ModelAndView profileChange(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;
-    	// save to DB
     	loginService.saveFrom(signupForm);
     	model = new ModelAndView("profile");
     	model.addObject("loggedInUser", loginService.getLoggedInUser());

@@ -5,19 +5,13 @@ import java.security.Principal;
 import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.sample.controller.PictureManager;
 import org.sample.controller.pojos.AdForm;
-import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.AdService;
 import org.sample.controller.service.LoginService;
-import org.sample.controller.service.NotificationService;
 import org.sample.model.Ad;
-import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +37,17 @@ public class AdController {
     
     public final String PICTURE_LOCATION = "/img";
     
+    /**
+     * Submits created ad and returns a confirmation model.
+     * 
+     * @param adForm				the completed ad form
+     * @param result				
+     * @param redirectAttributes
+     * @param principal
+     * @param files
+     * 
+     * @return						creation confirmation model, creation model if form invalid
+     */
     @RequestMapping(value = "/createAd", method = RequestMethod.POST)
     public ModelAndView createAd(@Valid AdForm adForm, BindingResult result, RedirectAttributes redirectAttributes, Principal principal, @RequestParam("image") MultipartFile[] files){
     	
@@ -56,23 +61,6 @@ public class AdController {
 				adForm.setImg_one(pictures.get(0));
 		} catch (Exception e) {
 		}
-		/*
-		try {
-			if (pictures.get(1)!= null)
-				adForm.setImg_two(pictures.get(1));
-		} catch (Exception e) {
-		}
-		try {
-			if (pictures.get(2) != null)
-				adForm.setImg_three(pictures.get(2));
-		} catch (Exception e) {
-		}
-		try {
-			if (pictures.get(3) != null)
-				adForm.setImg_four(pictures.get(3));
-		} catch (Exception e) {
-		}
-		*/
 
     	ModelAndView model;
     	if (!result.hasErrors()){
@@ -86,6 +74,11 @@ public class AdController {
     	return model;
     }
     
+    /**
+     * Builds a model for creating a new ad.
+     * 
+     * @return create ad model
+     */
     @RequestMapping(value = "/createAd", method = RequestMethod.GET)
     public ModelAndView createAd() {
     	ModelAndView model = new ModelAndView("createAd");
@@ -94,7 +87,11 @@ public class AdController {
         return model;
     }
     
-    
+    /**
+     * Creates a model displaying all ads available in DB.
+     * 
+     * @return ad view model
+     */
     @RequestMapping(value = "/adView", method = RequestMethod.GET)
     public ModelAndView adView() {
     	ModelAndView model = new ModelAndView("adView");
@@ -104,11 +101,16 @@ public class AdController {
 
     }
 
+    /**
+     * Creates a model displaying ad with given ad id.
+     * 
+     * @param id	ad id
+     * @return		ad display model, 404 model if adId doesn't exist
+     */
     @RequestMapping("ad")
-    public ModelAndView findUser(@RequestParam String id) {
+    public ModelAndView displaySingleAd(@RequestParam String id) {
     	
     	ModelAndView model = new ModelAndView("ad");
-    	//Long adId = Long.parseLong(id);
 	    
 	    try{
 	    	Ad ad = adRepository.findOne(new Long(id));
@@ -116,9 +118,6 @@ public class AdController {
 	    	 if(ad != null){
 	 	    	model.addObject("ad", ad);
 	 	    	model.addObject("shortDescription", "<b>"+ad.getTitle()+"</b><br />"+ad.getStreet()+" "+ad.getHouseNr()+"<br />" +ad.getZip()+" "+ad.getCity());
-	 	    	//model.addObject("newAdProfile", adService.getAd(adId));
-	 			//model.addObject("pictureIds", adService.getAdPictureIds(adId));
-	 			//model.addObject("mainPic", adService.getAdMainPic(adId));
 	 	    } else {
 	 	    	model = new ModelAndView("404");
 	 	    }
