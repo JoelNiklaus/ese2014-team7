@@ -43,7 +43,7 @@ public class BookmarkServiceImpl implements BookmarkService {
 
 		for(Bookmark b : allBookmarks)
 		{
-			if(b.getUserId() == loginService.getLoggedInUser().getId())
+			if(b.getUserId().equals(loginService.getLoggedInUser().getId()))
 			{
 				b.setAd(adDao.findOne(b.getAdId()));
 				results.add(b);
@@ -58,7 +58,7 @@ public class BookmarkServiceImpl implements BookmarkService {
 		Iterable<Bookmark> bookmarks = findBookmarks(user);
 		
 		for(Bookmark bookmark : bookmarks) {
-			if(bookmark.getAdId() == adId)
+			if(bookmark.getAdId().equals(adId))
 				return true;
 		}
 		

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
-import org.sample.controller.PictureManager;
 import org.sample.controller.pojos.AdForm;
 import org.sample.controller.service.AdService;
 import org.sample.controller.service.LoginService;
@@ -62,13 +61,13 @@ public class AdController {
 		} catch (Exception e) {
 		}
 
-    	ModelAndView model;
+    	ModelAndView model = new ModelAndView("createAd");
     	if (!result.hasErrors()){
 			adService.saveFrom(adForm);
 			
-    		model = new ModelAndView("adCreated");
+			model.addObject("success", "Ad successfully created.");
     	}else{
-    		model = new ModelAndView("createAd");
+    		model.addObject("error", "Please fill out all valid information.");
     	}
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	return model;

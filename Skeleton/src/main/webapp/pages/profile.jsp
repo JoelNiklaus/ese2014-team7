@@ -27,11 +27,11 @@
  	<form:errors path="lastName" cssClass="help-inline" element="span" /> 
  	<br> 
  	<form:password class="form-control" path="password" maxlength="45" 
- 		placeholder="Password" value="${loggedInUser.password}" /> 
+ 		placeholder="Password" value="" /> 
  	<form:errors path="password" cssClass="help-inline" element="span" /> 
  	<br> 
  	<form:password class="form-control" path="passwordConfirm" 
- 		maxlength="45" placeholder="Confirm Password" value="${loggedInUser.password}" /> 
+ 		maxlength="45" placeholder="Confirm Password" value="" /> 
  	<form:errors path="passwordConfirm" cssClass="help-inline" 
  		element="span" /> 
  	<br> 

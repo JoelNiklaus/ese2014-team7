@@ -60,7 +60,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 		
 		for(Enquiry e : allEnquiries)
 		{
-			if(e.getSenderId() == loginService.getLoggedInUser().getId())
+			if(e.getSenderId().equals(loginService.getLoggedInUser().getId()))
 			{
 				e.setAd(adDao.findOne(e.getAdId()));
 				results.add(e);
@@ -82,7 +82,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 		
 		for(Enquiry e : allEnquiries)
 		{
-			if((e.getReceiverId() == loginService.getLoggedInUser().getId()) && e.getRating() == 0)
+			if((e.getReceiverId().equals(loginService.getLoggedInUser().getId())) && e.getRating() == 0)
 			{
 				e.setAd(adDao.findOne(e.getAdId()));
 				results.add(e);
@@ -101,7 +101,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 		
 		for(Enquiry e : allEnquiries)
 		{
-			if((e.getReceiverId() == loginService.getLoggedInUser().getId()) && e.getRating() != 0)
+			if((e.getReceiverId().equals(loginService.getLoggedInUser().getId())) && e.getRating() != 0)
 			{
 				e.setAd(adDao.findOne(e.getAdId()));
 				results.add(e);
@@ -120,11 +120,13 @@ public class EnquiryServiceImpl implements EnquiryService {
 		Enquiry enquiry = enquiryDao.findOne(form.getEnquiryId());
 		form.setEnquiry(enquiry);
 		
-		if(enquiry==null)
+		if(enquiry == null)
 				System.out.println("Service: no enquiry added!");
+		else {
+			enquiry.setRating(form.getRating());
+			enquiryDao.save(enquiry);
+		}
 		
-		enquiry.setRating(form.getRating());
-		enquiryDao.save(enquiry);
 		return form;
 	}
     

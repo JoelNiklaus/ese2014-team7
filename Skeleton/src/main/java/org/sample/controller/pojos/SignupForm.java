@@ -3,9 +3,7 @@ package org.sample.controller.pojos;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.service.LoginService;
-import org.sample.controller.service.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
@@ -141,10 +139,9 @@ public class SignupForm {
 	 * 
 	 * @return true if at least one mandatory property is null, false else
 	 */
-	public boolean hasNull()
-	{
-		boolean hasNull = (email == "") || (firstName == "") || (lastName == "") || (password == "") 
-					   || (street == "")  || (houseNr == 0)  || (city == "")  || (zip == 0);
+	public boolean hasNull() {
+		boolean hasNull = (email.equals("")) || (firstName.equals("")) || (lastName.equals("")) || (password.equals("")) 
+					   || (street.equals(""))  || (houseNr == 0)  || (city.equals(""))  || (zip == 0);
 		return hasNull;
 	}
 }
