@@ -78,16 +78,14 @@ $(document).ready(function () {
 					<div class="form-group">
 						<input type="password" class="form-control" id="j_password" name="j_password" placeholder="Password">
 					</div>
-					<button type="submit" class="btn btn-default">Sign In</button>
-					<button type="button" onclick="window.location.href='register'" class="btn btn-default">Register</button>
+					<button type="submit" class="btn btn-primary">Sign In</button>
+					<button type="button" onclick="window.location.href='register'" class="btn btn-info">Register</button>
 				</form>			
 			</div>
 		</c:if>
 		<c:if test="${not empty loggedInUser}">
-			${loggedInUser.firstName } ${loggedInUser.lastName }   <a  class="btn btn-default" href="${pageContext.servletContext.contextPath}/logout">Logout</a></li>
+			${loggedInUser.firstName } ${loggedInUser.lastName }   <a  class="btn btn-danger" href="${pageContext.servletContext.contextPath}/logout">Logout</a></li>
 		</c:if>
-
-
                     
 
     </div><!-- /.navbar-collapse -->

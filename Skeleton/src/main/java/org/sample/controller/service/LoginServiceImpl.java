@@ -23,10 +23,10 @@ import org.springframework.util.StringUtils;
 public class LoginServiceImpl implements LoginService, UserDetailsService {
 
     @Autowired    UserDao userDao;
-    @Autowired    AddressDao addDao;
+    @Autowired    AddressDao addressDao;
     
     @Transactional
-    public SignupForm saveFrom(SignupForm signupForm) throws InvalidUserException{
+    public SignupForm saveFrom(SignupForm signupForm) throws InvalidUserException {
 
         String firstName = signupForm.getFirstName();
 
@@ -51,12 +51,42 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
         address.setHouseNr(signupForm.getHouseNr());
         address.setCity(signupForm.getCity());
         address.setZip(signupForm.getZip());
-        address = addDao.save(address);
-     
+        address = addressDao.save(address);
         
         signupForm.setId(user.getId());
 
         return signupForm;
+    }
+    
+    @Transactional
+    public SignupForm updateProfile(SignupForm profileForm) throws InvalidUserException {
+
+        String firstName = profileForm.getFirstName();
+
+        if(!StringUtils.isEmpty(firstName) && "ESE".equalsIgnoreCase(firstName)) {
+            throw new InvalidUserException("Sorry, ESE is not a valid name");   // throw exception
+        }
+        
+        User user = userDao.findByEmail(profileForm.getEmail());
+        user.setFirstName(profileForm.getFirstName());
+        user.setEmail(profileForm.getEmail());
+        user.setLastName(profileForm.getLastName());
+        
+        System.err.println(user.getEmail()+ "  " + user.getId());
+        
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(profileForm.getPassword());
+        user.setPassword(hashedPassword);
+        user = userDao.save(user);   // save object to DB
+        
+        Address address = user.getAddress();
+        address.setStreet(profileForm.getStreet());
+        address.setHouseNr(profileForm.getHouseNr());
+        address.setCity(profileForm.getCity());
+        address.setZip(profileForm.getZip());
+        address = addressDao.save(address);
+        
+        return profileForm;
     }
     
     @Transactional
@@ -92,7 +122,7 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
     public Address getAddress(long userID)
     {
     	Address add = new Address();
-    	add = addDao.findOne(userID);
+    	add = addressDao.findOne(userID);
     	return add;
     }
     
@@ -128,40 +158,6 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
     	return exists;
     }
 
-	/*
-	@Autowired AdDao adDao;
-	
-    
-    @Transactional
-	private AdForm saveFrom(AdForm adForm) {
-	    
-    	Ad ad = new Ad();
-    	
-	    ad.setId(adForm.getId());
-	    Timestamp timestamp  = new Timestamp(System.currentTimeMillis());
-		ad.setTimestamp(timestamp);
-	    ad.setTitle(adForm.getTitle());
-	    ad.setStreet(adForm.getStreet());
-	    ad.setHouseNr(adForm.getHouseNr());
-	    ad.setCity(adForm.getCity());
-	    ad.setZip(adForm.getZip());
-	    ad.setRent(adForm.getRent());
-	    ad.setAddCost(adForm.getAddCost());
-	    ad.setDateIn(adForm.getDateIn());
-	    ad.setDateOut(adForm.getDateOut());
-	    //ad.setType(adForm.getType());
-	    ad.setRoomSize(adForm.getRoomSize());
-	    ad.setDescription(adForm.getDescription());
-	    ad.setUs(adForm.getUs());
-	    ad.setYou(adForm.getYou());
-	    
-	    ad = adDao.save(ad);
-		
-	    return  adForm;
-	}
-<<<<<<< HEAD
-	*/
-
 	public UserDetails loadUserByUsername(String arg0)
 			throws UsernameNotFoundException {
 		User user = userDao.findByEmail(arg0);
@@ -170,7 +166,6 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
 	}
 
 	public User getLoggedInUser() {
-
 		return userDao.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
 	}
 }

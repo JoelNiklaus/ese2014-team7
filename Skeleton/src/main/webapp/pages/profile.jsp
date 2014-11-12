@@ -9,11 +9,21 @@
 
   <h1>My Profile</h1>
   
-  <p>${message}</p>  
+	<c:if test="${not empty success}">
+		<div class="alert alert-success" role="alert">
+			${success}
+		</div>
+	</c:if>
+	
+	<c:if test="${not empty error}">
+		<div class="alert alert-danger" role="alert">
+			${error}
+		</div>
+	</c:if>
 
 <h2>User Information</h2>
 
-<form:form method="post" modelAttribute="profileForm" action="profileChange" autocomplete="off">
+<form:form method="post" modelAttribute="profileForm" action="profileChange">
 	<form:input class="form-control" path="email" maxlength="45"
  		placeholder="Email" value="${loggedInUser.email}" /> 
  	<form:errors path="email" cssClass="help-inline" element="span" /> 
@@ -53,7 +63,7 @@
  	<br>
  	
  	<button class="btn btn-default" type="reset">Reset</button>
-	<button class="btn btn-theme" type="submit">Submit</button>
+	<button class="btn btn-primary" type="submit">Submit</button>
  </form:form>
 
 <c:import url="template/footer.jsp" />

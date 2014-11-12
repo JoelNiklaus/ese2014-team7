@@ -2,6 +2,7 @@ package org.sample.controller;
 
 import javax.validation.Valid;
 
+import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.LoginService;
 import org.sample.model.Address;
@@ -34,12 +35,23 @@ public class ProfileController {
 	}
 
     @RequestMapping(value = "/profileChange", method = RequestMethod.POST)
-    public ModelAndView profileChange(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
+    public ModelAndView profileChange(@Valid SignupForm profileForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;
-    	// save to DB
-    	loginService.saveFrom(signupForm);
-    	model = new ModelAndView("profile");
-    	model.addObject("loggedInUser", loginService.getLoggedInUser());
+    	model = loadProfilePage();
+    	if (!result.hasErrors()) {
+	    	try {
+	    		//TODO does not work properly yet: NumberFormatException: null
+	    		// save to DB
+	    		loginService.updateProfile(profileForm);
+				model.addObject("success", "Profile changes successfully saved");
+			} catch (InvalidUserException e) {
+				model.addObject("error", "Profile changes could not be saved: " + e.getMessage());
+			} catch (NullPointerException e) {
+				model.addObject("error", "Profile changes could not be saved: " + e.getMessage());
+			}
+    	} else
+    		model.addObject("error", "Please enter valid data.");
+    	
     	return model;
     }
 }

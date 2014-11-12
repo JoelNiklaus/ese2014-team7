@@ -19,12 +19,7 @@ public interface LoginService {
 	 */
     public SignupForm saveFrom(SignupForm signupForm) throws InvalidUserException;
     
-    /**
-	 * Saves Data from AdForm to DB.
-	 * 
-	 * @param 	adForm									the filled out form from the ad creation
-	 * @return 	the adForm after DB transaction
-	 */
+    public SignupForm updateProfile(SignupForm signupForm) throws InvalidUserException;
     
     public User getUser(LoginForm loginForm) throws InvalidUserException;
     

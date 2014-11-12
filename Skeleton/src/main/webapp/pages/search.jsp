@@ -90,7 +90,7 @@
 			
 			<div class="pull-right">
 				<button type="submit" onclick="javascript: form.action='search';" class="btn btn-primary">Search</button>
-				<button type="submit" onclick="javascript: form.action='saveSearch';" id="save" class="btn">Save</button>
+				<button type="submit" onclick="javascript: form.action='saveSearch';" id="save" class="btn btn-info">Save</button>
 			</div>
 		</fieldset>
 	</form:form>
