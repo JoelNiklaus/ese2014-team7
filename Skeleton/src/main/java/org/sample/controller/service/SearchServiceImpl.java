@@ -40,7 +40,7 @@ public class SearchServiceImpl implements SearchService {
 		LinkedList<Search> results = new LinkedList<Search>();
 
 		for(Search s : allSearches)
-			if(s.getUserId() == loginService.getLoggedInUser().getId())
+			if(s.getUserId().equals(loginService.getLoggedInUser().getId()))
 				results.add(s);
 
 		return (Iterable<Search>)results;
@@ -51,7 +51,7 @@ public class SearchServiceImpl implements SearchService {
 		Iterable<Search> searches = findSearches(user);
 		
 		for(Search search : searches) {
-			if(search.getId() == searchId)
+			if(search.getId().equals(searchId))
 				return true;
 		}
 		

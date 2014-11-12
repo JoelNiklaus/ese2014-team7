@@ -5,19 +5,12 @@ import java.security.Principal;
 import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.sample.controller.PictureManager;
 import org.sample.controller.pojos.AdForm;
-import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.AdService;
 import org.sample.controller.service.LoginService;
-import org.sample.controller.service.NotificationService;
 import org.sample.model.Ad;
-import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
