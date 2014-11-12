@@ -6,12 +6,37 @@ import org.sample.model.User;
 
 public interface SearchService {
 
-    public Search saveSearch(SearchForm searchForm);
+    /**
+     * Saves searchForm
+     * 
+     * @param searchForm			filled in SearchForm
+     * @return Search
+     */
+	public Search saveSearch(SearchForm searchForm);
         
-    public Iterable<Search> findSearches(User user);
+    /**
+     * Returns saved searches from given user
+     * 
+     * @param user
+     * @return Iterable<search>
+     */
+	public Iterable<Search> findSearches(User user);
     
-    public boolean alreadySaved(User user, Long searchId);
+    /**
+     * Looks if the search is already saved
+     * 
+     * @param user
+     * @param searchId
+     * @return boolean
+     */
+	public boolean alreadySaved(User user, Long searchId);
     
-    public Search removeSearch(Search search);
+    /**
+     * Removes search
+     * 
+     * @param search
+     * @return Search
+     */
+	public Search removeSearch(Search search);
     
 }
