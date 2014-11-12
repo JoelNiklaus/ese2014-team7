@@ -14,6 +14,7 @@
 
 	<form:input class="form-control" path="email" maxlength="45"
 		placeholder="Email" />
+	<c:out value="${emailExists}"></c:out>
 	<form:errors path="email" cssClass="help-inline" element="span" />
 	<br>
 	<form:input class="form-control" path="firstName" maxlength="35"
