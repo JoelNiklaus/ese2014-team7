@@ -24,6 +24,11 @@ public class NotificationController {
 	@Autowired
 	NotificationDao notificationRepository;
 
+	/**
+	 * Creates a model displaying user's notifications
+	 * 
+	 * @return notification model
+	 */
 	@RequestMapping("/notifications")
 	public ModelAndView showNotifications() {
 		ModelAndView model = new ModelAndView("notifications");
@@ -34,6 +39,12 @@ public class NotificationController {
 		return model;
 	}
 
+	/**
+	 * Removes notification with given id from DB, returns notification model
+	 * 
+	 * @param id	id of notification to be deleted
+	 * @return		notification model, 404 if id invalid
+	 */
 	@RequestMapping(value = "/removeNotification", method = RequestMethod.GET)
 	public ModelAndView removenotification(@RequestParam String id) {
 		ModelAndView model = showNotifications();
@@ -44,7 +55,6 @@ public class NotificationController {
 
 			User user = loginService.getLoggedInUser();
 			notificationService.removeNotification(notification);
-			// update notification list
 			model = showNotifications();
 			model.addObject("message", "notification successfully removed.");
 			model.addObject("notifications", notificationService.findNotifications(user)); 

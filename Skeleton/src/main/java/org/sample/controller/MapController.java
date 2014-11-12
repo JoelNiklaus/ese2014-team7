@@ -1,16 +1,11 @@
 package org.sample.controller;
 
 
-import java.io.IOException;
 
-import org.json.JSONException;
 import org.sample.controller.service.LoginService;
-import org.sample.model.Ad;
-import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,10 +28,4 @@ public class MapController {
 
         return model;
     }
-
-//    @ModelAttribute("adList")
-//    public Iterable<Ad> populateAdList(){
-//	    Iterable<Ad> adList = ;
-//	    return adList;
-//    }
 }

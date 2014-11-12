@@ -11,7 +11,6 @@ import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.LoginService;
-import org.sample.model.Address;
 import org.sample.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +27,11 @@ public class AuthentificationController {
     @Autowired
     LoginService loginService;
     
+    /**
+     * Creates a model for registering a new user.
+     * 
+     * @return	register model
+     */
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView index() {
 	    ModelAndView model = new ModelAndView("register");
@@ -36,6 +40,15 @@ public class AuthentificationController {
     	return model;
     }
     
+    /**
+     * Submits registration and returns login model
+     * 
+     * @param signupForm			completed registration form
+     * @param result				
+     * @param redirectAttributes
+     * 
+     * @return						login model, registration model if signup form invalid
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;    	
@@ -55,7 +68,6 @@ public class AuthentificationController {
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	return model;
     }
-    
     
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)

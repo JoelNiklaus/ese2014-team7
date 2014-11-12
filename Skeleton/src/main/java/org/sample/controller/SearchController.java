@@ -2,13 +2,11 @@ package org.sample.controller;
 
 import javax.validation.Valid;
 
-import org.sample.controller.pojos.EnquiryForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SearchForm;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.SearchService;
 import org.sample.model.Ad;
-import org.sample.model.Bookmark;
 import org.sample.model.Search;
 import org.sample.model.User;
 import org.sample.model.dao.AdDao;
@@ -34,6 +32,17 @@ public class SearchController {
 	@Autowired
 	SearchDao searchRepository;
 
+	/**
+	 * Assembles a model providing search functionality (specifying search criteria, displaying only ads
+	 * matching that criteria).
+	 * 
+	 * @param searchForm			completed search form
+	 * @param result
+	 * @param redirectAttributes
+	 * @param searchId				id of search-template
+	 * 
+	 * @return						model with tools to specify search criteria and displaying search results
+	 */
 	@RequestMapping(value = "/search", method = RequestMethod.POST)    
 	public ModelAndView search(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){
 
@@ -88,6 +97,13 @@ public class SearchController {
 		return model;
 	}
 
+	/**
+	 * Returns search model for a given search-template.
+	 * 
+	 * @param searchId		id of search-template to be used
+	 * 
+	 * @return				search results for given template
+	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView index(@RequestParam(value="searchId",required=false) String searchId) {
 		ModelAndView model = new ModelAndView("search");
@@ -109,6 +125,15 @@ public class SearchController {
 		return model;
 	}
 	
+	/**
+	 * Saves current search template to DB.
+	 * 
+	 * @param searchForm			search form to be saved
+	 * @param result
+	 * @param redirectAttributes
+	 * @param searchId				
+	 * @return						search model
+	 */
 	@RequestMapping(value = "/saveSearch", method = RequestMethod.POST)    
 	public ModelAndView saveSearch(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){
 		ModelAndView model = search(searchForm, result, redirectAttributes, searchId);
@@ -134,6 +159,10 @@ public class SearchController {
 		return model;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping("/searches")
 	public ModelAndView searches() {
 		ModelAndView model = new ModelAndView("searches");
