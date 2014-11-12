@@ -8,7 +8,7 @@ import org.sample.model.User;
 public interface NotificationService {
 
 	/**
-	 * ??
+	 * Saves the notifications to all users who have saved a search matching the newly created ad.
 	 * 
 	 * @param ad
 	 */
@@ -23,7 +23,7 @@ public interface NotificationService {
 	public Iterable<Notification> findNotifications(User user);
 	
 	/**
-	 * Removes notifications
+	 * Removes a notification
 	 * 
 	 * @param notification
 	 * @return
