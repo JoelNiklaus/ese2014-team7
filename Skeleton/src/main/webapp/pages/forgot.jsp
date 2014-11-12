@@ -22,7 +22,7 @@
 
 	<div class="form-actions">
 		<button type="submit" class="btn btn-primary">Send Password</button>
-		<button type="reset" class="btn">Reset</button>
+		<button type="reset" class="btn btn-warning">Reset</button>
 	</div>
 </form:form>
 

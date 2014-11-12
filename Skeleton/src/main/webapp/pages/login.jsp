@@ -32,7 +32,9 @@
 					            	</div>
         						</c:if>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="submit" class="btn btn-sm btn-success" value="Login">
+                                <input type="submit" class="btn btn-primary" value="Login">
+                                <input type="reset" class="btn btn-warning" value="Reset">
+                                <a href="forgot">Forgot Password?</a>
             					<input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </fieldset>
                         </form>

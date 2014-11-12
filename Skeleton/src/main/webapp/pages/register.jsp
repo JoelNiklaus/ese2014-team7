@@ -53,7 +53,6 @@
 	<div class="form-actions">
 		<button type="submit" class="btn btn-primary">Sign up</button>
 		<button type="reset" class="btn">Reset</button>
-		<a href="forgot">Forgot Password?</a>
 	</div>
 </form:form>
 
