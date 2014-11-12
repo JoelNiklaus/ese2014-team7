@@ -159,10 +159,7 @@ public class SearchController {
 		return model;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+
 	@RequestMapping("/searches")
 	public ModelAndView searches() {
 		ModelAndView model = new ModelAndView("searches");
