@@ -74,13 +74,13 @@ public class AdController {
 		}
 		*/
 
-    	ModelAndView model;
+    	ModelAndView model = new ModelAndView("createAd");
     	if (!result.hasErrors()){
 			adService.saveFrom(adForm);
 			
-    		model = new ModelAndView("adCreated");
+			model.addObject("success", "Ad successfully created.");
     	}else{
-    		model = new ModelAndView("createAd");
+    		model.addObject("error", "Please fill out all valid information.");
     	}
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	return model;
