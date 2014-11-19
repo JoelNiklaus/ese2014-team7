@@ -109,7 +109,7 @@
 				
 			</div>
 				
-			<div class="panel-footer"><b>Price:</b> CHF ${ad.rent}  <b>Room Size:</b> ${ad.roomSize}m²</div>
+			<div class="panel-footer"><b>Area: </b>${ad.city},  <b>Price:</b> CHF ${ad.rent},  <b>Room Size:</b> ${ad.roomSize}m²,  <b>Posted: </b>${ad.postingDateFormatted}</div>
 		</div>
 	</c:forEach>
 		

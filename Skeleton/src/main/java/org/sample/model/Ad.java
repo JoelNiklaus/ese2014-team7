@@ -1,6 +1,7 @@
 package org.sample.model;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -23,6 +24,7 @@ public class Ad {
     private Long id;
 	private Long placerId;
 	private Timestamp timestamp;
+	private String postingDateFormatted;
 	private String title;
 	private String street;
 	private Long houseNr;
@@ -66,7 +68,9 @@ public class Ad {
     } 
     
     public void setTimestamp(Timestamp timestamp){
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     	this.timestamp = timestamp;
+    	postingDateFormatted = dateFormat.format(timestamp);
     }
     
     public String getTitle(){
@@ -207,5 +211,13 @@ public class Ad {
 
 	public void setPlacerId(Long placerId) {
 		this.placerId = placerId;
+	}
+
+	public String getPostingDateFormatted() {
+		return postingDateFormatted;
+	}
+
+	public void setPostingDateFormatted(String postingDateFormatted) {
+		this.postingDateFormatted = postingDateFormatted;
 	}
 }
