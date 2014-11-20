@@ -1,10 +1,19 @@
 package org.sample.controller.service;
 
 import org.sample.controller.pojos.SearchForm;
+import org.sample.model.Ad;
 import org.sample.model.Search;
 import org.sample.model.User;
 
 public interface SearchService {
+	
+	/**
+	 * Returns relevant search results.
+	 * 
+	 * @param searchForm
+	 * @return Iterable<Ad>
+	 */
+	public Iterable<Ad> computeSearchResults(SearchForm searchForm);
 
     /**
      * Saves searchForm
@@ -18,7 +27,7 @@ public interface SearchService {
      * Returns saved searches from given user
      * 
      * @param user
-     * @return Iterable<search>
+     * @return Iterable<Search>
      */
 	public Iterable<Search> findSearches(User user);
     
