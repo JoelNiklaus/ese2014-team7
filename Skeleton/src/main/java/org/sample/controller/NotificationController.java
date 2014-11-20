@@ -20,9 +20,9 @@ public class NotificationController {
 	@Autowired
 	NotificationService notificationService;
 	@Autowired
-	AdDao adRepository;
+	AdDao adDao;
 	@Autowired
-	NotificationDao notificationRepository;
+	NotificationDao notificationDao;
 
 	/**
 	 * Creates a model displaying user's notifications
@@ -51,7 +51,7 @@ public class NotificationController {
 
 		try {
 			long notificationId = Long.parseLong(id);
-			Notification notification = notificationRepository.findOne(notificationId);
+			Notification notification = notificationDao.findOne(notificationId);
 
 			User user = loginService.getLoggedInUser();
 			notificationService.removeNotification(notification);

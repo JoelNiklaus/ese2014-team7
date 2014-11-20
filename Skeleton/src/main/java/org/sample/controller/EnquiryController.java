@@ -29,10 +29,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class EnquiryController {
 
 	@Autowired
-	AdDao adRepository;
+	AdDao adDao;
 
 	@Autowired
-	EnquiryDao enquiryRepository;
+	EnquiryDao enquiryDao;
 
 	@Autowired
 	EnquiryService enquiryService;
@@ -61,7 +61,7 @@ public class EnquiryController {
 			model.addObject("loggedInUser", loginService.getLoggedInUser());
 
 			try {
-				Ad ad = adRepository.findOne(Long.parseLong(id));
+				Ad ad = adDao.findOne(Long.parseLong(id));
 
 				if (ad == null)
 					model = new ModelAndView("404");
@@ -151,10 +151,10 @@ public class EnquiryController {
 		ModelAndView model = new ModelAndView("rateEnquiry");
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 
-		Enquiry enquiry = enquiryRepository.findOne(id);
+		Enquiry enquiry = enquiryDao.findOne(id);
 
 		if (enquiry != null) {
-			enquiry.setAd(adRepository.findOne(enquiry.getAdId()));
+			enquiry.setAd(adDao.findOne(enquiry.getAdId()));
 
 			List<Integer> numberList = new ArrayList<Integer>();
 			for (int i = 1; i <= 10; i++)
@@ -213,7 +213,7 @@ public class EnquiryController {
 
 		try {
 			long enquiryId = Long.parseLong(id);
-			Enquiry enquiry = enquiryRepository.findOne(enquiryId);
+			Enquiry enquiry = enquiryDao.findOne(enquiryId);
 
 			User user = loginService.getLoggedInUser();
 			enquiryService.removeEnquiry(enquiry);

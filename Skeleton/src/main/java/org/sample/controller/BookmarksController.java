@@ -23,9 +23,9 @@ public class BookmarksController {
 	@Autowired
 	BookmarkService bookmarkService;
 	@Autowired
-	AdDao adRepository;
+	AdDao adDao;
 	@Autowired
-	BookmarkDao bookmarkRepository;
+	BookmarkDao bookmarkDao;
 
 	/**
 	 * Assembles a model displaying user's bookmarked ads.
@@ -56,7 +56,7 @@ public class BookmarksController {
 
 		try {
 			long bookmarkId = Long.parseLong(id);
-			Bookmark bookmark = bookmarkRepository.findOne(bookmarkId);
+			Bookmark bookmark = bookmarkDao.findOne(bookmarkId);
 
 			User user = loginService.getLoggedInUser();
 			bookmarkService.removeBookmark(bookmark);
@@ -86,7 +86,7 @@ public class BookmarksController {
 		
 		try{
 			long adId = Long.parseLong(id);
-			Ad ad = adRepository.findOne(adId);
+			Ad ad = adDao.findOne(adId);
 
 			if(loginService.getLoggedInUser() == null)
 				throw new InvalidUserException("Not logged in");

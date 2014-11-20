@@ -24,13 +24,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class SearchController {
 
 	@Autowired
-	AdDao adRepository;
-	@Autowired
 	LoginService loginService;
 	@Autowired
 	SearchService searchService;
 	@Autowired
-	SearchDao searchRepository;
+	SearchDao searchDao;
+	@Autowired
+	AdDao adDao;
 
 	/**
 	 * Assembles a model providing search functionality (specifying search criteria, displaying only ads
@@ -71,23 +71,23 @@ public class SearchController {
 		//TODO Replace magic Number by config file
 		if(city.equals("")){
 			if(priceMax == 3000){
-				searchResults = adRepository.findByRentGreaterThanAndRoomSizeBetween(priceMin-1, roomSizeMin, roomSizeMax);
+				searchResults = adDao.findByRentGreaterThanAndRoomSizeBetween(priceMin-1, roomSizeMin, roomSizeMax);
 			} else if(roomSizeMax==300){
-				searchResults = adRepository.findByRentBetweenAndRoomSizeGreaterThan(priceMin, priceMax, roomSizeMin-1);
+				searchResults = adDao.findByRentBetweenAndRoomSizeGreaterThan(priceMin, priceMax, roomSizeMin-1);
 			} else if((roomSizeMax == 300) && (priceMax == 3000)){
-				searchResults = adRepository.findByRentGreaterThanAndRoomSizeGreaterThan(priceMin, roomSizeMin);
+				searchResults = adDao.findByRentGreaterThanAndRoomSizeGreaterThan(priceMin, roomSizeMin);
 			} else {
-				searchResults = adRepository.findByRentBetweenAndRoomSizeBetween(priceMin, priceMax, roomSizeMin, roomSizeMax);
+				searchResults = adDao.findByRentBetweenAndRoomSizeBetween(priceMin, priceMax, roomSizeMin, roomSizeMax);
 			}
 		} else {
 			if(priceMax == 3000){
-				searchResults = adRepository.findByRentGreaterThanAndRoomSizeBetweenAndCityLike(priceMin, roomSizeMin, roomSizeMax, city);
+				searchResults = adDao.findByRentGreaterThanAndRoomSizeBetweenAndCityLike(priceMin, roomSizeMin, roomSizeMax, city);
 			} else if(roomSizeMax==300){
-				searchResults = adRepository.findByRentBetweenAndRoomSizeGreaterThanAndCityLike(priceMin, priceMax, roomSizeMin, city);
+				searchResults = adDao.findByRentBetweenAndRoomSizeGreaterThanAndCityLike(priceMin, priceMax, roomSizeMin, city);
 			} else if((roomSizeMax == 300) && (priceMax == 3000)){
-				searchResults = adRepository.findByRentGreaterThanAndRoomSizeGreaterThanAndCityLike(priceMin, roomSizeMin, city);
+				searchResults = adDao.findByRentGreaterThanAndRoomSizeGreaterThanAndCityLike(priceMin, roomSizeMin, city);
 			} else {
-				searchResults = adRepository.findByRentBetweenAndRoomSizeBetweenAndCityLike(priceMin, priceMax, roomSizeMin, roomSizeMax, city);
+				searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityLike(priceMin, priceMax, roomSizeMin, roomSizeMax, city);
 			}
 		}
 
@@ -109,12 +109,12 @@ public class SearchController {
 		ModelAndView model = new ModelAndView("search");
 		model.addObject("searchForm", new SearchForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
-		Iterable<Ad> searchResults = adRepository.findAll();
+		Iterable<Ad> searchResults = adDao.findAll();
 		Search searchAttributes;
 		
 		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
 		try{
-			searchAttributes = searchRepository.findOne(Long.parseLong(searchId));
+			searchAttributes = searchDao.findOne(Long.parseLong(searchId));
 			
 		} catch(Exception e) {
 			System.out.println(e);
@@ -177,7 +177,7 @@ public class SearchController {
 
 		try {
 			long searchId = Long.parseLong(id);
-			Search search = searchRepository.findOne(searchId);
+			Search search = searchDao.findOne(searchId);
 
 			User user = loginService.getLoggedInUser();
 			searchService.removeSearch(search);

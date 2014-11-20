@@ -13,16 +13,15 @@ import org.sample.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.ModelAndView;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
 
-	@Autowired NotificationDao notificationDao;
 	@Autowired LoginService loginService;
 	@Autowired AdDao adDao;
 	@Autowired SearchDao searchDao;
 	@Autowired UserDao userDao;
+	@Autowired NotificationDao notificationDao;
 
 	@Transactional
 	public void saveNotificationsToAffectedUsers(Ad ad) {

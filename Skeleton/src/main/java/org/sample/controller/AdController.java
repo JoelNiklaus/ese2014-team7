@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.sample.controller.pojos.AdForm;
 import org.sample.controller.service.AdService;
 import org.sample.controller.service.LoginService;
+import org.sample.controller.service.PictureManager;
 import org.sample.model.Ad;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class AdController {
     @Autowired
     AdService adService;
     @Autowired
-    AdDao adRepository;
+    AdDao adDao;
     @Autowired
     ServletContext servletContext;
     
@@ -112,7 +113,7 @@ public class AdController {
     	ModelAndView model = new ModelAndView("ad");
 	    
 	    try{
-	    	Ad ad = adRepository.findOne(new Long(id));
+	    	Ad ad = adDao.findOne(new Long(id));
 	    	
 	    	 if(ad != null){
 	 	    	model.addObject("ad", ad);

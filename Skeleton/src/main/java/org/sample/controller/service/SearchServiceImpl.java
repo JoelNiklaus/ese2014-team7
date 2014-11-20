@@ -14,9 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SearchServiceImpl implements SearchService {
 
-	@Autowired SearchDao SearchDao;
 	@Autowired LoginService loginService;
 	@Autowired AdDao adDao;
+	@Autowired SearchDao searchDao;
 
 	@Transactional
 	public Search saveSearch(SearchForm searchForm) {
@@ -29,14 +29,14 @@ public class SearchServiceImpl implements SearchService {
 		Search search = new Search(new Long(0), priceMin, priceMax, roomSizeMin, roomSizeMax, city);
 		search.setUserId(loginService.getLoggedInUser().getId());
 
-		SearchDao.save(search);
+		searchDao.save(search);
 
 		return search;
 	}
 
 	@Transactional
 	public Iterable<Search> findSearches(User user) {
-		Iterable<Search> allSearches = SearchDao.findAll();
+		Iterable<Search> allSearches = searchDao.findAll();
 		LinkedList<Search> results = new LinkedList<Search>();
 
 		for(Search s : allSearches)
@@ -60,7 +60,7 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Transactional
 	public Search removeSearch(Search Search) {
-		SearchDao.delete(Search);
+		searchDao.delete(Search);
 		
 		return Search;
 	}

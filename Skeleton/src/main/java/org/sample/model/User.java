@@ -10,7 +10,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -41,7 +40,7 @@ public class User implements UserDetails{
     private Address address; 
     
     @OneToMany(cascade = {CascadeType.ALL})
-    private Set<Search> searchs = new HashSet<Search>(0);
+    private Set<Search> searches = new HashSet<Search>(0);
     
     public Long getId() {
         return id;

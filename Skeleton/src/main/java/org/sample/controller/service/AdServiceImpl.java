@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.sample.controller.NominatimConnector;
 import org.sample.controller.pojos.AdForm;
 import org.sample.model.Coordinates;
 import org.sample.model.Picture;

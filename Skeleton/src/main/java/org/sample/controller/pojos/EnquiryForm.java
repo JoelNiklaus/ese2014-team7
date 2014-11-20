@@ -1,8 +1,6 @@
 package org.sample.controller.pojos;
 
 import java.sql.Timestamp;
-import java.util.Date;
-
 import org.sample.model.Ad;
 
 public class EnquiryForm {
@@ -12,7 +10,7 @@ public class EnquiryForm {
 	private Timestamp timestamp;
 	private Long enquiryId;
 	private Long senderId; 
-    private Long receiverId; 
+    private Long receiverId;
     private String messageText;
     private Ad ad;
     private long adId;

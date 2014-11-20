@@ -1,6 +1,5 @@
 package org.sample.controller.pojos;
 
-import org.sample.model.Ad;
 import org.sample.model.Enquiry;
 
 public class EnquiryRatingForm {

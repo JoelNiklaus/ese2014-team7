@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import org.sample.controller.exceptions.InvalidAdException;
 import org.sample.controller.pojos.EnquiryForm;
 import org.sample.controller.pojos.EnquiryRatingForm;
-import org.sample.model.Bookmark;
 import org.sample.model.Enquiry;
 import org.sample.model.EnquiryComparator;
 import org.sample.model.EnquiryComparatorRating;
@@ -20,9 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class EnquiryServiceImpl implements EnquiryService {
 	
-	@Autowired EnquiryDao enquiryDao;
 	@Autowired LoginService loginService;
 	@Autowired AdDao adDao;
+	@Autowired EnquiryDao enquiryDao;
 
 
 	@Transactional //TODO: throw exception for null Ads to load 404 in Enquiry controller
