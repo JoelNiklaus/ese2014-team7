@@ -55,6 +55,8 @@ public class EnquiryController {
 	 */
 	@RequestMapping("/sendEnquiry")
 	public ModelAndView createEnquiry(@RequestParam String id) {
+		assert loginService.getLoggedInUser() != null;
+		
 		ModelAndView model = new ModelAndView("enquiryMask");
 
 		if (loginService.getLoggedInUser() != null) {
@@ -104,6 +106,8 @@ public class EnquiryController {
 	@RequestMapping(value = "/submitEnquiry", method = RequestMethod.POST)
 	public ModelAndView submitEnquiry(@Valid EnquiryForm enquiryForm,
 			BindingResult result, RedirectAttributes redirectAttributes) {
+		assert loginService.getLoggedInUser() != null;
+		
 		ModelAndView model = new ModelAndView("enquiries");
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 
@@ -130,6 +134,8 @@ public class EnquiryController {
 	 */
 	@RequestMapping("/enquiries")
 	public ModelAndView showEnquiries() {
+		assert loginService.getLoggedInUser() != null;
+		
 		ModelAndView model = new ModelAndView("enquiries");
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 
@@ -146,7 +152,9 @@ public class EnquiryController {
 	 * @return		rating model, 404 of enquiry idinvalid
 	 */
 	@RequestMapping(value = "/rateEnquiry")
-	public ModelAndView rateEnquiry(@RequestParam long id) {
+	public ModelAndView rateEnquiry(@RequestParam Long id) {
+		assert loginService.getLoggedInUser() != null;
+		assert id != null;
 
 		ModelAndView model = new ModelAndView("rateEnquiry");
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
@@ -185,6 +193,9 @@ public class EnquiryController {
 	@RequestMapping(value = "/submitRating", method = RequestMethod.POST)
 	public ModelAndView submitRating(@Valid EnquiryRatingForm form,
 			BindingResult result, RedirectAttributes redirectAttributes) {
+		assert loginService.getLoggedInUser() != null;
+		assert form != null;
+		
 		ModelAndView model = new ModelAndView("enquiries");
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 
@@ -209,6 +220,9 @@ public class EnquiryController {
 	 */
 	@RequestMapping(value = "/removeEnquiry", method = RequestMethod.GET)
 	public ModelAndView removeEnquiry(@RequestParam String id) {
+		assert loginService.getLoggedInUser() != null;
+		assert id != null;
+		
 		ModelAndView model = showEnquiries();
 
 		try {

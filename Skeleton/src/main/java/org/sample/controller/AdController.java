@@ -50,6 +50,8 @@ public class AdController {
      */
     @RequestMapping(value = "/createAd", method = RequestMethod.POST)
     public ModelAndView createAd(@Valid AdForm adForm, BindingResult result, RedirectAttributes redirectAttributes, Principal principal, @RequestParam("image") MultipartFile[] files){
+    	assert loginService.getLoggedInUser() != null;
+    	assert adForm != null;
     	
 		PictureManager picmgr = new PictureManager();
 		String path = servletContext.getRealPath(PICTURE_LOCATION);
@@ -81,6 +83,8 @@ public class AdController {
      */
     @RequestMapping(value = "/createAd", method = RequestMethod.GET)
     public ModelAndView createAd() {
+    	assert loginService.getLoggedInUser() != null;
+    	
     	ModelAndView model = new ModelAndView("createAd");
 		model.addObject("adForm", new AdForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
@@ -95,7 +99,7 @@ public class AdController {
     @RequestMapping(value = "/adView", method = RequestMethod.GET)
     public ModelAndView adView() {
     	ModelAndView model = new ModelAndView("adView");
-    	model.addObject("adView",adService.adCatcher());
+    	model.addObject("adView", adService.adCatcher());
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	return model;
 

@@ -34,6 +34,8 @@ public class BookmarksController {
 	 */
 	@RequestMapping("/bookmarks")
 	public ModelAndView showBookmarks() {
+    	assert loginService.getLoggedInUser() != null;
+		
 		ModelAndView model = new ModelAndView("bookmarks");
 
 		User user = loginService.getLoggedInUser();
@@ -52,6 +54,9 @@ public class BookmarksController {
 	 */
 	@RequestMapping(value = "/removeBookmark", method = RequestMethod.GET)
 	public ModelAndView removeBookmark(@RequestParam String id) {
+    	assert loginService.getLoggedInUser() != null;
+    	assert id != null;
+
 		ModelAndView model = showBookmarks();
 
 		try {
@@ -81,6 +86,9 @@ public class BookmarksController {
 	 */
 	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)
 	public ModelAndView bookmark(@RequestParam String id) {
+    	assert loginService.getLoggedInUser() != null;
+    	assert id != null;
+
 		ModelAndView model = showBookmarks();
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 		

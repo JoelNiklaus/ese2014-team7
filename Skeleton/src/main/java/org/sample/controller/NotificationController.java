@@ -31,6 +31,8 @@ public class NotificationController {
 	 */
 	@RequestMapping("/notifications")
 	public ModelAndView showNotifications() {
+		assert loginService.getLoggedInUser() != null;
+		
 		ModelAndView model = new ModelAndView("notifications");
 
 		User user = loginService.getLoggedInUser();
@@ -47,6 +49,8 @@ public class NotificationController {
 	 */
 	@RequestMapping(value = "/removeNotification", method = RequestMethod.GET)
 	public ModelAndView removenotification(@RequestParam String id) {
+		assert loginService.getLoggedInUser() != null;
+		
 		ModelAndView model = showNotifications();
 
 		try {

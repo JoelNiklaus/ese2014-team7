@@ -14,8 +14,6 @@
 <form:form method="post" modelAttribute="forgotPasswordForm" action="forgot"
 	id="forgotPasswordForm" autocomplete="off">
 
-	<h4>ForgotPassword</h4>
-
 	<form:input class="form-control" path="email" maxlength="45"
 		placeholder="Email" />
 	<form:errors path="email" cssClass="help-inline" element="span" />
