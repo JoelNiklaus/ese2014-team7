@@ -19,6 +19,8 @@ public class BookmarkServiceImpl implements BookmarkService {
 
 	@Transactional
 	public Bookmark saveBookmark(Long adId) {
+		assert adDao.findOne(adId) != null;
+		
 		Bookmark bookmark = new Bookmark();
 
 		bookmark.setAdId(adId);
