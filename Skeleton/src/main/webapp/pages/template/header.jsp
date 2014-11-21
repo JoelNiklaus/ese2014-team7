@@ -37,7 +37,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="search">Brand</a>
+      <a class="navbar-brand" href="search">Home</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

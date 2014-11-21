@@ -1,5 +1,6 @@
 package org.sample.controller.service;
 
+import java.sql.Timestamp;
 import java.util.LinkedList;
 
 import org.sample.controller.pojos.SearchForm;
@@ -18,6 +19,9 @@ public class SearchServiceImpl implements SearchService {
 	@Autowired LoginService loginService;
 	@Autowired AdDao adDao;
 	@Autowired SearchDao searchDao;
+	
+	// one month
+	private static final int SEARCH_EXPIRING_PERIOD = 1000*60*60*24*30;
 	
 	public Iterable<Ad> computeSearchResults(SearchForm searchForm) {
 		Iterable<Ad> searchResults;
@@ -64,6 +68,7 @@ public class SearchServiceImpl implements SearchService {
 		
 		Search search = new Search(new Long(0), priceMin, priceMax, roomSizeMin, roomSizeMax, city);
 		search.setUserId(loginService.getLoggedInUser().getId());
+		search.setTimestamp(new Timestamp(System.currentTimeMillis()));
 
 		searchDao.save(search);
 
@@ -77,7 +82,9 @@ public class SearchServiceImpl implements SearchService {
 
 		for(Search s : allSearches)
 			if(s.getUserId().equals(loginService.getLoggedInUser().getId()))
-				results.add(s);
+				//display only searches which are newer than a constant.
+				if(s.getTimestamp().compareTo(new Timestamp(System.currentTimeMillis())) > SEARCH_EXPIRING_PERIOD)
+					results.add(s);
 
 		return (Iterable<Search>)results;
 	}

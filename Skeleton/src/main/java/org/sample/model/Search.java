@@ -1,5 +1,7 @@
 package org.sample.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,6 +11,8 @@ public class Search {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	private Timestamp timestamp;
 	
 	private Long priceMin;
 	private Long priceMax;
@@ -60,6 +64,12 @@ public class Search {
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 	
 	public Search() {
