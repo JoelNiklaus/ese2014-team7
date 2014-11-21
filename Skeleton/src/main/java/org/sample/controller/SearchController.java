@@ -31,6 +31,34 @@ public class SearchController {
 	SearchDao searchDao;
 	@Autowired
 	AdDao adDao;
+	
+	/**
+	 * Returns search model for a given search-template. Is also the home page!
+	 * 
+	 * @param searchId		id of search-template to be used
+	 * 
+	 * @return				search results for given template
+	 */
+	@RequestMapping(value = {"", "/", "/search"} , method = RequestMethod.GET)
+	public ModelAndView index(@RequestParam(value="searchId", required=false) String searchId) {
+		ModelAndView model = new ModelAndView("search");
+		model.addObject("searchForm", new SearchForm());
+		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		Iterable<Ad> searchResults = adDao.findAll();
+		Search searchAttributes;
+		
+		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
+		try{
+			searchAttributes = searchDao.findOne(Long.parseLong(searchId));
+			
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		model.addObject("searchAttributes", searchAttributes);
+		if(searchResults != null)
+			model.addObject("searchResults", searchResults);
+		return model;
+	}
 
 	/**
 	 * Assembles a model providing search functionality (specifying search criteria, displaying only ads
@@ -68,34 +96,6 @@ public class SearchController {
 		if(searchResults != null)
 			model.addObject("searchResults", searchResults);
 
-		return model;
-	}
-
-	/**
-	 * Returns search model for a given search-template.
-	 * 
-	 * @param searchId		id of search-template to be used
-	 * 
-	 * @return				search results for given template
-	 */
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView index(@RequestParam(value="searchId", required=false) String searchId) {
-		ModelAndView model = new ModelAndView("search");
-		model.addObject("searchForm", new SearchForm());
-		model.addObject("loggedInUser", loginService.getLoggedInUser());
-		Iterable<Ad> searchResults = adDao.findAll();
-		Search searchAttributes;
-		
-		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
-		try{
-			searchAttributes = searchDao.findOne(Long.parseLong(searchId));
-			
-		} catch(Exception e) {
-			System.out.println(e);
-		}
-		model.addObject("searchAttributes", searchAttributes);
-		if(searchResults != null)
-			model.addObject("searchResults", searchResults);
 		return model;
 	}
 	
