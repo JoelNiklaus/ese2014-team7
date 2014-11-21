@@ -37,6 +37,7 @@ public class NotificationController {
 
 		User user = loginService.getLoggedInUser();
 		model.addObject("notifications", notificationService.findNotifications(user));
+		notificationService.markAllNotificationsAsRead(user);
 		model.addObject("loggedInUser", user);
 		return model;
 	}

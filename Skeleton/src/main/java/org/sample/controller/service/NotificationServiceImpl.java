@@ -52,6 +52,7 @@ public class NotificationServiceImpl implements NotificationService {
 						if(result.equals(ad)) {
 							notification.setAdId(ad.getId());
 							notification.setUserId(user.getId());
+							notification.setUnread(true);
 							notificationDao.save(notification);
 							break;
 						}
@@ -61,10 +62,10 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Transactional
 	public Iterable<Notification> findNotifications(User user) {
-		Iterable<Notification> allnotifications = notificationDao.findAll();
+		Iterable<Notification> allNotifications = notificationDao.findAll();
 		LinkedList<Notification> results = new LinkedList<Notification>();
 
-		for(Notification n : allnotifications) {
+		for(Notification n : allNotifications) {
 			if(n.getUserId().equals(loginService.getLoggedInUser().getId())) {
 				n.setAd(adDao.findOne(n.getAdId()));
 				results.add(n);
@@ -79,6 +80,13 @@ public class NotificationServiceImpl implements NotificationService {
 		notificationDao.delete(notification);
 
 		return notification;
+	}
+
+	public void markAllNotificationsAsRead(User user) {
+		Iterable<Notification> allNotifications = findNotifications(user);
+		
+		for(Notification n : allNotifications)
+			n.setUnread(false);
 	}
 
 }

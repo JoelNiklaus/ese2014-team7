@@ -7,7 +7,7 @@ import javax.persistence.Transient;
 
 
 @Entity
-public class Notification{
+public class Notification {
 
 	@Id
     @GeneratedValue
@@ -15,6 +15,7 @@ public class Notification{
 
 	private Long adId;
 	private Long userId;
+	private Boolean unread;
 	
 	@Transient
 	private Ad ad;
@@ -43,5 +44,10 @@ public class Notification{
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-   
+	public Boolean getUnread() {
+		return unread;
+	}
+	public void setUnread(Boolean unread) {
+		this.unread = unread;
+	}
 }
