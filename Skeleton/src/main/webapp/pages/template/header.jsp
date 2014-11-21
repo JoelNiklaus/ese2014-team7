@@ -44,7 +44,6 @@ $(document).ready(function () {
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="search">Search</a></li>
-        <li><a href="map">Map</a></li>
         <c:if test="${not empty loggedInUser}">
 	        <li><a href="createAd">Create Ad</a></li>
 	        <li class="dropdown">
