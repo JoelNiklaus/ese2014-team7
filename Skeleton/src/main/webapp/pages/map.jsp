@@ -36,9 +36,9 @@
 	
 		var markers = L.markerClusterGroup({ spiderfyOnMaxZoom: true, showCoverageOnHover: true, zoomToBoundsOnClick: true });
 
-		function populate(lat, lon, shortDescriptoin) {
+		function populate(lat, lng, shortDescriptoin) {
 
-				var m = L.marker([lat,lon]);
+				var m = L.marker([lat,lng]);
 				m.bindPopup(shortDescriptoin);
 				markers.addLayer(m);
 	
@@ -72,8 +72,8 @@
 			map.addLayer(markers);
 		}
 		
-		function setMarker(lat, lon, shortDescriptoin) {
-			L.marker([lat,lon]).addTo(map)
+		function setMarker(lat, lng, shortDescriptoin) {
+			L.marker([lat,lng]).addTo(map)
 			    .bindPopup(shortDescriptoin);
 			    //.openPopup();
 		};
@@ -91,7 +91,7 @@
 	<c:if test="${not empty adList}">
 		<c:forEach var="ad" items="${adList}">
 			<script type="text/javascript">
-				populate("${ad.lat}","${ad.lon}","	<a class='pull-left' ><img class='media-object' src='/Skeleton/img/house1.jpeg' height='80px'></a><b>${ad.title}</b> <br /> ${ad.street} ${ad.houseNr} <br /> ${ad.city} ${ad.zip} <br /> <a href='ad?id=${ad.id}'>open</a>");
+				populate("${ad.lat}","${ad.lng}","	<a class='pull-left' ><img class='media-object' src='/Skeleton/img/house1.jpeg' height='80px'></a><b>${ad.title}</b> <br /> ${ad.street} ${ad.houseNr} <br /> ${ad.city} ${ad.zip} <br /> <a href='ad?id=${ad.id}'>open</a>");
 			</script>
 		</c:forEach>
 		<script type="text/javascript">
