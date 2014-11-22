@@ -35,6 +35,13 @@ public interface EnquiryService {
 	 * @return iterable of received enquiries
 	 */
     public Iterable<Enquiry> findNewReceivedEnquiries();
+    
+    /**
+     * Compiles an iterable of all new (=unrated) enquiries the user hasn't yet seen
+     * 
+     * @return iterable of unread enquiries
+     */
+    public Iterable<Enquiry> findUnreadEnquiries();
 
     /**
      * Submits the rating of an enquiry

@@ -44,6 +44,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 		enquiry.setSenderId(enquiryForm.getSenderId());
 		enquiry.setReceiverId(enquiryForm.getReceiverId());
 		enquiry.setMessageText(enquiryForm.getMessageText());
+		enquiry.setUnread(true);
 		
 		enquiryDao.save(enquiry);
 		
@@ -76,12 +77,12 @@ public class EnquiryServiceImpl implements EnquiryService {
 	
 	@Transactional
 	public Iterable<Enquiry> findNewReceivedEnquiries() {
-		Iterable<Enquiry> allEnquiries = enquiryDao.findAll();
+		Iterable<Enquiry> allEnquiries = findUnratedEnquiriesByUser();
 		LinkedList<Enquiry> results = new LinkedList<Enquiry>();
 		
 		for(Enquiry e : allEnquiries)
 		{
-			if((e.getReceiverId().equals(loginService.getLoggedInUser().getId())) && e.getRating() == 0)
+			if(!e.isUnread())
 			{
 				e.setAd(adDao.findOne(e.getAdId()));
 				results.add(e);
@@ -134,6 +135,57 @@ public class EnquiryServiceImpl implements EnquiryService {
 		enquiryDao.delete(enquiry);
 		
 		return enquiry;
+	}
+
+
+	@Transactional
+	public Iterable<Enquiry> findUnreadEnquiries() {
+		Iterable<Enquiry> allEnquiries = findUnratedEnquiriesByUser();
+		LinkedList<Enquiry> results = new LinkedList<Enquiry>();
+		
+		for(Enquiry e : allEnquiries)
+		{
+			if(e.isUnread())
+			{
+				e.setAd(adDao.findOne(e.getAdId()));
+				results.add(e);
+			}
+		}
+		
+		Collections.sort(results, new EnquiryComparatorRating());
+		markEnquiriesAsRead(results);
+		
+		return (Iterable<Enquiry>)results;
+	}
+	
+	private Iterable<Enquiry> findUnratedEnquiriesByUser()
+	{
+		Iterable<Enquiry> allEnquiries = enquiryDao.findAll();
+		LinkedList<Enquiry> results = new LinkedList<Enquiry>();
+		
+		for(Enquiry e : allEnquiries)
+		{
+			if((e.getReceiverId().equals(loginService.getLoggedInUser().getId())) && e.getRating() == 0)
+			{
+				e.setAd(adDao.findOne(e.getAdId()));
+				results.add(e);
+			}
+		}
+		
+		Collections.sort(results, new EnquiryComparatorRating());
+		
+		return (Iterable<Enquiry>)results;
+	}
+	
+	@Transactional
+	private void markEnquiriesAsRead(Iterable<Enquiry> enquiries)
+	{
+		for(Enquiry e : enquiries)
+		{
+			System.out.println("saving...");
+			e.setUnread(false);
+			enquiryDao.save(e);
+		}	
 	}
 
 }

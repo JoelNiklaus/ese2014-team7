@@ -15,6 +15,25 @@
 
 <h2>Inbox</h2>
 <p>${newEmpty}</p>
+<c:forEach items="${unreadEnquiries}" var="enquiry">
+	<div class="panel panel-info" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
+		
+			<div class="panel-heading">
+				<h5>${enquiry.ad.title}</h5>
+				<a class="btn btn-danger" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
+			</div>
+			<div class="panel-body" >
+				<a class="pull-left" >
+		    		<img class="media-object" src="/Skeleton/img/<c:out value="${enquiry.ad.street}${enquiry.ad.houseNr}.jpeg"/>" height="100px">
+		  		</a>
+		  		<p>${enquiry.messageText}</p>
+		  		
+			</div>		
+			
+			<div class="panel-footer"><b>This enquiry has not yet been rated</b> (click on enquiry to rate it)</div>
+		</div>
+</c:forEach>
+
 <c:forEach items="${newReceivedEnquiries}" var="enquiry">
 	<div class="panel panel-primary" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
 		

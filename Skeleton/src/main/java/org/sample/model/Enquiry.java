@@ -21,6 +21,7 @@ public class Enquiry{
     private Long receiverId;
     private String messageText;
     private int rating;
+    private boolean unread;
     
     @Transient
     private Ad ad;
@@ -88,6 +89,14 @@ public class Enquiry{
 
 	public void setRating(int rating) {
 		this.rating = rating;
+	}
+
+	public boolean isUnread() {
+		return unread;
+	}
+
+	public void setUnread(boolean unread) {
+		this.unread = unread;
 	}
 	
 }

@@ -245,26 +245,22 @@ public class EnquiryController {
 
 
 	private void enquiryViewAddModelAttributes(ModelAndView model) {
-		Iterable<Enquiry> newReceivedEnquiries = enquiryService
-				.findNewReceivedEnquiries();
-		Iterable<Enquiry> ratedReceivedEnquiries = enquiryService
-				.findRatedReceivedEnquiries();
+		Iterable<Enquiry> newReceivedEnquiries = enquiryService.findNewReceivedEnquiries();
+		Iterable<Enquiry> ratedReceivedEnquiries = enquiryService.findRatedReceivedEnquiries();
 		Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
+		Iterable<Enquiry> unreadEnquiries = enquiryService.findUnreadEnquiries();
 
-		addEmptyMessages(model, newReceivedEnquiries, ratedReceivedEnquiries,
-				sentEnquiries);
+		addEmptyMessages(model, newReceivedEnquiries, ratedReceivedEnquiries, sentEnquiries, unreadEnquiries);
 
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 		model.addObject("newReceivedEnquiries", newReceivedEnquiries);
 		model.addObject("ratedReceivedEnquiries", ratedReceivedEnquiries);
 		model.addObject("sentEnquiries", sentEnquiries);
+		model.addObject("unreadEnquiries", unreadEnquiries);
 	}
 
-	private void addEmptyMessages(ModelAndView model,
-			Iterable<Enquiry> newReceivedEnquiries,
-			Iterable<Enquiry> ratedReceivedEnquiries,
-			Iterable<Enquiry> sentEnquiries) {
-		if (!newReceivedEnquiries.iterator().hasNext())
+	private void addEmptyMessages(ModelAndView model, Iterable<Enquiry> newReceivedEnquiries, Iterable<Enquiry> ratedReceivedEnquiries, Iterable<Enquiry> sentEnquiries, Iterable<Enquiry> unreadEnquiries) {
+		if (!newReceivedEnquiries.iterator().hasNext() && !unreadEnquiries.iterator().hasNext())
 			model.addObject("newEmpty", "No new enquiries");
 
 		if (!ratedReceivedEnquiries.iterator().hasNext())
