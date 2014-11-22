@@ -47,18 +47,12 @@ $(document).ready(function () {
         <c:if test="${not empty loggedInUser}">
 	        <li><a href="createAd">Create Ad</a></li>
 	        <li class="dropdown">
-	          <a href="profile" class="dropdown-toggle" data-toggle="dropdown">Profile <span class="caret"></span></a>
-	          <ul class="dropdown-menu" role="menu">
-	            <li><a href="profile">Settings</a></li>
-	            <li class="divider"></li>
-	            <li><a href="enquiries">Enquiries</a></li>
-	            <li><a href="bookmarks">Bookmarks</a></li>
-	            <li><a href="searches">Searches</a></li>
-	            <li><a href="notifications">Notifications</a></li>
-	            <!-- <li class="divider"></li> -->
-	            <!-- <a href="ad?id=1">Ads</a></li> --><li>
-	          </ul>
-	        </li>
+	        <li><a href="profile">Settings</a></li>
+	        <li class="divider"></li>
+	        <li><a href="enquiries">Enquiries</a></li>
+	        <li><a href="bookmarks">Bookmarks</a></li>
+	        <li><a href="searches">Searches</a></li>
+	        <li><a href="notifications">Notifications</a></li>
         </c:if>
       </ul>
       
