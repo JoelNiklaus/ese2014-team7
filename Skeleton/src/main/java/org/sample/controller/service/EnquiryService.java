@@ -58,4 +58,6 @@ public interface EnquiryService {
      * @return
      */
     public Enquiry removeEnquiry(Enquiry enquiry);
+    
+    public void updateNumberOfUnreadEnquiries();
 }

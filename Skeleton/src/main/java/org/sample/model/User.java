@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,6 +36,13 @@ public class User implements UserDetails{
 
     private String email;
     private String password; 
+    
+    @Transient
+    private int numUnreadEnquiries;
+
+	@Transient
+    private int numUnreadNotifications;
+    
     
     @OneToOne(cascade = {CascadeType.ALL}) //TODO: @Silas: what does this do?
     private Address address; 
@@ -104,6 +112,23 @@ public class User implements UserDetails{
 
 		return email;
 	}
+	
+	
+	 public int getNumUnreadEnquiries() {
+			return numUnreadEnquiries;
+		}
+
+		public void setNumUnreadEnquiries(int unreadEnquiries) {
+			this.numUnreadEnquiries = unreadEnquiries;
+		}
+
+		public int getNumUnreadNotifications() {
+			return numUnreadNotifications;
+		}
+
+		public void setNumUnreadNotifications(int unreadNotifications) {
+			this.numUnreadNotifications = unreadNotifications;
+		}
 
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
@@ -124,6 +149,8 @@ public class User implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	
     
 	
 	

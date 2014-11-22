@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SearchForm;
+import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.SearchService;
 import org.sample.model.Ad;
@@ -31,6 +32,8 @@ public class SearchController {
 	SearchDao searchDao;
 	@Autowired
 	AdDao adDao;
+	@Autowired
+	EnquiryService enquiryService;
 	
 	/**
 	 * Returns search model for a given search-template. Is also the home page!
@@ -57,6 +60,9 @@ public class SearchController {
 		model.addObject("searchAttributes", searchAttributes);
 		if(searchResults != null)
 			model.addObject("searchResults", searchResults);
+		
+		enquiryService.updateNumberOfUnreadEnquiries();
+		
 		return model;
 	}
 

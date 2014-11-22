@@ -182,10 +182,28 @@ public class EnquiryServiceImpl implements EnquiryService {
 	{
 		for(Enquiry e : enquiries)
 		{
-			System.out.println("saving...");
 			e.setUnread(false);
 			enquiryDao.save(e);
 		}	
+		
+		loginService.getLoggedInUser().setNumUnreadEnquiries(0);
+	}
+	
+	public void updateNumberOfUnreadEnquiries()
+	{
+		
+		if(loginService.getLoggedInUser() != null)
+		{
+			Iterable<Enquiry> allEnquiries = findUnratedEnquiriesByUser();
+			int numOfUnread = 0;
+			
+			for(Enquiry e : allEnquiries)
+				if(e.isUnread())
+					numOfUnread++;
+			
+			System.out.println("Updating: " + numOfUnread + " found;");
+			//TODO: make login form from user, save current new notifications to DB
+		}
 	}
 
 }
