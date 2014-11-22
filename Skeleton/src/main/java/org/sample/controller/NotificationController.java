@@ -20,9 +20,9 @@ public class NotificationController {
 	@Autowired
 	NotificationService notificationService;
 	@Autowired
-	AdDao adRepository;
+	AdDao adDao;
 	@Autowired
-	NotificationDao notificationRepository;
+	NotificationDao notificationDao;
 
 	/**
 	 * Creates a model displaying user's notifications
@@ -31,10 +31,13 @@ public class NotificationController {
 	 */
 	@RequestMapping("/notifications")
 	public ModelAndView showNotifications() {
+		assert loginService.getLoggedInUser() != null;
+		
 		ModelAndView model = new ModelAndView("notifications");
 
 		User user = loginService.getLoggedInUser();
 		model.addObject("notifications", notificationService.findNotifications(user));
+		notificationService.markAllNotificationsAsRead(user);
 		model.addObject("loggedInUser", user);
 		return model;
 	}
@@ -47,11 +50,13 @@ public class NotificationController {
 	 */
 	@RequestMapping(value = "/removeNotification", method = RequestMethod.GET)
 	public ModelAndView removenotification(@RequestParam String id) {
+		assert loginService.getLoggedInUser() != null;
+		
 		ModelAndView model = showNotifications();
 
 		try {
 			long notificationId = Long.parseLong(id);
-			Notification notification = notificationRepository.findOne(notificationId);
+			Notification notification = notificationDao.findOne(notificationId);
 
 			User user = loginService.getLoggedInUser();
 			notificationService.removeNotification(notification);

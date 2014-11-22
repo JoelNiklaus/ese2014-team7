@@ -1,8 +1,6 @@
 package org.sample.controller.service;
 
-import org.sample.controller.pojos.EnquiryForm;
 import org.sample.model.Bookmark;
-import org.sample.model.Enquiry;
 import org.sample.model.User;
 
 public interface BookmarkService {

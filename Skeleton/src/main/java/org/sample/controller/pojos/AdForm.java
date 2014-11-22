@@ -34,6 +34,9 @@ public class AdForm {
 	private String us;
 	private String you;
 	
+	private String lat;
+	private String lng;
+	
 	private String img_one;
 	/*
 	private String img_two;
@@ -168,6 +171,18 @@ public class AdForm {
 	}
 	public void setPlacerId(Long placerId) {
 		this.placerId = placerId;
+	}
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public String getLng() {
+		return lng;
+	}
+	public void setLng(String lng) {
+		this.lng = lng;
 	}
 	
 

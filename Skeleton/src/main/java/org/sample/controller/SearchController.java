@@ -24,13 +24,41 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class SearchController {
 
 	@Autowired
-	AdDao adRepository;
-	@Autowired
 	LoginService loginService;
 	@Autowired
 	SearchService searchService;
 	@Autowired
-	SearchDao searchRepository;
+	SearchDao searchDao;
+	@Autowired
+	AdDao adDao;
+	
+	/**
+	 * Returns search model for a given search-template. Is also the home page!
+	 * 
+	 * @param searchId		id of search-template to be used
+	 * 
+	 * @return				search results for given template
+	 */
+	@RequestMapping(value = {"", "/", "/search"} , method = RequestMethod.GET)
+	public ModelAndView index(@RequestParam(value="searchId", required=false) String searchId) {
+		ModelAndView model = new ModelAndView("search");
+		model.addObject("searchForm", new SearchForm());
+		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		Iterable<Ad> searchResults = adDao.findAll();
+		Search searchAttributes;
+		
+		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
+		try{
+			searchAttributes = searchDao.findOne(Long.parseLong(searchId));
+			
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		model.addObject("searchAttributes", searchAttributes);
+		if(searchResults != null)
+			model.addObject("searchResults", searchResults);
+		return model;
+	}
 
 	/**
 	 * Assembles a model providing search functionality (specifying search criteria, displaying only ads
@@ -46,82 +74,28 @@ public class SearchController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)    
 	public ModelAndView search(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){
 
-
-		Long priceMin = searchForm.getPriceMinAsLong();
-		Long priceMax = searchForm.getPriceMaxAsLong();
-		Long roomSizeMin = searchForm.getRoomSizeMinAsLong();
-		Long roomSizeMax = searchForm.getRoomSizeMaxAsLong();
-		String city = searchForm.getCity();
-		Iterable<Ad> searchResults;
-
 		ModelAndView model = new ModelAndView("search");
 		Search searchAttributes;
+		
 		if(searchId != null){
 			searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
 		} else {
-
+			Long priceMin = searchForm.getPriceMinAsLong();
+			Long priceMax = searchForm.getPriceMaxAsLong();
+			Long roomSizeMin = searchForm.getRoomSizeMinAsLong();
+			Long roomSizeMax = searchForm.getRoomSizeMaxAsLong();
+			String city = searchForm.getCity();
 			searchAttributes = new Search(new Long(0), priceMin, priceMax, roomSizeMin, roomSizeMax, city);
-
 		}
-		model.addObject("loggedInUser", loginService.getLoggedInUser());
-		model.addObject("searchAttributes", searchAttributes);
-
-
-
-		//TODO Replace magic Number by config file
-		if(city.equals("")){
-			if(priceMax == 3000){
-				searchResults = adRepository.findByRentGreaterThanAndRoomSizeBetween(priceMin-1, roomSizeMin, roomSizeMax);
-			} else if(roomSizeMax==300){
-				searchResults = adRepository.findByRentBetweenAndRoomSizeGreaterThan(priceMin, priceMax, roomSizeMin-1);
-			} else if((roomSizeMax == 300) && (priceMax == 3000)){
-				searchResults = adRepository.findByRentGreaterThanAndRoomSizeGreaterThan(priceMin, roomSizeMin);
-			} else {
-				searchResults = adRepository.findByRentBetweenAndRoomSizeBetween(priceMin, priceMax, roomSizeMin, roomSizeMax);
-			}
-		} else {
-			if(priceMax == 3000){
-				searchResults = adRepository.findByRentGreaterThanAndRoomSizeBetweenAndCityLike(priceMin, roomSizeMin, roomSizeMax, city);
-			} else if(roomSizeMax==300){
-				searchResults = adRepository.findByRentBetweenAndRoomSizeGreaterThanAndCityLike(priceMin, priceMax, roomSizeMin, city);
-			} else if((roomSizeMax == 300) && (priceMax == 3000)){
-				searchResults = adRepository.findByRentGreaterThanAndRoomSizeGreaterThanAndCityLike(priceMin, roomSizeMin, city);
-			} else {
-				searchResults = adRepository.findByRentBetweenAndRoomSizeBetweenAndCityLike(priceMin, priceMax, roomSizeMin, roomSizeMax, city);
-			}
-		}
-
-		if(searchResults != null)
-			model.addObject("searchResults", searchResults);
-
-		return model;
-	}
-
-	/**
-	 * Returns search model for a given search-template.
-	 * 
-	 * @param searchId		id of search-template to be used
-	 * 
-	 * @return				search results for given template
-	 */
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView index(@RequestParam(value="searchId",required=false) String searchId) {
-		ModelAndView model = new ModelAndView("search");
-		model.addObject("searchForm", new SearchForm());
-		model.addObject("loggedInUser", loginService.getLoggedInUser());
-		Iterable<Ad> searchResults = adRepository.findAll();
-		Search searchAttributes;
 		
-		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
-		try{
-			searchAttributes = searchRepository.findOne(Long.parseLong(searchId));
-			
-		} catch(Exception e) {
-			System.out.println(e);
-		}
+		model.addObject("loggedInUser", loginService.getLoggedInUser());
 		model.addObject("searchAttributes", searchAttributes);
+
+		Iterable<Ad> searchResults = searchService.computeSearchResults(searchForm);
+
 		if(searchResults != null)
 			model.addObject("searchResults", searchResults);
+
 		return model;
 	}
 	
@@ -136,6 +110,8 @@ public class SearchController {
 	 */
 	@RequestMapping(value = "/saveSearch", method = RequestMethod.POST)    
 	public ModelAndView saveSearch(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){
+		assert loginService.getLoggedInUser() != null;
+		
 		ModelAndView model = search(searchForm, result, redirectAttributes, searchId);
 		String message = "";
 		
@@ -162,6 +138,8 @@ public class SearchController {
 
 	@RequestMapping("/searches")
 	public ModelAndView searches() {
+		assert loginService.getLoggedInUser() != null;
+		
 		ModelAndView model = new ModelAndView("searches");
 
 		User user = loginService.getLoggedInUser();
@@ -173,11 +151,14 @@ public class SearchController {
 
 	@RequestMapping(value = "/removeSearch", method = RequestMethod.GET)
 	public ModelAndView removeSearch(@RequestParam String id) {
+		assert loginService.getLoggedInUser() != null;
+		assert id != null;
+		
 		ModelAndView model = searches();
 
 		try {
 			long searchId = Long.parseLong(id);
-			Search search = searchRepository.findOne(searchId);
+			Search search = searchDao.findOne(searchId);
 
 			User user = loginService.getLoggedInUser();
 			searchService.removeSearch(search);

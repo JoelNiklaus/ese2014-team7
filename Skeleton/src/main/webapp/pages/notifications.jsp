@@ -11,8 +11,12 @@
 ${message}
 
 <c:forEach items="${notifications}" var="notification">
-	<div class="panel panel-primary"
-		onclick="javascript:location.href='ad?id=${notification.adId}'">
+	<c:if test="${notification.unread}">
+		<div class="panel panel-info" onclick="javascript:location.href='ad?id=${notification.adId}'">
+	</c:if>
+	<c:if test="${not notification.unread}">
+		<div class="panel panel-default" onclick="javascript:location.href='ad?id=${notification.adId}'">
+	</c:if>
 
 		<div class="panel-heading">
 			<h5>${notification.ad.title}</h5>

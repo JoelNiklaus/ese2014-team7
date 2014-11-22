@@ -1,4 +1,4 @@
-package org.sample.controller;
+package org.sample.controller.service;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

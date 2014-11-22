@@ -1,8 +1,10 @@
 package org.sample.controller.service;
 
+import java.sql.Timestamp;
 import java.util.LinkedList;
 
 import org.sample.controller.pojos.SearchForm;
+import org.sample.model.Ad;
 import org.sample.model.Search;
 import org.sample.model.User;
 import org.sample.model.dao.AdDao;
@@ -14,9 +16,47 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SearchServiceImpl implements SearchService {
 
-	@Autowired SearchDao SearchDao;
 	@Autowired LoginService loginService;
 	@Autowired AdDao adDao;
+	@Autowired SearchDao searchDao;
+	
+	// one month
+	private static final int SEARCH_EXPIRING_PERIOD = 1000*60*60*24*30;
+	
+	public Iterable<Ad> computeSearchResults(SearchForm searchForm) {
+		Iterable<Ad> searchResults;
+		
+		Long priceMin = searchForm.getPriceMinAsLong();
+		Long priceMax = searchForm.getPriceMaxAsLong();
+		Long roomSizeMin = searchForm.getRoomSizeMinAsLong();
+		Long roomSizeMax = searchForm.getRoomSizeMaxAsLong();
+		String city = searchForm.getCity();
+		
+		//TODO Replace magic Number by config file
+		if(city.equals("")){
+			if(priceMax == 3000){
+				searchResults = adDao.findByRentGreaterThanAndRoomSizeBetween(priceMin-1, roomSizeMin, roomSizeMax);
+			} else if(roomSizeMax==300){
+				searchResults = adDao.findByRentBetweenAndRoomSizeGreaterThan(priceMin, priceMax, roomSizeMin-1);
+			} else if((roomSizeMax == 300) && (priceMax == 3000)){
+				searchResults = adDao.findByRentGreaterThanAndRoomSizeGreaterThan(priceMin, roomSizeMin);
+			} else {
+				searchResults = adDao.findByRentBetweenAndRoomSizeBetween(priceMin, priceMax, roomSizeMin, roomSizeMax);
+			}
+		} else {
+			if(priceMax == 3000){
+				searchResults = adDao.findByRentGreaterThanAndRoomSizeBetweenAndCityLike(priceMin, roomSizeMin, roomSizeMax, city);
+			} else if(roomSizeMax==300){
+				searchResults = adDao.findByRentBetweenAndRoomSizeGreaterThanAndCityLike(priceMin, priceMax, roomSizeMin, city);
+			} else if((roomSizeMax == 300) && (priceMax == 3000)){
+				searchResults = adDao.findByRentGreaterThanAndRoomSizeGreaterThanAndCityLike(priceMin, roomSizeMin, city);
+			} else {
+				searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityLike(priceMin, priceMax, roomSizeMin, roomSizeMax, city);
+			}
+		}
+		
+		return searchResults;
+	}
 
 	@Transactional
 	public Search saveSearch(SearchForm searchForm) {
@@ -28,20 +68,23 @@ public class SearchServiceImpl implements SearchService {
 		
 		Search search = new Search(new Long(0), priceMin, priceMax, roomSizeMin, roomSizeMax, city);
 		search.setUserId(loginService.getLoggedInUser().getId());
+		search.setTimestamp(new Timestamp(System.currentTimeMillis()));
 
-		SearchDao.save(search);
+		searchDao.save(search);
 
 		return search;
 	}
 
 	@Transactional
 	public Iterable<Search> findSearches(User user) {
-		Iterable<Search> allSearches = SearchDao.findAll();
+		Iterable<Search> allSearches = searchDao.findAll();
 		LinkedList<Search> results = new LinkedList<Search>();
 
 		for(Search s : allSearches)
 			if(s.getUserId().equals(loginService.getLoggedInUser().getId()))
-				results.add(s);
+				//display only searches which are newer than a constant.
+				if(s.getTimestamp().compareTo(new Timestamp(System.currentTimeMillis())) > SEARCH_EXPIRING_PERIOD)
+					results.add(s);
 
 		return (Iterable<Search>)results;
 	}
@@ -60,7 +103,7 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Transactional
 	public Search removeSearch(Search Search) {
-		SearchDao.delete(Search);
+		searchDao.delete(Search);
 		
 		return Search;
 	}

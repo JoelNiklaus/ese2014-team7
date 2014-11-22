@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.sample.controller.NominatimConnector;
 import org.sample.controller.pojos.AdForm;
 import org.sample.model.Coordinates;
 import org.sample.model.Picture;
@@ -30,16 +29,7 @@ public class AdServiceImpl implements AdService {
 	public AdForm saveFrom(AdForm adForm) {
 	    
     	Ad ad = new Ad();
-    	Coordinates coordinates;
-		try {
-			coordinates = NominatimConnector.getCoordinatesFromAddress(adForm.getStreet(), adForm.getHouseNr().toString(), adForm.getCity(), adForm.getZip().toString());
-		    ad.setLon(coordinates.getLon());
-		    ad.setLat(coordinates.getLat());
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		} 
-		
+
 		//Pictures
 		Set<Picture> pictures = new HashSet<Picture>();
 		Picture pic1 = new Picture();
@@ -93,7 +83,8 @@ public class AdServiceImpl implements AdService {
 	    ad.setDescription(adForm.getDescription());
 	    ad.setUs(adForm.getUs());
 	    ad.setYou(adForm.getYou());
-
+	    ad.setLat(adForm.getLat());
+	    ad.setLng(adForm.getLng());
 	    ad = adDao.save(ad);
 	    
 		// Ad successfully saved to DB

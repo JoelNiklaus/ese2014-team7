@@ -39,7 +39,7 @@ public class Ad {
 	private String us;
 	private String you;
 	private String lat;
-	private String lon;
+	private String lng;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private Set<Picture> pictures;
@@ -197,12 +197,12 @@ public class Ad {
 		this.lat = lat;
 	}
 
-	public String getLon() {
-		return lon;
+	public String getLng() {
+		return lng;
 	}
 
-	public void setLon(String lon) {
-		this.lon = lon;
+	public void setLng(String lng) {
+		this.lng = lng;
 	}
 
 	public Long getPlacerId() {

@@ -20,7 +20,7 @@
 
 		<div class="panel-heading">
 			<h5>${bookmark.ad.title}</h5>
-			<a class="btn btn-primary" href="removeBookmark?id=${bookmark.bookmarkId}">remove Bookmark</a>
+			<a class="btn btn-danger" href="removeBookmark?id=${bookmark.bookmarkId}">remove Bookmark</a>
 		</div>
 		<div class="panel-body">
 			<a class="pull-left"> <img class="media-object"

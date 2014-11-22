@@ -1,7 +1,6 @@
 package org.sample.controller.service;
 
 import org.sample.controller.exceptions.InvalidUserException;
-import org.sample.controller.pojos.AdForm;
 import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;

@@ -6,10 +6,11 @@
 
 <c:import url="template/header.jsp" />
 
-	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<!--  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
 	<script src="/Skeleton/lib/noUiSlider/jquery.nouislider.js"></script>
 	<script src="/Skeleton/lib/noUiSlider/jquery.liblink.js"></script>
-	<script src="/Skeleton/lib/noUiSlider/wNumb.js"></script>
+	<script src="/Skeleton/lib/noUiSlider/wNumb.js"></script>	
+
 	<link href="/Skeleton/lib/noUiSlider/jquery.nouislider.css" rel="stylesheet">
 
 	<style>
@@ -49,8 +50,13 @@
 		.roomSizeSliderTooltip strong {
 			display: block;
 			padding: 2px;
-	  	}
+	  	}		
+	  	div#map{
+			width:100%;
+			height:450px;
+		}
 	</style>
+
 	<div class="panel">
 	<h2 class="form-heading">Search</h2>
 	<c:if test="${not empty message}">
@@ -61,7 +67,6 @@
 	<br />
 	<br />
 	
-
 	<form:form method="post" modelAttribute="searchForm" id="searchForm" cssClass="form-horizontal" autocomplete="off">
 		<fieldset>
 			<div class="row">
@@ -96,29 +101,46 @@
 	</form:form>
 	</div>
 	<br>
-
-	<c:forEach items="${searchResults}" var="ad">
-		<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${ad.id}'">
+	<div role="tabpanel">
+		<ul class="nav nav-tabs" role="tablist" id="myTab">
+	  		<li role="presentation"><a href="#listTab">List</a></li>
+	  		<li role="presentation"><a href="#mapTab">Map</a></li>
+		</ul>
 		
-			<div class="panel-heading"><h5>${ad.title}</h5></div>
-			<div class="panel-body" >
-				<a class="pull-left" >
-		    		<img class="media-object" src="/Skeleton/img/<c:out value="${ad.street}${ad.houseNr}.jpeg"/>" height="100px">
-		  		</a>
-		  		<p>${ad.description}</p>
-				
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="mapTab">
+				<div class="well well-sm"><div id="map"></div></div>
 			</div>
-				
-			<div class="panel-footer"><b>Area: </b>${ad.city},  <b>Price:</b> CHF ${ad.rent},  <b>Room Size:</b> ${ad.roomSize}m²,  <b>Posted: </b>${ad.postingDateFormatted}</div>
+			
+			<div role="tabpanel" class="tab-pane"  id="listTab">
+				<c:forEach items="${searchResults}" var="ad">
+					<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${ad.id}'">
+					
+						<div class="panel-heading"><h5>${ad.title}</h5></div>
+						<div class="panel-body" >
+							<a class="pull-left" >
+					    		<img class="media-object" src="/Skeleton/img/<c:out value="${ad.street}${ad.houseNr}.jpeg"/>" height="100px">
+					  		</a>
+					  		<p>${ad.description}</p>
+							${ad.lat}
+						</div>
+							
+						<div class="panel-footer"><b>Area: </b>${ad.city},  <b>Price:</b> CHF ${ad.rent},  <b>Room Size:</b> ${ad.roomSize}m²,  <b>Posted: </b>${ad.postingDateFormatted}</div>
+					</div>
+				</c:forEach>
+			</div>
+
 		</div>
-	</c:forEach>
-		
+	</div>
+	
+	<div id="tabid"></div>
+			
+
 	<script>
 	/**
 	 * Search Sliders 
 	 *
 	 */
-	 
 		$("#priceSlider").noUiSlider({
 			start: [0, 3000],
 			behaviour: 'drag-tap',
@@ -228,10 +250,109 @@
 			$("#roomSizeSlider").val(["${searchAttributes.roomSizeMin}","${searchAttributes.roomSizeMax}"]);
 			$("#field-city").val("${searchAttributes.city}");
 		});
+		
+
 	</script>		
+	
+		<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/leaflet.css" />
+	<link rel="stylesheet" href="/Skeleton/css/Control.Geocoder.css" />
+	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/MarkerCluster.css" />
+	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/MarkerCluster.Default.css" />
+	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/Control.Geocoder.css" />
 
-	 	
 
+	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.js"></script>
+	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.markercluster.js"></script>
+	<script src="/Skeleton/lib/leaflet-0.7.3/Control.Geocoder.js"></script>
+		<script type="text/javascript">
+	
+		// create a map in the "map" div, set the view to a given place and zoom
+		var map = L.map('map', {center: [46.9467726,7.4442328], zoom: 8});
+		L.Control.geocoder().addTo(map);
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
+	
+		var markers = L.markerClusterGroup({ spiderfyOnMaxZoom: true, showCoverageOnHover: true, zoomToBoundsOnClick: true });
+
+		function populate(lat, lng, shortDescriptoin) {
+
+				var m = L.marker([lat,lng]);
+				m.bindPopup(shortDescriptoin);
+				markers.addLayer(m);
+	
+			return;
+		}
+
+		var polygon;
+		markers.on('clustermouseover', function (a) {
+			if (polygon) {
+				map.removeLayer(polygon);
+			}
+			polygon = L.polygon(a.layer.getConvexHull());
+			map.addLayer(polygon);
+		});
+
+		markers.on('clustermouseout', function (a) {
+			if (polygon) {
+				map.removeLayer(polygon);
+				polygon = null;
+			}
+		});
+
+		map.on('zoomend', function () {
+			if (polygon) {
+				map.removeLayer(polygon);
+				polygon = null;
+			}
+		});
+
+		function addMarkerLayer(){
+			map.addLayer(markers);
+		}
+		
+		function setMarker(lat, lng, shortDescriptoin) {
+			L.marker([lat,lng]).addTo(map)
+			    .bindPopup(shortDescriptoin);
+			    //.openPopup();
+		};
+
+		// center marker on click
+		map.on('popupopen', function(e) {
+		    var px = map.project(e.popup._latlng);
+		    px.y -= e.popup._container.clientHeight/2
+		    map.panTo(map.unproject(px),{animate: true});
+
+		});
+			
+	</script>
+
+	<script>
+	
+	$('#myTab a[href="#mapTab"]').click(function (e) {
+		  e.preventDefault()
+		  $(this).tab('show')
+		});
+	$('#myTab a[href="#listTab"]').click(function (e) {
+		  e.preventDefault()
+		  $(this).tab('show')
+		});
+	
+	$( document ).ready(function() {
+		$('#myTab a[href="#listTab"]').tab('show');
+		});
+	</script>
+		
+	<c:if test="${not empty searchResults}">
+		<c:forEach var="ad" items="${searchResults}">
+			<script type="text/javascript">
+				populate("${ad.lat}","${ad.lng}","	<a class='pull-left' ><img class='media-object' src='/Skeleton/img/house1.jpeg' height='80px'></a><b>${ad.title}</b> <br /> ${ad.street} ${ad.houseNr} <br /> ${ad.city} ${ad.zip} <br /> <a href='ad?id=${ad.id}'>open</a>");
+			</script>
+		</c:forEach>
+		<script type="text/javascript">
+			addMarkerLayer();
+		</script>
+	</c:if>
 	<c:if test="${page_error != null }">
         <div class="alert alert-error">
             <button type="button" class="close" data-dismiss="alert">&times;</button>

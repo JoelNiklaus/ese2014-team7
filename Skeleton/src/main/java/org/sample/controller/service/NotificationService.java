@@ -29,5 +29,11 @@ public interface NotificationService {
 	 * @return
 	 */
 	public Notification removeNotification(Notification notification);
+
+	/**
+	 * Sets all Notifications of a user to read state.
+	 * @param user
+	 */
+	public void markAllNotificationsAsRead(User user);
 	
 }

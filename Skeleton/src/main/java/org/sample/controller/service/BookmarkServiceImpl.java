@@ -1,18 +1,11 @@
 package org.sample.controller.service;
 
-import java.sql.Timestamp;
-import java.util.Collections;
 import java.util.LinkedList;
 
-import org.sample.controller.exceptions.InvalidAdException;
-import org.sample.controller.pojos.EnquiryForm;
 import org.sample.model.Bookmark;
-import org.sample.model.Enquiry;
-import org.sample.model.EnquiryComparator;
 import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.sample.model.dao.BookmarkDao;
-import org.sample.model.dao.EnquiryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +19,8 @@ public class BookmarkServiceImpl implements BookmarkService {
 
 	@Transactional
 	public Bookmark saveBookmark(Long adId) {
+		assert adDao.findOne(adId) != null;
+		
 		Bookmark bookmark = new Bookmark();
 
 		bookmark.setAdId(adId);

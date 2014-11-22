@@ -10,15 +10,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class IndexController {
+	
 	@Autowired
 	LoginService loginService;
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index() {
-    	ModelAndView model = new ModelAndView("index");
-
-    	model.addObject("loggedInUser", loginService.getLoggedInUser());
-        return model;
-    }
     
     @RequestMapping(value = "/404", method = RequestMethod.GET)
     public ModelAndView notFound() {

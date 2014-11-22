@@ -20,7 +20,7 @@
 		
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
-				<a class="btn btn-primary" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
+				<a class="btn btn-danger" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
@@ -41,7 +41,7 @@
 		
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
-				<a class="btn btn-primary" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
+				<a class="btn btn-danger" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
@@ -62,7 +62,7 @@
 		
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
-				<a class="btn btn-primary" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
+				<a class="btn btn-danger" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
