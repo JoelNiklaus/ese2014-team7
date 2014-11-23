@@ -86,18 +86,35 @@
 		<form:input class="form-control" path="addCost" tabindex="7" maxlength="3" placeholder="Additional Cost"/>
 		<form:errors path="addCost" cssClass="help-inline" element="span"/>
 		<br>
-
+		
 		<legend>Availability</legend>
 
+		<link rel="stylesheet" href="/Skeleton/lib/datepicker-1.3.0/css/datepicker.css" />
+		<link rel="stylesheet" href="/Skeleton/lib/datepicker-1.3.0/css/datepicker3.css" />
+		<script src="/Skeleton/lib/datepicker-1.3.0/js/bootstrap-datepicker.js"></script>
+
+
 		<label class="control-label" for="field-dateIn">Move In Date</label>
-		<form:input class="form-control" path="dateIn" tabindex="8" maxlength="10" placeholder="DD.MM.YYYY"/>
+		<form:input class="datepicker form-control" path="dateIn" tabindex="8" maxlength="10" placeholder="DD.MM.YYYY"/>
 		<form:errors path="dateIn" cssClass="help-inline" element="span"/>
 		
 		<label class="control-label" for="field-dateOut">Move Out Date</label>
-		<form:input class="form-control" path="dateOut" tabindex="9" maxlength="10" placeholder="DD.MM.YYYY or empty"/>
+		<form:input class="datepicker form-control" path="dateOut" tabindex="9" maxlength="10" placeholder="DD.MM.YYYY or empty"/>
 		<form:errors path="dateOut" cssClass="help-inline" element="span"/>
 		<br>
 
+
+		<script type="text/javascript">
+			$('.datepicker').datepicker({
+			    startDate: '-0d',
+			    todayHighlight: true,
+			    weekStart: 1,
+			    calendarWeeks: true,
+			    autoclose: true,
+			    format: 'dd.mm.yyyy'
+			})
+		</script>
+		
 		<legend>Additional Information</legend>
 
 		<label class="control-label" for="field-roomSize">Room Size</label>
