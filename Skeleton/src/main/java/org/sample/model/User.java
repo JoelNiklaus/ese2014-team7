@@ -22,65 +22,65 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 public class User implements UserDetails{
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue
-    private Long id;
+	@GeneratedValue
+	private Long id;
 
-    private String firstName;
-    private String lastName;
+	private String firstName;
+	private String lastName;
 
-    private String email;
-    private String password; 
-    
-    @Transient
-    private int numUnreadEnquiries;
+	private String email;
+	private String password; 
 
 	@Transient
-    private int numUnreadNotifications;
-    
-    
-    @OneToOne(cascade = {CascadeType.ALL}) //TODO: @Silas: what does this do?
-    private Address address; 
-    
-    @OneToMany(cascade = {CascadeType.ALL})
-    private Set<Search> searches = new HashSet<Search>(0);
-    
-    public Long getId() {
-        return id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
+	private int numUnreadEnquiries;
 
-    public String getFirstName() {
-        return firstName;
-    }
+	@Transient
+	private int numUnreadNotifications;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
-    public String getLastName() {
-        return lastName;
-    }
+	@OneToOne(cascade = {CascadeType.ALL}) //TODO: @Silas: what does this do?
+	private Address address; 
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	@OneToMany(cascade = {CascadeType.ALL})
+	private Set<Search> searches = new HashSet<Search>(0);
 
-    public String getEmail() {
-        return email;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public Address getAddress() {
 		return address;
@@ -94,15 +94,15 @@ public class User implements UserDetails{
 	{
 		this.password = password;
 	}
-	
+
 	public String getPassword()
 	{
 		return password;
 	}
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		 List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		 authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
 		return authorities;
 	}
@@ -112,23 +112,23 @@ public class User implements UserDetails{
 
 		return email;
 	}
-	
-	
-	 public int getNumUnreadEnquiries() {
-			return numUnreadEnquiries;
-		}
 
-		public void setNumUnreadEnquiries(int unreadEnquiries) {
-			this.numUnreadEnquiries = unreadEnquiries;
-		}
 
-		public int getNumUnreadNotifications() {
-			return numUnreadNotifications;
-		}
+	public int getNumUnreadEnquiries() {
+		return numUnreadEnquiries;
+	}
 
-		public void setNumUnreadNotifications(int unreadNotifications) {
-			this.numUnreadNotifications = unreadNotifications;
-		}
+	public void setNumUnreadEnquiries(int unreadEnquiries) {
+		this.numUnreadEnquiries = unreadEnquiries;
+	}
+
+	public int getNumUnreadNotifications() {
+		return numUnreadNotifications;
+	}
+
+	public void setNumUnreadNotifications(int unreadNotifications) {
+		this.numUnreadNotifications = unreadNotifications;
+	}
 
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
@@ -150,8 +150,17 @@ public class User implements UserDetails{
 		return true;
 	}
 	
-	
-    
-	
-	
+	public User() {
+		
+	}
+
+	public User(Long id, String firstName, String lastName, String email,
+			String password) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+	}
+
 }
