@@ -6,56 +6,18 @@
 
 <c:import url="template/header.jsp" />
 
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="simpleSearch">Simple Search</a></li>
+  <li role="presentation"><a href="advancedSearch">Advanced Search</a></li>
+</ul>
+
 	<!--  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
 	<script src="/Skeleton/lib/noUiSlider/jquery.nouislider.js"></script>
 	<script src="/Skeleton/lib/noUiSlider/jquery.liblink.js"></script>
 	<script src="/Skeleton/lib/noUiSlider/wNumb.js"></script>	
 
 	<link href="/Skeleton/lib/noUiSlider/jquery.nouislider.css" rel="stylesheet">
-
-	<style>
-		.priceSliderTooltip {
-			display: block;
-			position: absolute;
-		 	border: 1px solid #D9D9D9;
-			font: 400 12px/12px Arial;
-			border-radius: 3px;
-			background: #fff;
-		
-			top: -40px;
-			left: -20px;
-			padding: 5px;
-
-			text-align: center;
-			width: 70px;
-		}
-		.priceSliderTooltip strong {
-			display: block;
-			padding: 2px;
-	  	}
-	  	
-	  	.roomSizeSliderTooltip {
-			display: block;
-			position: absolute;
-		 	border: 1px solid #D9D9D9;
-			font: 400 12px/12px Arial;
-			border-radius: 3px;
-			background: #fff;
-			top: -40px;
-			padding: 5px;
-			left: -20px;
-			text-align: center;
-			width: 70px;
-		}
-		.roomSizeSliderTooltip strong {
-			display: block;
-			padding: 2px;
-	  	}		
-	  	div#map{
-			width:100%;
-			height:450px;
-		}
-	</style>
+	<link href="/Skeleton/css/search.css" rel="stylesheet">
 
 	<div class="panel">
 	<h2 class="form-heading">Search</h2>
@@ -227,7 +189,6 @@
 		}));
 		$("#roomSizeSlider").Link('upper').to('-inline-<div class="roomSizeSliderTooltip" ></div>', function ( value ) {
 		
-
 			if(value==300)
 			{
 				$(this).html(
@@ -240,7 +201,6 @@
 						'<strong>Max: </strong>' +
 						'<span>' + value + '</span>'
 					);
-
 			}
 			
 		});
@@ -254,7 +214,7 @@
 
 	</script>		
 	
-		<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/leaflet.css" />
+	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/leaflet.css" />
 	<link rel="stylesheet" href="/Skeleton/css/Control.Geocoder.css" />
 	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/MarkerCluster.css" />
 	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/MarkerCluster.Default.css" />
@@ -264,7 +224,7 @@
 	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.js"></script>
 	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.markercluster.js"></script>
 	<script src="/Skeleton/lib/leaflet-0.7.3/Control.Geocoder.js"></script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 	
 		// create a map in the "map" div, set the view to a given place and zoom
 		var map = L.map('map', {center: [46.9467726,7.4442328], zoom: 8});
