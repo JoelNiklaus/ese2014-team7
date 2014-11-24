@@ -11,6 +11,7 @@ import org.sample.controller.pojos.EnquiryRatingForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
+import org.sample.controller.service.UpdateService;
 import org.sample.model.Ad;
 import org.sample.model.Enquiry;
 import org.sample.model.User;
@@ -39,6 +40,9 @@ public class EnquiryController {
 
 	@Autowired
 	LoginService loginService;
+	
+	@Autowired
+	UpdateService updateService;
 
 	private String defaultMsg = "Hi guys, \n\n"
 			+ "I'm interested in your room. Let's meet and see if I'm going to be your new roomie.\n\n"
@@ -61,6 +65,7 @@ public class EnquiryController {
 
 		if (loginService.getLoggedInUser() != null) {
 			model.addObject("loggedInUser", loginService.getLoggedInUser());
+			updateService.updateNumberOfUnreadItems(model);
 
 			try {
 				Ad ad = adDao.findOne(Long.parseLong(id));
@@ -110,6 +115,7 @@ public class EnquiryController {
 		
 		ModelAndView model = new ModelAndView("enquiries");
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		updateService.updateNumberOfUnreadItems(model);
 
 		try {
 			if (!result.hasErrors()) {
@@ -138,7 +144,8 @@ public class EnquiryController {
 		
 		ModelAndView model = new ModelAndView("enquiries");
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
-
+		updateService.updateNumberOfUnreadItems(model);
+		
 		enquiryViewAddModelAttributes(model);
 
 		return model;
@@ -158,6 +165,7 @@ public class EnquiryController {
 
 		ModelAndView model = new ModelAndView("rateEnquiry");
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		updateService.updateNumberOfUnreadItems(model);
 
 		Enquiry enquiry = enquiryDao.findOne(id);
 
@@ -198,6 +206,7 @@ public class EnquiryController {
 		
 		ModelAndView model = new ModelAndView("enquiries");
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		updateService.updateNumberOfUnreadItems(model);
 
 		if (form != null || !result.hasErrors()) {
 			enquiryService.submitRating(form);
@@ -233,6 +242,7 @@ public class EnquiryController {
 			enquiryService.removeEnquiry(enquiry);
 			model = showEnquiries();
 			model.addObject("loggedInUser", user);
+			updateService.updateNumberOfUnreadItems(model);
 			model.addObject("message", "enquiry successfully deleted.");
 			enquiryViewAddModelAttributes(model);
 		} catch (NumberFormatException ex) {

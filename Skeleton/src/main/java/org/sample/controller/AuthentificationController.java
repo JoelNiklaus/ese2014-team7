@@ -11,6 +11,7 @@ import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.LoginService;
+import org.sample.controller.service.UpdateService;
 import org.sample.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ public class AuthentificationController {
 
 	@Autowired
 	LoginService loginService;
+	@Autowired
+	UpdateService updateService;
 
 	/**
 	 * Creates a model for registering a new user.
@@ -39,6 +42,7 @@ public class AuthentificationController {
 		ModelAndView model = new ModelAndView("register");
 		model.addObject("signupForm", new SignupForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		updateService.updateNumberOfUnreadItems(model);
 		return model;
 	}
 
@@ -78,6 +82,7 @@ public class AuthentificationController {
 				model = new ModelAndView("register");
 			}
 			model.addObject("loggedInUser", loginService.getLoggedInUser());
+			updateService.updateNumberOfUnreadItems(model);
 		} catch (InvalidUserException ex) {
 			model = new ModelAndView("register");
 			signupForm.setEmail("");
@@ -114,6 +119,7 @@ public class AuthentificationController {
 		ModelAndView model = new ModelAndView("forgot");
 		model.addObject("forgotPasswordForm", new ForgotPasswordForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		updateService.updateNumberOfUnreadItems(model);
 		return model;
 	}
 

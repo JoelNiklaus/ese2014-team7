@@ -49,10 +49,11 @@ $(document).ready(function () {
 	        <li class="dropdown">
 	        <li><a href="profile">Settings</a></li>
 	        <li class="divider"></li>
-	        <li><a href="enquiries">Enquiries <span class="badge">${loggedInUser.numUnreadEnquiries}</span></a></li>
+	        <li><a href="enquiries">Enquiries <span class="badge">${numUnreadEnquiries}</span></a></li>
+	        <li><a href="notifications">Notifications <span class="badge">${numUnreadNotifications}</span></a></li>
 	        <li><a href="bookmarks">Bookmarks</a></li>
 	        <li><a href="searches">Searches</a></li>
-	        <li><a href="notifications">Notifications</a></li>
+	        
         </c:if>
       </ul>
       

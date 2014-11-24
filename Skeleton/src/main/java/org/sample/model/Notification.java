@@ -44,7 +44,7 @@ public class Notification {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	public Boolean getUnread() {
+	public Boolean isUnread() {
 		return unread;
 	}
 	public void setUnread(Boolean unread) {

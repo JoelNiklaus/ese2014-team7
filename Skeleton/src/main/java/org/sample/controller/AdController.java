@@ -11,6 +11,7 @@ import org.sample.controller.pojos.AdForm;
 import org.sample.controller.service.AdService;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.PictureManager;
+import org.sample.controller.service.UpdateService;
 import org.sample.model.Ad;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class AdController {
     AdDao adDao;
     @Autowired
     ServletContext servletContext;
+    @Autowired
+	UpdateService updateService;
     
     public final String PICTURE_LOCATION = "/img";
     
@@ -73,6 +76,9 @@ public class AdController {
     		model.addObject("error", "Please fill out all valid information.");
     	}
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
+    	
+    	updateService.updateNumberOfUnreadItems(model);
+    	
     	return model;
     }
     
@@ -88,6 +94,7 @@ public class AdController {
     	ModelAndView model = new ModelAndView("createAd");
 		model.addObject("adForm", new AdForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		updateService.updateNumberOfUnreadItems(model);
         return model;
     }
     
@@ -101,6 +108,7 @@ public class AdController {
     	ModelAndView model = new ModelAndView("adView");
     	model.addObject("adView", adService.adCatcher());
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
+    	updateService.updateNumberOfUnreadItems(model);
     	return model;
 
     }
@@ -129,6 +137,7 @@ public class AdController {
 	    	model = new ModelAndView("404");
 	    }
 	    model.addObject("loggedInUser", loginService.getLoggedInUser());
+	    updateService.updateNumberOfUnreadItems(model);
 	    return model;
     }
 }

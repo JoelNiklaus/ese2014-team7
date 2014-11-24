@@ -4,6 +4,7 @@ import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.service.BookmarkService;
 import org.sample.controller.service.LoginService;
+import org.sample.controller.service.UpdateService;
 import org.sample.model.Ad;
 import org.sample.model.Bookmark;
 import org.sample.model.User;
@@ -26,6 +27,8 @@ public class BookmarksController {
 	AdDao adDao;
 	@Autowired
 	BookmarkDao bookmarkDao;
+	@Autowired
+	UpdateService updateService;
 
 	/**
 	 * Assembles a model displaying user's bookmarked ads.
@@ -41,6 +44,7 @@ public class BookmarksController {
 		User user = loginService.getLoggedInUser();
 		model.addObject("bookmarks", bookmarkService.findBookmarks(user));
 		model.addObject("loggedInUser", user);
+		updateService.updateNumberOfUnreadItems(model);
 		return model;
 	}
 
@@ -64,6 +68,7 @@ public class BookmarksController {
 			Bookmark bookmark = bookmarkDao.findOne(bookmarkId);
 
 			User user = loginService.getLoggedInUser();
+			updateService.updateNumberOfUnreadItems(model);
 			bookmarkService.removeBookmark(bookmark);
 			// update bookmark list
 			model = showBookmarks();
@@ -91,6 +96,7 @@ public class BookmarksController {
 
 		ModelAndView model = showBookmarks();
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		updateService.updateNumberOfUnreadItems(model);
 		
 		try{
 			long adId = Long.parseLong(id);

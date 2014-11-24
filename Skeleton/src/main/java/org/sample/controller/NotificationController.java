@@ -2,6 +2,7 @@ package org.sample.controller;
 
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.NotificationService;
+import org.sample.controller.service.UpdateService;
 import org.sample.model.Notification;
 import org.sample.model.User;
 import org.sample.model.dao.AdDao;
@@ -23,6 +24,8 @@ public class NotificationController {
 	AdDao adDao;
 	@Autowired
 	NotificationDao notificationDao;
+	@Autowired
+	UpdateService updateService;
 
 	/**
 	 * Creates a model displaying user's notifications
@@ -36,6 +39,7 @@ public class NotificationController {
 		ModelAndView model = new ModelAndView("notifications");
 
 		User user = loginService.getLoggedInUser();
+		updateService.updateNumberOfUnreadItems(model);
 		
 		model.addObject("notifications", notificationService.findNotifications(user));
 		model.addObject("unreadNotifications", notificationService.findUnreadNotifications());
@@ -62,6 +66,7 @@ public class NotificationController {
 			Notification notification = notificationDao.findOne(notificationId);
 
 			User user = loginService.getLoggedInUser();
+			updateService.updateNumberOfUnreadItems(model);
 			notificationService.removeNotification(notification);
 			model = showNotifications();
 			model.addObject("message", "notification successfully removed.");

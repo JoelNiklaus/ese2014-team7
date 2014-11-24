@@ -1,6 +1,7 @@
 package org.sample.controller;
 
 import org.sample.controller.service.LoginService;
+import org.sample.controller.service.UpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +14,15 @@ public class IndexController {
 	
 	@Autowired
 	LoginService loginService;
+	
+	@Autowired
+	UpdateService updateService;
     
     @RequestMapping(value = "/404", method = RequestMethod.GET)
     public ModelAndView notFound() {
     	ModelAndView model = new ModelAndView("404");
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
+    	updateService.updateNumberOfUnreadItems(model);
         return model;
     }
         

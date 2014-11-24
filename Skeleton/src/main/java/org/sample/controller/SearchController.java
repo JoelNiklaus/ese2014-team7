@@ -7,6 +7,7 @@ import org.sample.controller.pojos.SearchForm;
 import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.SearchService;
+import org.sample.controller.service.UpdateService;
 import org.sample.model.Ad;
 import org.sample.model.Search;
 import org.sample.model.User;
@@ -33,7 +34,7 @@ public class SearchController {
 	@Autowired
 	AdDao adDao;
 	@Autowired
-	EnquiryService enquiryService;
+	UpdateService updateService;
 	
 	/**
 	 * Returns search model for a given search-template. Is also the home page!
@@ -47,6 +48,7 @@ public class SearchController {
 		ModelAndView model = new ModelAndView("search");
 		model.addObject("searchForm", new SearchForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		updateService.updateNumberOfUnreadItems(model);
 		Iterable<Ad> searchResults = adDao.findAll();
 		Search searchAttributes;
 		
@@ -61,7 +63,7 @@ public class SearchController {
 		if(searchResults != null)
 			model.addObject("searchResults", searchResults);
 		
-		enquiryService.updateNumberOfUnreadEnquiries();
+		
 		
 		return model;
 	}
@@ -95,6 +97,7 @@ public class SearchController {
 		}
 		
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		updateService.updateNumberOfUnreadItems(model);
 		model.addObject("searchAttributes", searchAttributes);
 
 		Iterable<Ad> searchResults = searchService.computeSearchResults(searchForm);
@@ -137,6 +140,7 @@ public class SearchController {
 		
 		model.addObject("message", message);
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		updateService.updateNumberOfUnreadItems(model);
 
 		return model;
 	}
@@ -151,6 +155,7 @@ public class SearchController {
 		User user = loginService.getLoggedInUser();
 		model.addObject("searches", searchService.findSearches(user));
 		model.addObject("loggedInUser", user);
+		updateService.updateNumberOfUnreadItems(model);
 		
 		return model;
 	}
@@ -167,6 +172,7 @@ public class SearchController {
 			Search search = searchDao.findOne(searchId);
 
 			User user = loginService.getLoggedInUser();
+			updateService.updateNumberOfUnreadItems(model);
 			searchService.removeSearch(search);
 			// update search list
 			model = searches();

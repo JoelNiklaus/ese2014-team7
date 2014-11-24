@@ -77,7 +77,7 @@ public class NotificationServiceImpl implements NotificationService {
 		LinkedList<Notification> results = new LinkedList<Notification>();
 
 		for(Notification n : allNotifications) {
-			if(n.getUserId().equals(loginService.getLoggedInUser().getId()) && (n.getUnread() == unread)) {
+			if(n.getUserId().equals(loginService.getLoggedInUser().getId()) && (n.isUnread() == unread)) {
 				n.setAd(adDao.findOne(n.getAdId()));
 				results.add(n);
 				
