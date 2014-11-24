@@ -35,7 +35,7 @@
 </c:forEach>
 
 <c:forEach items="${newReceivedEnquiries}" var="enquiry">
-	<div class="panel panel-primary" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
+	<div class="panel panel-default" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
 		
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
@@ -56,7 +56,7 @@
 <h2>Rated enquiries</h2>
 <p>${ratedEmpty}</p>
 <c:forEach items="${ratedReceivedEnquiries}" var="enquiry">
-	<div class="panel panel-primary" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
+	<div class="panel panel-default" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
 		
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
@@ -77,7 +77,7 @@
 <h2>Sent</h2>
 <p>${sentEmpty}</p>
 <c:forEach items="${sentEnquiries}" var="enquiry">
-	<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${enquiry.adId}'">
+	<div class="panel panel-default" onclick="javascript:location.href='ad?id=${enquiry.adId}'">
 		
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>

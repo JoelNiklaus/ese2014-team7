@@ -36,7 +36,10 @@ public class NotificationController {
 		ModelAndView model = new ModelAndView("notifications");
 
 		User user = loginService.getLoggedInUser();
+		
 		model.addObject("notifications", notificationService.findNotifications(user));
+		model.addObject("unreadNotifications", notificationService.findUnreadNotifications());
+		
 		notificationService.markAllNotificationsAsRead(user);
 		model.addObject("loggedInUser", user);
 		return model;

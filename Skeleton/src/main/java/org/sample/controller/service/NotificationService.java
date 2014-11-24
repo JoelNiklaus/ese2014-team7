@@ -15,7 +15,7 @@ public interface NotificationService {
 	public void saveNotificationsToAffectedUsers(Ad ad);
 	
 	/**
-	 * Compiles a list of all Notifications relevant to given user.
+	 * Compiles a list of all (already read) Notifications relevant to given user.
 	 * 
 	 * @param user
 	 * @return Iterable<Notifications>
@@ -35,5 +35,12 @@ public interface NotificationService {
 	 * @param user
 	 */
 	public void markAllNotificationsAsRead(User user);
+
+	/**
+	 * Compiles a list of all unread notifications and sets the items in that list to read.
+	 * 
+	 * @return
+	 */
+	public Iterable<Notification> findUnreadNotifications();
 	
 }

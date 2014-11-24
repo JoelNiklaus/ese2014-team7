@@ -62,19 +62,37 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Transactional
 	public Iterable<Notification> findNotifications(User user) {
+		return fetchRelevantNotifications(false);
+	}
+	
+	public Iterable<Notification> findUnreadNotifications() {
+		return fetchRelevantNotifications(true);
+	}
+	
+	
+	@Transactional
+	private Iterable<Notification> fetchRelevantNotifications(boolean unread)
+	{
 		Iterable<Notification> allNotifications = notificationDao.findAll();
 		LinkedList<Notification> results = new LinkedList<Notification>();
 
 		for(Notification n : allNotifications) {
-			if(n.getUserId().equals(loginService.getLoggedInUser().getId())) {
+			if(n.getUserId().equals(loginService.getLoggedInUser().getId()) && (n.getUnread() == unread)) {
 				n.setAd(adDao.findOne(n.getAdId()));
 				results.add(n);
+				
+				if(unread)
+				{
+					n.setUnread(false);
+					notificationDao.save(n);
+				}
 			}
 		}
 
 		return (Iterable<Notification>)results;
 	}
 
+	
 	@Transactional
 	public Notification removeNotification(Notification notification) {
 		notificationDao.delete(notification);
