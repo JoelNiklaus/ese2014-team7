@@ -154,4 +154,33 @@ public class AdServiceImpl implements AdService {
 		return pics;
 	}
 
+	public void deleteAd(Long adId) {
+		adDao.delete(adId);
+	}
+
+	public void editAd(AdForm adForm, Long adId) {
+		Ad ad = adDao.findOne(adId);
+		
+	    Timestamp timestamp  = new Timestamp(System.currentTimeMillis());
+		ad.setTimestamp(timestamp);
+	    ad.setTitle(adForm.getTitle());
+	    ad.setStreet(adForm.getStreet());
+	    ad.setHouseNr(adForm.getHouseNr());
+	    ad.setCity(adForm.getCity());
+	    ad.setZip(adForm.getZip());
+	    ad.setRent(adForm.getRent());
+	    ad.setAddCost(adForm.getAddCost());
+	    ad.setDateIn(adForm.getDateIn());
+	    ad.setDateOut(adForm.getDateOut());
+	    ad.setRoomSize(adForm.getRoomSize());
+	    ad.setDescription(adForm.getDescription());
+	    ad.setUs(adForm.getUs());
+	    ad.setYou(adForm.getYou());
+	    ad.setLat(adForm.getLat());
+	    ad.setLng(adForm.getLng());
+	    
+	    ad = adDao.save(ad);
+		
+	}
+
 }

@@ -26,8 +26,7 @@
 		${message}
 	</div>
 	</c:if>
-	<br />
-	<br />
+	
 	
 	<form:form method="post" modelAttribute="searchForm" id="searchForm" cssClass="form-horizontal" autocomplete="off">
 		<fieldset>

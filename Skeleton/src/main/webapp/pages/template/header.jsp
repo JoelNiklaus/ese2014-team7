@@ -46,6 +46,7 @@ $(document).ready(function () {
         <li><a href="search">Search</a></li>
         <c:if test="${not empty loggedInUser}">
 	        <li><a href="createAd">Create Ad</a></li>
+	        <li><a href="myAd">My Ad</a></li>
 	        <li class="dropdown">
 	        <li><a href="profile">Settings</a></li>
 	        <li class="divider"></li>

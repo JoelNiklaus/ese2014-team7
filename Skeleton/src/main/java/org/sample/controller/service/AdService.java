@@ -64,5 +64,9 @@ public interface AdService {
 	 */
     public ArrayList<Picture> getAdPictures(Long adId);
 
+	public void deleteAd(Long adId);
+
+	public void editAd(AdForm adForm, Long adId);
+
 
 }
