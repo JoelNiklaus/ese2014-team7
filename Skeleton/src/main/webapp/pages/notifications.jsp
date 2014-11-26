@@ -22,6 +22,9 @@ ${message}
 				src="/Skeleton/img/<c:out value="${notification.ad.street}${notification.ad.houseNr}.jpeg"/>"
 				height="100px">
 			</a>
+			
+			<div>${notification.notificationText}</div>
+			
 		</div>
 
 		<div class="panel-footer">

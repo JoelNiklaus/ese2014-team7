@@ -16,6 +16,7 @@ public class Notification {
 	private Long adId;
 	private Long userId;
 	private Boolean unread;
+	private String notificationText;
 	
 	@Transient
 	private Ad ad;
@@ -49,5 +50,11 @@ public class Notification {
 	}
 	public void setUnread(Boolean unread) {
 		this.unread = unread;
+	}
+	public String getNotificationText() {
+		return notificationText;
+	}
+	public void setNotificationText(String notificationText) {
+		this.notificationText = notificationText;
 	}
 }
