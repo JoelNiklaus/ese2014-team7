@@ -182,33 +182,32 @@ public class AdController {
     
     @RequestMapping(value = "/editAd", method = RequestMethod.GET)
     public ModelAndView editAd() {
-	ModelAndView model = new ModelAndView("editAd");
-	AdForm adForm = new AdForm();
-	Long adId = adDao.findOneByPlacerId(loginService.getLoggedInUser().getId()).getId();
-	Ad ad = adService.getAd(adId);
+    	ModelAndView model = new ModelAndView("editAd");
+    	AdForm adForm = new AdForm();
+    	Long adId = adDao.findOneByPlacerId(loginService.getLoggedInUser().getId()).getId();
+    	Ad ad = adService.getAd(adId);
 	
-	model.addObject("ad", ad);
-	//model.addObject("infoMessage", message);
-	
-	model.addObject("adForm", adForm);
-	return model;
+    	model.addObject("ad", ad);
+    	model.addObject("adForm", adForm);
+    	
+    	return model;
     }
     
     @RequestMapping(value = "/submitEditAd", method = RequestMethod.POST)
     public ModelAndView submitEditAd(@Valid AdForm adForm, BindingResult result , Principal principal, @RequestParam(value = "adId", required = true) Long adId) {
 	
-	ModelAndView model = new ModelAndView("editAd");
-	if (!result.hasErrors()){
-		adService.editAd(adForm, adId);
+    	ModelAndView model = new ModelAndView("editAd");
+    	if (!result.hasErrors()){
+    		adService.editAd(adForm, adId);
 		
-		model.addObject("success", "Ad successfully created.");
-	}else{
-		model.addObject("error", "Please fill out all valid information.");
-	}
-	model.addObject("loggedInUser", loginService.getLoggedInUser());
+    		model.addObject("success", "Ad successfully created.");
+    	}else{
+    		model.addObject("error", "Please fill out all valid information.");
+    	}
+    	model.addObject("loggedInUser", loginService.getLoggedInUser());
 	
-	updateService.updateNumberOfUnreadItems(model);
+    	updateService.updateNumberOfUnreadItems(model);
 	
-	return model;
+    	return model;
     }
 }
