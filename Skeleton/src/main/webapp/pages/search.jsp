@@ -6,6 +6,12 @@
 
 <c:import url="template/header.jsp" />
 
+		<c:if test="${not empty success}">
+		<div class="alert alert-success" role="alert">
+			${success}
+		</div>
+	</c:if>
+
 <ul class="nav nav-tabs">
   <li role="presentation" class="active"><a href="simpleSearch">Simple Search</a></li>
   <li role="presentation"><a href="advancedSearch">Advanced Search</a></li>
@@ -19,6 +25,9 @@
 	<link href="/Skeleton/lib/noUiSlider/jquery.nouislider.css" rel="stylesheet">
 	<link href="/Skeleton/css/search.css" rel="stylesheet">
 
+
+	
+
 	<div class="panel">
 	<h2 class="form-heading">Search</h2>
 	<c:if test="${not empty message}">
@@ -26,6 +35,7 @@
 		${message}
 	</div>
 	</c:if>
+	
 	
 	
 	<form:form method="post" modelAttribute="searchForm" id="searchForm" cssClass="form-horizontal" autocomplete="off">
@@ -62,6 +72,8 @@
 	</form:form>
 	</div>
 	<br>
+	
+
 	<div role="tabpanel">
 		<ul class="nav nav-tabs" role="tablist" id="myTab">
 	  		<li role="presentation"><a href="#listTab">List</a></li>

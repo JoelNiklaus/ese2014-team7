@@ -24,12 +24,6 @@
 		}
 	</style>
 	
-	<c:if test="${not empty success}">
-		<div class="alert alert-success" role="alert">
-			${success}
-		</div>
-	</c:if>
-	
 	<c:if test="${not empty error}">
 		<div class="alert alert-danger" role="alert">
 			${error}

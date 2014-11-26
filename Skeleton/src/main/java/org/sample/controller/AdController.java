@@ -42,6 +42,7 @@ public class AdController {
     ServletContext servletContext;
     @Autowired
 	UpdateService updateService;
+    @Autowired SearchController searchController;
     
     public final String PICTURE_LOCATION = "/img";
     
@@ -75,9 +76,10 @@ public class AdController {
     	ModelAndView model = new ModelAndView("createAd");
     	if (!result.hasErrors()){
 			adService.saveFrom(adForm);
-			
+			model = searchController.index(null);
 			model.addObject("success", "Ad successfully created.");
     	}else{
+    		
     		model.addObject("error", "Please fill out all valid information.");
     	}
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
