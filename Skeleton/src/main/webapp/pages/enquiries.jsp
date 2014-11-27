@@ -20,7 +20,6 @@
 		
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
-				<a class="btn btn-danger" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
@@ -30,7 +29,10 @@
 		  		
 			</div>		
 			
-			<div class="panel-footer"><b>This enquiry has not yet been rated</b> (click on enquiry to rate it)</div>
+			<div class="panel-footer">
+				<b>This enquiry has not yet been rated</b> (click on enquiry to rate it)
+				<a class="btn btn-danger btn-xs pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
+			</div>
 		</div>
 </c:forEach>
 
@@ -39,7 +41,6 @@
 		
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
-				<a class="btn btn-danger" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
@@ -49,7 +50,10 @@
 		  		
 			</div>		
 			
-			<div class="panel-footer"><b>This enquiry has not yet been rated</b> (click on enquiry to rate it)</div>
+			<div class="panel-footer"><b>
+				This enquiry has not yet been rated</b> (click on enquiry to rate it)
+				<a class="btn btn-danger btn-xs pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
+			</div>
 		</div>
 </c:forEach>
 
@@ -70,7 +74,10 @@
 		  		
 			</div>		
 			
-			<div class="panel-footer"><b>My rating:</b> ${enquiry.rating}/10</div>
+			<div class="panel-footer"
+				><b>My rating:</b> ${enquiry.rating}/10
+				<a class="btn btn-danger btn-xs pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
+			</div>
 		</div>
 </c:forEach>
 
@@ -90,7 +97,10 @@
 		  		<p>${enquiry.messageText}</p>
 			</div>
 			
-			<div class="panel-footer"><b>Price:</b> CHF ${enquiry.ad.rent}  <b>Room Size:</b> ${enquiry.ad.roomSize}m²</div>
+			<div class="panel-footer">
+				<b>Price:</b> CHF ${enquiry.ad.rent}  <b>Room Size:</b> ${enquiry.ad.roomSize}m²
+				<a class="btn btn-danger btn-xs pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
+			</div>
 		</div>
 </c:forEach>
 

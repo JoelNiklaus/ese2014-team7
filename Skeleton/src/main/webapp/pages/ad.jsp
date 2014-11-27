@@ -6,7 +6,11 @@
 
 <c:import url="template/header.jsp" />
 
-<h1>${ad.title} <a class="btn btn-theme" href="/Skeleton/bookmark?id=${ad.id}">Bookmark Ad</a> <a class="btn btn-theme" href="/Skeleton/sendEnquiry?id=${ad.id}">Send Enquiry</a> </h1>
+<h1>
+	${ad.title}
+	<a class="btn btn-info" href="/Skeleton/bookmark?id=${ad.id}"><span class="glyphicon glyphicon-star"></span> Bookmark Ad</a>
+	<a class="btn btn-info" href="/Skeleton/sendEnquiry?id=${ad.id}"><span class="glyphicon glyphicon-envelope"></span> Send Enquiry</a>
+</h1>
     
     
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
