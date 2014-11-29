@@ -160,7 +160,7 @@
 							// Call the default addedfile event handler
 							dropZone.emit("addedfile", mockFile);
 							// And optionally show the thumbnail of the file:
-							dropZone.emit("thumbnail", mockFile, "/Skeleton/img/adImages/"+data);
+							dropZone.emit("thumbnail", mockFile, 'http://localhost:8080/Skeleton/img/ad/'+data);
 							dropZone.files.push( mockFile );
 							dropZone.emit("success", mockFile, image);
 						 });
