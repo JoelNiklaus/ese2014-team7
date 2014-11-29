@@ -13,7 +13,12 @@ import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.UpdateService;
 import org.sample.model.User;
+import org.sample.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -29,6 +34,10 @@ public class AuthentificationController {
 	LoginService loginService;
 	@Autowired
 	UpdateService updateService;
+	@Autowired
+	UserDao userRepositry;
+	@Autowired
+	@Qualifier("authMgr") private AuthenticationManager authMgr;
 
 	/**
 	 * Creates a model for registering a new user.
@@ -90,20 +99,50 @@ public class AuthentificationController {
 			model.addObject("emailExists", "This email address is already in use");
 		}
 
+		// perform login authentication 
+		
+		try {
+			User user = userRepositry.findByEmail(signupForm.getEmail());
+			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, signupForm.getPassword(), user.getAuthorities());
+			authMgr.authenticate(auth);
+			
+			if(auth.isAuthenticated()){
+				SecurityContextHolder.getContext().setAuthentication(auth);
+				return new ModelAndView("redirect:/");
+			}
+		} catch (Exception e){
+			System.out.println("Problem authenticating user" + signupForm.getEmail());
+		}
+		
 		return model;
 	}
 
+	/**
+	 * Redirects the login to spring security
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(ModelMap model) {
 		return "login";
 	}
 
+	/**
+	 * Redirects accessdenied to spring security
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
 	public String loginerror(ModelMap model) {
 		model.addAttribute("error", "true");
 		return "denied";
 	}
 
+	/**
+	 * Redirects logout to spring security
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(ModelMap model) {
 		return "logout";
@@ -163,6 +202,13 @@ public class AuthentificationController {
 		return model;
 	}
 
+	/**
+	 * Send an email using mailtrap.io
+	 * @param email
+	 * @param subject
+	 * @param message
+	 * @throws EmailException
+	 */
 	private void sendMail(String email, String subject, String message)
 			throws EmailException {
 		Email simpleEmail = new SimpleEmail();
