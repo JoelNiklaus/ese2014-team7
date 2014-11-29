@@ -15,6 +15,12 @@
     
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 	<link rel="stylesheet" href="/Skeleton/css/Control.Geocoder.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!-- 33 KB -->
+
+<!-- fotorama.css & fotorama.js. -->
+<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.2/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.2/fotorama.js"></script> <!-- 16 KB -->
+	
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 	<script src="/Skeleton/js/Control.Geocoder.js"></script>
 	<style type="text/css">
@@ -31,13 +37,13 @@
 
 	<div class="row">
 
-			<div class="col-md-2"> 		
-				<a class="pull-left" >
-				    <!-- <img class="media-object" src="/Skeleton/img/house1.jpeg" height="200px">-->
-				    <img class="media-object" src="/Skeleton/img/<c:out value="${ad.street}${ad.houseNr}.jpeg"/>" width="200px">
-				    
-				</a>
-			</div>
+	 			<div class="fotorama">
+					<c:forEach items="${ad.pictures}" var="pic">
+						 <img style="float:left;" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
+						
+						<br />
+					</c:forEach>
+				</div>
 			<div class="col-md-2"> 		
 				<table class="smalltable">
 		
@@ -128,7 +134,6 @@
 		});
 			
 	</script>
-
 
 
 	<c:if test="${page_error != null }">

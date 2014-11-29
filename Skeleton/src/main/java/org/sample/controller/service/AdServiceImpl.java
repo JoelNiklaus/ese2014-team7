@@ -1,9 +1,14 @@
 package org.sample.controller.service;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.sample.controller.pojos.AdForm;
 import org.sample.model.Ad;
+import org.sample.model.Picture;
 import org.sample.model.dao.PictureDao;
 import org.sample.model.dao.UserDao;
 import org.sample.model.dao.AdDao;
@@ -18,12 +23,22 @@ public class AdServiceImpl implements AdService {
 	@Autowired UserDao userDao;
 	@Autowired LoginService loginService;
     @Autowired NotificationService notificationService;
+    @Autowired PictureDao pictureDao;
     
     @Transactional
 	public AdForm saveFrom(AdForm adForm) {
 	    
     	Ad ad = new Ad();
 	
+    	Set<Picture> pictures = new HashSet<Picture>(0);
+    	
+    	List<String> pictureIdList = Arrays.asList(adForm.getImageIds().replaceAll(" ", "").split(","));
+    	for (String id : pictureIdList) {
+			pictures.add(pictureDao.findOne(new Long(id)));
+		}
+    	
+    	ad.setPictures(pictures);
+    	
 	    ad.setId(adForm.getId());
 	    ad.setPlacerId(loginService.getLoggedInUser().getId());
 	    Timestamp timestamp  = new Timestamp(System.currentTimeMillis());

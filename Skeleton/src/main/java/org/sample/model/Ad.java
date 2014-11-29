@@ -2,6 +2,7 @@ package org.sample.model;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -42,7 +43,9 @@ public class Ad {
 	private String lng;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	private Set<Picture> pictures;
+	private Set<Picture> pictures = new HashSet<Picture>();
+
+
 	
 	@ManyToOne
 	private Ad ad;

@@ -40,7 +40,7 @@ public class AdForm {
 	private String lat;
 	private String lng;
 	
-	private List<String> imageIds;
+	private String imageIds;
 
 	
 	private Long placerId;
@@ -158,10 +158,10 @@ public class AdForm {
 	public void setLng(String lng) {
 		this.lng = lng;
 	}
-	public List<String> getImageIds() {
+	public String getImageIds() {
 		return imageIds;
 	}
-	public void setImageIds(List<String> imageIds) {
+	public void setImageIds(String imageIds) {
 		this.imageIds = imageIds;
 	}
 	

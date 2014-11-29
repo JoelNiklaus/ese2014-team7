@@ -7,8 +7,6 @@ import java.util.Date;
 
 import javax.servlet.ServletContext;
 
-import org.sample.controller.service.PictureService;
-import org.sample.controller.service.PictureServiceImpl;
 import org.sample.model.Picture;
 import org.sample.model.dao.PictureDao;
 import org.springframework.beans.factory.annotation.Autowired;

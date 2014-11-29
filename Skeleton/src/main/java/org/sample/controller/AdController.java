@@ -11,6 +11,7 @@ import org.sample.controller.service.AdService;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.UpdateService;
 import org.sample.model.Ad;
+import org.sample.model.Picture;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -115,13 +116,15 @@ public class AdController {
 	    
 	    try{
 	    	Ad ad = adDao.findOne(new Long(id));
-	    	
+
 	    	 if(ad != null){
 	 	    	model.addObject("ad", ad);
 	 	    	model.addObject("shortDescription", "<b>"+ad.getTitle()+"</b><br />"+ad.getStreet()+" "+ad.getHouseNr()+"<br />" +ad.getZip()+" "+ad.getCity());
 	 	    } else {
+	 	    	
 	 	    	model = new ModelAndView("404");
 	 	    }
+	    	 
 	    }catch(NumberFormatException ex){
 	    	model = new ModelAndView("404");
 	    }
