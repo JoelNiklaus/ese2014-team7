@@ -23,9 +23,11 @@
 			<a class="btn btn-danger" href="removeBookmark?id=${bookmark.bookmarkId}">remove Bookmark</a>
 		</div>
 		<div class="panel-body">
-			<a class="pull-left"> <img class="media-object"
-				src="/Skeleton/img/<c:out value="${bookmark.ad.street}${bookmark.ad.houseNr}.jpeg"/>"
-				height="100px">
+			<a class="pull-left"> 								<c:forEach items="${ad.pictures}" varStatus="loopCount" var="pic">
+								<c:if test="${loopCount.count eq 1}">
+								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
+								</c:if>
+								</c:forEach>
 			</a>
 		</div>
 

@@ -148,8 +148,8 @@
 			init: function() {
 
 				imageIds = document.getElementById("files").value;
-				var images = imageIds.split(',');
-
+				var replacer = new RegExp(" ", "g");
+				var images = imageIds.replace(replacer,"").split(',');
 				images.forEach(function(image){
 					if(image!=""){
 						 $.post("/Skeleton/getImgUrl?id="+image,function( data ) {
