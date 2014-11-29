@@ -1,27 +1,20 @@
 package org.sample.controller;
 
-
 import java.security.Principal;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.sample.controller.pojos.AdForm;
 import org.sample.controller.service.AdService;
 import org.sample.controller.service.LoginService;
-import org.sample.controller.service.PictureManager;
 import org.sample.controller.service.UpdateService;
 import org.sample.model.Ad;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.authentication.UserServiceBeanDefinitionParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,7 +37,6 @@ public class AdController {
 	UpdateService updateService;
     @Autowired SearchController searchController;
     
-    public final String PICTURE_LOCATION = "/img";
     
     /**
      * Submits created ad and returns a confirmation model.
@@ -62,16 +54,6 @@ public class AdController {
     	assert loginService.getLoggedInUser() != null;
     	assert adForm != null;
     	
-		PictureManager picmgr = new PictureManager();
-		String path = servletContext.getRealPath(PICTURE_LOCATION);
-		String filename = adForm.getStreet()+String.valueOf(adForm.getHouseNr());
-		
-		ArrayList<String> pictures = (picmgr.uploadMultipleFile(path, filename, files));
-		try {
-			if (pictures.get(0)!= null)
-				adForm.setImg_one(pictures.get(0));
-		} catch (Exception e) {
-		}
 
     	ModelAndView model = new ModelAndView("createAd");
     	if (!result.hasErrors()){
@@ -148,52 +130,47 @@ public class AdController {
 	    return model;
     }
     
-    @RequestMapping("myAd")
+    /**
+     * 
+     * @return myAds model 
+     */
+    @RequestMapping("myAds")
     public ModelAndView showMyAd() {
-    	ModelAndView model = new ModelAndView("myAd");
+    	ModelAndView model = new ModelAndView("myAds");
     
-    	try{
-    		Long loggedInUserId = loginService.getLoggedInUser().getId();
-        	Ad ad = adDao.findOneByPlacerId(loggedInUserId);
-        	
-        	if(ad != null){
-        		model.addObject("ad", ad);
-            	Long adId = ad.getId();
-            	model.addObject("adId", adId);
-        	} else {
-        		model = new ModelAndView("404");
-        	}
-    	} catch(NumberFormatException ex) {
-    		model = new ModelAndView("404");
-    	}
+
+    	Long loggedInUserId = loginService.getLoggedInUser().getId();
+        List<Ad> ads = adDao.findByPlacerId(loggedInUserId);
+
+        model.addObject("ads", ads);
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	updateService.updateNumberOfUnreadItems(model);
     	
     	return model;
     }
     
-    @RequestMapping(value = "/deleteAd", method = RequestMethod.GET)
-    public String deleteAd(
-	    HttpServletRequest request, HttpServletResponse response,
-	    HttpSession session, Principal principal, RedirectAttributes redirectAttributes) {
-    Long adId = adDao.findOneByPlacerId(loginService.getLoggedInUser().getId()).getId();
-	adService.deleteAd(adId);
-	
-	return "redirect:/";
-    }
-    
-    @RequestMapping(value = "/editAd", method = RequestMethod.GET)
-    public ModelAndView editAd() {
-    	ModelAndView model = new ModelAndView("editAd");
-    	AdForm adForm = new AdForm();
-    	Long adId = adDao.findOneByPlacerId(loginService.getLoggedInUser().getId()).getId();
-    	Ad ad = adService.getAd(adId);
-	
-    	model.addObject("ad", ad);
-    	model.addObject("adForm", adForm);
-    	
-    	return model;
-    }
+//    @RequestMapping(value = "/deleteAd", method = RequestMethod.GET)
+//    public String deleteAd(
+//	    HttpServletRequest request, HttpServletResponse response,
+//	    HttpSession session, Principal principal, RedirectAttributes redirectAttributes) {
+//    Long adId = adDao.findOneByPlacerId(loginService.getLoggedInUser().getId()).getId();
+//	adService.deleteAd(adId);
+//	
+//	return "redirect:/";
+//    }
+//    
+//    @RequestMapping(value = "/editAd", method = RequestMethod.GET)
+//    public ModelAndView editAd() {
+//    	ModelAndView model = new ModelAndView("editAd");
+//    	AdForm adForm = new AdForm();
+//    	Long adId = adDao.findOneByPlacerId(loginService.getLoggedInUser().getId()).getId();
+//    	Ad ad = adService.getAd(adId);
+//	
+//    	model.addObject("ad", ad);
+//    	model.addObject("adForm", adForm);
+//    	
+//    	return model;
+//    }
     
     @RequestMapping(value = "/submitEditAd", method = RequestMethod.POST)
     public ModelAndView submitEditAd(@Valid AdForm adForm, BindingResult result , Principal principal, @RequestParam(value = "adId", required = true) Long adId) {

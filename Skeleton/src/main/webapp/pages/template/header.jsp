@@ -56,7 +56,7 @@ body {
 					<li><a href="search">Search</a></li>
 					<c:if test="${not empty loggedInUser}">
 						<li><a href="createAd">Create Ad</a></li>
-						<li><a href="myAd">My Ad</a></li>
+						<li><a href="myAds">My Ads</a></li>
 						<li><a href="enquiries">Enquiries 
 							<c:if test="${numUnreadEnquiries > 0}"><span class="badge">${numUnreadEnquiries}</span></c:if>
 						</a></li>

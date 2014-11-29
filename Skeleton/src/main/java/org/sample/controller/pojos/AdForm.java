@@ -1,9 +1,12 @@
 package org.sample.controller.pojos;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class AdForm {
 	
@@ -37,12 +40,8 @@ public class AdForm {
 	private String lat;
 	private String lng;
 	
-	private String img_one;
-	/*
-	private String img_two;
-	private String img_three;
-	private String img_four;
-	*/
+	private List<String> imageIds;
+
 	
 	private Long placerId;
 	
@@ -139,32 +138,7 @@ public class AdForm {
 	public void setYou(String you) {
 		this.you = you;
 	}
-	public String getImg_one() {
-		return img_one;
-	}
-	public void setImg_one(String img_one) {
-		this.img_one = img_one;
-	}
-	/*
-	public String getImg_two() {
-		return img_two;
-	}
-	public void setImg_two(String img_two) {
-		this.img_two = img_two;
-	}
-	public String getImg_three() {
-		return img_three;
-	}
-	public void setImg_three(String img_three) {
-		this.img_three = img_three;
-	}
-	public String getImg_four() {
-		return img_four;
-	}
-	public void setImg_four(String img_four) {
-		this.img_four = img_four;
-	}
-	*/
+
 	
 	public Long getPlacerId() {
 		return placerId;
@@ -183,6 +157,12 @@ public class AdForm {
 	}
 	public void setLng(String lng) {
 		this.lng = lng;
+	}
+	public List<String> getImageIds() {
+		return imageIds;
+	}
+	public void setImageIds(List<String> imageIds) {
+		this.imageIds = imageIds;
 	}
 	
 

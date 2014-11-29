@@ -95,7 +95,6 @@
 					    		<img class="media-object" src="/Skeleton/img/<c:out value="${ad.street}${ad.houseNr}.jpeg"/>" height="100px">
 					  		</a>
 					  		<p>${ad.description}</p>
-							${ad.lat}
 						</div>
 							
 						<div class="panel-footer"><b>Area: </b>${ad.city},  <b>Price:</b> CHF ${ad.rent},  <b>Room Size:</b> ${ad.roomSize}m²,  <b>Posted: </b>${ad.postingDateFormatted}</div>

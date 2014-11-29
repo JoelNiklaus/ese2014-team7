@@ -1,22 +1,17 @@
 package org.sample.model;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
 @Entity
-@Embeddable
 public class Picture {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String filePath;
-	@ManyToOne
-	private Ad ad;
-	private boolean isMainPic;
+	private String fileName;
+
 	
 	public void setId(Long id) {
 		this.id = id;
@@ -24,14 +19,6 @@ public class Picture {
 
 	public Long getId() {
 		return id;
-	}
-
-	public boolean getIsMainPic() {
-		return isMainPic;
-	}
-
-	public void setIsMainPic(boolean isMainPic) {
-		this.isMainPic = isMainPic;
 	}
 
 	public String getFilePath() {
@@ -42,11 +29,12 @@ public class Picture {
 		this.filePath = filePath;
 	}
 
-	public Ad getAd() {
-		return ad;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setAd(Ad ad) {
-		this.ad = ad;
-	} 
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 }

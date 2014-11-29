@@ -16,6 +16,7 @@
 	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.markercluster.js"></script>
 	<script src="/Skeleton/lib/leaflet-0.7.3/Control.Geocoder.js"></script>
 	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<link href="/Skeleton/css/dropzone.css" type="text/css" rel="stylesheet" /> 
 	
 	<style type="text/css">
 		div#map{
@@ -126,45 +127,77 @@
 		<label class="control-label" for="field-you">Ideal Roomie</label>
 		<form:input class="form-control" path="you" tabindex="13" maxlength="255" placeholder="My/Our ideal roomie should be.."/>
 		<form:errors path="you" cssClass="help-inline" element="span"/>
+		
+		<form:input class="form-control" type="hidden" path="imageIds" name="files" id="files"/><br />
 
 		<legend>Images</legend>
-
-		<table border="1" cellpadding="5">
-				<tr>
-					<label for="image"> Image (in JPEG format only, and max 5MB):</label>
-					<input name="image" type="file" />
-					</br>
-				</tr>
-				<!--
-				<tr>
-					<label for="image"> Ad Image 1 (in JPEG format only, and
-						max 700kb):</label>
-					<input name="image" type="file" />
-					</br>
-				</tr>
-				<tr>
-					<label for="image">Ad Image 2 (in JPEG format only, and max
-						700kb):</label>
-					<input name="image" type="file" />
-					</br>
-				</tr>
-				<tr>
-					<label for="image">Ad Image 3 (in JPEG format only, and max
-						700kb):</label>
-					<input name="image" type="file" />
-					</br>
-				</tr>
-				-->
-
-			</table>
-
-		<div class="form-actions">
+			<script src="/Skeleton/js/dropzone.min.js"></script>
+			<div class="dropzone" id="file-dropzone"> 
+			</div>
+			<br />
 			<button type="submit" class="btn btn-primary">Create Ad</button>
 			<button type="button" class="btn">Cancel</button>
-		</div>
+
 	</fieldset>
 </form:form>
 
+
+	<script>
+		Dropzone.autoDiscover = false;
+		var dropZone = new Dropzone("#file-dropzone", { 			
+			init: function() {
+
+				imageIds = document.getElementById("files").value;
+				var images = imageIds.split(',');
+
+				images.forEach(function(image){
+					if(image!=""){
+						 $.post("/Skeleton/getImgUrl?id="+image,function( data ) {
+							// Create the mock file:
+							var mockFile = { name: data, size: 0, status: 'success', accepted: true, serverId: image };
+							mockFile.upload = {bytesSent: 12345};
+							mockFile.kind = "image";
+							// Call the default addedfile event handler
+							dropZone.emit("addedfile", mockFile);
+							// And optionally show the thumbnail of the file:
+							dropZone.emit("thumbnail", mockFile, "/Skeleton/img/adImages/"+data);
+							dropZone.files.push( mockFile );
+							dropZone.emit("success", mockFile, image);
+						 });
+					}
+				});
+			},
+			url: "/Skeleton/upload?name=${loggedInUser.id}",
+			addRemoveLinks: true}
+		);
+	
+		
+		function refreshIds(files){
+			var imageIds = "";
+			
+			files.forEach(function(file){
+				if(imageIds==""){
+					imageIds = file.serverId;
+				} else {
+					imageIds += ", " + file.serverId;
+				}
+			});
+			
+			document.getElementById("files").value = imageIds;
+		}
+		
+		dropZone.on("success", function(file, response) {
+		      file.serverId = response; // If you just return the ID when storing the file
+		   
+		      refreshIds(dropZone.getAcceptedFiles());
+		    });
+		
+		dropZone.on("removedfile", function(file) {
+		      if (!file.serverId) { return; } // The file hasn't been uploaded
+		      $.post("/Skeleton/removePicture?id=" + file.serverId); // Send the file id along
+		      refreshIds(dropZone.getAcceptedFiles());
+		    });
+	</script>
 
 
 	<c:if test="${page_error != null }">
@@ -174,6 +207,8 @@
 			${page_error}
 		</div>
 	</c:if>
+
+
 
 	<script type="text/javascript">
 	
@@ -230,5 +265,8 @@
 		} 	
 		
 	</script>
+	
+	
 
+	
 <c:import url="template/footer.jsp" />
