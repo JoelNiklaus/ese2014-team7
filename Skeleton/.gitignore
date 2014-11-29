@@ -1,3 +1,4 @@
 /target/
 .metadata
-/src/main/webapp/img/ad/
+/src/main/webapp/img/ad/*
+!/src/main/webapp/img/ad/empty
