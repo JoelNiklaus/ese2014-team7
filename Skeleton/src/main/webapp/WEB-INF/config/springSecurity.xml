@@ -13,6 +13,7 @@
 		<security:intercept-url pattern="/profile" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/enquiries" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/bookmarks" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/register/**" access="isAnonymous()"/>
 		<security:form-login login-page="/login" authentication-failure-url="/login?error=true" default-target-url="/" />
 		<security:logout invalidate-session="true" logout-success-url="/" logout-url="/logout" />
 	</security:http>
