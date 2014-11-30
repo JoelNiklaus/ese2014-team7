@@ -8,10 +8,14 @@
 
 <h1>
 	${ad.title}
-	<a class="btn btn-info" href="/Skeleton/bookmark?id=${ad.id}"><span class="glyphicon glyphicon-star"></span> Bookmark Ad</a>
-	<a class="btn btn-info" href="/Skeleton/sendEnquiry?id=${ad.id}"><span class="glyphicon glyphicon-envelope"></span> Send Enquiry</a>
-	<c:if test="${loggedInUser.id==ad.placerId}"><a class="btn btn-info" href="">Edit</a>
-	<a class="btn btn-danger" href="/Skeleton/deleteAd?id=${ad.id}">Delete</a></c:if>
+	<c:if test="${loggedInUser.id!=ad.placerId}">
+		<a class="btn btn-info" href="/Skeleton/bookmark?id=${ad.id}"><span class="glyphicon glyphicon-star"></span> Bookmark Ad</a>
+		<a class="btn btn-info" href="/Skeleton/sendEnquiry?id=${ad.id}"><span class="glyphicon glyphicon-envelope"></span> Send Enquiry</a>
+	</c:if>
+	<c:if test="${loggedInUser.id==ad.placerId}">
+		<a class="btn btn-info" href="">Edit</a>
+		<a class="btn btn-danger" href="/Skeleton/deleteAd?id=${ad.id}">Delete</a>
+	</c:if>
 </h1>
     
     
