@@ -54,9 +54,11 @@
 			<br>
 			<div class="row">
 				<div class="col-md-2">
-					<label for="field-city">City</label>
+					<label class="control-label" for="field-city">City</label>
 				</div>
-				<form:input path="city" id="field-city" tabindex="5" maxlength="35"/>
+				<div class="col-md-3">	
+					<form:input class="form-control" path="city" id="field-city" placeholder="City" tabindex="5" maxlength="35"/>
+				</div>
 			</div>
 	
 			<form:input type="hidden" path="priceMin" id="field-priceMin" maxlength="45"/>
