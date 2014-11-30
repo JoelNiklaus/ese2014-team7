@@ -31,6 +31,15 @@
 								name="j_password">
 						</div>
 					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="checkbox">
+								<label> <input type="checkbox"
+									name="_spring_security_remember_me"> Remember me
+								</label>
+							</div>
+						</div>
+					</div>
 					<c:if test="${param.error != null}">
 						<div class="alert alert-danger">
 							Failed to login.

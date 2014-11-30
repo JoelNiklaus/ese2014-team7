@@ -72,6 +72,10 @@
 								<input type="password" class="form-control" id="j_password"
 									name="j_password" placeholder="Password">
 							</div>
+							<div class="checkbox">
+								<label> <input type="checkbox" name="_spring_security_remember_me"> Remember me
+								</label>
+							</div>
 							<button type="submit" class="btn btn-primary">Sign In</button>
 							<button type="button" onclick="window.location.href='register'"
 								class="btn btn-info">Register</button>

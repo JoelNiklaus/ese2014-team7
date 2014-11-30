@@ -20,12 +20,11 @@
     
     
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-	<link rel="stylesheet" href="/Skeleton/css/Control.Geocoder.css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!-- 33 KB -->
 
-<!-- fotorama.css & fotorama.js. -->
-<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.2/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.2/fotorama.js"></script> <!-- 16 KB -->
+	<!-- fotorama.css & fotorama.js. -->
+	<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.2/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.2/fotorama.js"></script> <!-- 16 KB -->
 	
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 	<script src="/Skeleton/js/Control.Geocoder.js"></script>

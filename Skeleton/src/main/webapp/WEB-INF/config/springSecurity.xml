@@ -19,15 +19,17 @@
 		<security:intercept-url pattern="/register/**" access="isAnonymous()"/>
 		<security:form-login login-page="/login" authentication-failure-url="/login?error=true" default-target-url="/" />
 		<security:logout invalidate-session="true" logout-success-url="/" logout-url="/logout" />
+		
+		<!-- Remember Me functionality -->
+		<security:remember-me key="uniqueAndSecret"/>
 	</security:http>
 
 
 	<!-- Declare an authentication-manager to use a custom userDetailsService -->
 	<security:authentication-manager id="authMgr">
-	 <security:authentication-provider user-service-ref="loginServiceImpl" >
-		<security:password-encoder hash="bcrypt" />
-	</security:authentication-provider>
-	</security:authentication-manager> 
-
-
+		<security:authentication-provider user-service-ref="loginServiceImpl">
+			<security:password-encoder hash="bcrypt" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
 </beans>

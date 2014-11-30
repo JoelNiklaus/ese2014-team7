@@ -87,12 +87,12 @@ public class BookmarksController {
 	 */
 	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)
 	public ModelAndView bookmark(@RequestParam String id) {
-		ModelAndView model = showBookmarks();
-		model.addObject("loggedInUser", loginService.getLoggedInUser());
-		updateService.updateNumberOfUnreadItems(model);
+		ModelAndView model;
 		
 		if (loginService.getLoggedInUser() != null) {
+			model = showBookmarks();
 			model.addObject("loggedInUser", loginService.getLoggedInUser());
+			updateService.updateNumberOfUnreadItems(model);
 			try{
 				long adId = Long.parseLong(id);
 				Ad ad = adDao.findOne(adId);
