@@ -302,9 +302,7 @@
 	</script>
 
 	<script>
-	function selectFirst(pictures){
-		return pictures[0];
-	}
+
 	$('#myTab a[href="#mapTab"]').click(function (e) {
 		  e.preventDefault()
 		  $(this).tab('show')
@@ -321,10 +319,14 @@
 		
 	<c:if test="${not empty searchResults}">
 		<c:forEach var="ad" items="${searchResults}">
-		
-			<script type="text/javascript">
-				populate("${ad.lat}","${ad.lng}","	<a class='pull-left' ><img class='media-object' src='/Skeleton/img/ad/' height='80px'></a><b>${ad.title}</b> <br /> ${ad.street} ${ad.houseNr} <br /> ${ad.city} ${ad.zip} <br /> <a href='ad?id=${ad.id}'>open</a>");
-			</script>
+			<c:forEach items="${ad.pictures}" varStatus="loopCount" var="pic">
+				<c:if test="${loopCount.count eq 1}">
+					<script type="text/javascript">
+						populate("${ad.lat}","${ad.lng}","	<a class='pull-left' ><img class='media-object' src='/Skeleton/img/ad/${pic.fileName}' height='80px'></a><b>${ad.title}</b> <br /> ${ad.street} ${ad.houseNr} <br /> ${ad.city} ${ad.zip} <br /> <a href='ad?id=${ad.id}'>open</a>");
+					</script>
+				</c:if>
+			</c:forEach>
+
 		</c:forEach>
 		<script type="text/javascript">
 			addMarkerLayer();
