@@ -143,62 +143,7 @@
 </form:form>
 
 
-	<script>
-		Dropzone.autoDiscover = false;
-		var dropZone = new Dropzone("#file-dropzone", { 			
-			init: function() {
-
-				imageIds = document.getElementById("files").value;
-				var replacer = new RegExp(" ", "g");
-				var images = imageIds.replace(replacer,"").split(',');
-				images.forEach(function(image){
-					if(image!=""){
-						 $.post("/Skeleton/getImgUrl?id="+image,function( data ) {
-							// Create the mock file:
-							var mockFile = { name: data, size: 0, status: 'success', accepted: true, serverId: image };
-							mockFile.upload = {bytesSent: 12345};
-							mockFile.kind = "image";
-							// Call the default addedfile event handler
-							dropZone.emit("addedfile", mockFile);
-							// And optionally show the thumbnail of the file:
-							dropZone.emit("thumbnail", mockFile, 'http://localhost:8080/Skeleton/img/ad/'+data);
-							dropZone.files.push( mockFile );
-							dropZone.emit("success", mockFile, image);
-						 });
-					}
-				});
-			},
-			url: "/Skeleton/upload?name=${loggedInUser.id}",
-			addRemoveLinks: true}
-		);
-	
-		
-		function refreshIds(files){
-			var imageIds = "";
-			
-			files.forEach(function(file){
-				if(imageIds==""){
-					imageIds = file.serverId;
-				} else {
-					imageIds += ", " + file.serverId;
-				}
-			});
-			
-			document.getElementById("files").value = imageIds;
-		}
-		
-		dropZone.on("success", function(file, response) {
-		      file.serverId = response; // If you just return the ID when storing the file
-		   
-		      refreshIds(dropZone.getAcceptedFiles());
-		    });
-		
-		dropZone.on("removedfile", function(file) {
-		      if (!file.serverId) { return; } // The file hasn't been uploaded
-		      $.post("/Skeleton/removePicture?id=" + file.serverId); // Send the file id along
-		      refreshIds(dropZone.getAcceptedFiles());
-		    });
-	</script>
+	<script type="text/javascript" src="/Skeleton/js/ddupload.js"></script>
 
 
 	<c:if test="${page_error != null }">
