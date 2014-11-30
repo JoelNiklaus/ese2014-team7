@@ -54,8 +54,6 @@ public class AdController {
      */
     @RequestMapping(value = "/createAd", method = RequestMethod.POST)
     public ModelAndView createAd(@Valid AdForm adForm, BindingResult result, RedirectAttributes redirectAttributes, Principal principal, @RequestParam("image") MultipartFile[] files){
-    	assert loginService.getLoggedInUser() != null;
-    	assert adForm != null;
     	
 
     	ModelAndView model = new ModelAndView("createAd");
@@ -81,8 +79,6 @@ public class AdController {
      */
     @RequestMapping(value = "/createAd", method = RequestMethod.GET)
     public ModelAndView createAd() {
-    	assert loginService.getLoggedInUser() != null;
-    	
     	ModelAndView model = new ModelAndView("createAd");
 		model.addObject("adForm", new AdForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());

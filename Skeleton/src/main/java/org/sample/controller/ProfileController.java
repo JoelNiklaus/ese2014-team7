@@ -25,9 +25,8 @@ public class ProfileController {
 	UpdateService updateService;
 	
 	@RequestMapping("/profile")
-	public ModelAndView loadProfilePage() {
-		assert loginService.getLoggedInUser() != null;
-		
+	public ModelAndView loadProfilePage()
+	{
 		ModelAndView model = new ModelAndView("profile");
 		model.addObject("profileForm", new SignupForm());
 		
@@ -42,9 +41,8 @@ public class ProfileController {
 
     @RequestMapping(value = "/profileChange", method = RequestMethod.POST)
     public ModelAndView profileChange(@Valid SignupForm profileForm, BindingResult result, RedirectAttributes redirectAttributes) {
-    	assert loginService.getLoggedInUser() != null;
-    	
-    	ModelAndView model= loadProfilePage();
+    	ModelAndView model;
+    	model = loadProfilePage();
     	if (!result.hasErrors()) {
 	    	try {
 	    		//TODO does not work properly yet: NumberFormatException: null

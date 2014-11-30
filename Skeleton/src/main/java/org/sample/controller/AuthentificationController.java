@@ -46,8 +46,6 @@ public class AuthentificationController {
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView index() {
-		assert loginService.getLoggedInUser() == null;
-		
 		ModelAndView model = new ModelAndView("register");
 		model.addObject("signupForm", new SignupForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
@@ -68,9 +66,6 @@ public class AuthentificationController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView register(@Valid SignupForm signupForm,
 			BindingResult result, RedirectAttributes redirectAttributes) {
-		assert loginService.getLoggedInUser() == null;
-		assert signupForm != null;
-		
 		ModelAndView model = new ModelAndView("login");
 
 		try {
@@ -152,9 +147,7 @@ public class AuthentificationController {
 	 * Displays an E-Mail input field for the user who forgot his password.
 	 */
 	@RequestMapping(value = "/forgot", method = RequestMethod.GET)
-	public ModelAndView forgot() {
-		assert loginService.getLoggedInUser() == null;
-		
+	public ModelAndView forgot() {		
 		ModelAndView model = new ModelAndView("forgot");
 		model.addObject("forgotPasswordForm", new ForgotPasswordForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
@@ -169,8 +162,6 @@ public class AuthentificationController {
 	 */
 	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
 	public ModelAndView forgot(@Valid ForgotPasswordForm forgotPasswordForm) {
-		assert loginService.getLoggedInUser() == null;
-		
 		ModelAndView model = new ModelAndView("forgot");
 		try {
 			User user = loginService.getUser(forgotPasswordForm);
@@ -199,6 +190,7 @@ public class AuthentificationController {
 			model.addObject("error",
 					"No User with this E-Mail found: " + e.getMessage());
 		}
+		model.addObject("loggedInUser", loginService.getLoggedInUser());
 		return model;
 	}
 
