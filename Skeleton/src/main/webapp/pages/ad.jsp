@@ -35,9 +35,8 @@
 	 	
     <div class="main">
    
-	<div class="row">
-
-				<div class="col-md-5">
+	<div class="row center">
+				<div class="col-md-8">
 					<div class="fotorama" data-nav="thumbs" data-ratio="800/600">
 						<c:forEach items="${ad.pictures}" var="pic">
 							 <img src="/Skeleton/img/ad/${pic.fileName}"/>
@@ -48,10 +47,9 @@
 				</div>
 				
 				</div>
-
 			<div class="row"><br></div>
 			<div class="row">
-			<div class="col-md-2"> 		
+			<div class="col-md-8"> 		
 				<table class="smalltable">
 		
 		    		<tr>
@@ -110,7 +108,7 @@
 		
 			<div class="row"><br></div>
 	<div class="row">
-		<div class="col-md-5 center" id="map"></div>
+		<div class="col-md-8 center" id="map"></div>
 			</div>
 	</div>
 
