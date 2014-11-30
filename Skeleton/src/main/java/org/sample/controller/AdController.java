@@ -180,8 +180,8 @@ public class AdController {
     	return model;
     }
     
-    @RequestMapping(value = "/submitEditAd", method = RequestMethod.POST)
-    public ModelAndView submitEditAd(@Valid AdForm adForm, BindingResult result , Principal principal, @RequestParam(value = "adId", required = true) Long adId) {
+    @RequestMapping(value = "/editAd", method = RequestMethod.POST)
+    public ModelAndView submitEditAd(@Valid AdForm adForm, BindingResult result , Principal principal, @RequestParam(value = "id", required = true) Long adId) {
 	
     	ModelAndView model = new ModelAndView("editAd");
     	if (!result.hasErrors()){
@@ -191,8 +191,10 @@ public class AdController {
     	}else{
     		model.addObject("error", "Please fill out all valid information.");
     	}
+    	Ad ad = adService.getAd(new Long(adId));
+    	model.addObject("ad", ad);
+    	model.addObject("adForm", adForm);
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
-	
     	updateService.updateNumberOfUnreadItems(model);
 	
     	return model;

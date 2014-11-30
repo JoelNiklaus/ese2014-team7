@@ -91,6 +91,17 @@ public class AdServiceImpl implements AdService {
 	public void editAd(AdForm adForm, Long adId) {
 		Ad ad = adDao.findOne(adId);
 		
+    	Set<Picture> pictures = new HashSet<Picture>(0);
+    	
+    	List<String> pictureIdList = Arrays.asList(adForm.getImageIds().replaceAll(" ", "").split(","));
+    	for (String id : pictureIdList) {
+    		if(id!=null);
+    			if(!id.equals(""))
+    				pictures.add(pictureDao.findOne(new Long(id)));
+		}
+    	
+    	ad.setPictures(pictures);
+		
 	    Timestamp timestamp  = new Timestamp(System.currentTimeMillis());
 		ad.setTimestamp(timestamp);
 	    ad.setTitle(adForm.getTitle());

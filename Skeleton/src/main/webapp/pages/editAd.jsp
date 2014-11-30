@@ -33,7 +33,7 @@
 
 <h1>Edit Ad</h1>
 
-<form:form method="post" modelAttribute="adForm" action="createAd" id="adForm" cssClass="form-horizontal" autocomplete="on" enctype="multipart/form-data">
+<form:form method="post" modelAttribute="adForm" action="editAd?id=${ad.id }" id="adForm" cssClass="form-horizontal" autocomplete="on" enctype="multipart/form-data">
 	<fieldset>
 
 		<legend>General Information</legend>
