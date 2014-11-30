@@ -29,28 +29,27 @@
 	
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 	<script src="/Skeleton/js/Control.Geocoder.js"></script>
-	<style type="text/css">
-		div#map{
-			width:100%;
-			height:450px;
-		}
-	</style>
+
 	  
 	
-	
+	 	
     <div class="main">
-    	
-
-	<div class="row">
-
-	 			<div class="fotorama" data-nav="thumbs">
-					<c:forEach items="${ad.pictures}" var="pic">
-						 <img style="float:left;" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
-						
-						<br />
-					</c:forEach>
+   
+	<div class="row center">
+				<div class="col-md-8">
+					<div class="fotorama" data-nav="thumbs" data-ratio="800/600">
+						<c:forEach items="${ad.pictures}" var="pic">
+							 <img src="/Skeleton/img/ad/${pic.fileName}"/>
+							
+							<br />
+						</c:forEach>
+					</div>
 				</div>
-			<div class="col-md-2"> 		
+				
+				</div>
+			<div class="row"><br></div>
+			<div class="row">
+			<div class="col-md-8"> 		
 				<table class="smalltable">
 		
 		    		<tr>
@@ -105,40 +104,47 @@
 		  
 	    	</table>
 			</div>
+			</div>
+		
+			<div class="row"><br></div>
+	<div class="row">
+		<div class="col-md-8 center" id="map"></div>
+			</div>
 	</div>
 
-
-
-
-    	
-    </div>	
-    
- <div class="well well-sm"> <div id="map"></div></div>
 	<script>
-	
-		// create a map in the "map" div, set the view to a given place and zoom
+		function drawMap(){
+			// create a map in the "map" div, set the view to a given place and zoom
 			var map = L.map('map').setView(["${ad.lat}]", "${ad.lng}]"], 15);
-		
-
-
-		//map.locate({setView: true, maxZoom: 16});
-		// add an OpenStreetMap tile layer
-		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-		}).addTo(map);
-
-		// add a marker in the given location, attach some popup content to it and open the popup
-		L.marker(["${ad.lat}]","${ad.lng}]"]).addTo(map)
-		    .bindPopup("${shortDescription}")
-		    .openPopup();
-		
-		// center marker on click
-		map.on('popupopen', function(e) {
-		    var px = map.project(e.popup._latlng);
-		    px.y -= e.popup._container.clientHeight/2
-		    map.panTo(map.unproject(px),{animate: true});
-		});
 			
+	
+	
+			//map.locate({setView: true, maxZoom: 16});
+			// add an OpenStreetMap tile layer
+			L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+			}).addTo(map);
+	
+			// add a marker in the given location, attach some popup content to it and open the popup
+			L.marker(["${ad.lat}]","${ad.lng}]"]).addTo(map)
+			    .bindPopup("${shortDescription}")
+			    .openPopup();
+			
+			// center marker on click
+			map.on('popupopen', function(e) {
+			    var px = map.project(e.popup._latlng);
+			    px.y -= e.popup._container.clientHeight/2
+			    map.panTo(map.unproject(px),{animate: true});
+			});
+		};	
+		
+		$( document ).ready(function() {
+			var cw = $('#map').width();
+			$('#map').css({'height':cw+'px'});
+			
+			drawMap();
+		});
+
 	</script>
 
 
