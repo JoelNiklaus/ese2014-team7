@@ -43,9 +43,9 @@
 
 	<div class="row">
 
-	 			<div class="fotorama">
+	 			<div class="fotorama" data-nav="thumbs">
 					<c:forEach items="${ad.pictures}" var="pic">
-						 <img style="float:left;" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
+						 <img style="float:left;" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
 						
 						<br />
 					</c:forEach>
