@@ -9,7 +9,7 @@
 		<title>TestApp</title>
 		
 		<link rel="stylesheet" type="text/css" href="/Skeleton/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/Skeleton/css/sticky-footer-navbar.css">
+		<link rel="stylesheet" type="text/css" href="/Skeleton/css/custom.css">
 		
 		<!-- jQuery at the beginning, otherwise e.g. sliders won't work -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -60,7 +60,7 @@
 					</ul>
 					<c:if test="${empty loggedInUser}">
 						<form class="navbar-form navbar-right" name="f"
-							action="<c:url value="/j_spring_security_check"/>" method="POST">
+							action="<c:url value="/j_spring_security_check"/>" method="post">
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon">@</div>
@@ -78,8 +78,9 @@
 						</form>
 					</c:if>
 					<c:if test="${not empty loggedInUser}">
-						<a type="button" class="btn btn-danger navbar-btn navbar-right"
-							href="${pageContext.servletContext.contextPath}/logout">Logout</a>
+						<form class="navbar-form navbar-right" action="logout" method="get">
+							<button type="submit" class="btn btn-danger">Logout</button>
+						</form>
 						<p class="navbar-text navbar-right">Signed in as <a class="navbar-link" href="profile">${loggedInUser.firstName }
 									${loggedInUser.lastName }</a>&nbsp&nbsp&nbsp</p>
 					</c:if>
