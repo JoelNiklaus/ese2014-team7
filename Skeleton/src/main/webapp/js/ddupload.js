@@ -39,6 +39,16 @@ var dropZone = new Dropzone("#file-dropzone", {
 			}
 		});
 	},
+	accept: function(file, done){
+		var re = /(?:\.([^.]+))?$/;
+		var ext = re.exec(file.name)[1];
+		ext = ext.toUpperCase();
+		if ( ext == "JPEG" || ext == "BMP" || ext == "GIF" ||  ext == "JPG" ||  ext == "PNG" ||  ext == "JPE") {
+			done();
+		} else { 
+			done("Please select an Image file"); 
+		}
+	},
 	url: "/Skeleton/upload?name=${loggedInUser.id}",
 	addRemoveLinks: true
 });
