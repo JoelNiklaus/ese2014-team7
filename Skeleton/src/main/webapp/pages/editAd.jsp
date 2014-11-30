@@ -133,6 +133,7 @@
 		<legend>Images</legend>
 			<script src="/Skeleton/js/dropzone.min.js"></script>
 			<div class="dropzone" id="file-dropzone"> 
+			<div class="dz-message" data-dz-message><span>Click or Drag & Drop to this field to upload images</span></div>
 			</div>
 			<br />
 			<button type="submit" class="btn btn-primary">Save Change</button>
