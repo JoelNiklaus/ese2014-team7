@@ -112,8 +112,19 @@
 	</div>
 	
 	<div id="tabid"></div>
-			
+					
+	
+	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/leaflet.css" />
+	<link rel="stylesheet" href="/Skeleton/css/Control.Geocoder.css" />
+	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/MarkerCluster.css" />
+	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/MarkerCluster.Default.css" />
+	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/Control.Geocoder.css" />
 
+
+	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.js"></script>
+	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.markercluster.js"></script>
+	<script src="/Skeleton/lib/leaflet-0.7.3/Control.Geocoder.js"></script>
+	
 	<script>
 	/**
 	 * Search Sliders 
@@ -225,23 +236,10 @@
 			$("#priceSlider").val(["${searchAttributes.priceMin}","${searchAttributes.priceMax}"]);
 			$("#roomSizeSlider").val(["${searchAttributes.roomSizeMin}","${searchAttributes.roomSizeMax}"]);
 			$("#field-city").val("${searchAttributes.city}");
-		});
-		
+		});		
+	</script>	
 
-	</script>		
-	
-	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/leaflet.css" />
-	<link rel="stylesheet" href="/Skeleton/css/Control.Geocoder.css" />
-	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/MarkerCluster.css" />
-	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/MarkerCluster.Default.css" />
-	<link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/Control.Geocoder.css" />
-
-
-	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.js"></script>
-	<script src="/Skeleton/lib/leaflet-0.7.3/leaflet.markercluster.js"></script>
-	<script src="/Skeleton/lib/leaflet-0.7.3/Control.Geocoder.js"></script>
-	<script type="text/javascript">
-	
+	<script>
 		// create a map in the "map" div, set the view to a given place and zoom
 		var map = L.map('map', {center: [46.9467726,7.4442328], zoom: 8});
 		L.Control.geocoder().addTo(map);
@@ -299,24 +297,22 @@
 		    px.y -= e.popup._container.clientHeight/2
 		    map.panTo(map.unproject(px),{animate: true});
 
-		});
-			
+		});		
 	</script>
 
 	<script>
-
-	$('#myTab a[href="#mapTab"]').click(function (e) {
-		  e.preventDefault()
-		  $(this).tab('show')
-		});
-	$('#myTab a[href="#listTab"]').click(function (e) {
-		  e.preventDefault()
-		  $(this).tab('show')
-		});
-	
-	$( document ).ready(function() {
-		$('#myTab a[href="#listTab"]').tab('show');
-		});
+		$('#myTab a[href="#mapTab"]').click(function (e) {
+			  e.preventDefault()
+			  $(this).tab('show')
+			});
+		$('#myTab a[href="#listTab"]').click(function (e) {
+			  e.preventDefault()
+			  $(this).tab('show')
+			});
+		
+		$( document ).ready(function() {
+			$('#myTab a[href="#listTab"]').tab('show');
+			});
 	</script>
 		
 	<c:if test="${not empty searchResults}">
