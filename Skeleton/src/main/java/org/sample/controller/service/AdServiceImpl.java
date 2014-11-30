@@ -34,7 +34,9 @@ public class AdServiceImpl implements AdService {
     	
     	List<String> pictureIdList = Arrays.asList(adForm.getImageIds().replaceAll(" ", "").split(","));
     	for (String id : pictureIdList) {
-			pictures.add(pictureDao.findOne(new Long(id)));
+    		if(id!=null);
+    			if(!id.equals(""))
+    				pictures.add(pictureDao.findOne(new Long(id)));
 		}
     	
     	ad.setPictures(pictures);
