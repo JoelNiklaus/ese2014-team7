@@ -65,6 +65,7 @@ public class FileUploadController {
     
     @RequestMapping(value="/removePicture", method=RequestMethod.POST)
     public @ResponseBody String removePicutre(@RequestParam("id") String id) {
+    	System.out.println(id);
     	Picture picture = pictureDao.findOne(new Long(id));
     	File file = new File(picture.getFilePath() + picture.getFileName());
     	file.delete();

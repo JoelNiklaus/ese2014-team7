@@ -155,27 +155,30 @@ public class AdController {
     }
     
     @RequestMapping(value="/deleteAd")
-    public @ResponseBody ModelAndView removePicutre(@RequestParam("id") String id) {
+    public @ResponseBody ModelAndView deleteAd(@RequestParam("id") String id) {
+    	ModelAndView model = new ModelAndView("myAds");
     	Ad ad = adDao.findOne(new Long(id));
-
+    	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	adService.deleteAd(ad);
-        return new ModelAndView("myAds");
+        return model;
     }
     
 
-//    
-//    @RequestMapping(value = "/editAd", method = RequestMethod.GET)
-//    public ModelAndView editAd() {
-//    	ModelAndView model = new ModelAndView("editAd");
-//    	AdForm adForm = new AdForm();
-//    	Long adId = adDao.findOneByPlacerId(loginService.getLoggedInUser().getId()).getId();
-//    	Ad ad = adService.getAd(adId);
-//	
-//    	model.addObject("ad", ad);
-//    	model.addObject("adForm", adForm);
-//    	
-//    	return model;
-//    }
+    
+    @RequestMapping(value = "/editAd")
+    public @ResponseBody ModelAndView editAd(@RequestParam("id") String id) {
+    	ModelAndView model = new ModelAndView("editAd");
+    	
+    	
+    	Ad ad = adService.getAd(new Long(id));
+    	AdForm adForm = new AdForm(ad);
+    	
+    	model.addObject("ad", ad);
+    	model.addObject("adForm", adForm);
+    	model.addObject("loggedInUser", loginService.getLoggedInUser());
+    	
+    	return model;
+    }
     
     @RequestMapping(value = "/submitEditAd", method = RequestMethod.POST)
     public ModelAndView submitEditAd(@Valid AdForm adForm, BindingResult result , Principal principal, @RequestParam(value = "adId", required = true) Long adId) {

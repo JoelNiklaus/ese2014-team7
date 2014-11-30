@@ -6,6 +6,8 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.sample.model.Ad;
+import org.sample.model.Picture;
 import org.springframework.web.multipart.MultipartFile;
 
 public class AdForm {
@@ -45,7 +47,36 @@ public class AdForm {
 	
 	private Long placerId;
 	
-
+	public AdForm(){
+		
+	}
+	
+	public AdForm(Ad ad) {
+		super();
+		this.id = ad.getId();
+		this.timestamp = ad.getTimestamp();
+		this.title = ad.getTitle();
+		this.street = ad.getStreet();
+		this.houseNr = ad.getHouseNr();
+		this.city = ad.getCity();
+		this.zip = ad.getZip();
+		this.rent = ad.getRent();
+		this.addCost = ad.getAddCost();
+		this.dateIn = ad.getDateIn();
+		this.dateOut = ad.getDateOut();
+		this.roomSize = ad.getRoomSize();
+		this.description = ad.getDescription();
+		this.us = ad.getUs();
+		this.you = ad.getYou();
+		this.lat = ad.getLat();
+		this.lng = ad.getLng();
+		String imageIds="";
+		for (Picture picture : ad.getPictures()) {
+			imageIds += picture.getId().toString()+",";
+		}
+		this.imageIds = imageIds;
+		this.placerId = getPlacerId();
+	}
 	public Timestamp getTimestamp() {
 		return timestamp;
 	}
