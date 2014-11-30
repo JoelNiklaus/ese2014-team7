@@ -31,5 +31,11 @@ public interface PictureService {
 	 */
 	public void removePictureById(Long id);
 	
+	/**
+	 * 
+	 * @param picture
+	 */
+	public void deletePicture(Picture picture);
+	
 
 }

@@ -31,7 +31,7 @@ public interface AdService {
     public Ad getAd(Long id);
 	
 
-	public void deleteAd(Long adId);
+	public void deleteAd(Ad ad);
 
 	public void editAd(AdForm adForm, Long adId);
 

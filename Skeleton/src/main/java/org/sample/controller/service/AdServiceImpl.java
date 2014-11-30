@@ -78,8 +78,14 @@ public class AdServiceImpl implements AdService {
 	}
 
 
-	public void deleteAd(Long adId) {
-		adDao.delete(adId);
+	public void deleteAd(Ad ad) {
+
+		PictureService pictureService = new PictureServiceImpl();
+		for (Picture picture : ad.getPictures()) {
+			if(picture != null)
+				pictureService.deletePicture(picture);
+		}
+		adDao.delete(ad.getId());
 	}
 
 	public void editAd(AdForm adForm, Long adId) {

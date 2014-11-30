@@ -1,5 +1,7 @@
 package org.sample.controller.service;
 
+import java.io.File;
+
 import org.sample.model.Picture;
 import org.sample.model.dao.PictureDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,13 @@ public class PictureServiceImpl implements PictureService{
 		return pictureDao.findByFileName(name);
 	}
 
+	public void deletePicture(Picture picture){
+    	File file = new File(picture.getFilePath() + picture.getFileName());
+    	file.delete();
+    	System.out.println(picture.getId());
+		//pictureDao.delete(picture.getId());
+	}
+	
 	public void removePictureById(Long id) {
 		pictureDao.delete(id);
 	}
