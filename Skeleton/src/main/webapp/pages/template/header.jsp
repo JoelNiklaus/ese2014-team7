@@ -37,13 +37,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="search">Home</a>
+					<a class="navbar-brand" href="search"><span class="glyphicon glyphicon-home"></span> Home</a>
 				</div>
 	
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="search">Search</a></li>
+						<li><a href="search"><span class="glyphicon glyphicon-search"></span> Search</a></li>
 						<c:if test="${not empty loggedInUser}">
 							<li><a href="createAd">Create Ad</a></li>
 							<li><a href="myAds">My Ads</a></li>
@@ -76,17 +76,17 @@
 								<label> <input type="checkbox" name="_spring_security_remember_me"> Remember me
 								</label>
 							</div>
-							<button type="submit" class="btn btn-primary">Sign In</button>
+							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Login</button>
 							<button type="button" onclick="window.location.href='register'"
-								class="btn btn-info">Register</button>
+								class="btn btn-info"><span class="glyphicon glyphicon-new-window"></span> Register</button>
 						</form>
 					</c:if>
 					<c:if test="${not empty loggedInUser}">
 						<form class="navbar-form navbar-right" action="logout" method="get">
-							<button type="submit" class="btn btn-danger">Logout</button>
+							<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
 						</form>
-						<p class="navbar-text navbar-right">Signed in as <a class="navbar-link" href="profile">${loggedInUser.firstName }
-									${loggedInUser.lastName }</a>&nbsp&nbsp&nbsp</p>
+						<p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> Signed in as <a class="navbar-link" href="profile">${loggedInUser.firstName }
+									${loggedInUser.lastName }</a></p>
 					</c:if>
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->

@@ -9,12 +9,12 @@
 <h1>
 	${ad.title}
 	<c:if test="${loggedInUser.id!=ad.placerId}">
-		<a class="btn btn-info" href="/Skeleton/bookmark?id=${ad.id}"><span class="glyphicon glyphicon-star"></span> Bookmark Ad</a>
+		<a class="btn btn-info" href="/Skeleton/bookmark?id=${ad.id}"><span class="glyphicon glyphicon-bookmark"></span> Bookmark Ad</a>
 		<a class="btn btn-info" href="/Skeleton/sendEnquiry?id=${ad.id}"><span class="glyphicon glyphicon-envelope"></span> Send Enquiry</a>
 	</c:if>
 	<c:if test="${loggedInUser.id==ad.placerId}">
-		<a class="btn btn-info" href="/Skeleton/editAd?id=${ad.id}">Edit</a>
-		<a class="btn btn-danger" href="/Skeleton/deleteAd?id=${ad.id}">Delete</a>
+		<a class="btn btn-info" href="/Skeleton/editAd?id=${ad.id}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+		<a class="btn btn-danger" href="/Skeleton/deleteAd?id=${ad.id}"><span class="glyphicon glyphicon-remove"></span> Delete</a>
 	</c:if>
 </h1>
     

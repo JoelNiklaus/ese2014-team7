@@ -19,8 +19,8 @@
 	<form:errors path="email" cssClass="help-inline" element="span" />
 
 	<div class="form-actions">
-		<button type="submit" class="btn btn-primary">Send Password</button>
-		<button type="reset" class="btn btn-warning">Reset</button>
+		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span> Send Password</button>
+		<button type="reset" class="btn btn-warning"><span class="glyphicon glyphicon-remove"></span> Reset</button>
 	</div>
 </form:form>
 

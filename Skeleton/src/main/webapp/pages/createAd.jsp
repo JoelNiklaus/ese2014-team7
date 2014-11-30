@@ -129,8 +129,8 @@
 			<div class="dz-message" data-dz-message><span>Click or Drag and Drop to this field to upload images</span></div>
 			</div>
 			<br />
-			<button type="submit" class="btn btn-primary">Create Ad</button>
-			<button type="button" class="btn">Cancel</button>
+			<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+			<button type="reset" class="btn btn-warning"><span class="glyphicon glyphicon-remove"></span> Reset</button>
 
 	</fieldset>
 </form:form>

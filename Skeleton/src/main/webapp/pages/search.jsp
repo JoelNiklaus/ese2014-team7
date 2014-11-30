@@ -13,8 +13,8 @@
 	</c:if>
 
 <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="simpleSearch">Simple Search</a></li>
-  <li role="presentation"><a href="advancedSearch">Advanced Search</a></li>
+  <li role="presentation" class="active"><a href="simpleSearch"><span class="glyphicon glyphicon-minus"></span> Simple Search</a></li>
+  <li role="presentation"><a href="advancedSearch"><span class="glyphicon glyphicon-plus"></span> Advanced Search</a></li>
 </ul>
 
 	<!--  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
@@ -67,8 +67,8 @@
 			<form:input type="hidden" path="roomSizeMax" id="field-roomSizeMax" maxlength="45"/>
 			
 			<div class="pull-right">
-				<button type="submit" onclick="javascript: form.action='search';" class="btn btn-primary">Search</button>
-				<button type="submit" onclick="javascript: form.action='saveSearch';" id="save" class="btn btn-info">Save</button>
+				<button type="submit" onclick="javascript: form.action='search';" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+				<button type="submit" onclick="javascript: form.action='saveSearch';" id="save" class="btn btn-info"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
 			</div>
 		</fieldset>
 	</form:form>
@@ -78,8 +78,8 @@
 
 	<div role="tabpanel">
 		<ul class="nav nav-tabs" role="tablist" id="myTab">
-	  		<li role="presentation"><a href="#listTab">List</a></li>
-	  		<li role="presentation"><a href="#mapTab">Map</a></li>
+	  		<li role="presentation"><a href="#listTab"><span class="glyphicon glyphicon-list"></span> List</a></li>
+	  		<li role="presentation"><a href="#mapTab"><span class="glyphicon glyphicon-globe"></span> Map</a></li>
 		</ul>
 		
 		<div class="tab-content">

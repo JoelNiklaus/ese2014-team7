@@ -51,8 +51,8 @@
 					</c:if>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<input type="submit" class="btn btn-primary" value="Login">
-							<input type="reset" class="btn btn-warning" value="Reset">
+							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+							<button type="reset" class="btn btn-warning"><span class="glyphicon glyphicon-remove"></span> Reset</button>
 							<a href="forgot">Forgot Password?</a>
 							<input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />

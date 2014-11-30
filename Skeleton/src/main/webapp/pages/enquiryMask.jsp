@@ -26,8 +26,6 @@
   </div>
 
  <form:form class="form-horizontal" method="post" modelAttribute="enquiryForm" action="submitEnquiry" id="enquiryForm" autocomplete="off">
- 
- 	<fieldset>
  		<div class="control-group<c:if test="${not empty descriptionErrors}"> error</c:if>">
 			<div class="controls">
 				<form:hidden path="adId" id="field-ad-id" tabindex="2" maxlength="255" placeholder="ID" />
@@ -39,12 +37,10 @@
 				<form:errors path="messageText" cssClass="help-inline" element="span" />
 			</div>
 		</div>
-	
-		<div class="form-actions">
-			<button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-envelope"></i> SUBMIT</button>
+		
+		<div class="controls">
+				<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-send"></span> Send</button>
 		</div>
- 	</fieldset>
- 
  </form:form>
 
 <c:import url="template/footer.jsp" />
