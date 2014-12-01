@@ -33,47 +33,6 @@ public class NotificationServiceImpl implements NotificationService {
 			if(match(s, ad))
 				sendNotification(s, ad);
 		
-		/*
-		 * Algorithm:
-		 * - Get all saved searches
-		 * - for all saved searches s: 
-		 * 		- check if s matches ad
-		 * 				if true: assemble and save notification (userId in s, adId in ad)
-		 * 
-		 * TODO: Where do I get adId from?! Ad doesn't get ID before being saved...
-		 */
-		
-		/*Notification notification = new Notification();
-
-		Iterable<User> allUsers = userDao.findAll();
-
-		if(userDao.count() > 0)
-
-			//TODO optimize this very inefficient way of fetching the data.
-			for(User user : allUsers) {
-				//TODO Question: What happens if a user has more than one saved searches
-				Search search = searchDao.findOne(user.getId());
-
-				if(search != null) {
-					SearchForm searchForm = new SearchForm();
-					searchForm.setPriceMin("" + search.getPriceMin());
-					searchForm.setPriceMax("" + search.getPriceMax());
-					searchForm.setRoomSizeMin("" + search.getRoomSizeMin());
-					searchForm.setRoomSizeMax("" + search.getRoomSizeMax());
-					searchForm.setCity(search.getCity());
-					
-					Iterable<Ad> searchResults = searchService.computeSearchResults(searchForm);
-					
-					for(Ad result : searchResults)
-						if(result.equals(ad)) {
-							notification.setAdId(ad.getId());
-							notification.setUserId(user.getId());
-							notification.setUnread(true);
-							notificationDao.save(notification);
-							break;
-						}
-				}
-			}*/
 	}
 	
 	private boolean match(Search search, Ad ad)
@@ -129,6 +88,7 @@ public class NotificationServiceImpl implements NotificationService {
 				
 				if(unread)
 				{
+					System.out.println("Found unread notif");
 					n.setUnread(false);
 					notificationDao.save(n);
 				}

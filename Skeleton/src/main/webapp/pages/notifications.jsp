@@ -6,18 +6,22 @@
 
 <c:import url="template/header.jsp" />
 
-<h1>My Notification Center</h1>
+<div class="pull-right">
+    <button id="clearNotifications" class="btn btn-danger" onclick="javascript:location.href='clearNotifications'"><span class="glyphicon glyphicon-trash"></span> Clear Notifications</button>
+</div>
+
+<h1>My Notification Center</h1> 
 
 ${message}
 
 <c:forEach items="${unreadNotifications}" var="notification">
 		<%-- the onclick link should lead to notificationController, which should then return the ad model --%>
-		<div class="panel panel-info" onclick="javascript:location.href='ad?id=${notification.adId}'">
+		<div class="panel panel-info" onclick="javascript:location.href='openNotification?adId=${notification.adId}&notificationId=${notification.id}'">
 
 		<div class="panel-heading">
-			<h5>${notification.ad.title}</h5>
-			<a class="btn btn-primary" href="removeNotification?id=${notification.id}">remove notification</a>
+				<h5>New Match: ${notification.ad.title}</h5>
 		</div>
+
 		<div class="panel-body">
 			<a class="pull-left"> <img class="media-object"
 				src="/Skeleton/img/<c:out value="${notification.ad.street}${notification.ad.houseNr}.jpeg"/>"
@@ -36,17 +40,15 @@ ${message}
 </c:forEach>
 
 <c:forEach items="${notifications}" var="notification">
-	<div class="panel panel-default" onclick="javascript:location.href='ad?id=${notification.adId}'">
+	<div class="panel panel-default" onclick="javascript:location.href='openNotification?adId=${notification.adId}&notificationId=${notification.id}'">
 
-		<div class="panel-heading">
-			<h5>${notification.ad.title}</h5>
-			<a class="btn btn-primary" href="removeNotification?id=${notification.id}">remove notification</a>
-		</div>
 		<div class="panel-body">
 			<a class="pull-left"> <img class="media-object"
 				src="/Skeleton/img/<c:out value="${notification.ad.street}${notification.ad.houseNr}.jpeg"/>"
 				height="100px">
 			</a>
+			
+			<div>${notification.notificationText}</div>
 		</div>
 
 		<div class="panel-footer">
