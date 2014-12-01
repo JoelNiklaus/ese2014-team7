@@ -37,7 +37,7 @@ public class NotificationController {
 		ModelAndView model = new ModelAndView("notifications");
 
 		User user = loginService.getLoggedInUser();
-		updateService.updateNumberOfUnreadItems(model);
+		updateService.updateNumberOfUnreadItems(model); //TODO: shouldn't this come after fetching notifs? --> check!
 		
 		model.addObject("notifications", notificationService.findNotifications(user));
 		model.addObject("unreadNotifications", notificationService.findUnreadNotifications());
@@ -75,3 +75,8 @@ public class NotificationController {
 		return model;
 	}
 }
+
+/*
+ * TODO: implement controller method that deletes clicked notification and then redirects to ad model, 
+ * as it does directly so far.
+ */

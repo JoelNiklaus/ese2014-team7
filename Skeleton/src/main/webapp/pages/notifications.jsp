@@ -11,6 +11,7 @@
 ${message}
 
 <c:forEach items="${unreadNotifications}" var="notification">
+		<%-- the onclick link should lead to notificationController, which should then return the ad model --%>
 		<div class="panel panel-info" onclick="javascript:location.href='ad?id=${notification.adId}'">
 
 		<div class="panel-heading">
