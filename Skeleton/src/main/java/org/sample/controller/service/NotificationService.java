@@ -12,7 +12,7 @@ public interface NotificationService {
 	 * 
 	 * @param ad
 	 */
-	public void saveNotificationsToAffectedUsers(Ad ad);
+	public void sendNotificationsForMatchingSearches(Ad ad);
 	
 	/**
 	 * Compiles a list of all (already read) Notifications relevant to given user.

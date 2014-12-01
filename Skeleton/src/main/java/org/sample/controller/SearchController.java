@@ -64,7 +64,6 @@ public class SearchController {
 			model.addObject("searchResults", searchResults);
 		
 		
-		
 		return model;
 	}
 
