@@ -19,7 +19,7 @@ ${message}
 		<div class="panel panel-info" onclick="javascript:location.href='openNotification?adId=${notification.adId}&notificationId=${notification.id}'">
 
 		<div class="panel-heading">
-				<h5>New Match: ${notification.ad.title}</h5>
+				<h5>New Search Match: ${notification.ad.title}</h5>
 		</div>
 
 		<div class="panel-body">
@@ -41,6 +41,10 @@ ${message}
 
 <c:forEach items="${notifications}" var="notification">
 	<div class="panel panel-default" onclick="javascript:location.href='openNotification?adId=${notification.adId}&notificationId=${notification.id}'">
+
+		<div class="panel-heading">
+				<h5>Search Match: ${notification.ad.title}</h5>
+		</div>
 
 		<div class="panel-body">
 			<a class="pull-left"> <img class="media-object"
