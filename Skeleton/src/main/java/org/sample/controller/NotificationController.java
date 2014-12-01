@@ -26,6 +26,7 @@ public class NotificationController {
 	NotificationDao notificationDao;
 	@Autowired
 	UpdateService updateService;
+	@Autowired AdController adController;
 
 	/**
 	 * Creates a model displaying user's notifications
@@ -37,13 +38,13 @@ public class NotificationController {
 		ModelAndView model = new ModelAndView("notifications");
 
 		User user = loginService.getLoggedInUser();
-		updateService.updateNumberOfUnreadItems(model);
 		
 		model.addObject("notifications", notificationService.findNotifications(user));
 		model.addObject("unreadNotifications", notificationService.findUnreadNotifications());
 		
 		notificationService.markAllNotificationsAsRead(user);
 		model.addObject("loggedInUser", user);
+		updateService.updateNumberOfUnreadItems(model);
 		return model;
 	}
 
@@ -74,4 +75,50 @@ public class NotificationController {
 		}
 		return model;
 	}
+
+
+	@RequestMapping(value = "/openNotification", method = RequestMethod.GET)
+	public ModelAndView openNotification(@RequestParam String adId, @RequestParam String notificationId)
+	{
+		ModelAndView model = adController.displaySingleAd(adId);
+		Long notifId;
+		
+		try
+		{
+			notifId = Long.parseLong(notificationId);
+			Notification notification = notificationDao.findOne(notifId);
+			
+			if(notification != null)
+				notificationDao.delete(notification);
+			else
+				throw new IllegalArgumentException();
+			
+		}
+		catch(NumberFormatException ex)
+		{
+			model = new ModelAndView("404");
+		}
+		catch(IllegalArgumentException ex)
+		{
+			model = new ModelAndView("404");
+		}
+		
+		return model;
+	}
+	
+	@RequestMapping(value = "/clearNotifications")
+	public ModelAndView clearNotifications()
+	{
+		ModelAndView model;
+		
+		Iterable<Notification> allNotificationsByUser = notificationDao.findAllByUserId(loginService.getLoggedInUser().getId());
+		for(Notification n : allNotificationsByUser)
+			notificationDao.delete(n);
+			
+		model = showNotifications();
+		
+		return model;
+	}
+	
+	
 }
