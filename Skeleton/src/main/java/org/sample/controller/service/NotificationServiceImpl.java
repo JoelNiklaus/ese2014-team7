@@ -25,9 +25,25 @@ public class NotificationServiceImpl implements NotificationService {
 	@Autowired UserDao userDao;
 	@Autowired NotificationDao notificationDao;
 
-	@Transactional
-	public void saveNotificationsToAffectedUsers(Ad ad) {
-		Notification notification = new Notification();
+	public void sendNotificationsForMatchingSearches(Ad ad) {
+		
+		Iterable<Search> allSearches = searchDao.findAll();
+		
+		for(Search s: allSearches)
+			if(match(s, ad))
+				sendNotification(s, ad);
+		
+		/*
+		 * Algorithm:
+		 * - Get all saved searches
+		 * - for all saved searches s: 
+		 * 		- check if s matches ad
+		 * 				if true: assemble and save notification (userId in s, adId in ad)
+		 * 
+		 * TODO: Where do I get adId from?! Ad doesn't get ID before being saved...
+		 */
+		
+		/*Notification notification = new Notification();
 
 		Iterable<User> allUsers = userDao.findAll();
 
@@ -57,9 +73,39 @@ public class NotificationServiceImpl implements NotificationService {
 							break;
 						}
 				}
-			}
+			}*/
+	}
+	
+	private boolean match(Search search, Ad ad)
+	{
+		long price;
+		
+		if(search == null || ad == null)
+			return false;
+		
+		price = ad.getRent() + ad.getAddCost();
+		
+		if(ad.getCity().equals(search.getCity())
+		   && search.getPriceMin() <= price
+		   && price <= search.getPriceMax())
+				return true;
+		
+		return false;
 	}
 
+	@Transactional
+	private void sendNotification(Search search, Ad ad)
+	{
+		assert (search != null) && (ad != null);
+		
+		Notification notification = new Notification();
+		notification.setAdId(ad.getId());
+		notification.setUserId(search.getUserId());
+		notification.setNotificationText("Hey, there's a new ad that might be interesting for you! Click to check it out!");
+		notification.setUnread(true);
+		notificationDao.save(notification);
+	}
+	
 	@Transactional
 	public Iterable<Notification> findNotifications(User user) {
 		return fetchRelevantNotifications(false);

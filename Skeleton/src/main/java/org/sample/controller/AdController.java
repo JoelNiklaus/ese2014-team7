@@ -28,18 +28,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class AdController {
 
-    @Autowired
-    LoginService loginService;
-    @Autowired
-    AdService adService;
-    @Autowired
-    AdDao adDao;
-    @Autowired
-    ServletContext servletContext;
-    @Autowired
-	UpdateService updateService;
+    @Autowired LoginService 	loginService;
+    @Autowired AdService 		adService;
+    @Autowired AdDao 			adDao;
+    @Autowired ServletContext 	servletContext;
+    @Autowired UpdateService 	updateService;
     @Autowired SearchController searchController;
-    
     
     /**
      * Submits created ad and returns a confirmation model.
