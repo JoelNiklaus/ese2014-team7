@@ -12,66 +12,69 @@
 		</div>
 	</c:if>
 
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="simpleSearch"><span class="glyphicon glyphicon-minus"></span> Simple Search</a></li>
-  <li role="presentation"><a href="advancedSearch"><span class="glyphicon glyphicon-plus"></span> Advanced Search</a></li>
-</ul>
+
 
 	<!--  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
 	<script src="/Skeleton/lib/noUiSlider/jquery.nouislider.js"></script>
 	<script src="/Skeleton/lib/noUiSlider/jquery.liblink.js"></script>
 	<script src="/Skeleton/lib/noUiSlider/wNumb.js"></script>	
+	<script src="/Skeleton/js/bootstrap.min.js"></script>
 
 	<link href="/Skeleton/lib/noUiSlider/jquery.nouislider.css" rel="stylesheet">
 	<link href="/Skeleton/css/search.css" rel="stylesheet">
 
+	<div class="panel" style="background-color: #fafafa; padding: 5pt; 	border: 1px solid; border-color: #f0f0f0;">
+		<h2 class="form-heading">Search</h2>
+		<c:if test="${not empty message}">
+		<div class="alert alert-success" role="alert">
+			${message}
+		</div>
+		</c:if>
+		
+		<form:form method="post" modelAttribute="searchForm" id="searchForm" cssClass="form-horizontal" autocomplete="off">
+			<fieldset>
+				<div class="row">
+					<div class="col-md-2">
+						<label for="field-price">Price</label>
+					</div>
+					<div class="col-md-3" id="priceSlider" ></div>
+	
+					<div class="col-md-2">
+						<label for="field-rooms">Room Size</label>
+					</div>
+						<div class="col-md-3" id="roomSizeSlider"></div>
+				</div>
+	
+				<br>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="control-label" for="field-city">City</label>
+					</div>
+					
+					<div class="col-md-3">	
+						<form:input class="form-control" path="city" id="field-city" placeholder="City" tabindex="5" maxlength="35"/>
+					</div>
+					<br />
+				</div>
+				<div class="row" id="dateRow">
+					<div class="col-md-2">
+						<label class="control-label" for="field-date">Move in Date</label>
+					</div>
+				</div>
+		
+				<form:input type="hidden" path="priceMin" id="field-priceMin" maxlength="45"/>
+				<form:input type="hidden" path="priceMax" id="field-priceMax" maxlength="45"/>
+				<form:input type="hidden" path="roomSizeMin" id="field-roomSizeMin" maxlength="45"/>
+				<form:input type="hidden" path="roomSizeMax" id="field-roomSizeMax" maxlength="45"/>
+				
+				<div class="pull-right">
+			        	<button type="button" class="btn btn btn-default" id="advancedSearchBtn">Advanced Search</button>
 
-	
-
-	<div class="panel">
-	<h2 class="form-heading">Search</h2>
-	<c:if test="${not empty message}">
-	<div class="alert alert-success" role="alert">
-		${message}
-	</div>
-	</c:if>
-	
-	
-	
-	<form:form method="post" modelAttribute="searchForm" id="searchForm" cssClass="form-horizontal" autocomplete="off">
-		<fieldset>
-			<div class="row">
-				<div class="col-md-2">
-					<label for="field-price">Price</label>
+					<button type="submit" onclick="javascript: form.action='saveSearch';" id="save" class="btn btn-info"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+					<button type="submit" onclick="javascript: form.action='search';" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
 				</div>
-				<div class="col-md-3" id="priceSlider"></div>
-				<div class="col-md-1"></div>
-				<div class="col-md-2">
-					<label for="field-rooms">Room Size</label>
-				</div>
-				<div class="col-md-3" id="roomSizeSlider"></div>
-			</div>
-			<br>
-			<div class="row">
-				<div class="col-md-2">
-					<label class="control-label" for="field-city">City</label>
-				</div>
-				<div class="col-md-3">	
-					<form:input class="form-control" path="city" id="field-city" placeholder="City" tabindex="5" maxlength="35"/>
-				</div>
-			</div>
-	
-			<form:input type="hidden" path="priceMin" id="field-priceMin" maxlength="45"/>
-			<form:input type="hidden" path="priceMax" id="field-priceMax" maxlength="45"/>
-			<form:input type="hidden" path="roomSizeMin" id="field-roomSizeMin" maxlength="45"/>
-			<form:input type="hidden" path="roomSizeMax" id="field-roomSizeMax" maxlength="45"/>
-			
-			<div class="pull-right">
-				<button type="submit" onclick="javascript: form.action='search';" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
-				<button type="submit" onclick="javascript: form.action='saveSearch';" id="save" class="btn btn-info"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
-			</div>
-		</fieldset>
-	</form:form>
+			</fieldset>
+		</form:form>
 	</div>
 	<br>
 	
@@ -169,22 +172,10 @@
 		}));
 		$("#priceSlider").Link('upper').to('-inline-<div class="priceSliderTooltip" ></div>', function ( value ) {
 		
-
-			
-			if(value==3000)
-			{
-				$(this).html(
-						'<strong>Max: </strong>' +
-						'<span>' + "Unlimited" + '</span>'
-					);
-				
-			} else {
 				$(this).html(
 						'<strong>Max: </strong>' +
 						'<span>' + value + '</span>'
 					);
-			}
-
 		});
 		$("#roomSizeSlider").noUiSlider({
 			start: [0, 300],
@@ -195,10 +186,6 @@
 				'min': 0,
 				'max': 300
 			}),
-			/*format: wNumb({
-				decimals: 0,
-				postfix: ' CHF',
-			})*/
 		});
 		
 		$("#roomSizeSlider").Link('lower').to($("#field-roomSizeMin"), null, wNumb({
@@ -215,21 +202,10 @@
 			decimals: 0,
 		}));
 		$("#roomSizeSlider").Link('upper').to('-inline-<div class="roomSizeSliderTooltip" ></div>', function ( value ) {
-		
-			if(value==300)
-			{
-				$(this).html(
-						'<strong>Max: </strong>' +
-						'<span>' + "Unlimited" + '</span>'
-					);
-				
-			} else {
 				$(this).html(
 						'<strong>Max: </strong>' +
 						'<span>' + value + '</span>'
-					);
-			}
-			
+					);			
 		});
 		
 		$(document).ready(function(){			
@@ -296,11 +272,19 @@
 		    var px = map.project(e.popup._latlng);
 		    px.y -= e.popup._container.clientHeight/2
 		    map.panTo(map.unproject(px),{animate: true});
-
 		});		
 	</script>
 
 	<script>
+		$('#advancedSearchBtn').click(function(){
+			$('#advancedSearchBtn').toggleClass('active');
+			if ($('#advancedSearchBtn').hasClass('active')) {
+				$('#dateRow').hide();
+			} else {
+				$('#dateRow').show();
+			}
+		});
+		
 		$('#myTab a[href="#mapTab"]').click(function (e) {
 			  e.preventDefault()
 			  $(this).tab('show')
