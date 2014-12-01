@@ -16,7 +16,11 @@
 			<div class="panel-heading"><h5>${ad.title}</h5></div>
 			<div class="panel-body" >
 				<a class="pull-left" >
-		    		<img class="media-object" src="/Skeleton/img/<c:out value="${ad.street}${ad.houseNr}.jpeg"/>" width="200px">
+								<c:forEach items="${ad.pictures}" varStatus="loopCount" var="pic">
+								<c:if test="${loopCount.count eq 1}">
+								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
+								</c:if>
+								</c:forEach>
 		  		</a>
 		  		<p>${ad.description}</p>
 				

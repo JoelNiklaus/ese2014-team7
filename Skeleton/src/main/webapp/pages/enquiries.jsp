@@ -23,7 +23,11 @@
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
-		    		<img class="media-object" src="/Skeleton/img/<c:out value="${enquiry.ad.street}${enquiry.ad.houseNr}.jpeg"/>" height="100px">
+		    						<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
+								<c:if test="${loopCount.count eq 1}">
+								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
+								</c:if>
+								</c:forEach>
 		  		</a>
 		  		<p>${enquiry.messageText}</p>
 		  		
@@ -44,7 +48,11 @@
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
-		    		<img class="media-object" src="/Skeleton/img/<c:out value="${enquiry.ad.street}${enquiry.ad.houseNr}.jpeg"/>" height="100px">
+		    						<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
+								<c:if test="${loopCount.count eq 1}">
+								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
+								</c:if>
+								</c:forEach>
 		  		</a>
 		  		<p>${enquiry.messageText}</p>
 		  		
@@ -68,7 +76,11 @@
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
-		    		<img class="media-object" src="/Skeleton/img/<c:out value="${enquiry.ad.street}${enquiry.ad.houseNr}.jpeg"/>" height="100px">
+		    						<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
+								<c:if test="${loopCount.count eq 1}">
+								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
+								</c:if>
+								</c:forEach>
 		  		</a>
 		  		<p>${enquiry.messageText}</p>
 		  		
@@ -92,7 +104,11 @@
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
-		    		<img class="media-object" src="/Skeleton/img/<c:out value="${enquiry.ad.street}${enquiry.ad.houseNr}.jpeg"/>" height="100px">
+		    						<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
+								<c:if test="${loopCount.count eq 1}">
+								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
+								</c:if>
+								</c:forEach>
 		  		</a>
 		  		<p>${enquiry.messageText}</p>
 			</div>
