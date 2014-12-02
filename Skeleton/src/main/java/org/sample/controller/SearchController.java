@@ -117,9 +117,7 @@ public class SearchController {
 	 * @return						search model
 	 */
 	@RequestMapping(value = "/saveSearch", method = RequestMethod.POST)    
-	public ModelAndView saveSearch(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){
-		assert loginService.getLoggedInUser() != null;
-		
+	public ModelAndView saveSearch(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){		
 		ModelAndView model = search(searchForm, result, redirectAttributes, searchId);
 		String message = "";
 		
@@ -146,9 +144,7 @@ public class SearchController {
 
 
 	@RequestMapping("/searches")
-	public ModelAndView searches() {
-		assert loginService.getLoggedInUser() != null;
-		
+	public ModelAndView searches() {		
 		ModelAndView model = new ModelAndView("searches");
 
 		User user = loginService.getLoggedInUser();
@@ -160,10 +156,7 @@ public class SearchController {
 	}
 
 	@RequestMapping(value = "/removeSearch", method = RequestMethod.GET)
-	public ModelAndView removeSearch(@RequestParam String id) {
-		assert loginService.getLoggedInUser() != null;
-		assert id != null;
-		
+	public ModelAndView removeSearch(@RequestParam String id) {	
 		ModelAndView model = searches();
 
 		try {
