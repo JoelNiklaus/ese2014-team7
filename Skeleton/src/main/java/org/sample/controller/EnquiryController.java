@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.sample.controller.exceptions.InvalidAdException;
 import org.sample.controller.pojos.EnquiryForm;
 import org.sample.controller.pojos.EnquiryRatingForm;
-import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.UpdateService;
@@ -227,7 +226,11 @@ public class EnquiryController {
 		return model;
 	}
 
-
+	/**
+	 * Composes a list of the objects needed in the enquiry view.
+	 * 
+	 * @param model
+	 */
 	private void enquiryViewAddModelAttributes(ModelAndView model) {
 		Iterable<Enquiry> newReceivedEnquiries = enquiryService.findNewReceivedEnquiries();
 		Iterable<Enquiry> ratedReceivedEnquiries = enquiryService.findRatedReceivedEnquiries();

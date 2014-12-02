@@ -10,13 +10,11 @@ import org.sample.controller.pojos.EnquiryRatingForm;
 import org.sample.model.Enquiry;
 import org.sample.model.EnquiryComparator;
 import org.sample.model.EnquiryComparatorRating;
-import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.sample.model.dao.EnquiryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.ModelAndView;
 
 @Service
 public class EnquiryServiceImpl implements EnquiryService {

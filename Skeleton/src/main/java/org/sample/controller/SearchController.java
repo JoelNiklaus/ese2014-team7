@@ -1,7 +1,5 @@
 package org.sample.controller;
 
-import java.util.LinkedList;
-
 import javax.validation.Valid;
 
 import org.sample.controller.pojos.LoginForm;
@@ -10,7 +8,6 @@ import org.sample.controller.service.LoginService;
 import org.sample.controller.service.SearchService;
 import org.sample.controller.service.UpdateService;
 import org.sample.model.Ad;
-import org.sample.model.Notification;
 import org.sample.model.Search;
 import org.sample.model.User;
 import org.sample.model.dao.AdDao;
@@ -28,18 +25,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class SearchController {
 
-	@Autowired
-	LoginService loginService;
-	@Autowired
-	SearchService searchService;
-	@Autowired
-	SearchDao searchDao;
-	@Autowired
-	AdDao adDao;
-	@Autowired
-	UpdateService updateService;
-	@Autowired
-	NotificationDao notificationDao;
+	@Autowired LoginService loginService;
+	@Autowired SearchService searchService;
+	@Autowired SearchDao searchDao;
+	@Autowired AdDao adDao;
+	@Autowired UpdateService updateService;
+	@Autowired NotificationDao notificationDao;
 	
 	/**
 	 * Returns search model for a given search-template. Is also the home page!
@@ -149,7 +140,11 @@ public class SearchController {
 		return model;
 	}
 
-
+	/**
+	 * Displays the searches the logged in user saved previously.
+	 * 
+	 * @return
+	 */
 	@RequestMapping("/searches")
 	public ModelAndView searches() {		
 		ModelAndView model = new ModelAndView("searches");
@@ -162,6 +157,12 @@ public class SearchController {
 		return model;
 	}
 
+	/**
+	 * Removes a saved search from the list.
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/removeSearch", method = RequestMethod.GET)
 	public ModelAndView removeSearch(@RequestParam String id) {	
 		ModelAndView model = searches();

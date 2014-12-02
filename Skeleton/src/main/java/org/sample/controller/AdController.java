@@ -1,6 +1,5 @@
 package org.sample.controller;
 
-import java.io.File;
 import java.security.Principal;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import org.sample.controller.service.AdService;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.UpdateService;
 import org.sample.model.Ad;
-import org.sample.model.Picture;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -101,7 +99,7 @@ public class AdController {
      * @param id	ad id
      * @return		ad display model, 404 model if adId doesn't exist
      */
-    @RequestMapping("ad")
+    @RequestMapping(value = "/ad", method = RequestMethod.GET)
     public ModelAndView displaySingleAd(@RequestParam String id) {
     	
     	ModelAndView model = new ModelAndView("ad");
@@ -126,10 +124,11 @@ public class AdController {
     }
     
     /**
+     * Shows the ads created by the logged in user.
      * 
      * @return myAds model 
      */
-    @RequestMapping("myAds")
+    @RequestMapping(value = "/myAds", method = RequestMethod.GET)
     public ModelAndView showMyAd() {
     	ModelAndView model = new ModelAndView("myAds");
     
@@ -144,7 +143,13 @@ public class AdController {
     	return model;
     }
     
-    @RequestMapping(value="/deleteAd")
+    /**
+     * Deletes an ad.
+     * 
+     * @param id	of the ad to be deleted
+     * @return
+     */
+    @RequestMapping(value = "/deleteAd", method = RequestMethod.GET)
     public @ResponseBody ModelAndView deleteAd(@RequestParam("id") String id) {
     	ModelAndView model = new ModelAndView("myAds");
     	Ad ad = adDao.findOne(new Long(id));
@@ -153,9 +158,13 @@ public class AdController {
         return model;
     }
     
-
-    
-    @RequestMapping(value = "/editAd")
+    /**
+     * Shows the form to edit the ad.
+     * 
+     * @param id	ad to be edited
+     * @return
+     */
+    @RequestMapping(value = "/editAd", method = RequestMethod.GET)
     public @ResponseBody ModelAndView editAd(@RequestParam("id") String id) {
     	ModelAndView model = new ModelAndView("editAd");
     	
@@ -170,6 +179,15 @@ public class AdController {
     	return model;
     }
     
+    /**
+     * Saves the changes made to the ad.
+     * 
+     * @param adForm
+     * @param result
+     * @param principal
+     * @param adId
+     * @return	the form for further changes
+     */
     @RequestMapping(value = "/editAd", method = RequestMethod.POST)
     public ModelAndView submitEditAd(@Valid AdForm adForm, BindingResult result , Principal principal, @RequestParam(value = "id", required = true) Long adId) {
 	

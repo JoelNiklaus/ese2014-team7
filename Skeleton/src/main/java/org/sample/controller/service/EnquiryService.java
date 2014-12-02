@@ -3,7 +3,6 @@ package org.sample.controller.service;
 import org.sample.controller.pojos.EnquiryForm;
 import org.sample.controller.pojos.EnquiryRatingForm;
 import org.sample.model.Enquiry;
-import org.springframework.web.servlet.ModelAndView;
 
 public interface EnquiryService {
 

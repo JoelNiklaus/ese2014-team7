@@ -18,12 +18,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ProfileController { 
 	
-    @Autowired
-    LoginService loginService;
-    
-    @Autowired
-	UpdateService updateService;
+    @Autowired LoginService loginService;
+    @Autowired UpdateService updateService;
 	
+    /**
+     * Displays the profileForm which enables the user to change his profile information.
+     * 
+     * @return
+     */
 	@RequestMapping("/profile")
 	public ModelAndView loadProfilePage()
 	{
@@ -39,6 +41,14 @@ public class ProfileController {
 		return model;
 	}
 
+	/**
+	 * Saves the changes made to the profile to the database.
+	 * 
+	 * @param profileForm
+	 * @param result
+	 * @param redirectAttributes
+	 * @return the profileForm for further changes.
+	 */
     @RequestMapping(value = "/profileChange", method = RequestMethod.POST)
     public ModelAndView profileChange(@Valid SignupForm profileForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;

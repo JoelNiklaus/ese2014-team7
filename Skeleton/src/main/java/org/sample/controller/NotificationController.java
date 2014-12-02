@@ -16,16 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class NotificationController {
-	@Autowired
-	LoginService loginService;
-	@Autowired
-	NotificationService notificationService;
-	@Autowired
-	AdDao adDao;
-	@Autowired
-	NotificationDao notificationDao;
-	@Autowired
-	UpdateService updateService;
+	@Autowired LoginService loginService;
+	@Autowired NotificationService notificationService;
+	@Autowired AdDao adDao;
+	@Autowired NotificationDao notificationDao;
+	@Autowired UpdateService updateService;
 	@Autowired AdController adController;
 
 	/**
@@ -76,7 +71,13 @@ public class NotificationController {
 		return model;
 	}
 
-
+	/**
+	 * 
+	 * 
+	 * @param adId
+	 * @param notificationId
+	 * @return
+	 */
 	@RequestMapping(value = "/openNotification", method = RequestMethod.GET)
 	public ModelAndView openNotification(@RequestParam String adId, @RequestParam String notificationId)
 	{
@@ -106,6 +107,11 @@ public class NotificationController {
 		return model;
 	}
 	
+	/**
+	 * Deletes all notifications of the logged in user.
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/clearNotifications")
 	public ModelAndView clearNotifications()
 	{

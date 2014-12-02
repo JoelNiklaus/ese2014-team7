@@ -12,12 +12,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class IndexController {
 	
-	@Autowired
-	LoginService loginService;
-	
-	@Autowired
-	UpdateService updateService;
+	@Autowired LoginService loginService;
+	@Autowired UpdateService updateService;
     
+	/**
+	 * Shows a 404 error page.
+	 * 
+	 * @return
+	 */
     @RequestMapping(value = "/404", method = RequestMethod.GET)
     public ModelAndView notFound() {
     	ModelAndView model = new ModelAndView("404");
@@ -25,7 +27,12 @@ public class IndexController {
     	updateService.updateNumberOfUnreadItems(model);
         return model;
     }
-        
+    
+    /**
+     * 
+     * @param redirectAttributes
+     * @return
+     */
     @RequestMapping(value = "/security-error", method = RequestMethod.GET)
     public String securityError(RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("page_error", "You do have have permission to do that!");

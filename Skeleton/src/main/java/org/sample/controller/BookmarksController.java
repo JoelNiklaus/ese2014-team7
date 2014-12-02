@@ -1,7 +1,6 @@
 package org.sample.controller;
 
 import org.sample.controller.exceptions.InvalidUserException;
-import org.sample.controller.pojos.EnquiryForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.service.BookmarkService;
 import org.sample.controller.service.LoginService;

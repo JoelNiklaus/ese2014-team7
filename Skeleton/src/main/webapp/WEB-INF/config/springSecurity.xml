@@ -7,17 +7,33 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<security:http auto-config="true" use-expressions="true" access-denied-page="/access-denied" authentication-manager-ref="authMgr">
-		<security:intercept-url pattern="/login" access="permitAll" />		
-		<security:intercept-url pattern="/createAd" access="hasRole('ROLE_USER')"/>	
-		<security:intercept-url pattern="/myAds" access="hasRole('ROLE_USER')" />
+	<security:http auto-config="true" use-expressions="true" access-denied-page="/access-denied" authentication-manager-ref="authMgr">	
 		<security:intercept-url pattern="/profile" access="hasRole('ROLE_USER')"/>
-		<security:intercept-url pattern="/enquiries" access="hasRole('ROLE_USER')" />
-		<security:intercept-url pattern="/bookmarks" access="hasRole('ROLE_USER')" />
+		
+		<security:intercept-url pattern="/myAds" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/createAd" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/deleteAd" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/editAd" access="hasRole('ROLE_USER')" />
+		
+		<security:intercept-url pattern="/bookmarks" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/bookmark" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/removeBookmark" access="hasRole('ROLE_USER')" />
+		
+		<security:intercept-url pattern="/enquiries" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/sendEnquiry" access="hasRole('ROLE_USER')" />
-		<security:intercept-url pattern="/register/**" access="isAnonymous()"/>
+		<security:intercept-url pattern="/rateEnquiry" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/removeEnquiry" access="hasRole('ROLE_USER')" />
+		
+		<security:intercept-url pattern="/searches" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/removeSearch" access="hasRole('ROLE_USER')" />
+		
+		<security:intercept-url pattern="/notifications" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/removeNotification" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/openNotification" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/clearNotifications" access="hasRole('ROLE_USER')" />
+		
+		<security:intercept-url pattern="/register/**" access="isAnonymous()" />
+		<security:intercept-url pattern="/login" access="permitAll" />	
 		<security:form-login login-page="/login" authentication-failure-url="/login?error=true" default-target-url="/" />
 		<security:logout invalidate-session="true" logout-success-url="/" logout-url="/logout" />
 		
