@@ -30,9 +30,19 @@ public interface AdService {
 	 */
     public Ad getAd(Long id);
 	
-
+    /**
+     * Deletes an ad out of the database.
+     * 
+     * @param ad
+     */
 	public void deleteAd(Ad ad);
 
+	/**
+	 * Saves the changes from the adForm to the ad.
+	 * 
+	 * @param adForm
+	 * @param adId
+	 */
 	public void editAd(AdForm adForm, Long adId);
 
 

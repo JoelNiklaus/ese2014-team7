@@ -5,7 +5,7 @@ import org.sample.model.Ad;
 
 public class EnquiryForm {
 
-	//TODO: validation, when login works
+	//TODO: validation
 	
 	private Timestamp timestamp;
 	private Long enquiryId;

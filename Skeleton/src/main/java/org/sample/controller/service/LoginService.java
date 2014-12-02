@@ -18,8 +18,22 @@ public interface LoginService {
 	 */
     public SignupForm saveFrom(SignupForm signupForm) throws InvalidUserException;
     
+    /**
+     * Updates a users profile based on the signupForm submitted.
+     * 
+     * @param signupForm
+     * @return
+     * @throws InvalidUserException
+     */
     public SignupForm updateProfile(SignupForm signupForm) throws InvalidUserException;
     
+    /**
+     * Fetches a user from the DB based on his login credentials.
+     * 
+     * @param loginForm
+     * @return
+     * @throws InvalidUserException
+     */
     public User getUser(LoginForm loginForm) throws InvalidUserException;
     
     /**

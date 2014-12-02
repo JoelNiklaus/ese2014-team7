@@ -2,7 +2,6 @@ package org.sample.controller.service;
 
 import java.util.LinkedList;
 
-import org.sample.controller.pojos.SearchForm;
 import org.sample.model.Ad;
 import org.sample.model.Notification;
 import org.sample.model.Search;

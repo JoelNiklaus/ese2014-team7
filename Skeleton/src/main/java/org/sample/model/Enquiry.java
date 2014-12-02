@@ -1,7 +1,6 @@
 package org.sample.model;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

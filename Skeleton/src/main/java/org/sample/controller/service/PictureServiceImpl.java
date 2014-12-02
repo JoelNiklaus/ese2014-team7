@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PictureServiceImpl implements PictureService{
 
-
     @Autowired PictureDao pictureDao;
+    
 	public String save(Picture picture) {
 		pictureDao.save(picture);
 
