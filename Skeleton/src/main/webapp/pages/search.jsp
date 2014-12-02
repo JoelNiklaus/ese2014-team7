@@ -75,7 +75,7 @@
 				<div class="pull-right">
 			        <button type="button" class="btn btn btn-default" id="advancedSearchBtn">Advanced Search</button>
 					<button type="submit" onclick="javascript: form.action='saveSearch';" id="save" class="btn btn-info"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
-					<button type="submit" onclick="javascript: form.action='search';" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+					<button type="submit" onclick="javascript: form.action='search';" value="searched" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
 				</div>
 			</fieldset>
 		</form:form>
@@ -100,14 +100,14 @@
 					
 						<div class="panel-heading"><h5>${ad.title}</h5></div>
 						<div class="panel-body" >
-							<a class="pull-left" >
+							<a class="pull-left" style="padding:1em;" >
 								<c:forEach items="${ad.pictures}" varStatus="loopCount" var="pic">
 								<c:if test="${loopCount.count eq 1}">
-								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
+								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
 								</c:if>
 								</c:forEach>
 					  		</a>
-					  		<p>${ad.description}</p>
+					  		<p style="padding:1em;">${ad.description}</p>
 						</div>
 							
 						<div class="panel-footer"><b>Area: </b>${ad.city},  <b>Price:</b> CHF ${ad.rent},  <b>Room Size:</b> ${ad.roomSize}m²,  <b>Posted: </b>${ad.postingDateFormatted}</div>
@@ -211,17 +211,15 @@
 						'<span>' + value + '</span>'
 					);			
 		});
-
 		$(document).ready(function(){		
 
 			$("#priceSlider").val(["${searchAttributes.priceMin}","${searchAttributes.priceMax}"]);
 			$("#roomSizeSlider").val(["${searchAttributes.roomSizeMin}","${searchAttributes.roomSizeMax}"]);
 			$("#field-city").val("${searchAttributes.city}");
-/* 			if(!showAdvSearch){
-				$('#advancedSearchContainer').hide();
-				$('#save').hide();
-			} */
-
+			
+			$('#advancedSearchContainer').hide();
+			$('#save').hide();
+			
 		});		
 	</script>	
 
@@ -289,12 +287,12 @@
 		$('#advancedSearchBtn').click(function(){
 			$('#advancedSearchBtn').toggleClass('active');
 			if ($('#advancedSearchBtn').hasClass('active')) {
-				$('#advancedSearchContainer').show();
-				$('#save').show();
+				$('#advancedSearchContainer').show(200);
+				$('#save').show(200);
 				showAdvSearch = true;
 			} else {
-				$('#advancedSearchContainer').hide();
-				$('#save').hide();
+				$('#advancedSearchContainer').hide(200);
+				$('#save').hide(200);
 				showAdvSearch = false;
 			}
 		});

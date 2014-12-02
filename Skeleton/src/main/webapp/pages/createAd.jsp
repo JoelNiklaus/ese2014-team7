@@ -83,11 +83,11 @@
 
 
 		<label class="control-label" for="field-dateIn">Move In Date</label>
-		<form:input class="datepicker form-control" path="dateIn" tabindex="8" maxlength="10" placeholder="DD.MM.YYYY"/>
+		<form:input readonly="true" style="background-color:white" class="datepicker form-control" path="dateIn" tabindex="8" maxlength="10" placeholder="DD.MM.YYYY"/>
 		<form:errors path="dateIn" cssClass="help-inline" element="span"/>
 		
 		<label class="control-label" for="field-dateOut">Move Out Date</label>
-		<form:input class="datepicker form-control" path="dateOut" tabindex="9" maxlength="10" placeholder="DD.MM.YYYY or empty"/>
+		<form:input readonly="true" style="background-color:white" class="datepicker form-control" path="dateOut" tabindex="9" maxlength="10" placeholder="DD.MM.YYYY or empty"/>
 		<form:errors path="dateOut" cssClass="help-inline" element="span"/>
 		<br>
 
