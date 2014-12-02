@@ -1,6 +1,7 @@
 package org.sample.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,12 +15,13 @@ public class Enquiry{
 	@Id
     @GeneratedValue
 	private Long enquiryId;
-
 	private Long adId;
 	private Timestamp timestamp;
 	private Long senderId;
     private Long receiverId;
     private String messageText;
+    private Date startDate;
+    private Date endDate;
     private int rating;
     private boolean unread;
     
@@ -110,6 +112,22 @@ public class Enquiry{
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 	
 }

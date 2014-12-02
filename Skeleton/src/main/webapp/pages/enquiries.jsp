@@ -22,17 +22,16 @@
 				<h5>${enquiry.ad.title}</h5>
 			</div>
 			<div class="panel-body" >
-				<a class="pull-left" >
-		    						<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
-								<c:if test="${loopCount.count eq 1}">
-								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
-								</c:if>
-								</c:forEach>
-		  		</a>
-		  		<p>${enquiry.messageText}</p>
-		  		
+				<a class="pull-left" style="padding:1em;" >
+					<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
+						<c:if test="${loopCount.count eq 1}">
+							<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
+						</c:if>
+					</c:forEach>
+				</a>
+		  		<p  style="padding:1em;">${enquiry.messageText}</p>
+		  		${enquiry.status}
 			</div>		
-			
 			<div class="panel-footer">
 				<b>This enquiry has not yet been rated</b> (click on enquiry to rate it)
 				<a class="btn btn-danger btn-xs pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
@@ -47,15 +46,15 @@
 				<h5>${enquiry.ad.title}</h5>
 			</div>
 			<div class="panel-body" >
-				<a class="pull-left" >
-		    						<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
-								<c:if test="${loopCount.count eq 1}">
-								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
-								</c:if>
-								</c:forEach>
-		  		</a>
-		  		<p>${enquiry.messageText}</p>
-		  		
+			<a class="pull-left" style="padding:1em;" >
+			<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
+				<c:if test="${loopCount.count eq 1}">
+					<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
+				</c:if>
+			</c:forEach>
+		</a>
+  		<p style="padding:1em;">${enquiry.messageText}</p>
+  		${enquiry.status}	
 			</div>		
 			
 			<div class="panel-footer"><b>
@@ -72,7 +71,6 @@
 		
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
-				<a class="btn btn-danger" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >
@@ -100,7 +98,6 @@
 		
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
-				<a class="btn btn-danger" href="removeEnquiry?id=${enquiry.enquiryId}">delete Enquiry</a>
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" >

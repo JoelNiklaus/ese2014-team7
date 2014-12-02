@@ -74,8 +74,9 @@
 				
 				<div class="pull-right">
 			        <button type="button" class="btn btn btn-default" id="advancedSearchBtn">Advanced Search</button>
+<button type="submit" onclick="javascript: form.action='search';" value="searched" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
 					<button type="submit" onclick="javascript: form.action='saveSearch';" id="save" class="btn btn-info"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
-					<button type="submit" onclick="javascript: form.action='search';" value="searched" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+					
 				</div>
 			</fieldset>
 		</form:form>
