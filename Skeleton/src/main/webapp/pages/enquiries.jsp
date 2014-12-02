@@ -14,10 +14,9 @@
 	</c:if>
 
 	<h2>Inbox</h2>
-	<p>${newEmpty}</p>
 	<c:forEach items="${unreadEnquiries}" var="enquiry">
 		<div class="panel panel-info" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
-			
+				
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
 			</div>
@@ -38,7 +37,8 @@
 			</div>
 		</div>
 	</c:forEach>
-	
+
+
 	<c:forEach items="${newReceivedEnquiries}" var="enquiry">
 		<div class="panel panel-default" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
 			
@@ -64,8 +64,6 @@
 		</div>
 	</c:forEach>
 	
-	<h2>Rated enquiries</h2>
-	<p>${ratedEmpty}</p>
 	<c:forEach items="${ratedReceivedEnquiries}" var="enquiry">
 		<div class="panel panel-default" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
 			

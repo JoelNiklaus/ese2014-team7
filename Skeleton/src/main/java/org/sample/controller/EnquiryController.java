@@ -61,16 +61,15 @@ public class EnquiryController {
 	public ModelAndView createEnquiry(@RequestParam String id) {
 		ModelAndView model = new ModelAndView("enquiryMask");
 
-		if (loginService.getLoggedInUser() != null) {
-			model.addObject("loggedInUser", loginService.getLoggedInUser());
-			updateService.updateNumberOfUnreadItems(model);
+		model.addObject("loggedInUser", loginService.getLoggedInUser());
+		updateService.updateNumberOfUnreadItems(model);
 
-			try {
-				Ad ad = adDao.findOne(Long.parseLong(id));
+		try {
+			Ad ad = adDao.findOne(Long.parseLong(id));
 
-				if (ad == null)
-					model = new ModelAndView("404");
-				else {
+			if (ad == null)
+				model = new ModelAndView("404");
+			else {
 					EnquiryForm enquiryForm = new EnquiryForm();
 					enquiryForm.setAdId(ad.getId());
 					enquiryForm.setMessageText(defaultMsg
@@ -81,21 +80,18 @@ public class EnquiryController {
 
 					model.addObject("ad", ad);
 					model.addObject("enquiryForm", enquiryForm);
-				}
-			} catch (NumberFormatException ex) {
-				model = new ModelAndView("404");
 			}
-		} else {
-			model = new ModelAndView("login");
-			model.addObject("loginForm", new LoginForm());
+		} catch (NumberFormatException ex) {
+			model = new ModelAndView("404");
 		}
+
 
 		return model;
 	}
 
 	/**
-	 * Manages processing of submitted enquiries and returns enquiries page
-	 * model, in case of success.
+	 * Manages processing of submitted enquiries and redirects to enquiries page
+	 * 
 	 * 
 	 * @param enquiryForm
 	 *            the filled in form to be processed
@@ -103,30 +99,22 @@ public class EnquiryController {
 	 *            the binding result
 	 * @param redirectAttributes
 	 *            the redirected attributes
-	 * @return enquiries model or 404 model, in case of errors in binding
-	 *         results
+	 * @return redirect string
 	 */
 	@RequestMapping(value = "/submitEnquiry", method = RequestMethod.POST)
-	public ModelAndView submitEnquiry(@Valid EnquiryForm enquiryForm,
+	public String submitEnquiry(@Valid EnquiryForm enquiryForm,
 			BindingResult result, RedirectAttributes redirectAttributes) {
 		ModelAndView model = new ModelAndView("enquiries");
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 		updateService.updateNumberOfUnreadItems(model);
 
 		try {
-			if (!result.hasErrors()) {
-				enquiryService.submit(enquiryForm);
-				Iterable<Enquiry> results = enquiryService.findSentEnquiries();
-
-				model.addObject("sentEnquiries", results);
-			} else {
-				model = new ModelAndView("404");
-			}
+			enquiryService.submit(enquiryForm);
 		} catch (InvalidAdException ex) {
-			model = new ModelAndView("404");
+			
 		}
-
-		return model;
+		 
+		return "redirect:enquiries";
 	}
 
 	/**
@@ -246,8 +234,6 @@ public class EnquiryController {
 		Iterable<Enquiry> sentEnquiries = enquiryService.findSentEnquiries();
 		Iterable<Enquiry> unreadEnquiries = enquiryService.findUnreadEnquiries();
 
-		addEmptyMessages(model, newReceivedEnquiries, ratedReceivedEnquiries, sentEnquiries, unreadEnquiries);
-
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 		model.addObject("newReceivedEnquiries", newReceivedEnquiries);
 		model.addObject("ratedReceivedEnquiries", ratedReceivedEnquiries);
@@ -255,14 +241,4 @@ public class EnquiryController {
 		model.addObject("unreadEnquiries", unreadEnquiries);
 	}
 
-	private void addEmptyMessages(ModelAndView model, Iterable<Enquiry> newReceivedEnquiries, Iterable<Enquiry> ratedReceivedEnquiries, Iterable<Enquiry> sentEnquiries, Iterable<Enquiry> unreadEnquiries) {
-		if (!newReceivedEnquiries.iterator().hasNext() && !unreadEnquiries.iterator().hasNext())
-			model.addObject("newEmpty", "No new enquiries");
-
-		if (!ratedReceivedEnquiries.iterator().hasNext())
-			model.addObject("ratedEmpty", "No rated enquiries");
-
-		if (!sentEnquiries.iterator().hasNext())
-			model.addObject("sentEmpty", "No sent enquiries");
-	}
 }
