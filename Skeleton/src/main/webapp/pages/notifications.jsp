@@ -40,7 +40,7 @@ ${message}
 </c:forEach>
 
 <c:forEach items="${notifications}" var="notification">
-	<div class="panel panel-default" onclick="javascript: form.action='search';">
+	<div class="panel panel-default" onclick="javascript:location.href='openNotification?adId=${notification.adId}&notificationId=${notification.id}'">
 
 		<div class="panel-heading">
 				<h5>Search Match: ${notification.ad.title}</h5>
