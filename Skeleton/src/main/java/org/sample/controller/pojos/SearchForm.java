@@ -7,6 +7,7 @@ public class SearchForm {
 	private String roomSizeMin;
 	private String roomSizeMax;
 	private String city;
+	private String addCostMax;
 	
 
 	public String getRoomSizeMin() {
@@ -46,10 +47,24 @@ public class SearchForm {
 	public Long getRoomSizeMaxAsLong(){
 		return Long.parseLong(roomSizeMax);
 	}
+	public Long getAddCostMaxAsLong(){
+		try {
+			return Long.parseLong(addCostMax);
+		} catch(Exception e){
+			
+		}
+		return 1000L;
+	}
 	public String getCity() {
 		return city;
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+	public String getAddCostMax() {
+		return addCostMax;
+	}
+	public void setAddCostMax(String addCostMax) {
+		this.addCostMax = addCostMax;
 	}
 }

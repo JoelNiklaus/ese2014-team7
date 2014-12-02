@@ -188,7 +188,10 @@ public class Ad {
 	}
 
 	public void setRoomSize(Long roomSize) {
-		this.roomSize = roomSize;
+		if(roomSize!=null)
+			this.roomSize = roomSize;
+		else
+			this.roomSize = 0L;
 	}
 
 	public String getLat() {

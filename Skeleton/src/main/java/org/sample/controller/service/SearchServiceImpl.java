@@ -30,9 +30,10 @@ public class SearchServiceImpl implements SearchService {
 		Long priceMax = searchForm.getPriceMaxAsLong();
 		Long roomSizeMin = searchForm.getRoomSizeMinAsLong();
 		Long roomSizeMax = searchForm.getRoomSizeMaxAsLong();
+		Long addCostMax = searchForm.getAddCostMaxAsLong();
 		String city = searchForm.getCity();
 
-		searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContaining(priceMin, priceMax, roomSizeMin, roomSizeMax, city);
+		searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThan(priceMin, priceMax, roomSizeMin, roomSizeMax, city, addCostMax);
 
 		return searchResults;
 	}

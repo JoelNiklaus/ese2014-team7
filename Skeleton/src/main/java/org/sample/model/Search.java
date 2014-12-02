@@ -18,6 +18,7 @@ public class Search {
 	private Long priceMax;
 	private Long roomSizeMin;
 	private Long roomSizeMax;
+	private Long addCostMax;
 	
 	private String city;
 	
@@ -85,6 +86,12 @@ public class Search {
 		this.roomSizeMin = roomSizeMin;
 		this.roomSizeMax = roomSizeMax;
 		this.city = city;
+	}
+	public Long getAddCostMax() {
+		return addCostMax;
+	}
+	public void setAddCostMax(Long addCostMax) {
+		this.addCostMax = addCostMax;
 	}
 	   
 }

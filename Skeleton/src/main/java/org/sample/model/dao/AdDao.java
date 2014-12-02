@@ -9,7 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface AdDao  extends CrudRepository<Ad,Long>{
 
 	
-	List<Ad> findByRentBetweenAndRoomSizeBetweenAndCityContaining(Long priceMin, Long priceMax, Long roomSizeMin, Long roomSizeMax, String city);
+	List<Ad> findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThan(Long priceMin, Long priceMax, Long roomSizeMin, Long roomSizeMax, String city, Long addCostMax);
 
 	
 	List<Ad> findByPlacerId(Long loggedInUserId);

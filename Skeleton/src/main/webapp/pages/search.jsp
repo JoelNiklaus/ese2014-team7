@@ -46,30 +46,34 @@
 				</div>
 	
 				<br>
-				<div class="row">
-					<div class="col-md-2">
-						<label class="control-label" for="field-city">City</label>
+
+				<div id="advancedSearchContainer">
+	
+					<div class="row">
+						<div class="col-md-2">
+							<label class="control-label" for="field-dateIn">Add. cost max</label>
+						</div>
+						<div class="col-md-3">	
+							<form:input class="form-control" path="addCostMax" id="field-dateIn" placeholder="1000" tabindex="5" maxlength="35"/>
+						</div>
+						<div class="col-md-2">
+							<label class="control-label" for="field-city">City</label>
+						</div>
+						
+						<div class="col-md-3">	
+							<form:input class="form-control" path="city" id="field-city" placeholder="City" tabindex="5" maxlength="35"/>
+						</div>
 					</div>
-					
-					<div class="col-md-3">	
-						<form:input class="form-control" path="city" id="field-city" placeholder="City" tabindex="5" maxlength="35"/>
-					</div>
-					<br />
 				</div>
-				<div class="row" id="dateRow">
-					<div class="col-md-2">
-						<label class="control-label" for="field-date">Move in Date</label>
-					</div>
-				</div>
-		
+				
+						<br />
 				<form:input type="hidden" path="priceMin" id="field-priceMin" maxlength="45"/>
 				<form:input type="hidden" path="priceMax" id="field-priceMax" maxlength="45"/>
 				<form:input type="hidden" path="roomSizeMin" id="field-roomSizeMin" maxlength="45"/>
 				<form:input type="hidden" path="roomSizeMax" id="field-roomSizeMax" maxlength="45"/>
 				
 				<div class="pull-right">
-			        	<button type="button" class="btn btn btn-default" id="advancedSearchBtn">Advanced Search</button>
-
+			        <button type="button" class="btn btn btn-default" id="advancedSearchBtn">Advanced Search</button>
 					<button type="submit" onclick="javascript: form.action='saveSearch';" id="save" class="btn btn-info"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
 					<button type="submit" onclick="javascript: form.action='search';" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
 				</div>
@@ -207,11 +211,17 @@
 						'<span>' + value + '</span>'
 					);			
 		});
-		
-		$(document).ready(function(){			
+
+		$(document).ready(function(){		
+
 			$("#priceSlider").val(["${searchAttributes.priceMin}","${searchAttributes.priceMax}"]);
 			$("#roomSizeSlider").val(["${searchAttributes.roomSizeMin}","${searchAttributes.roomSizeMax}"]);
 			$("#field-city").val("${searchAttributes.city}");
+/* 			if(!showAdvSearch){
+				$('#advancedSearchContainer').hide();
+				$('#save').hide();
+			} */
+
 		});		
 	</script>	
 
@@ -279,9 +289,13 @@
 		$('#advancedSearchBtn').click(function(){
 			$('#advancedSearchBtn').toggleClass('active');
 			if ($('#advancedSearchBtn').hasClass('active')) {
-				$('#dateRow').hide();
+				$('#advancedSearchContainer').show();
+				$('#save').show();
+				showAdvSearch = true;
 			} else {
-				$('#dateRow').show();
+				$('#advancedSearchContainer').hide();
+				$('#save').hide();
+				showAdvSearch = false;
 			}
 		});
 		
@@ -296,7 +310,9 @@
 		
 		$( document ).ready(function() {
 			$('#myTab a[href="#listTab"]').tab('show');
-			});
+
+		});
+		
 	</script>
 		
 	<c:if test="${not empty searchResults}">
