@@ -21,8 +21,6 @@
 		</div>
 	</c:if>
 
-<h2>User Information</h2>
-
 <form:form method="post" modelAttribute="profileForm" action="profileChange">
 	<form:input class="form-control" path="email" maxlength="45"
  		placeholder="Email" value="${loggedInUser.email}" /> 
@@ -62,8 +60,8 @@
  	<form:errors path="city" cssClass="help-inline" element="span" /> 
  	<br>
  	
- 	<button class="btn btn-default" type="reset">Reset</button>
-	<button class="btn btn-primary" type="submit">Submit</button>
+ 	<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+ 	<button class="btn btn-warning" type="reset"><span class="glyphicon glyphicon-remove"></span> Reset</button>
  </form:form>
 
 <c:import url="template/footer.jsp" />

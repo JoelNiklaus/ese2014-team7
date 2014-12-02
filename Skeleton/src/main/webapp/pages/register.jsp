@@ -7,10 +7,10 @@
 
 <c:import url="template/header.jsp" />
 
+	<h1>Create new account</h1>
+
 <form:form method="post" modelAttribute="signupForm" action="register"
 	id="signupForm" autocomplete="off">
-
-	<h4>Create new account</h4>
 
 	<form:input class="form-control" path="email" maxlength="45"
 		placeholder="Email" />

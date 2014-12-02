@@ -45,16 +45,16 @@
 					<ul class="nav navbar-nav">
 						<li><a href="search"><span class="glyphicon glyphicon-search"></span> Search</a></li>
 						<c:if test="${not empty loggedInUser}">
-							<li><a href="createAd">Create Ad</a></li>
-							<li><a href="myAds">My Ads</a></li>
-							<li><a href="enquiries">Enquiries 
+							<li><a href="createAd"><span class="glyphicon glyphicon-tag"></span> Create Ad</a></li>
+							<li><a href="myAds"><span class="glyphicon glyphicon-tags"></span> My Ads</a></li>
+							<li><a href="enquiries"><span class="glyphicon glyphicon-calendar"></span> Enquiries 
 								<c:if test="${numUnreadEnquiries > 0}"><span class="badge">${numUnreadEnquiries}</span></c:if>
 							</a></li>
-							<li><a href="notifications">Notifications 
+							<li><a href="notifications"><span class="glyphicon glyphicon-envelope"></span> Notifications 
 								<c:if test="${numUnreadNotifications > 0}"><span class="badge">${numUnreadNotifications}</span></c:if>
 							</a></li>
-							<li><a href="bookmarks">Bookmarks</a> </li>
-							<li><a href="searches">Searches</a></li>
+							<li><a href="bookmarks"><span class="glyphicon glyphicon-bookmark"></span> Bookmarks</a> </li>
+							<li><a href="searches"><span class="glyphicon glyphicon-filter"></span> Searches</a></li>
 	
 						</c:if>
 					</ul>

@@ -12,7 +12,7 @@
 	<div class="modal-dialog" style="margin-bottom: 0">
 		<div class="modal-content">
 			<div class="panel-heading">
-				<h2 class="panel-title">Sign In</h2>
+				<h1>Sign In</h1>
 			</div>
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" name="f" action="<c:url value="/j_spring_security_check"/>"

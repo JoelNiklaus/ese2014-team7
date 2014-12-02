@@ -1,16 +1,20 @@
 package org.sample.controller.pojos;
 
 import java.sql.Timestamp;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import org.sample.model.Ad;
 
 public class EnquiryForm {
-
-	//TODO: validation
 	
 	private Timestamp timestamp;
 	private Long enquiryId;
 	private Long senderId; 
     private Long receiverId;
+	@NotNull
+	@Pattern(regexp = "[a-zA-ZäöüÄÖÜ.,;:0-9()\\s]+", message = "Please enter a valid message text.\n")
     private String messageText;
     private Ad ad;
     private long adId;

@@ -110,7 +110,7 @@
 		<form:errors path="roomSize" cssClass="help-inline" element="span"/>
 		
 		<label class="control-label" for="field-description">Description</label>
-		<form:input class="form-control" path="description" tabindex="11" maxlength="255" placeholder="Description of the room and the flat."/>
+		<form:textarea class="form-control" path="description" tabindex="11" maxlength="255" placeholder="Description of the room and the flat."></form:textarea>
 		<form:errors path="description" cssClass="help-inline" element="span"/>
 
 		<label class="control-label" for="field-us">We are...</label>

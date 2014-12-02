@@ -6,6 +6,8 @@
 
 <c:import url="template/header.jsp" />
 
+<h1>My Ads</h1>
+
 	<div role="tabpanel" class="tab-pane"  id="listTab">
 		<c:forEach items="${ads}" var="ad">
 			<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${ad.id}'">

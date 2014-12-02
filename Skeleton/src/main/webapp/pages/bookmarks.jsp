@@ -20,7 +20,6 @@
 
 		<div class="panel-heading">
 			<h5>${bookmark.ad.title}</h5>
-			<a class="btn btn-danger" href="removeBookmark?id=${bookmark.bookmarkId}">remove Bookmark</a>
 		</div>
 		<div class="panel-body">
 			<a class="pull-left"> 								<c:forEach items="${ad.pictures}" varStatus="loopCount" var="pic">
@@ -34,6 +33,7 @@
 		<div class="panel-footer">
 			<b>Price:</b> CHF ${bookmark.ad.rent} <b>Room Size:</b>
 			${bookmark.ad.roomSize}m²
+			<a class="btn btn-danger" href="removeBookmark?id=${bookmark.bookmarkId}"><span class="glyphicon glyphicon-remove"></span> Delete</a>
 		</div>
 	</div>
 </c:forEach>

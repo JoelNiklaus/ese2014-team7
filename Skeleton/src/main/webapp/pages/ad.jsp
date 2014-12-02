@@ -48,8 +48,9 @@
 				</div>
 			<div class="row"><br></div>
 			<div class="row">
-			<div class="col-md-8"> 		
-				<table class="smalltable">
+			<div class="col-md-8">
+			<div class="table-responsive">
+				<table class="table table-hover">
 		
 		    		<tr>
 		    			<td>Street&nbsp;&nbsp;
@@ -102,6 +103,7 @@
 		    		<tr>
 		  
 	    	</table>
+	    	</div>
 			</div>
 			</div>
 		
