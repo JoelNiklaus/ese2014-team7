@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SearchForm;
-import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.SearchService;
 import org.sample.controller.service.UpdateService;
@@ -85,7 +84,7 @@ public class SearchController {
 	 * @return						model with tools to specify search criteria and displaying search results
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.POST)    
-	public ModelAndView search(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId, @RequestParam(value="notificationId",required=false) String notificationId){
+	public ModelAndView search(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){
 
 		ModelAndView model = new ModelAndView("search");
 		Search searchAttributes;
@@ -106,62 +105,12 @@ public class SearchController {
 		model.addObject("searchAttributes", searchAttributes);
 
 		Iterable<Ad> searchResults = searchService.computeSearchResults(searchForm);
-		Iterable<Ad> newMatches = null;
-		Ad featuredNewMatch = null;
-		
-		//TODO: save long cast
-		categorizeAds(searchResults, 1);
 
-		/*if(featuredNewMatch != null)
-			model.addObject("feturedNewMatch", featuredNewMatch);
-		
-		if(newMatches != null)
-			model.addObject("newMatched", newMatches);
 		
 		if(searchResults != null)
-			model.addObject("searchResults", searchResults);*/
+			model.addObject("searchResults", searchResults);
 
 		return model;
-	}
-	
-	private Iterable<Ad>[] categorizeAds(Iterable<Ad> allAds, long notificationId)
-	{
-		User user = loginService.getLoggedInUser();
-		LinkedList<Ad> newMatches, remaining;
-		LinkedList<Notification> allNotificationsByUser = (LinkedList<Notification>) notificationDao.findAllByUserId(user.getId());
-		
-		newMatches = new LinkedList<Ad>();
-		remaining = new LinkedList<Ad>();
-		
-		for(Ad ad : allAds)
-		{
-			boolean isRequested = false;
-			
-			SEARCH_FOR_REQUEST:
-			for(Notification n : allNotificationsByUser)
-			{
-				if(n.getAdId() == ad.getId())
-				{
-					isRequested = true;
-					break SEARCH_FOR_REQUEST;
-				}
-			}
-			
-			if(isRequested)
-				newMatches.add(ad);
-			else
-				remaining.add(ad);
-		}
-		
-		LinkedList<Iterable<Ad>> collection = new LinkedList<Iterable<Ad>>();
-		collection.add(null);
-		collection.add(newMatches);
-		collection.add(remaining);
-		
-		System.out.println("Found " + newMatches.size() + " notification matches");
-		System.out.println("Found " + remaining.size() + " remaining ads");
-		
-		return (Iterable<Ad>[])collection.toArray();
 	}
 	
 	
@@ -175,10 +124,8 @@ public class SearchController {
 	 * @return						search model
 	 */
 	@RequestMapping(value = "/saveSearch", method = RequestMethod.POST)    
-	public ModelAndView saveSearch(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId, @RequestParam(value="notificationId",required=false) String notificationId){
-		assert loginService.getLoggedInUser() != null;
-		
-		ModelAndView model = search(searchForm, result, redirectAttributes, searchId, notificationId);
+	public ModelAndView saveSearch(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){		
+		ModelAndView model = search(searchForm, result, redirectAttributes, searchId);
 		String message = "";
 		
 		if(loginService.getLoggedInUser() != null) {
@@ -204,9 +151,7 @@ public class SearchController {
 
 
 	@RequestMapping("/searches")
-	public ModelAndView searches() {
-		assert loginService.getLoggedInUser() != null;
-		
+	public ModelAndView searches() {		
 		ModelAndView model = new ModelAndView("searches");
 
 		User user = loginService.getLoggedInUser();
@@ -218,10 +163,7 @@ public class SearchController {
 	}
 
 	@RequestMapping(value = "/removeSearch", method = RequestMethod.GET)
-	public ModelAndView removeSearch(@RequestParam String id) {
-		assert loginService.getLoggedInUser() != null;
-		assert id != null;
-		
+	public ModelAndView removeSearch(@RequestParam String id) {	
 		ModelAndView model = searches();
 
 		try {
