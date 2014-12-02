@@ -1,5 +1,7 @@
 package org.sample.controller;
 
+import java.util.LinkedList;
+
 import javax.validation.Valid;
 
 import org.sample.controller.pojos.LoginForm;
@@ -9,9 +11,11 @@ import org.sample.controller.service.LoginService;
 import org.sample.controller.service.SearchService;
 import org.sample.controller.service.UpdateService;
 import org.sample.model.Ad;
+import org.sample.model.Notification;
 import org.sample.model.Search;
 import org.sample.model.User;
 import org.sample.model.dao.AdDao;
+import org.sample.model.dao.NotificationDao;
 import org.sample.model.dao.SearchDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +39,8 @@ public class SearchController {
 	AdDao adDao;
 	@Autowired
 	UpdateService updateService;
+	@Autowired
+	NotificationDao notificationDao;
 	
 	/**
 	 * Returns search model for a given search-template. Is also the home page!
@@ -79,7 +85,7 @@ public class SearchController {
 	 * @return						model with tools to specify search criteria and displaying search results
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.POST)    
-	public ModelAndView search(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){
+	public ModelAndView search(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId, @RequestParam(value="notificationId",required=false) String notificationId){
 
 		ModelAndView model = new ModelAndView("search");
 		Search searchAttributes;
@@ -100,12 +106,64 @@ public class SearchController {
 		model.addObject("searchAttributes", searchAttributes);
 
 		Iterable<Ad> searchResults = searchService.computeSearchResults(searchForm);
+		Iterable<Ad> newMatches = null;
+		Ad featuredNewMatch = null;
+		
+		//TODO: save long cast
+		categorizeAds(searchResults, 1);
 
+		/*if(featuredNewMatch != null)
+			model.addObject("feturedNewMatch", featuredNewMatch);
+		
+		if(newMatches != null)
+			model.addObject("newMatched", newMatches);
+		
 		if(searchResults != null)
-			model.addObject("searchResults", searchResults);
+			model.addObject("searchResults", searchResults);*/
 
 		return model;
 	}
+	
+	private Iterable<Ad>[] categorizeAds(Iterable<Ad> allAds, long notificationId)
+	{
+		User user = loginService.getLoggedInUser();
+		LinkedList<Ad> newMatches, remaining;
+		LinkedList<Notification> allNotificationsByUser = (LinkedList<Notification>) notificationDao.findAllByUserId(user.getId());
+		
+		newMatches = new LinkedList<Ad>();
+		remaining = new LinkedList<Ad>();
+		
+		for(Ad ad : allAds)
+		{
+			boolean isRequested = false;
+			
+			SEARCH_FOR_REQUEST:
+			for(Notification n : allNotificationsByUser)
+			{
+				if(n.getAdId() == ad.getId())
+				{
+					isRequested = true;
+					break SEARCH_FOR_REQUEST;
+				}
+			}
+			
+			if(isRequested)
+				newMatches.add(ad);
+			else
+				remaining.add(ad);
+		}
+		
+		LinkedList<Iterable<Ad>> collection = new LinkedList<Iterable<Ad>>();
+		collection.add(null);
+		collection.add(newMatches);
+		collection.add(remaining);
+		
+		System.out.println("Found " + newMatches.size() + " notification matches");
+		System.out.println("Found " + remaining.size() + " remaining ads");
+		
+		return (Iterable<Ad>[])collection.toArray();
+	}
+	
 	
 	/**
 	 * Saves current search template to DB.
@@ -117,10 +175,10 @@ public class SearchController {
 	 * @return						search model
 	 */
 	@RequestMapping(value = "/saveSearch", method = RequestMethod.POST)    
-	public ModelAndView saveSearch(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId){
+	public ModelAndView saveSearch(@Valid SearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam(value="searchId",required=false) String searchId, @RequestParam(value="notificationId",required=false) String notificationId){
 		assert loginService.getLoggedInUser() != null;
 		
-		ModelAndView model = search(searchForm, result, redirectAttributes, searchId);
+		ModelAndView model = search(searchForm, result, redirectAttributes, searchId, notificationId);
 		String message = "";
 		
 		if(loginService.getLoggedInUser() != null) {
