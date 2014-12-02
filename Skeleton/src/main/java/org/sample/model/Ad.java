@@ -43,8 +43,6 @@ public class Ad {
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private Set<Picture> pictures = new HashSet<Picture>();
-
-
 	
 	@ManyToOne
 	private Ad ad;
