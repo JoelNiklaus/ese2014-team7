@@ -85,7 +85,7 @@
 						<form class="navbar-form navbar-right" action="logout" method="get">
 							<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
 						</form>
-						<p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> Signed in as <a class="navbar-link" href="profile">${loggedInUser.firstName }
+						<p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> Signed in as <a class="badge" href="profile">${loggedInUser.firstName }
 									${loggedInUser.lastName }</a></p>
 					</c:if>
 				</div><!-- /.navbar-collapse -->
