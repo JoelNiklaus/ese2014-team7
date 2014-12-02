@@ -64,7 +64,6 @@ public class AdServiceImpl implements AdService {
 	    
 		// Ad successfully saved to DB
 		// can now send notifications to users
-	    //TODO: by now, the adId should be known...
 		notificationService.sendNotificationsForMatchingSearches(ad);
 		
 	    return  adForm;
