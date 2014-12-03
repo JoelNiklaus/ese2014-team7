@@ -31,27 +31,27 @@
 
 		<legend>General Information</legend>
 
-		<label class="control-label" for="field-title">Title</label>
+		<label class="control-label">Title</label>
 		<form:input class="form-control" path="Title" tabindex="1" maxlength="50" placeholder="Title"/>
 		<form:errors path="title" cssClass="help-inline" element="span"/>
 		<br>
 
 		<legend>Address</legend>
 		
-		<label class="control-label" for="field-street">Street</label>
+		<label class="control-label">Street</label>
 		<form:input class="form-control" id="streetInput" path="street" onblur="geocode()" tabindex="2" maxlength="50" placeholder="Street"/>
 		<form:errors path="street" cssClass="help-inline" element="span"/>
 		
-		<label class="control-label" for="field-houseNr">House Nr.</label>
+		<label class="control-label">House Nr.</label>
 		<form:input class="form-control" id="houseNrInput" path="houseNr" onblur="geocode()" tabindex="3" maxlength="50" placeholder="House Nr."/>
 		<form:errors path="houseNr" cssClass="help-inline" element="span"/>
 		
-		<label class="control-label" for="field-zip">ZIP</label>
+		<label class="control-label">ZIP</label>
 		<form:input class="form-control" id="zipInput" path="zip" onblur="geocode()" tabindex="4" maxlength="4" placeholder="ZIP"/>
 		<form:errors path="zip" cssClass="help-inline" element="span"/>
 
 		
-		<label class="control-label" for="field-city">City</label>
+		<label class="control-label">City</label>
 		<form:input class="form-control" id="cityInput" path="city" onblur="geocode()" tabindex="5" maxlength="50" placeholder="City"/>
 		<form:errors path="city" cssClass="help-inline" element="span"/>
 		<br>
@@ -66,11 +66,11 @@
 
 		<legend>Costs</legend>
 
-		<label class="control-label" for="field-rent">Rent</label>
+		<label class="control-label">Rent</label>
 		<form:input class="form-control" path="rent" tabindex="6" maxlength="4" placeholder="Rent"/>
 		<form:errors path="rent" cssClass="help-inline" element="span"/>
 		
-		<label class="control-label" for="field-addCost">Additional Cost</label>
+		<label class="control-label">Additional Cost</label>
 		<form:input class="form-control" path="addCost" tabindex="7" maxlength="3" placeholder="Additional Cost"/>
 		<form:errors path="addCost" cssClass="help-inline" element="span"/>
 		<br>
@@ -82,11 +82,11 @@
 		<script src="/Skeleton/lib/datepicker-1.3.0/js/bootstrap-datepicker.js"></script>
 
 
-		<label class="control-label" for="field-dateIn">Move In Date</label>
+		<label class="control-label">Move In Date</label>
 		<form:input readonly="true" style="background-color:white" class="datepicker form-control" path="dateIn" tabindex="8" maxlength="10" placeholder="DD.MM.YYYY"/>
 		<form:errors path="dateIn" cssClass="help-inline" element="span"/>
 		
-		<label class="control-label" for="field-dateOut">Move Out Date</label>
+		<label class="control-label">Move Out Date</label>
 		<form:input readonly="true" style="background-color:white" class="datepicker form-control" path="dateOut" tabindex="9" maxlength="10" placeholder="DD.MM.YYYY or empty"/>
 		<form:errors path="dateOut" cssClass="help-inline" element="span"/>
 		<br>
@@ -105,30 +105,30 @@
 		
 		<legend>Additional Information</legend>
 
-		<label class="control-label" for="field-roomSize">Room Size</label>
+		<label class="control-label">Room Size</label>
 		<form:input class="form-control" path="roomSize" tabindex="10" maxlength="3" placeholder="Room Size in m2"/>
 		<form:errors path="roomSize" cssClass="help-inline" element="span"/>
 		
-		<label class="control-label" for="field-description">Description</label>
+		<label class="control-label">Description</label>
 		<form:textarea class="form-control" path="description" tabindex="11" maxlength="255" placeholder="are pets allowed?...is there a balcony?...parking?...smokers?"></form:textarea>
 		<form:errors path="description" cssClass="help-inline" element="span"/>
 		
-		<label class="control-label" for="field-distanceToPublicTransport">Distance To Public Transport</label>
+		<label class="control-label">Distance To Public Transport</label>
 		<form:input class="form-control" path="distanceToPublicTransport" tabindex="12" maxlength="4" placeholder="Distance in m."/>
 		<form:errors path="distanceToPublicTransport" cssClass="help-inline" element="span"/>
 		
-		<label class="control-label" for="field-distanceToShopping">Distance To Mall or next Grocery Shopping Possibilities</label>
+		<label class="control-label">Distance To Mall or next Grocery Shopping Possibilities</label>
 		<form:input class="form-control" path="distanceToShopping" tabindex="13" maxlength="4" placeholder="Distance in m."/>
 		<form:errors path="distanceToShopping" cssClass="help-inline" element="span"/>
 		
 		<br>
 		<legend>Social Informations</legend>
 
-		<label class="control-label" for="field-us">We are...</label>
+		<label class="control-label">We are...</label>
 		<form:input class="form-control" path="us" tabindex="14" maxlength="255" placeholder="Write about you and your roomies."/>
 		<form:errors path="us" cssClass="help-inline" element="span"/>
 		
-		<label class="control-label" for="field-you">Ideal Roomie</label>
+		<label class="control-label">Ideal Roomie</label>
 		<form:input class="form-control" path="you" tabindex="15" maxlength="255" placeholder="My/Our ideal roomie should be.."/>
 		<form:errors path="you" cssClass="help-inline" element="span"/>
 		
