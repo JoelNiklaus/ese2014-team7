@@ -92,7 +92,7 @@
 			<div class="container">
 			<div class="row">
 			<c:forEach items="${searchResults}" var="ad">
-			<div class="col-md-4">
+			<div class="col-sm-4 col-md-3">
 				<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${ad.id}'">
 					<div class="panel-heading"><h5>${ad.title}</h5></div>
 					<div class="panel-body" >

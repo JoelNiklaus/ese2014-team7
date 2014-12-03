@@ -9,7 +9,9 @@
 <h1>My Ads</h1>
 
 	<div role="tabpanel" class="tab-pane"  id="listTab">
+		<div class="row">
 		<c:forEach items="${ads}" var="ad">
+		<div class="col-sm-4 col-md-3">
 			<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${ad.id}'">
 					
 				<div class="panel-heading"><h5>${ad.title}</h5></div>
@@ -26,8 +28,11 @@
 							
 						<div class="panel-footer"><b>Area: </b>${ad.city},  <b>Price:</b> CHF ${ad.rent},  <b>Room Size:</b> ${ad.roomSize}m²,  <b>Posted: </b>${ad.postingDateFormatted}</div>
 					</div>
+					</div>
 				</c:forEach>
+				</div>
 			</div>
+			
 <!-- 
 <a class="btn btn-theme" href="/Skeleton/ad?id=${ad.id}"><h1>${ad.title}</h1> </a>
 <a class="btn btn-theme" href="/Skeleton/editAd?id=${ad.id}">Edit Ad</a>
