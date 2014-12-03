@@ -6,7 +6,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>TestApp</title>
+		<title>Roomiez.</title>
 		
 		<link rel="stylesheet" type="text/css" href="/Skeleton/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/Skeleton/css/custom.css">
@@ -37,7 +37,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="search"><span class="glyphicon glyphicon-home"></span> Home</a>
+					<a class="navbar-brand" href="search"><span class="glyphicon glyphicon-home"></span>Roomiez.</a>
 				</div>
 	
 				<!-- Collect the nav links, forms, and other content for toggling -->
