@@ -110,7 +110,7 @@
 		<form:errors path="roomSize" cssClass="help-inline" element="span"/>
 		
 		<label class="control-label" for="field-description">Description</label>
-		<form:textarea class="form-control" path="description" tabindex="11" maxlength="255" placeholder="Description of the room and the flat."></form:textarea>
+		<form:textarea class="form-control" path="description" tabindex="11" maxlength="255" placeholder="are pets allowed?...is there a balcony?...parking?...smokers?"></form:textarea>
 		<form:errors path="description" cssClass="help-inline" element="span"/>
 		
 		<label class="control-label" for="field-distanceToPublicTransport">Distance To Public Transport</label>
