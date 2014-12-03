@@ -35,7 +35,8 @@ public class FileUploadController {
     public @ResponseBody String handleFileUpload(@RequestParam("name") String name,
            @RequestParam("file") MultipartFile file){
     	
-    	String fileName = new Date().getTime() + "_" + name + "_" + file.getOriginalFilename();
+    	//String fileName = new Date().getTime() + "_" + name + "_" + file.getOriginalFilename();
+    	String fileName = new Date().getTime() +  "_" + file.getOriginalFilename();
     	String path = servletContext.getRealPath("/")+"/img/ad/";
     	String fullPath = path + fileName;
         if (!file.isEmpty()) {
