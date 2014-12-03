@@ -10,7 +10,7 @@
 	<h1>Create new account</h1>
 
 <form:form method="post" modelAttribute="signupForm" action="register"
-	id="signupForm" autocomplete="off">
+	id="signupForm" autocomplete="on">
 
 	<label class="control-label" for="field-email">E-Mail</label>
 	<form:input class="form-control" path="email" maxlength="45" placeholder="Email" />
