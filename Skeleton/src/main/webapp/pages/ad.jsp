@@ -17,6 +17,7 @@
 		<a class="btn btn-danger" href="/Skeleton/deleteAd?id=${ad.id}"><span class="glyphicon glyphicon-remove"></span> Delete</a>
 	</c:if>
 </h1>
+<h2>Rent: ${ad.rent}.- Additional Costs: ${ad.addCost}.-</h2>
     
     
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
@@ -64,14 +65,6 @@
 			<h4>Additional Information</h4>
 			<div class="table-responsive">
 				<table class="table table-hover table-condensed">
-					<tr>
-						<td>Rent&nbsp;&nbsp;
-						<td>${ad.rent}
-					</tr>
-					<tr>
-						<td>Additional Cost&nbsp;&nbsp;
-						<td>${ad.addCost}
-					</tr>
 					<tr>
 						<td>Move In Date&nbsp;&nbsp;
 						<td>${ad.dateIn}
