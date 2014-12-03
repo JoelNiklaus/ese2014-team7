@@ -29,132 +29,120 @@
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 	<script src="/Skeleton/js/Control.Geocoder.js"></script>
 
-	  
-	
-	 	
-    <div class="main">
-   
-	<div class="row center">
-				<div class="col-md-8">
-					<div class="fotorama" data-nav="thumbs" data-ratio="800/600">
-						<c:forEach items="${ad.pictures}" var="pic">
-							 <img src="/Skeleton/img/ad/${pic.fileName}"/>
-							
-							<br />
-						</c:forEach>
-					</div>
-				</div>
-				
-				</div>
-			<div class="row"><br></div>
-			<div class="row">
-			<div class="col-md-8">
-			<div class="table-responsive">
-				<table class="table table-hover">
-		
-		    		<tr>
-		    			<td>Street&nbsp;&nbsp;
-		    			<td>${ad.street}
-		    		</tr>
-		    		<tr>
-		    			<td>House Nr.&nbsp;&nbsp;
-		    			<td>${ad.houseNr}
-		    		</tr>
-		    		<tr>
-		    			<td>City&nbsp;&nbsp;
-		    			<td>${ad.city}
-		    		</tr>
-		    		<tr>
-		    			<td>ZIP&nbsp;&nbsp;
-		    			<td>${ad.zip}
-		    		</tr>
-		    		<tr>
-		    			<td>Rent&nbsp;&nbsp;
-		    			<td>${ad.rent}
-		    		</tr>
-		    		<tr>
-		    			<td>Additional Cost&nbsp;&nbsp;
-		    			<td>${ad.addCost}
-		    		</tr>
-		    		<tr>
-		    			<td>Move In Date&nbsp;&nbsp;
-		    			<td>${ad.dateIn}
-		    		</tr>
-		    		<tr>
-		    			<td>Move Out Date&nbsp;&nbsp;
-		    			<td>${ad.dateOut}
-		    		</tr>
-		    		<tr>
-		    			<td>Room Size&nbsp;&nbsp;
-		    			<td>${ad.roomSize}
-		    		</tr>
-		    		<tr>
-		    			<td>Description&nbsp;&nbsp;
-		    			<td>${ad.description}
-		    		</tr>
-		    		<tr>
-		    			<td>Distance To Public Transport&nbsp;&nbsp;
-		    			<td>${ad.distanceToPublicTransport}
-		    		</tr>
-		    		<tr>
-		    			<td>Distance To Mall Or Grocery Shopping Possibilities&nbsp;&nbsp;
-		    			<td>${ad.distanceToShopping}
-		    		</tr>
-		    		<tr>
-		    			<td>About Us&nbsp;&nbsp;
-		    			<td>${ad.us}
-		    		</tr>
-		    		<tr>
-		    			<td>Ideal Roomie&nbsp;&nbsp;
-		    			<td>${ad.you}
-		    		</tr>
-		    		<tr>
-		  
-	    	</table>
-	    	</div>
-			</div>
-			</div>
-		
-			<div class="row"><br></div>
-	<div class="row">
-		<div class="col-md-8 center" id="map"></div>
-			</div>
-	</div>
 
-	<script>
-		function drawMap(){
-			// create a map in the "map" div, set the view to a given place and zoom
-			var map = L.map('map').setView(["${ad.lat}]", "${ad.lng}]"], 15);
-			
-	
-	
-			//map.locate({setView: true, maxZoom: 16});
-			// add an OpenStreetMap tile layer
-			L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-			    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-			}).addTo(map);
-	
-			// add a marker in the given location, attach some popup content to it and open the popup
-			L.marker(["${ad.lat}]","${ad.lng}]"]).addTo(map)
-			    .bindPopup("${shortDescription}")
-			    .openPopup();
-			
-			// center marker on click
-			map.on('popupopen', function(e) {
-			    var px = map.project(e.popup._latlng);
-			    px.y -= e.popup._container.clientHeight/2
-			    map.panTo(map.unproject(px),{animate: true});
-			});
-		};	
+
+
+<div class="main">
+
+	<div class="row center">
+		<div class="col-md-8">
+			<div class="fotorama" data-nav="thumbs" data-ratio="800/600">
+				<c:forEach items="${ad.pictures}" var="pic">
+					<img src="/Skeleton/img/ad/${pic.fileName}" />
+
+					<br />
+				</c:forEach>
+			</div>
+		</div>
+
+		<div class="col-md-4" id="map"></div>
+
+	</div>
+	<div class="row">
+		<br>
+		<br>
+		<br>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<h4>Address</h4>
+			<p>
+				${ad.street} ${ad.houseNr}<br>
+				${ad.zip} ${ad.city}
+			</p>
 		
-		$( document ).ready(function() {
-			var cw = $('#map').width();
-			$('#map').css({'height':cw+'px'});
-			
-			drawMap();
+			<h4>Additional Information</h4>
+			<div class="table-responsive">
+				<table class="table table-hover table-condensed">
+					<tr>
+						<td>Rent&nbsp;&nbsp;
+						<td>${ad.rent}
+					</tr>
+					<tr>
+						<td>Additional Cost&nbsp;&nbsp;
+						<td>${ad.addCost}
+					</tr>
+					<tr>
+						<td>Move In Date&nbsp;&nbsp;
+						<td>${ad.dateIn}
+					</tr>
+					<tr>
+						<td>Move Out Date&nbsp;&nbsp;
+						<td>${ad.dateOut}
+					</tr>
+					<tr>
+						<td>Room Size&nbsp;&nbsp;
+						<td>${ad.roomSize}
+					</tr>
+					<tr>
+						<td>Distance To Public Transport
+						<td>${ad.distanceToPublicTransport}
+					</tr>
+					<tr>
+						<td>Distance To Mall or Grocery
+						<td>${ad.distanceToShopping}
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<h4>Description</h4>
+			<p>${ad.description}</p>
+			<h4>About Us</h4>
+			<p>${ad.us}</p>
+			<h4>Ideal Roomie</h4>
+			<p>${ad.you}</p>
+		</div>
+	</div>
+</div>
+
+<script>
+	function drawMap() {
+		// create a map in the "map" div, set the view to a given place and zoom
+		var map = L.map('map').setView([ "${ad.lat}]", "${ad.lng}]" ], 15);
+
+		//map.locate({setView: true, maxZoom: 16});
+		// add an OpenStreetMap tile layer
+		L
+				.tileLayer(
+						'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+						{
+							attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+						}).addTo(map);
+
+		// add a marker in the given location, attach some popup content to it and open the popup
+		L.marker([ "${ad.lat}]", "${ad.lng}]" ]).addTo(map).bindPopup(
+				"${shortDescription}").openPopup();
+
+		// center marker on click
+		map.on('popupopen', function(e) {
+			var px = map.project(e.popup._latlng);
+			px.y -= e.popup._container.clientHeight / 2
+			map.panTo(map.unproject(px), {
+				animate : true
+			});
+		});
+	};
+
+	$(document).ready(function() {
+		var cw = $('#map').width();
+		$('#map').css({
+			'height' : cw + 'px'
 		});
 
-	</script>
+		drawMap();
+	});
+</script>
 
 
 	<c:if test="${page_error != null }">
