@@ -93,6 +93,14 @@
 		    			<td>${ad.description}
 		    		</tr>
 		    		<tr>
+		    			<td>Distance To Public Transport&nbsp;&nbsp;
+		    			<td>${ad.distanceToPublicTransport}
+		    		</tr>
+		    		<tr>
+		    			<td>Distance To Mall Or Grocery Shopping Possibilities&nbsp;&nbsp;
+		    			<td>${ad.distanceToShopping}
+		    		</tr>
+		    		<tr>
 		    			<td>About Us&nbsp;&nbsp;
 		    			<td>${ad.us}
 		    		</tr>

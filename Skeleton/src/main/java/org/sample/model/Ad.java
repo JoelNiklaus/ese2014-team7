@@ -36,6 +36,8 @@ public class Ad {
 	private String dateOut;
 	private Long roomSize;
 	private String description;
+	private Long distanceToPublicTransport;
+	private Long distanceToShopping;
 	private String us;
 	private String you;
 	private String lat;
@@ -222,5 +224,21 @@ public class Ad {
 
 	public void setPostingDateFormatted(String postingDateFormatted) {
 		this.postingDateFormatted = postingDateFormatted;
+	}
+
+	public Long getDistanceToPublicTransport() {
+		return distanceToPublicTransport;
+	}
+
+	public void setDistanceToPublicTransport(Long distanceToPublicTransport) {
+		this.distanceToPublicTransport = distanceToPublicTransport;
+	}
+
+	public Long getDistanceToShopping() {
+		return distanceToShopping;
+	}
+
+	public void setDistanceToShopping(Long distanceToShopping) {
+		this.distanceToShopping = distanceToShopping;
 	}
 }

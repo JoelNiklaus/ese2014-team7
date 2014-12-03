@@ -112,13 +112,24 @@
 		<label class="control-label" for="field-description">Description</label>
 		<form:textarea class="form-control" path="description" tabindex="11" maxlength="255" placeholder="Description of the room and the flat."></form:textarea>
 		<form:errors path="description" cssClass="help-inline" element="span"/>
+		
+		<label class="control-label" for="field-distanceToPublicTransport">Distance To Public Transport</label>
+		<form:input class="form-control" path="distanceToPublicTransport" tabindex="12" maxlength="4" placeholder="Distance in m."/>
+		<form:errors path="distanceToPublicTransport" cssClass="help-inline" element="span"/>
+		
+		<label class="control-label" for="field-distanceToShopping">Distance To Mall or next Grocery Shopping Possibilities</label>
+		<form:input class="form-control" path="distanceToShopping" tabindex="13" maxlength="4" placeholder="Distance in m."/>
+		<form:errors path="distanceToShopping" cssClass="help-inline" element="span"/>
+		
+		<br>
+		<legend>Social Informations</legend>
 
 		<label class="control-label" for="field-us">We are...</label>
-		<form:input class="form-control" path="us" tabindex="12" maxlength="255" placeholder="Write about you and your roomies."/>
+		<form:input class="form-control" path="us" tabindex="14" maxlength="255" placeholder="Write about you and your roomies."/>
 		<form:errors path="us" cssClass="help-inline" element="span"/>
 		
 		<label class="control-label" for="field-you">Ideal Roomie</label>
-		<form:input class="form-control" path="you" tabindex="13" maxlength="255" placeholder="My/Our ideal roomie should be.."/>
+		<form:input class="form-control" path="you" tabindex="15" maxlength="255" placeholder="My/Our ideal roomie should be.."/>
 		<form:errors path="you" cssClass="help-inline" element="span"/>
 		
 		<form:input class="form-control" type="hidden" path="imageIds" name="files" id="files"/><br />

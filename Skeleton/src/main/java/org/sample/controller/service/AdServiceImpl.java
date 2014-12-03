@@ -56,6 +56,8 @@ public class AdServiceImpl implements AdService {
 	    ad.setDateOut(adForm.getDateOut());
 	    ad.setRoomSize(adForm.getRoomSize());
 	    ad.setDescription(adForm.getDescription());
+	    ad.setDistanceToPublicTransport(adForm.getDistanceToPublicTransport());
+	    ad.setDistanceToShopping(adForm.getDistanceToShopping());
 	    ad.setUs(adForm.getUs());
 	    ad.setYou(adForm.getYou());
 	    ad.setLat(adForm.getLat());
@@ -115,6 +117,8 @@ public class AdServiceImpl implements AdService {
 	    ad.setDateOut(adForm.getDateOut());
 	    ad.setRoomSize(adForm.getRoomSize());
 	    ad.setDescription(adForm.getDescription());
+	    ad.setDistanceToPublicTransport(adForm.getDistanceToPublicTransport());
+	    ad.setDistanceToShopping(adForm.getDistanceToShopping());
 	    ad.setUs(adForm.getUs());
 	    ad.setYou(adForm.getYou());
 	    ad.setLat(adForm.getLat());

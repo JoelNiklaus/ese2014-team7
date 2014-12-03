@@ -34,6 +34,10 @@ public class AdForm {
 	@NotNull
 	@Pattern(regexp = "[a-zA-ZäöüÄÖÜ.,;:0-9()\\s]+", message = "Enter a description about the room\n")
 	private String description;
+	@NotNull
+	private Long distanceToPublicTransport;
+	@NotNull
+	private Long distanceToShopping;
 	private String us;
 	private String you;
 	
@@ -192,6 +196,22 @@ public class AdForm {
 	}
 	public void setImageIds(String imageIds) {
 		this.imageIds = imageIds;
+	}
+
+	public Long getDistanceToPublicTransport() {
+		return distanceToPublicTransport;
+	}
+
+	public void setDistanceToPublicTransport(Long distanceToPublicTransport) {
+		this.distanceToPublicTransport = distanceToPublicTransport;
+	}
+
+	public Long getDistanceToShopping() {
+		return distanceToShopping;
+	}
+
+	public void setDistanceToShopping(Long distanceToShopping) {
+		this.distanceToShopping = distanceToShopping;
 	}
 	
 
