@@ -1,7 +1,9 @@
 package org.sample.controller.pojos;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class LoginForm {
 
@@ -9,8 +11,8 @@ public class LoginForm {
     private Long id;
 
     @NotNull
-    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", 
-    message = "Must be valid email address")
+    @Email(message="Please enter a valid E-Mail address")
+    @NotEmpty(message="please enter your E-Mail address")
     private String email;
     
     private String password;

@@ -1,8 +1,12 @@
 package org.sample.controller.pojos;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.sample.controller.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -24,16 +28,16 @@ public class SignupForm {
     private String lastName;
 
     @NotNull(message="E-Mail already exists")
-    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", 
-    message = "Must be valid email address")
+    @Email(message="Please enter a valid E-Mail address")
+    @NotEmpty(message="please enter your E-Mail address")
     private String email;
     
     @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-]*", 
-    	    message = "Password must be at leat 3 characters long")
+    	    message = "Password must be at least 3 characters long")
     private String password;
     
     @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-]*", 
-    	    message = "Password must be at leat 3 characters long")
+    	    message = "Password must be at least 3 characters long")
     private String passwordConfirm;
 
     @Pattern(regexp = "[a-zA-Z\\s]+", 
@@ -46,6 +50,8 @@ public class SignupForm {
     	    message = "Enter your city")
     private String city;
     
+    @Min(1000)
+    @Max(99999)
     private int zip;
 
     public String getStreet() {

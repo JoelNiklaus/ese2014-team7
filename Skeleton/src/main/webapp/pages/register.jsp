@@ -9,46 +9,91 @@
 
 	<h1>Create new account</h1>
 
-<form:form method="post" modelAttribute="signupForm" action="register"
+<form:form class="form-horizontal" role="form" method="post" modelAttribute="signupForm" action="register"
 	id="signupForm" autocomplete="on">
-
-	<label class="control-label" for="field-email">E-Mail</label>
-	<form:input class="form-control" path="email" maxlength="45" placeholder="Email" />
-	<c:out value="${emailExists}"></c:out>
-	<form:errors path="email" cssClass="help-inline" element="span" />
-	<br>
-	<label class="control-label" for="field-firstName">First Name</label>
-	<form:input class="form-control" path="firstName" maxlength="35" placeholder="First Name" />
-	<form:errors path="firstName" cssClass="help-inline" element="span" />
-	<br>
-	<label class="control-label" for="field-lastName">Last Name</label>
-	<form:input class="form-control" path="lastName" maxlength="35" placeholder="Last Name" />
-	<form:errors path="lastName" cssClass="help-inline" element="span" />
-	<br>
-	<label class="control-label" for="field-password">Password</label>
-	<form:password class="form-control" path="password" maxlength="45" placeholder="Password" />
-	<form:errors path="password" cssClass="help-inline" element="span" />
-	<br>
-	<label class="control-label" for="field-passwordConfirm">Confirm password</label>
-	<form:password class="form-control" path="passwordConfirm" maxlength="45" placeholder="Confirm Password" />
-	<form:errors path="passwordConfirm" cssClass="help-inline" element="span" />
-	<br>
-	<label class="control-label" for="field-street">Street</label>
-	<form:input class="form-control" path="street" maxlength="45" placeholder="Street" />
-	<form:errors path="street" cssClass="help-inline" element="span" />
-	<br>
-	<label class="control-label" for="field-houseNr">House Nr.</label>
-	<form:input class="form-control" path="houseNr" maxlength="45" placeholder="House Nr." />
-	<form:errors path="houseNr" cssClass="help-inline" element="span" />
-	<br>
-	<label class="control-label" for="field-zip">ZIP</label>
-	<form:input class="form-control" path="zip" maxlength="45" placeholder="ZIP" />
-	<form:errors path="zip" cssClass="help-inline" element="span" />
-	<br>
-	<label class="control-label" for="field-city">City</label>
-	<form:input class="form-control" path="city" maxlength="45" placeholder="City" />
-	<form:errors path="city" cssClass="help-inline" element="span" />
-	<br>
+	
+	<spring:bind path="email">
+		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
+			<label class="control-label col-sm-3" for="email">E-Mail</label>
+			<div class="col-sm-9">
+				<form:input path="email" class="form-control" id="email" type="email" maxlength="45" placeholder="E-Mail" />
+				<form:errors path="email" class="help-block" element="span" />
+				<c:out value="${emailExists}"></c:out>
+			</div>
+		</div>
+	</spring:bind>
+	<spring:bind path="firstName">
+		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
+			<label class="control-label col-sm-3" for="firstName">First Name</label>
+			<div class="col-sm-9">
+				<form:input path="firstName" class="form-control" id="firstName" type="text" maxlength="45" placeholder="First Name" />
+				<form:errors path="firstName" class="help-block" element="span" />
+			</div>
+		</div>
+	</spring:bind>
+	<spring:bind path="lastName">
+		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
+			<label class="control-label col-sm-3" for="lastName">Last Name</label>
+			<div class="col-sm-9">
+				<form:input path="lastName" class="form-control" id="lastName" type="text" maxlength="45" placeholder="Last Name" />
+				<form:errors path="lastName" class="help-block" element="span" />
+			</div>
+		</div>
+	</spring:bind>
+	<spring:bind path="password">
+		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
+			<label class="control-label col-sm-3" for="password">Password</label>
+			<div class="col-sm-9">
+				<form:password path="password" class="form-control" id="password" maxlength="45" placeholder="Password" />
+				<form:errors path="password" class="help-block" element="span" />
+			</div>
+		</div>
+	</spring:bind>
+	<spring:bind path="passwordConfirm">
+		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
+			<label class="control-label col-sm-3" for="passwordConfirm">Confirm Password</label>
+			<div class="col-sm-9">
+				<form:password path="passwordConfirm" class="form-control" id="passwordConfirm" maxlength="45" placeholder="Confirm Password" />
+				<form:errors path="passwordConfirm" class="help-block" element="span" />
+			</div>
+		</div>
+	</spring:bind>
+	<spring:bind path="street">
+		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
+			<label class="control-label col-sm-3" for="street">Street</label>
+			<div class="col-sm-9">
+				<form:input path="street" class="form-control" id="street" type="text" maxlength="45" placeholder="Street" />
+				<form:errors path="street" class="help-block" element="span" />
+			</div>
+		</div>
+	</spring:bind>
+	<spring:bind path="houseNr">
+		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
+			<label class="control-label col-sm-3" for="houseNr">House Number</label>
+			<div class="col-sm-9">
+				<form:input path="houseNr" class="form-control" id="houseNr" type="text" maxlength="45" placeholder="House Number" />
+				<form:errors path="houseNr" class="help-block" element="span" />
+			</div>
+		</div>
+	</spring:bind>	
+	<spring:bind path="zip">
+		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
+			<label class="control-label col-sm-3" for="zip">ZIP-Code</label>
+			<div class="col-sm-9">
+				<form:input path="zip" class="form-control" id="zip" type="text" maxlength="45" placeholder="ZIP-Code" />
+				<form:errors path="zip" class="help-block" element="span" />
+			</div>
+		</div>
+	</spring:bind>
+	<spring:bind path="city">
+		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
+			<label class="control-label col-sm-3" for="city">City</label>
+			<div class="col-sm-9">
+				<form:input path="city" class="form-control" id="city" type="text" maxlength="45" placeholder="City" />
+				<form:errors path="city" class="help-block" element="span" />
+			</div>
+		</div>
+	</spring:bind>
 
 	<div class="form-actions">
 		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-new-window"></span> Sign up</button>
