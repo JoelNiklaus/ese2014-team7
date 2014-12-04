@@ -68,6 +68,8 @@ public class AdForm {
 		this.dateOut = ad.getDateOut();
 		this.roomSize = ad.getRoomSize();
 		this.description = ad.getDescription();
+		this.distanceToPublicTransport = ad.getDistanceToPublicTransport();
+		this.distanceToShopping = ad.getDistanceToShopping();
 		this.us = ad.getUs();
 		this.you = ad.getYou();
 		this.lat = ad.getLat();
