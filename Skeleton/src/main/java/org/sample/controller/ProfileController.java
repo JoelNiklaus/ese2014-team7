@@ -33,7 +33,6 @@ public class ProfileController {
 		model.addObject("profileForm", new SignupForm());
 		
 		User loggedInUser = loginService.getLoggedInUser();
-		loggedInUser.setAddress(loginService.getAddress(loggedInUser.getId()));
 		
 		model.addObject("loggedInUser", loggedInUser);
 		updateService.updateNumberOfUnreadItems(model);

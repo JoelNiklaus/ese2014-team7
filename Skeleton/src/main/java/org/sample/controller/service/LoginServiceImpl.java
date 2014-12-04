@@ -43,15 +43,16 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(signupForm.getPassword());
         user.setPassword(hashedPassword);
-        user = userDao.save(user);   // save object to DB
         
         Address address = new Address();
-        address.setId(user.getId());
         address.setStreet(signupForm.getStreet());
         address.setHouseNr(signupForm.getHouseNr());
         address.setCity(signupForm.getCity());
         address.setZip(signupForm.getZip());
         address = addressDao.save(address);
+        
+        user.setAddress(address);
+        user = userDao.save(user);   // save object to DB
         
         signupForm.setId(user.getId());
 
@@ -116,14 +117,6 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
     		throw new InvalidUserException("E-Mail or password incorrect");
     	
     	return user;
-    }
-    
-    @Transactional 
-    public Address getAddress(long userID)
-    {
-    	Address add = new Address();
-    	add = addressDao.findOne(userID);
-    	return add;
     }
     
     private User filterResults(Iterable<User> users, String email, String password)

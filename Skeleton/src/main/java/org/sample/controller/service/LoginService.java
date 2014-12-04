@@ -47,14 +47,6 @@ public interface LoginService {
     public User getUser(ForgotPasswordForm forgotPasswordForm) throws InvalidUserException;
     
     /**
-     * Gets address corresponding to given userID
-     * 
-     * @param 	userID	ID of the user to search address for
-     * @return	user's address
-     */
-    public Address getAddress(long userID);
-    
-    /**
      * Checks if email already exists in DB.
      * 
      * @param 	email email-address to check
