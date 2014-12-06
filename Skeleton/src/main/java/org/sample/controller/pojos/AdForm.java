@@ -30,15 +30,13 @@ public class AdForm {
 	private Long addCost;
 	@NotNull
 	private String dateIn;
-	@Future
+	//@Future
 	private String dateOut;
 	private Long roomSize;
 	@NotNull
 	@Pattern(regexp = "[a-zA-ZäöüÄÖÜ.,;:0-9()\\s]+", message = "Enter a description about the room\n")
 	private String description;
-	@NotNull
 	private Long distanceToPublicTransport;
-	@NotNull
 	private Long distanceToShopping;
 	private String us;
 	private String you;

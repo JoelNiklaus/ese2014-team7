@@ -7,7 +7,7 @@
 
 <h1>My Enquiries</h1>
 
-<h2>Rate this equiry</h2>
+<h2>Manage</h2>
 	<div class="panel panel-primary">
 		
 			<div class="panel-heading"><h5>${enquiry.ad.title}</h5></div>
