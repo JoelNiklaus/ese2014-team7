@@ -189,9 +189,15 @@ public class EnquiryServiceImpl implements EnquiryService {
 
 
 
-	public Enquiry getEnyuiryById(Long id) {
+	public Enquiry getEnquiryById(Long id) {
 		
 		return enquiryDao.findOne(id);
+	}
+
+
+
+	public Enquiry save(Enquiry enquiry) {
+		return enquiryDao.save(enquiry);
 	}
 
 }

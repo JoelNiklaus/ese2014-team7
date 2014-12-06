@@ -53,6 +53,7 @@ public class AdController {
 			adService.saveFrom(adForm);
 			model = searchController.index(null);
 			model.addObject("success", "Ad successfully created.");
+			//model = new ModelAndView("redirect:/myAds");
     	}else{
     		
     		model.addObject("error", "Please fill out all valid information.");
@@ -151,7 +152,7 @@ public class AdController {
      */
     @RequestMapping(value = "/deleteAd", method = RequestMethod.GET)
     public @ResponseBody ModelAndView deleteAd(@RequestParam("id") String id) {
-    	ModelAndView model = new ModelAndView("myAds");
+    	ModelAndView model = new ModelAndView("redirect:/myAds");
     	Ad ad = adDao.findOne(new Long(id));
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
     	adService.deleteAd(ad);
@@ -167,8 +168,7 @@ public class AdController {
     @RequestMapping(value = "/editAd", method = RequestMethod.GET)
     public @ResponseBody ModelAndView editAd(@RequestParam("id") String id) {
     	ModelAndView model = new ModelAndView("editAd");
-    	
-    	
+    	    	
     	Ad ad = adService.getAd(new Long(id));
     	AdForm adForm = new AdForm(ad);
     	
@@ -191,12 +191,13 @@ public class AdController {
     @RequestMapping(value = "/editAd", method = RequestMethod.POST)
     public ModelAndView submitEditAd(@Valid AdForm adForm, BindingResult result , Principal principal, @RequestParam(value = "id", required = true) Long adId) {
 	
-    	ModelAndView model = new ModelAndView("editAd");
+    	ModelAndView model;
     	if (!result.hasErrors()){
     		adService.editAd(adForm, adId);
-		
+    		model = new ModelAndView("redirect:/ad?id="+adId);
     		model.addObject("success", "Ad successfully created.");
     	}else{
+    		model = new ModelAndView("editAd");
     		model.addObject("error", "Please fill out all valid information.");
     	}
     	Ad ad = adService.getAd(new Long(adId));

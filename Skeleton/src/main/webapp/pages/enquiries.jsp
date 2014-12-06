@@ -32,8 +32,8 @@
 			</div>		
 			<div class="panel-footer" style="height:55px">
 				<b>This enquiry has not yet been rated</b> (click on enquiry to rate it)
-				<a class="btn btn-default pull-right" href="createVisitAppointment?enquiryId=${enquiry.enquiryId}">Send Invitation</a>
 				<a class="btn btn-danger pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
+				<a class="btn btn-default pull-right" href="createVisitAppointment?enquiryId=${enquiry.enquiryId}">Send Invitation</a>
 			</div>
 		</div>
 	</c:forEach>
@@ -108,9 +108,10 @@
 		  		<p>${enquiry.messageText}</p>
 			</div>
 				
-			<div class="panel-footer">
+			<div class="panel-footer" style="height:55px">
 				<b>Price:</b> CHF ${enquiry.ad.rent}  <b>Room Size:</b> ${enquiry.ad.roomSize}m²
-				<a class="btn btn-danger btn-xs pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>				
+				<a class="btn btn-danger pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>	
+				<a class="btn btn-default pull-right" href="manageInvitationRequests?enquiryId=${enquiry.enquiryId}">Manage Received Invitations</a>			
 			</div>
 		</div>
 	</c:forEach>

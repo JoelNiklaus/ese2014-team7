@@ -16,8 +16,7 @@ public class VisitAppointment {
 	@Id
     @GeneratedValue
 	private Long id;
-	private Long equiryId;
-
+	
 	private String Comment;
 	
 	@DateTimeFormat(pattern="dd.MM.yyyy hh:mm")
@@ -28,6 +27,10 @@ public class VisitAppointment {
 	
 	@Enumerated
 	private VisitAppointmentState state;
+	
+	public VisitAppointment() {
+		state = VisitAppointmentState.NEW;
+	}
 
 	public Long getId() {
 		return id;
@@ -59,14 +62,6 @@ public class VisitAppointment {
 
 	public void setState(VisitAppointmentState state) {
 		this.state = state;
-	}
-
-	public Long getEquiryId() {
-		return equiryId;
-	}
-
-	public void setEquiryId(Long equiryId) {
-		this.equiryId = equiryId;
 	}
 
 	public String getComment() {
