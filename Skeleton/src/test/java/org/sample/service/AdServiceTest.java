@@ -2,6 +2,8 @@ package org.sample.service;
 
 import static org.junit.Assert.*;
 
+import java.sql.Timestamp;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
@@ -10,6 +12,7 @@ import org.sample.controller.pojos.AdForm;
 import org.sample.controller.service.AdService;
 import org.sample.model.Ad;
 import org.sample.model.dao.AdDao;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -18,6 +21,7 @@ import static org.mockito.Mockito.when;
 public class AdServiceTest {
 
 		private AdDao adDao;
+		@Autowired
 		private AdService adService;
 	
 		@Before
@@ -29,6 +33,9 @@ public class AdServiceTest {
 		public void testSaveFrom(){
 			AdForm adForm = new AdForm();
 			
+			adForm.setPlacerId(1L);
+		    Timestamp timestamp  = new Timestamp(System.currentTimeMillis());
+			adForm.setTimestamp(timestamp);
 			adForm.setTitle("testTitle");
 			adForm.setStreet("testStreet");
 			adForm.setHouseNr(1L);
@@ -57,10 +64,9 @@ public class AdServiceTest {
 
 			assertNull(adForm.getId());
 			
-			AdForm adFormx = new AdForm();
-			adFormx = adService.saveFrom(adForm);
+			adForm = adService.saveFrom(adForm);
 		
-			assertNotNull(adFormx.getId());
-			assertTrue(adFormx.getId() > 0);			
+			assertNotNull(adForm.getId());
+			assertTrue(adForm.getId() > 0);			
 		}
 }

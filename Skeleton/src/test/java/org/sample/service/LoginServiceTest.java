@@ -48,6 +48,10 @@ public class LoginServiceTest {
                 });
 
         assertNull(signupForm.getId());
+        
+        signupForm = loginServiceImpl.saveFrom(signupForm);
+        
+        
     }
     
     @Test
