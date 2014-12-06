@@ -23,13 +23,10 @@ public class Enquiry{
     private int rating;
     private boolean unread;
     
-    private int status;
-    
     @Transient
     private Ad ad;
     
     public Enquiry(){
-    	this.status = 0;
     }
     
     public Long getEnquiryId() {
@@ -104,11 +101,4 @@ public class Enquiry{
 		this.unread = unread;
 	}
 
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}	
 }
