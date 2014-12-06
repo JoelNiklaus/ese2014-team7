@@ -54,4 +54,15 @@ public class BookmarkServiceTest {
         
 
     }
+    
+    @Test
+    public void testFindBookmarks(){
+    	
+    }
+    
+    @Test
+    public void testAlreadyBookmarked(){
+    	
+    }
+    
 }

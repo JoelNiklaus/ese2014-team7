@@ -7,7 +7,7 @@ import org.junit.Test;
 public class UpdateServiceTest {
 
 	@Test
-	public void test() {
+	public void testUpdateNumberOfUnreadItems() {
 		fail("Not yet implemented");
 	}
 

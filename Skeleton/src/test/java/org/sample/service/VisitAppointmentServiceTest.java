@@ -7,7 +7,7 @@ import org.junit.Test;
 public class VisitAppointmentServiceTest {
 
 	@Test
-	public void test() {
+	public void testSave() {
 		fail("Not yet implemented");
 	}
 
