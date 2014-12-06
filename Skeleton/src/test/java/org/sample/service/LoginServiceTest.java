@@ -48,8 +48,6 @@ public class LoginServiceTest {
                 });
 
         assertNull(signupForm.getId());
-        assertNotNull(signupForm.getId());
-        assertTrue(signupForm.getId() > 0);
     }
 
     @Test(expected = InvalidUserException.class)

@@ -2,6 +2,7 @@ package org.sample.dao;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.sample.model.Address;
 import org.sample.model.User;
 import org.sample.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +24,27 @@ public class UserDaoIntegrationTest {
 
     
     @Test
-    public void testFindUserByEmail() {
+    public void testAddressReference() {
+    	String STREETNAME = "testStreet"; 
+    	
+    	Address address = new Address();
+    	address.setStreet(STREETNAME);	
+    	User user = new User();       
+        user.setAddress(address);
+        user =  userDao.save(user);
+        
+        assertEquals(user.getAddress().getStreet(), STREETNAME);
+    }
+    
+    @Test
+    public void testFindByEmail(){
     	String EMAIL =  "bla@bla.bla";
     	
     	User user = new User();
-    	user.setFirstName("Test");
-    
     	user.setEmail(EMAIL);
     	
         user =  userDao.save(user);        
         User findUser = userDao.findByEmail(EMAIL);
-        System.out.println(user.getFirstName());
         assertEquals(findUser.getEmail(), EMAIL);
     }
 

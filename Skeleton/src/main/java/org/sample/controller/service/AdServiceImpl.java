@@ -79,7 +79,6 @@ public class AdServiceImpl implements AdService {
 		return adDao.findOne(id);
 	}
 
-
 	public void deleteAd(Ad ad) {
 
 		PictureService pictureService = new PictureServiceImpl();
@@ -91,6 +90,7 @@ public class AdServiceImpl implements AdService {
 	}
 
 	public void editAd(AdForm adForm, Long adId) {
+		
 		Ad ad = adDao.findOne(adId);
 		
     	Set<Picture> pictures = new HashSet<Picture>(0);
@@ -125,6 +125,10 @@ public class AdServiceImpl implements AdService {
 	    ad.setLng(adForm.getLng());
 	    
 	    ad = adDao.save(ad);
+	    
+	    // Ad successfully saved to DB
+	 	// can now send notifications to users
+	    notificationService.sendNotificationsForMatchingSearches(ad);
 		
 	}
 
