@@ -20,8 +20,8 @@ public class Search {
 	private Long roomSizeMin;
 	private Long roomSizeMax;
 	private Long addCostMax;
-	private Date earliestMoveInDate;
-	private Date latestMoveInDate;
+	private String earliestMoveInDate;
+	private String latestMoveInDate;
 	
 	private String city;
 	
@@ -81,7 +81,7 @@ public class Search {
 	}
 
 	public Search(Long id, Long priceMin, Long priceMax, Long roomSizeMin,
-			Long roomSizeMax, String city) {
+			Long roomSizeMax, String city, String earliestMoveInDate, String latestMoveInDate) {
 		super();
 		this.id = id;
 		this.priceMin = priceMin;
@@ -89,6 +89,8 @@ public class Search {
 		this.roomSizeMin = roomSizeMin;
 		this.roomSizeMax = roomSizeMax;
 		this.city = city;
+		this.earliestMoveInDate = earliestMoveInDate;
+		this.latestMoveInDate = latestMoveInDate;
 	}
 	public Long getAddCostMax() {
 		return addCostMax;
@@ -96,16 +98,16 @@ public class Search {
 	public void setAddCostMax(Long addCostMax) {
 		this.addCostMax = addCostMax;
 	}
-	public Date getEarliestMoveInDate() {
+	public String getEarliestMoveInDate() {
 		return earliestMoveInDate;
 	}
-	public void setEarliestMoveInDate(Date earliestMoveInDate) {
+	public void setEarliestMoveInDate(String earliestMoveInDate) {
 		this.earliestMoveInDate = earliestMoveInDate;
 	}
-	public Date getLatestMoveInDate() {
+	public String getLatestMoveInDate() {
 		return latestMoveInDate;
 	}
-	public void setLatestMoveInDate(Date latestMoveInDate) {
+	public void setLatestMoveInDate(String latestMoveInDate) {
 		this.latestMoveInDate = latestMoveInDate;
 	}
 	   

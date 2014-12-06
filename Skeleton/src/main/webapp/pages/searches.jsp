@@ -22,6 +22,8 @@
 				Minimal Room Size: ${search.roomSizeMin}<br>
 				Maximal Room Size: ${search.roomSizeMax}<br>
 				City: ${search.city}<br>
+				Earliest Move In Date: ${search.earliestMoveInDate}<br>
+				Latest Move In Date: ${search.latestMoveInDate}<br>
 			</div>
 			<div class="panel-footer">
 				 <button type="button" class="btn btn-primary" href='search?searchId=${search.id}'><span class="glyphicon glyphicon-search"></span>  Search</button><a class="btn btn-danger" href="removeSearch?id=${search.id}"><span class="glyphicon glyphicon-remove"></span>  Delete</a>

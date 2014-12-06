@@ -37,8 +37,15 @@ public class SearchServiceImpl implements SearchService {
 		Date earliestDateIn = searchForm.getEarliestMoveInDateD();
 		Date latestDateIn = searchForm.getLatestMoveInDateD();
 		
-		searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDBetween(priceMin, priceMax, roomSizeMin, roomSizeMax, city, addCostMax, earliestDateIn, latestDateIn);
-
+		if(earliestDateIn==null && latestDateIn==null)
+			searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThan(priceMin, priceMax, roomSizeMin, roomSizeMax, city, addCostMax);
+		else if(earliestDateIn==null)
+			searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDLessThan(priceMin, priceMax, roomSizeMin, roomSizeMax, city, addCostMax, latestDateIn);
+		else if(latestDateIn==null)
+			searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDGreaterThan(priceMin, priceMax, roomSizeMin, roomSizeMax, city, addCostMax, earliestDateIn);
+		else
+			searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDBetween(priceMin, priceMax, roomSizeMin, roomSizeMax, city, addCostMax, earliestDateIn, latestDateIn);
+			
 		return searchResults;
 	}
 
@@ -49,8 +56,10 @@ public class SearchServiceImpl implements SearchService {
 		Long roomSizeMin = searchForm.getRoomSizeMinAsLong();
 		Long roomSizeMax = searchForm.getRoomSizeMaxAsLong();
 		String city = searchForm.getCity();
+		String earliestDateIn = searchForm.getEarliestMoveInDate();
+		String latestDateOut = searchForm.getLatestMoveInDate();
 		
-		Search search = new Search(new Long(0), priceMin, priceMax, roomSizeMin, roomSizeMax, city);
+		Search search = new Search(new Long(0), priceMin, priceMax, roomSizeMin, roomSizeMax, city, earliestDateIn, latestDateOut);
 		search.setUserId(loginService.getLoggedInUser().getId());
 		search.setTimestamp(new Timestamp(System.currentTimeMillis()));
 

@@ -48,7 +48,7 @@ public class SearchController {
 		Iterable<Ad> searchResults = adDao.findAll();
 		Search searchAttributes;
 		
-		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
+		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "", "", ""); //TODO: check if works
 		try{
 			searchAttributes = searchDao.findOne(Long.parseLong(searchId));
 			
@@ -81,14 +81,17 @@ public class SearchController {
 		Search searchAttributes;
 		
 		if(searchId != null){
-			searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "");
+			searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "", "", ""); //TODO: check if works
 		} else {
 			Long priceMin = searchForm.getPriceMinAsLong();
 			Long priceMax = searchForm.getPriceMaxAsLong();
 			Long roomSizeMin = searchForm.getRoomSizeMinAsLong();
 			Long roomSizeMax = searchForm.getRoomSizeMaxAsLong();
 			String city = searchForm.getCity();
-			searchAttributes = new Search(new Long(0), priceMin, priceMax, roomSizeMin, roomSizeMax, city);
+			String earliestDateIn = searchForm.getEarliestMoveInDate();
+			String latestDateOut = searchForm.getLatestMoveInDate();
+			
+			searchAttributes = new Search(new Long(0), priceMin, priceMax, roomSizeMin, roomSizeMax, city, earliestDateIn, latestDateOut);
 		}
 		
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
