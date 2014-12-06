@@ -1,5 +1,7 @@
 package org.sample.controller.pojos;
 
+import java.util.Date;
+
 public class SearchForm {
 	
 	private String priceMin;
@@ -8,7 +10,8 @@ public class SearchForm {
 	private String roomSizeMax;
 	private String city;
 	private String addCostMax;
-	
+	private Date earliestMoveInDate;
+	private Date latestMoveInDate;
 
 	public String getRoomSizeMin() {
 		return roomSizeMin;
@@ -66,5 +69,17 @@ public class SearchForm {
 	}
 	public void setAddCostMax(String addCostMax) {
 		this.addCostMax = addCostMax;
+	}
+	public Date getEarliestMoveInDate() {
+		return earliestMoveInDate;
+	}
+	public void setEarliestMoveInDate(Date earliestMoveInDate) {
+		this.earliestMoveInDate = earliestMoveInDate;
+	}
+	public Date getLatestMoveInDate() {
+		return latestMoveInDate;
+	}
+	public void setLatestMoveInDate(Date latestMoveInDate) {
+		this.latestMoveInDate = latestMoveInDate;
 	}
 }

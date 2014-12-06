@@ -2,6 +2,7 @@ package org.sample.model;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,8 +33,12 @@ public class Ad {
 	private Long zip;
 	private Long rent;
 	private Long addCost;
+	
 	private String dateIn;
 	private String dateOut;
+	private Date dateInD;
+	private Date dateOutD;
+	
 	private Long roomSize;
 	private String description;
 	private Long distanceToPublicTransport;
@@ -240,5 +245,21 @@ public class Ad {
 
 	public void setDistanceToShopping(Long distanceToShopping) {
 		this.distanceToShopping = distanceToShopping;
+	}
+
+	public Date getDateOutD() {
+		return dateOutD;
+	}
+
+	public void setDateOutD(Date dateOutD) {
+		this.dateOutD = dateOutD;
+	}
+
+	public Date getDateInD() {
+		return dateInD;
+	}
+
+	public void setDateInD(Date dateInD) {
+		this.dateInD = dateInD;
 	}
 }

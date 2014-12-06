@@ -1,6 +1,7 @@
 package org.sample.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,8 @@ public class Search {
 	private Long roomSizeMin;
 	private Long roomSizeMax;
 	private Long addCostMax;
+	private Date earliestMoveInDate;
+	private Date latestMoveInDate;
 	
 	private String city;
 	
@@ -92,6 +95,18 @@ public class Search {
 	}
 	public void setAddCostMax(Long addCostMax) {
 		this.addCostMax = addCostMax;
+	}
+	public Date getEarliestMoveInDate() {
+		return earliestMoveInDate;
+	}
+	public void setEarliestMoveInDate(Date earliestMoveInDate) {
+		this.earliestMoveInDate = earliestMoveInDate;
+	}
+	public Date getLatestMoveInDate() {
+		return latestMoveInDate;
+	}
+	public void setLatestMoveInDate(Date latestMoveInDate) {
+		this.latestMoveInDate = latestMoveInDate;
 	}
 	   
 }
