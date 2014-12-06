@@ -115,6 +115,13 @@
 			<br>
 
 			<div id="advancedSearchContainer">
+			
+			<link rel="stylesheet" href="/Skeleton/lib/datepicker-1.3.0/css/datepicker.css" />
+			<link rel="stylesheet" href="/Skeleton/lib/datepicker-1.3.0/css/datepicker3.css" />
+			<script src="/Skeleton/lib/datepicker-1.3.0/js/bootstrap-datepicker.js"></script>
+			
+			
+			
 				<div class="row">
 					<div class="col-md-2">
 						<label class="control-label" for="field-dateIn">Add. cost max</label>
@@ -129,13 +136,45 @@
 					<div class="col-md-3">	
 						<form:input class="form-control" path="city" id="field-city" placeholder="City" tabindex="5" maxlength="35"/>
 					</div>	
+					
+					<div class="col-md-2">
+						<label class="control-label" for="field-city">Earliest Move In Date</label>
+					</div>
+					<div class="col-md-3">	
+						<form:input style="background-color:white" class="datepicker form-control" path="earliestMoveInDate" maxlength="10" placeholder="DD.MM.YYYY"/>
+					</div>	
+					<div class="col-md-2 col-md-offset-1">
+						<label class="control-label" for="field-city">Latest Move In Date</label>
+					</div>
+					<div class="col-md-3">	
+						<form:input readonly="true" style="background-color:white" class="datepicker form-control" path="latestMoveInDate" maxlength="10" placeholder="DD.MM.YYYY or empty"/>
+					</div>	
+					
+					<script type="text/javascript">
+						$('.datepicker').datepicker({
+					    startDate: '-0d',
+					    todayHighlight: true,
+					    weekStart: 1,
+					    calendarWeeks: true,
+					    autoclose: true,
+					    format: 'dd.mm.yyyy'
+						})
+					</script>
 				</div>
 			</div>
 			<br />
+			
+			
+			
 			<form:input type="hidden" path="priceMin" id="field-priceMin" maxlength="45"/>
 			<form:input type="hidden" path="priceMax" id="field-priceMax" maxlength="45"/>
 			<form:input type="hidden" path="roomSizeMin" id="field-roomSizeMin" maxlength="45"/>
 			<form:input type="hidden" path="roomSizeMax" id="field-roomSizeMax" maxlength="45"/>
+			
+			<br>
+
+
+			
 			
 			<div class="pull-right">
 				<button type="button" class="btn btn btn-default" id="advancedSearchBtn"><span class="glyphicon glyphicon-plus"></span> Advanced Search</button>

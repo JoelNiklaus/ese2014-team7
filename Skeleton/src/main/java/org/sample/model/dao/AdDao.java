@@ -1,5 +1,6 @@
 package org.sample.model.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.sample.model.Ad;
@@ -10,6 +11,7 @@ public interface AdDao  extends CrudRepository<Ad,Long>{
 
 	
 	List<Ad> findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThan(Long priceMin, Long priceMax, Long roomSizeMin, Long roomSizeMax, String city, Long addCostMax);
+	List<Ad> findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDBetween(Long priceMin, Long priceMax, Long roomSizeMin, Long roomSizeMax, String city, Long addCostMax, Date earliestDateIn, Date latestDateIn);
 
 	
 	List<Ad> findByPlacerId(Long loggedInUserId);

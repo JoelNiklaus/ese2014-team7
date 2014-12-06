@@ -1,7 +1,9 @@
 package org.sample.controller.service;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.sample.controller.pojos.SearchForm;
 import org.sample.model.Ad;
@@ -32,8 +34,10 @@ public class SearchServiceImpl implements SearchService {
 		Long roomSizeMax = searchForm.getRoomSizeMaxAsLong();
 		Long addCostMax = searchForm.getAddCostMaxAsLong();
 		String city = searchForm.getCity();
-
-		searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThan(priceMin, priceMax, roomSizeMin, roomSizeMax, city, addCostMax);
+		Date earliestDateIn = searchForm.getEarliestMoveInDateD();
+		Date latestDateIn = searchForm.getLatestMoveInDateD();
+		
+		searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDBetween(priceMin, priceMax, roomSizeMin, roomSizeMax, city, addCostMax, earliestDateIn, latestDateIn);
 
 		return searchResults;
 	}

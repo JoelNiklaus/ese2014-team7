@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.sample.controller.pojos.AdForm;
 import org.sample.model.Ad;
+import org.sample.model.DateConverter;
 import org.sample.model.Picture;
 import org.sample.model.dao.PictureDao;
 import org.sample.model.dao.UserDao;
@@ -35,7 +36,6 @@ public class AdServiceImpl implements AdService {
 	public AdForm saveFrom(AdForm adForm) {
 	    
     	Ad ad = new Ad();
-    	DateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy", Locale.GERMAN);
     	
     	Set<Picture> pictures = new HashSet<Picture>(0);
     	
@@ -62,8 +62,8 @@ public class AdServiceImpl implements AdService {
 	    
 	    ad.setDateIn(adForm.getDateIn());
 	    ad.setDateOut(adForm.getDateOut());
-		ad.setDateInD(parseDate(adForm.getDateIn()));
-		ad.setDateOutD(parseDate(adForm.getDateOut()));
+		ad.setDateInD(DateConverter.parseDate(adForm.getDateIn()));
+		ad.setDateOutD(DateConverter.parseDate(adForm.getDateOut()));
 	    
 	    ad.setRoomSize(adForm.getRoomSize());
 	    ad.setDescription(adForm.getDescription());
@@ -127,8 +127,8 @@ public class AdServiceImpl implements AdService {
 	    
 	    ad.setDateIn(adForm.getDateIn());
 	    ad.setDateOut(adForm.getDateOut());
-	    ad.setDateInD(parseDate(adForm.getDateIn()));
-		ad.setDateOutD(parseDate(adForm.getDateOut()));
+	    ad.setDateInD(DateConverter.parseDate(adForm.getDateIn()));
+		ad.setDateOutD(DateConverter.parseDate(adForm.getDateOut()));
 	    
 	    ad.setRoomSize(adForm.getRoomSize());
 	    ad.setDescription(adForm.getDescription());
@@ -145,41 +145,6 @@ public class AdServiceImpl implements AdService {
 	 	// can now send notifications to users
 	    notificationService.sendNotificationsForMatchingSearches(ad);
 		
-	}
-	
-	/**
-	 * Parses Date from String.
-	 * @param dateString  	format: dd.mm.yyyy
-	 * @return
-	 */
-	private Date parseDate(String dateString)
-	{
-		Calendar cal = Calendar.getInstance();
-		Date date = new Date();
-	
-		int month, day, year;
-		
-		try
-		{		
-			day = Integer.parseInt(dateString.substring(0, 2));
-			month = Integer.parseInt(dateString.substring(3, 5))-1;
-			year = Integer.parseInt(dateString.substring(6, 10));
-			
-			cal.set(Calendar.MONTH, month);
-			cal.set(Calendar.DAY_OF_MONTH, day);
-			cal.set(Calendar.YEAR, year);
-			cal.set(Calendar.HOUR_OF_DAY, 0);
-			cal.set(Calendar.MINUTE, 0);
-			cal.set(Calendar.SECOND, 0);
-			
-			date = cal.getTime();
-		}
-		catch(Exception ex)
-		{
-			ex.printStackTrace();
-		}
-		
-		return date;
 	}
 
 }

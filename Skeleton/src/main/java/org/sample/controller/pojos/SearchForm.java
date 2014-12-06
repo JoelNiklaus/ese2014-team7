@@ -1,6 +1,10 @@
 package org.sample.controller.pojos;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.sample.model.DateConverter;
 
 public class SearchForm {
 	
@@ -10,8 +14,10 @@ public class SearchForm {
 	private String roomSizeMax;
 	private String city;
 	private String addCostMax;
-	private Date earliestMoveInDate;
-	private Date latestMoveInDate;
+	private String earliestMoveInDate;
+	private String latestMoveInDate;
+	private Date earliestMoveInDateD;
+	private Date latestMoveInDateD;
 
 	public String getRoomSizeMin() {
 		return roomSizeMin;
@@ -70,16 +76,37 @@ public class SearchForm {
 	public void setAddCostMax(String addCostMax) {
 		this.addCostMax = addCostMax;
 	}
-	public Date getEarliestMoveInDate() {
+	
+	
+	
+	public String getEarliestMoveInDate() {
 		return earliestMoveInDate;
 	}
-	public void setEarliestMoveInDate(Date earliestMoveInDate) {
+	public void setEarliestMoveInDate(String earliestMoveInDate) {
 		this.earliestMoveInDate = earliestMoveInDate;
+		setEarliestMoveInDateD(null);
 	}
-	public Date getLatestMoveInDate() {
+	public String getLatestMoveInDate() {
 		return latestMoveInDate;
 	}
-	public void setLatestMoveInDate(Date latestMoveInDate) {
+	public void setLatestMoveInDate(String latestMoveInDate) {
 		this.latestMoveInDate = latestMoveInDate;
+		setLatestMoveInDateD(null);
 	}
+	
+	
+	
+	public Date getEarliestMoveInDateD() {
+		return earliestMoveInDateD;
+	}
+	public void setEarliestMoveInDateD(Date earliestMoveInDateD) {
+		this.earliestMoveInDateD = DateConverter.parseDate(earliestMoveInDate);
+	}
+	public Date getLatestMoveInDateD() {
+		return latestMoveInDateD;
+	}
+	public void setLatestMoveInDateD(Date latestMoveInDateD) {
+		this.latestMoveInDateD = DateConverter.parseDate(latestMoveInDate);
+	}
+	
 }
