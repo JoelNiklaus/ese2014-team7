@@ -59,5 +59,10 @@ public interface EnquiryService {
      */
     public Enquiry removeEnquiry(Enquiry enquiry);
     
-    
+    /**
+     * 
+     * @param id
+     * @return enquiry
+     */
+    public Enquiry getEnyuiryById(Long id);
 }

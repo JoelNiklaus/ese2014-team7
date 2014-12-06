@@ -18,6 +18,8 @@ public class VisitAppointment {
 	private Long id;
 	private Long equiryId;
 
+	private String Comment;
+	
 	@DateTimeFormat(pattern="dd.MM.yyyy hh:mm")
 	private Date startDate;
 
@@ -65,6 +67,14 @@ public class VisitAppointment {
 
 	public void setEquiryId(Long equiryId) {
 		this.equiryId = equiryId;
+	}
+
+	public String getComment() {
+		return Comment;
+	}
+
+	public void setComment(String comment) {
+		Comment = comment;
 	}
 	
 	

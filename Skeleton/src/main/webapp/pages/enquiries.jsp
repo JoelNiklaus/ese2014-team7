@@ -29,11 +29,11 @@
 					</c:forEach>
 				</a>
 			  	<p  style="padding:1em;">${enquiry.messageText}</p>
-			  	${enquiry.status}
 			</div>		
-			<div class="panel-footer">
+			<div class="panel-footer" style="height:55px">
 				<b>This enquiry has not yet been rated</b> (click on enquiry to rate it)
-				<a class="btn btn-danger btn-xs pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
+				<a class="btn btn-default pull-right" href="createVisitAppointment?enquiryId=${enquiry.enquiryId}">Send Invitation</a>
+				<a class="btn btn-danger pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
 			</div>
 		</div>
 	</c:forEach>
@@ -54,12 +54,12 @@
 				</c:forEach>
 				</a>
 		  		<p style="padding:1em;">${enquiry.messageText}</p>
-		  		${enquiry.status}	
 	  		</div>		
 			
-	  		<div class="panel-footer"><b>
-	  			This enquiry has not yet been rated</b> (click on enquiry to rate it)
-	  			<a class="btn btn-danger btn-xs pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
+			<div class="panel-footer" style="height:55px">
+				<b>This enquiry has not yet been rated</b>(click on enquiry to rate it) 
+				<a class="btn btn-danger pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
+				<a class="btn btn-default pull-right" href="createVisitAppointment?enquiryId=${enquiry.enquiryId}">Send Invitation</a>
 			</div>
 		</div>
 	</c:forEach>

@@ -28,6 +28,7 @@ public class VisitAppointmentServiceImpl implements VisitAppointmentService{
 			VisitAppointment visitAppointment = new VisitAppointment();
 			visitAppointment.setEquiryId(vaForm.getEnquiryId());
 			visitAppointment.setEndDate(endDate);
+			visitAppointment.setComment(vaForm.getComment());
 			visitAppointment.setEquiryId(vaForm.getEnquiryId());
 			visitAppointment.setStartDate(startDate);
 			visitAppointment.setState(VisitAppointmentState.NEW);

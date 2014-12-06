@@ -2,7 +2,6 @@ package org.sample.controller.pojos;
 
 import javax.validation.constraints.NotNull;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 
@@ -16,7 +15,7 @@ public class VisitAppointmentForm {
 	@NotNull
 	private String endDate;
 	
-
+	private String comment;
 	
 	public Long getId() {
 		return id;
@@ -49,6 +48,14 @@ public class VisitAppointmentForm {
 
 	public void setEnquiryId(Long enquiryId) {
 		this.enquiryId = enquiryId;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }
