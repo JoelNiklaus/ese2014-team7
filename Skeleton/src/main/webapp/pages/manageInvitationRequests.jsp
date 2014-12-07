@@ -11,7 +11,7 @@
 <script src="/Skeleton/lib/moment/locales.min.js"></script>
 <script src="/Skeleton/lib/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
-<div style="background-color:#f1f1f1; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
+<div style="background-color:#fbfbfb; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
 	<div class="container">
 		<div class='col-sm-6'>
 			<h4>Enquiry Message</h4>
@@ -25,7 +25,7 @@
 </div>
 <br />
 
-<div style="background-color:#f1f1f1; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
+<div style="background-color:#fbfbfb; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
 	<div class="container">
 		<div class='col-sm-6'>
 			<h4>Sent Invitations</h4>
@@ -33,8 +33,11 @@
 	</div>
 	<div class="container">
 		<c:forEach items="${enquiry.visitAppointments}" var="visitAppointment">
-			<div class='col-sm-11' style="background-color:#ffffff; padding:1em; border: 1px solid; border-radius: 2px; border-color:#aaaaaa">
-				${visitAppointment.state} from: ${visitAppointment.startDate} to:${visitAppointment.startDate} <br/>
+			<div role="alert" class="col-sm-11 <c:if test="${ visitAppointment.state eq 'NEW'}">alert alert-info</c:if>
+								<c:if test="${ visitAppointment.state eq 'ACCEPTED'}">alert alert-success</c:if>
+								<c:if test="${ visitAppointment.state eq 'REJECTED'}">alert alert-danger</c:if>" >
+				${visitAppointment.state} <br />
+				from: ${visitAppointment.startDate} to:${visitAppointment.startDate} <br/>
 				Message: ${visitAppointment.comment}
 				<a class="btn btn-default btn-xs pull-right" href="setVisitAppointmentStateAccepted?id=${visitAppointment.id}&enquiryId=${enquiry.enquiryId}"><span class="glyphicon glyphicon-thumbs-up"></span>Accept</a>
 				<a class="btn btn-default btn-xs pull-right" href="setVisitAppointmentStateRejected?id=${visitAppointment.id}&enquiryId=${enquiry.enquiryId}"><span class="glyphicon glyphicon-thumbs-down"></span>Decline</a>

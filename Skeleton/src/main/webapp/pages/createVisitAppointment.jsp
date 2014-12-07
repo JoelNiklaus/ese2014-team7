@@ -31,31 +31,16 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#invitationTab" aria-controls="invitationTab" role="tab" data-toggle="tab">Invitation</a></li>
+    <li role="presentation" class="active"><a href="#invitationTab" aria-controls="invitationTab" role="tab" data-toggle="tab">Send Invitation</a></li>
+    <li role="presentation"><a href="#sentInvitationTab" aria-controls="#sentInvitationTab" role="tab" data-toggle="tab">Sent Invitation</a></li>
     <li role="presentation"><a href="#prospectTab" aria-controls="prospectTab" role="tab" data-toggle="tab">Rate Prospect</a></li>
   </ul>
 
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade in active" id="invitationTab">
-    <div style="background-color:#fbfbfb; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
-				<div class="container">
-					<div class='col-sm-6'>
-						<h4>Sent Invitations</h4>
-					</div>
-				</div>
-				<div class="container">
-					<c:forEach items="${enquiry.visitAppointments}" var="visitAppointment">
-						<div class='col-sm-11' style="background-color:#ffffff; padding:1em; border: 1px solid; border-radius: 2px; border-color:#aaaaaa">
-							${visitAppointment.state} from: ${visitAppointment.startDate} to:${visitAppointment.startDate} <br/>
-							Message: ${visitAppointment.comment}
-							<a class="btn btn-danger btn-xs pull-right" href="removeVisitAppointment?id=${visitAppointment.id}&enquiryId=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-			<br />
-			<div style="background-color:#fbfbfb; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
+    	
+		<div style="background-color:#fbfbfb; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
 				<div class="container">
 					<div class='col-sm-6'>
 						<h4>Send New Invitation</h4>
@@ -158,9 +143,32 @@
 				</form:form>
 			</div>	
 		</div>
+		
+	<div role="tabpanel" class="tab-pane fade" id="sentInvitationTab">
+		<div style="background-color:#fbfbfb; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
+				<div class="container">
+					<div class='col-sm-6'>
+						<h4>Sent Invitations</h4>
+					</div>
+				</div>
+				<div class="container">
+					<c:forEach items="${enquiry.visitAppointments}" var="visitAppointment">
+						
+						<div role="alert" class="col-sm-11 <c:if test="${ visitAppointment.state eq 'NEW'}">alert alert-info</c:if>
+								<c:if test="${ visitAppointment.state eq 'ACCEPTED'}">alert alert-success</c:if>
+								<c:if test="${ visitAppointment.state eq 'REJECTED'}">alert alert-danger</c:if>" >
+								${visitAppointment.state} <br />from: ${visitAppointment.startDate} to:${visitAppointment.startDate} <br/>
+								Message: ${visitAppointment.comment}
+							<a class="btn btn-danger btn-xs pull-right" href="removeVisitAppointment?id=${visitAppointment.id}&enquiryId=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<br />
+	</div>
     
     <div role="tabpanel" class="tab-pane fade" id="prospectTab">
-    <div style="background-color:#fbfbfb; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa"> 
+    	<div style="background-color:#fbfbfb; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa"> 
 
 			<div class="container">
 				<div class='col-sm-6'>
@@ -210,24 +218,8 @@
 		</div>
     </div>
   </div>
+</div>
 
-</div>
-<!-- 
-<div role="tabpanel">
-	<ul class="nav nav-tabs" role="tablist" id="myTab">
-	  	<li role="presentation"><a href="#invitation">Invitation</a></li>
-	  	<li role="presentation"><a href="#prospect">Prospect</a></li>
-	</ul>
-		
-	<div class="tab-content">
-		
-		</div>
-				
-		<div role="tabpanel" class="tab-pane"  id="prospectTab">
-			
-	</div>
-</div>
- -->
 <script>
 	$("#ratingStars").rating("refresh", {disabled: false, showCaption: false, showClear: false,min: "0", max:"5", step:"1"});
 </script>
