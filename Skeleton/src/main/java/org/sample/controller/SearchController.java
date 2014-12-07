@@ -42,45 +42,43 @@ public class SearchController {
 	@RequestMapping(value = {"", "/", "/search"} , method = RequestMethod.GET)
 	public ModelAndView index(@RequestParam(value="searchId", required=false) String searchId) {
 		
-		//TODO: bugged: search results aren't actually computed, same attributes aren't displayed correctly
-		System.out.println("Method: GET");
+		//TODO: bugged: some attributes aren't displayed correctly
 		
 		ModelAndView model = new ModelAndView("search");
 		model.addObject("searchForm", new SearchForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
 		updateService.updateNumberOfUnreadItems(model);
-		Iterable<Ad> searchResults = adDao.findAll();
+		Iterable<Ad> searchResults = null;
 		Search searchAttributes;
 		
 		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "", "", "");
 		try{
 			searchAttributes = searchDao.findOne(Long.parseLong(searchId));
-			
+			searchResults = searchService.computeSearchResults(searchToForm(searchAttributes));
 		} catch(Exception e) {
+			searchResults = adDao.findAll();
 			System.out.println(e);
 		}
 		model.addObject("searchAttributes", searchAttributes);
 		if(searchResults != null)
 			model.addObject("searchResults", searchResults);
 		
-		
 		return model;
 	}
 	
 	
-	private SearchForm SearchToForm(Search searchAttributes)
+	private SearchForm searchToForm(Search searchAttributes)
 	{
 		SearchForm form = new SearchForm();
 		
-		//TODO: check if works
-		
-		form.setPriceMax(searchAttributes.getPriceMax().toString());
-		form.setPriceMin(searchAttributes.getPriceMin().toString());
-		form.setAddCostMax(searchAttributes.getAddCostMax().toString());
-		form.setCity(searchAttributes.getCity().toString());
-		form.setRoomSizeMax(searchAttributes.getRoomSizeMax().toString());
-		form.setRoomSizeMin(searchAttributes.getRoomSizeMin().toString());
-		form.setEarliestMoveInDate(searchAttributes.getLatestMoveInDate().toString());
+		form.setPriceMax("" + searchAttributes.getPriceMax());
+		form.setPriceMin("" + searchAttributes.getPriceMin());
+		form.setAddCostMax("" + searchAttributes.getAddCostMax());
+		form.setCity("" + searchAttributes.getCity());
+		form.setRoomSizeMax("" + searchAttributes.getRoomSizeMax());
+		form.setRoomSizeMin("" + searchAttributes.getRoomSizeMin());
+		form.setEarliestMoveInDate("" + searchAttributes.getEarliestMoveInDate());
+		form.setLatestMoveInDate("" + searchAttributes.getLatestMoveInDate());
 		
 		return form;
 	}
