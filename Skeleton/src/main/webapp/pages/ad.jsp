@@ -82,10 +82,15 @@
 								<img width="50px" class="gallery" src="/Skeleton/img/Profile_Placeholder.jpg" />
 							</c:if>
 						 </div>
+							
 				    	<div class="col-sm-6">
-							${enquiry.enquiryRatingComment }
+							${enquiry.messageText }
 						</div>
-				    	<div class='col-sm-1 pull-right'>
+						<!-- 
+						<div class="col-sm-3">
+							${enquiry.enquiryRatingComment }
+						</div> -->
+				    	<div class='col-sm-2 pull-right'>
 							<input id="rateStar${loop.index}" type="number" value="${enquiry.rating}" class="rating" data-size="xxs" />
 							<script>
 								$("#rateStar${loop.index}").rating("refresh", {disabled: true, showCaption: false, showClear: false,min: "0", max:"5", step:"1"});
