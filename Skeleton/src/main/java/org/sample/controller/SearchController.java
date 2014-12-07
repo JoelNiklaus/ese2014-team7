@@ -41,6 +41,10 @@ public class SearchController {
 	 */
 	@RequestMapping(value = {"", "/", "/search"} , method = RequestMethod.GET)
 	public ModelAndView index(@RequestParam(value="searchId", required=false) String searchId) {
+		
+		//TODO: bugged: search results aren't actually computed, same attributes aren't displayed correctly
+		System.out.println("Method: GET");
+		
 		ModelAndView model = new ModelAndView("search");
 		model.addObject("searchForm", new SearchForm());
 		model.addObject("loggedInUser", loginService.getLoggedInUser());
@@ -48,7 +52,7 @@ public class SearchController {
 		Iterable<Ad> searchResults = adDao.findAll();
 		Search searchAttributes;
 		
-		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "", "", ""); //TODO: check if works
+		searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "", "", "");
 		try{
 			searchAttributes = searchDao.findOne(Long.parseLong(searchId));
 			
@@ -62,6 +66,25 @@ public class SearchController {
 		
 		return model;
 	}
+	
+	
+	private SearchForm SearchToForm(Search searchAttributes)
+	{
+		SearchForm form = new SearchForm();
+		
+		//TODO: check if works
+		
+		form.setPriceMax(searchAttributes.getPriceMax().toString());
+		form.setPriceMin(searchAttributes.getPriceMin().toString());
+		form.setAddCostMax(searchAttributes.getAddCostMax().toString());
+		form.setCity(searchAttributes.getCity().toString());
+		form.setRoomSizeMax(searchAttributes.getRoomSizeMax().toString());
+		form.setRoomSizeMin(searchAttributes.getRoomSizeMin().toString());
+		form.setEarliestMoveInDate(searchAttributes.getLatestMoveInDate().toString());
+		
+		return form;
+	}
+	
 
 	/**
 	 * Assembles a model providing search functionality (specifying search criteria, displaying only ads
@@ -81,7 +104,7 @@ public class SearchController {
 		Search searchAttributes;
 		
 		if(searchId != null){
-			searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "", "", ""); //TODO: check if works
+			searchAttributes = new Search(new Long(0), new Long(0), new Long(3000), new Long(0),new Long(300), "", "", "");
 		} else {
 			Long priceMin = searchForm.getPriceMinAsLong();
 			Long priceMax = searchForm.getPriceMaxAsLong();
