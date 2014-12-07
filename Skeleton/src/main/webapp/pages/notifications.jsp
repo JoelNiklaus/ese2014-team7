@@ -6,13 +6,25 @@
 
 <c:import url="template/header.jsp" />
 
-<div class="pull-right">
-    <button id="clearNotifications" class="btn btn-danger" onclick="javascript:location.href='clearNotifications'"><span class="glyphicon glyphicon-trash"></span> Clear Notifications</button>
-</div>
+<c:if test="${not empty unreadNotifications or not empty notifications}">
+	<div class="pull-right">
+	    <button id="clearNotifications" class="btn btn-danger" onclick="javascript:location.href='clearNotifications'"><span class="glyphicon glyphicon-trash"></span> Clear Notifications</button>
+	</div>
+</c:if>
 
-<h1>My Notification Center</h1> 
+<h1>My Notification Center</h1>
 
-${message}
+<c:if test="${empty unreadNotifications and empty notifications}">
+	<div class="jumbotron">
+		<p>You have not received any notifications yet. When a user creates an ad which matches one of your saved searches you will get a notification here. You can here <a href="search">search ads</a>. Under "advanced Search" you can save your search.</p>
+	</div>
+</c:if>
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success" role="alert">
+		${message}
+	</div>
+</c:if>
 
 <c:forEach items="${unreadNotifications}" var="notification">
 		<%-- the onclick link should lead to notificationController, which should then return the ad model --%>

@@ -51,11 +51,11 @@ public class AdController {
     	ModelAndView model = new ModelAndView("createAd");
     	if (!result.hasErrors()){
 			adService.saveFrom(adForm);
-			model = searchController.index(null);
+			//model = searchController.index(null);
+			model = showMyAds();
 			model.addObject("success", "Ad successfully created.");
 			//model = new ModelAndView("redirect:/myAds");
-    	}else{
-    		
+    	}else{	
     		model.addObject("error", "Please fill out all valid information.");
     	}
     	model.addObject("loggedInUser", loginService.getLoggedInUser());
@@ -130,9 +130,8 @@ public class AdController {
      * @return myAds model 
      */
     @RequestMapping(value = "/myAds", method = RequestMethod.GET)
-    public ModelAndView showMyAd() {
-    	ModelAndView model = new ModelAndView("myAds");
-    
+    public ModelAndView showMyAds() {
+    	ModelAndView model = new ModelAndView("myAds");  
 
     	Long loggedInUserId = loginService.getLoggedInUser().getId();
         List<Ad> ads = adDao.findByPlacerId(loggedInUserId);

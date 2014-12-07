@@ -6,8 +6,6 @@
 
 <c:import url="template/header.jsp" />
 
-
-
 	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 	<link href="/Skeleton/css/dropzone.css" type="text/css" rel="stylesheet" /> 
 	
@@ -110,7 +108,7 @@
 		<form:errors path="roomSize" cssClass="help-inline" element="span"/>
 		
 		<label class="control-label">Description</label>
-		<form:textarea class="form-control" path="description" tabindex="11" maxlength="255" placeholder="are pets allowed?...is there a balcony?...parking?...smokers?"></form:textarea>
+		<form:textarea class="form-control" path="description" tabindex="11" maxlength="255" placeholder="are pets allowed?...is there a balcony?...parking?...smokers?"/>
 		<form:errors path="description" cssClass="help-inline" element="span"/>
 		
 		<label class="control-label">Distance To Public Transport</label>
@@ -125,11 +123,11 @@
 		<legend>Social Informations</legend>
 
 		<label class="control-label">We are...</label>
-		<form:input class="form-control" path="us" tabindex="14" maxlength="255" placeholder="Write about you and your roomies."/>
+		<form:textarea class="form-control" path="us" tabindex="14" maxlength="255" placeholder="Write about you and your roomies."/>
 		<form:errors path="us" cssClass="help-inline" element="span"/>
 		
 		<label class="control-label">Ideal Roomie</label>
-		<form:input class="form-control" path="you" tabindex="15" maxlength="255" placeholder="My/Our ideal roomie should be.."/>
+		<form:textarea class="form-control" path="you" tabindex="15" maxlength="255" placeholder="My/Our ideal roomie should be.."/>
 		<form:errors path="you" cssClass="help-inline" element="span"/>
 		
 		<form:input class="form-control" type="hidden" path="imageIds" name="files" id="files"/><br />

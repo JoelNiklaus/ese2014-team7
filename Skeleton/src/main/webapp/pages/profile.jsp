@@ -106,8 +106,12 @@
 		</div>
 	</spring:bind>	
  	
- 	<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
- 	<button class="btn btn-warning" type="reset"><span class="glyphicon glyphicon-remove"></span> Reset</button>
+ 	<div class="form group">
+ 		<div class="col-sm-offset-2 col-sm-10">
+ 			<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+ 			<button class="btn btn-warning" type="reset"><span class="glyphicon glyphicon-remove"></span> Reset</button>
+ 		</div>
+ 	</div>
  </form:form>
 
 <c:import url="template/footer.jsp" />

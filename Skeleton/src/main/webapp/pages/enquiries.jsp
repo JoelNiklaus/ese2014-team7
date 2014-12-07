@@ -7,6 +7,15 @@
 
 <h1>My Enquiries</h1>
 
+<c:if test="${empty unreadEnquiries and empty newReceivedEnquiries and empty ratedReceivedEnquiries and empty sentEnquiries}">
+	<div class="jumbotron">
+		<p>
+			You have not sent or received any enquiries yet. If you want to find apartments, studios, houses etc, you can here <a href="search">search ads</a>.
+			When you have found an interesting one you can contact the ad placer by sending an enquiry.
+		</p>
+	</div>
+</c:if>
+
 	<c:if test="${not empty message}">
 		<div class="alert alert-success" role="alert">
 			${message}

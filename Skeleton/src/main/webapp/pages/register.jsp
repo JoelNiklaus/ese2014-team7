@@ -95,9 +95,11 @@
 		</div>
 	</spring:bind>
 
-	<div class="form-actions">
-		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-new-window"></span> Sign up</button>
-		<button type="reset" class="btn btn-warning"><span class="glyphicon glyphicon-remove"></span> Reset</button>
+	 <div class="form group">
+ 		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-new-window"></span> Sign up</button>
+			<button type="reset" class="btn btn-warning"><span class="glyphicon glyphicon-remove"></span> Reset</button>
+		</div>
 	</div>
 </form:form>
 

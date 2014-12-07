@@ -93,13 +93,16 @@
 <link href="/Skeleton/css/search.css" rel="stylesheet">
 
 <div class="panel" style="background-color: #fafafa; padding: 5pt; 	border: 1px solid; border-color: #f0f0f0;">
+	
 	<h2 class="form-heading">Search</h2>
 	<c:if test="${not empty message}">
 		<div class="alert alert-success" role="alert">
 			${message}
 		</div>
 	</c:if>
-		
+	
+	<br>
+	<br>
 	<form:form method="post" modelAttribute="searchForm" id="searchForm" cssClass="form-horizontal" autocomplete="off">
 		<fieldset>
 			<div class="row">
@@ -119,8 +122,7 @@
 			<link rel="stylesheet" href="/Skeleton/lib/datepicker-1.3.0/css/datepicker.css" />
 			<link rel="stylesheet" href="/Skeleton/lib/datepicker-1.3.0/css/datepicker3.css" />
 			<script src="/Skeleton/lib/datepicker-1.3.0/js/bootstrap-datepicker.js"></script>
-			
-			
+		
 			
 				<div class="row">
 					<div class="col-md-2">
@@ -162,18 +164,12 @@
 					</script>
 				</div>
 			</div>
-			<br />
-			
-			
+			<br />		
 			
 			<form:input type="hidden" path="priceMin" id="field-priceMin" maxlength="45"/>
 			<form:input type="hidden" path="priceMax" id="field-priceMax" maxlength="45"/>
 			<form:input type="hidden" path="roomSizeMin" id="field-roomSizeMin" maxlength="45"/>
 			<form:input type="hidden" path="roomSizeMax" id="field-roomSizeMax" maxlength="45"/>
-			
-			<br>
-
-
 			
 			
 			<div class="pull-right">
@@ -184,9 +180,7 @@
 			</div>
 		</fieldset>
 	</form:form>
-</div>
-<br />
-	
+</div>	
 
 <div role="tabpanel">
 	<ul class="nav nav-tabs" role="tablist" id="myTab">
