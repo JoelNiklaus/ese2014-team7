@@ -24,7 +24,7 @@
 	</c:if>
 
 	<h2>Inbox</h2>
-	<c:forEach items="${unreadEnquiries}" var="enquiry">
+	<c:forEach items="${unreadEnquiries}" var="enquiry" >
 		<div class="panel panel-info" onclick="javascript:location.href='createVisitAppointment?enquiryId=${enquiry.enquiryId}'">
 				
 			<div class="panel-heading">
@@ -49,7 +49,7 @@
 	</c:forEach>
 
 
-	<c:forEach items="${newReceivedEnquiries}" var="enquiry">
+	<c:forEach items="${newReceivedEnquiries}" var="enquiry" >
 		<div class="panel panel-default" onclick="javascript:location.href='createVisitAppointment?enquiryId=${enquiry.enquiryId}'">
 			
 			<div class="panel-heading">
@@ -74,7 +74,7 @@
 		</div>
 	</c:forEach>
 	
-	<c:forEach items="${ratedReceivedEnquiries}" var="enquiry">
+	<c:forEach items="${ratedReceivedEnquiries}" var="enquiry" varStatus="loop">
 		<div class="panel panel-default" onclick="javascript:location.href='createVisitAppointment?enquiryId=${enquiry.enquiryId}'">
 			
 				<div class="panel-heading">
@@ -94,7 +94,10 @@
 				<div class="panel-footer">
 					<div class="row">
 						<div class='col-sm-6'>
-							<input id="ratingStars" type="number" value="${enquiry.rating}" class="rating" data-size="xxs" />
+							<input id="ratingStars${loop.index}" type="number" value="${enquiry.rating}" class="rating" data-size="xxs" />
+							<script>
+								$("#ratingStars${loop.index}").rating("refresh", {disabled: true, showCaption: false, showClear: false,min: "0", max:"5", step:"1"});
+							</script>
 						</div>
 						<div class='col-sm-6'>
 							<a class="btn btn-danger btn-xs pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
@@ -130,8 +133,6 @@
 			</div>
 		</div>
 	</c:forEach>
-<script>
-	$("#ratingStars").rating("refresh", {disabled: true, showCaption: false, showClear: false,min: "0", max:"5", step:"1"});
-</script>
+
 			
 <c:import url="template/footer.jsp" />
