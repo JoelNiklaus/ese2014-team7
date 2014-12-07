@@ -203,6 +203,7 @@
 						 <fieldset>
 							<div class="row">
 								<form:input id="enquiryId" path="enquiryId" type="hidden"/>
+								<label>Remark:</label>
 								<form:textarea id="enquiryRatingComment" style="width: 100%;" path="enquiryRatingComment"/>
 								<form:input id="ratingStars" path="rating" type="number" class="rating" data-size="xs" />
 							</div>

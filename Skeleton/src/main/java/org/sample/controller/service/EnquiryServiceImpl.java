@@ -3,13 +3,17 @@ package org.sample.controller.service;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import org.sample.controller.exceptions.InvalidAdException;
 import org.sample.controller.pojos.EnquiryForm;
 import org.sample.controller.pojos.EnquiryRatingForm;
+import org.sample.model.Ad;
 import org.sample.model.Enquiry;
 import org.sample.model.EnquiryComparator;
 import org.sample.model.EnquiryComparatorRating;
+import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.sample.model.dao.EnquiryDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +28,17 @@ public class EnquiryServiceImpl implements EnquiryService {
 	@Autowired EnquiryDao enquiryDao;
 
 
-	@Transactional //TODO: throw exception for null Ads to load 404 in Enquiry controller
+	@Transactional 
 	public EnquiryForm submit(EnquiryForm enquiryForm) {
 		Enquiry enquiry = new Enquiry();
 		
+		Ad ad = adDao.findOne(enquiryForm.getAdId());
+		User sender = loginService.getLoggedInUser();
+
+		Set<Enquiry> enquiries = ad.getEnquiries();
+		
 		/* fetch ad from DB, according to submitted Ad-ID. Throw exception if no ad found */
-		enquiryForm.setAd(adDao.findOne(enquiryForm.getAdId()));
+		enquiryForm.setAd(ad);
 		if(enquiryForm.getAd() == null)
 			throw new InvalidAdException("This ad doesn't exist");
 			
@@ -41,12 +50,17 @@ public class EnquiryServiceImpl implements EnquiryService {
 		/* Fill in enquiry from completed enquiry form */
 		enquiry.setTimestamp(enquiryForm.getTimestamp());
 		enquiry.setAdId(enquiryForm.getAdId());
+		enquiry.setSender(sender);
 		enquiry.setSenderId(enquiryForm.getSenderId());
 		enquiry.setReceiverId(enquiryForm.getReceiverId());
 		enquiry.setMessageText(enquiryForm.getMessageText());
 		enquiry.setUnread(true);
 		
+
 		enquiryDao.save(enquiry);
+		enquiries.add(enquiry);
+		ad.setEnquiries(enquiries);
+		adDao.save(ad);
 		
 		return enquiryForm;
 	}
@@ -133,6 +147,14 @@ public class EnquiryServiceImpl implements EnquiryService {
     
 	@Transactional
 	public Enquiry removeEnquiry(Enquiry enquiry) {
+		Ad ad = adDao.findOne(enquiry.getAdId());
+		Set<Enquiry> enquiries = ad.getEnquiries();
+		for (Enquiry tmpEnquiry : enquiries) {
+			if(tmpEnquiry.getAdId().equals(enquiry.getAdId()))
+				enquiries.remove(tmpEnquiry);
+		}
+		ad.setEnquiries(enquiries);
+		adDao.save(ad);
 		enquiryDao.delete(enquiry);
 		
 		return enquiry;

@@ -130,7 +130,7 @@
 			</div>
 		</div>
 	</c:forEach>
-				<script>
+<script>
 	$("#ratingStars").rating("refresh", {disabled: true, showCaption: false, showClear: false,min: "0", max:"5", step:"1"});
 </script>
 			

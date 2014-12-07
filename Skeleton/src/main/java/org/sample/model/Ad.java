@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.sample.model.Ad;
@@ -48,11 +47,19 @@ public class Ad {
 	private String lat;
 	private String lng;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	private Set<Picture> pictures = new HashSet<Picture>();
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	private Set<Enquiry> enquiries = new HashSet<Enquiry>();
 	
-	@ManyToOne
-	private Ad ad;
+	public Set<Enquiry> getEnquiries() {
+		return enquiries;
+	}
+
+	public void setEnquiries(Set<Enquiry> enquiries) {
+		this.enquiries = enquiries;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private Set<Picture> pictures = new HashSet<Picture>();
 
 	public Set<Picture> getPictures() {
 		return pictures;
