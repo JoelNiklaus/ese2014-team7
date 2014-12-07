@@ -35,6 +35,9 @@ public class User implements UserDetails{
 
 	private String email;
 	private String password; 
+	
+	@OneToOne
+	private Picture profileImage;
 
 
 	@OneToOne(cascade = {CascadeType.ALL}) //TODO: @Silas: what does this do?
@@ -139,4 +142,11 @@ public class User implements UserDetails{
 		this.password = password;
 	}
 
+	public Picture getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(Picture profileImage) {
+		this.profileImage = profileImage;
+	}
 }

@@ -26,7 +26,7 @@ public class ProfileController {
      * 
      * @return
      */
-	@RequestMapping("/profile")
+	@RequestMapping(value="/profile", method = RequestMethod.GET)
 	public ModelAndView loadProfilePage()
 	{
 		ModelAndView model = new ModelAndView("profile");
@@ -48,7 +48,7 @@ public class ProfileController {
 	 * @param redirectAttributes
 	 * @return the profileForm for further changes.
 	 */
-    @RequestMapping(value = "/profileChange", method = RequestMethod.POST)
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public ModelAndView profileChange(@Valid SignupForm profileForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;
     	model = loadProfilePage();

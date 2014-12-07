@@ -74,6 +74,14 @@
 			    <h4 class="list-group-item-heading">${enquiry.sender.firstName } ${enquiry.sender.lastName } <i class="pull-right">${state} </i></h4>
 			    <p class="list-group-item-text">
 				    <div class="row">
+				    	<div class="col-md-1">
+							<c:if test="${not empty enquiry.sender.profileImage}">
+								<img width="50px" class="gallery" src="/Skeleton/img/ad/${enquiry.sender.profileImage.fileName}" />
+							</c:if>
+							<c:if test="${empty enquiry.sender.profileImage}">
+								<img width="50px" class="gallery" src="/Skeleton/img/Profile_Placeholder.jpg" />
+							</c:if>
+						 </div>
 				    	<div class="col-sm-6">
 							${enquiry.enquiryRatingComment }
 						</div>

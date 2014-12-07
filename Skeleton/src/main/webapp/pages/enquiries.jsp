@@ -32,11 +32,12 @@
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" style="padding:1em;" >
-					<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
-						<c:if test="${loopCount.count eq 1}">
-							<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
-						</c:if>
-					</c:forEach>
+					<c:if test="${not empty enquiry.sender.profileImage}">
+						<img width="100px" class="gallery" src="/Skeleton/img/ad/${enquiry.sender.profileImage.fileName}" />
+					</c:if>
+					<c:if test="${empty enquiry.sender.profileImage}">
+						<img width="100px" class="gallery" src="/Skeleton/img/Profile_Placeholder.jpg" />
+					</c:if>
 				</a>
 			  	<p  style="padding:1em;">${enquiry.messageText}</p>
 			</div>		
@@ -57,11 +58,12 @@
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" style="padding:1em;" >
-				<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
-					<c:if test="${loopCount.count eq 1}">
-						<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
+					<c:if test="${not empty enquiry.sender.profileImage}">
+						<img width="100px" class="gallery" src="/Skeleton/img/ad/${enquiry.sender.profileImage.fileName}" />
 					</c:if>
-				</c:forEach>
+					<c:if test="${empty enquiry.sender.profileImage}">
+						<img width="100px" class="gallery" src="/Skeleton/img/Profile_Placeholder.jpg" />
+					</c:if>
 				</a>
 		  		<p style="padding:1em;">${enquiry.messageText}</p>
 	  		</div>		
@@ -82,11 +84,12 @@
 				</div>
 				<div class="panel-body" >
 					<a class="pull-left" style="padding:1em;">
-			    		<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
-							<c:if test="${loopCount.count eq 1}">
-								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
-							</c:if>
-						</c:forEach>
+					<c:if test="${not empty enquiry.sender.profileImage}">
+						<img width="100px" class="gallery" src="/Skeleton/img/ad/${enquiry.sender.profileImage.fileName}" />
+					</c:if>
+					<c:if test="${empty enquiry.sender.profileImage}">
+						<img width="100px" class="gallery" src="/Skeleton/img/Profile_Placeholder.jpg" />
+					</c:if>
 			  		</a>
 			  		<p style="padding:1em;">${enquiry.messageText}</p>
 				</div>		

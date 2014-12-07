@@ -1,12 +1,19 @@
 package org.sample.controller.service;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.ForgotPasswordForm;
 import org.sample.controller.pojos.LoginForm;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.model.Address;
+import org.sample.model.Picture;
 import org.sample.model.User;
 import org.sample.model.dao.AddressDao;
+import org.sample.model.dao.PictureDao;
 import org.sample.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,23 +29,27 @@ import org.springframework.util.StringUtils;
 @Service
 public class LoginServiceImpl implements LoginService, UserDetailsService {
 
-    @Autowired    UserDao userDao;
-    @Autowired    AddressDao addressDao;
+    @Autowired UserDao userDao;
+    @Autowired AddressDao addressDao;
+    @Autowired PictureDao pictureDao;
     
     @Transactional
     public SignupForm saveFrom(SignupForm signupForm) throws InvalidUserException {
 
+    	Picture picture = pictureDao.findOne(new Long(signupForm.getImageId()));
+
+    	
         String firstName = signupForm.getFirstName();
 
         if(!StringUtils.isEmpty(firstName) && "ESE".equalsIgnoreCase(firstName)) {
             throw new InvalidUserException("Sorry, ESE is not a valid name");   // throw exception
         }
         
-        
         User user = new User();
         user.setFirstName(signupForm.getFirstName());
         user.setEmail(signupForm.getEmail());
         user.setLastName(signupForm.getLastName());
+        user.setProfileImage(picture);
         
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(signupForm.getPassword());
@@ -64,6 +75,8 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
 
         String firstName = profileForm.getFirstName();
 
+        Picture picture = pictureDao.findOne(new Long(profileForm.getImageId()));
+        
         if(!StringUtils.isEmpty(firstName) && "ESE".equalsIgnoreCase(firstName)) {
             throw new InvalidUserException("Sorry, ESE is not a valid name");   // throw exception
         }
@@ -72,7 +85,7 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
         user.setFirstName(profileForm.getFirstName());
         user.setEmail(profileForm.getEmail());
         user.setLastName(profileForm.getLastName());
-        
+        user.setProfileImage(picture);
         System.err.println(user.getEmail()+ "  " + user.getId());
         
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

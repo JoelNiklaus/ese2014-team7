@@ -54,6 +54,8 @@ public class SignupForm {
     @Max(99999)
     private int zip;
 
+    private String imageId;
+    
     public String getStreet() {
 		return street;
 	}
@@ -149,5 +151,13 @@ public class SignupForm {
 		boolean hasNull = (email.equals("")) || (firstName.equals("")) || (lastName.equals("")) || (password.equals("")) 
 					   || (street.equals(""))  || (houseNr == 0)  || (city.equals(""))  || (zip == 0);
 		return hasNull;
+	}
+
+	public String getImageId() {
+		return imageId;
+	}
+
+	public void setImageId(String imageId) {
+		this.imageId = imageId;
 	}
 }
