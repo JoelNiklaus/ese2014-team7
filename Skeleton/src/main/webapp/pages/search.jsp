@@ -128,27 +128,27 @@
 					<div class="col-md-2">
 						<label class="control-label" for="field-dateIn">Add. cost max</label>
 					</div>
-					<div class="col-md-3">	
+					<div class="col-md-3">
 						<form:input class="form-control" path="addCostMax" id="field-dateIn" placeholder="1000" tabindex="5" maxlength="35"/>
 					</div>						
 					<div class="col-md-2 col-md-offset-1">
 						<label class="control-label" for="field-city">City</label>
 					</div>
 						
-					<div class="col-md-3">	
+					<div class="col-md-3">
 						<form:input class="form-control" path="city" id="field-city" placeholder="City" tabindex="5" maxlength="35"/>
 					</div>	
 					
 					<div class="col-md-2">
 						<label class="control-label" for="field-city">Earliest Move In Date</label>
 					</div>
-					<div class="col-md-3">	
+					<div class="col-md-3">
 						<form:input style="background-color:white" class="datepicker form-control" path="earliestMoveInDate" maxlength="10" placeholder="DD.MM.YYYY"/>
 					</div>	
 					<div class="col-md-2 col-md-offset-1">
 						<label class="control-label" for="field-city">Latest Move In Date</label>
 					</div>
-					<div class="col-md-3">	
+					<div class="col-md-3">
 						<form:input readonly="true" style="background-color:white" class="datepicker form-control" path="latestMoveInDate" maxlength="10" placeholder="DD.MM.YYYY or empty"/>
 					</div>	
 					
@@ -188,34 +188,34 @@
 	  	<li role="presentation"><a href="#mapTab"><span class="glyphicon glyphicon-globe"></span> Map</a></li>
 	</ul>
 		
-<div class="tab-content">
-	<div role="tabpanel" class="tab-pane active" id="mapTab">
-		<div class="well well-sm"><div id="map"></div></div>
-	</div>
-			
-		<div role="tabpanel" class="tab-pane"  id="listTab">
-			<div class="container">
-			<div class="row">
-			<c:forEach items="${searchResults}" var="ad">
-			<div class="col-sm-4 col-md-3">
-				<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${ad.id}'">
-					<div class="panel-heading"><h5>${ad.title}</h5></div>
-					<div class="panel-body" >
-						<a class="pull-left" style="padding:1em;" >
-							<c:forEach items="${ad.pictures}" varStatus="loopCount" var="pic">
-								<c:if test="${loopCount.count eq 1}">
-									<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
-								</c:if>
-							</c:forEach>
-					  	</a>
-					  	<p style="padding:1em;">${ad.description}</p>
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="mapTab">
+			<div class="well well-sm"><div id="map"></div></div>
+		</div>
+				
+			<div role="tabpanel" class="tab-pane"  id="listTab">
+				<div class="container">
+				<div class="row">
+				<c:forEach items="${searchResults}" var="ad">
+				<div class="col-sm-4 col-md-3">
+					<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${ad.id}'">
+						<div class="panel-heading"><h5>${ad.title}</h5></div>
+						<div class="panel-body" >
+							<a class="pull-left" style="padding:1em;" >
+								<c:forEach items="${ad.pictures}" varStatus="loopCount" var="pic">
+									<c:if test="${loopCount.count eq 1}">
+										<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
+									</c:if>
+								</c:forEach>
+						  	</a>
+						  	<p style="padding:1em;">${ad.description}</p>
+						</div>
+								
+						<div class="panel-footer"><b>Area: </b>${ad.city},  <b>Price:</b> CHF ${ad.rent},  <b>Room Size:</b> ${ad.roomSize}m²,  <b>Posted: </b>${ad.postingDateFormatted}</div>
 					</div>
-							
-					<div class="panel-footer"><b>Area: </b>${ad.city},  <b>Price:</b> CHF ${ad.rent},  <b>Room Size:</b> ${ad.roomSize}m²,  <b>Posted: </b>${ad.postingDateFormatted}</div>
 				</div>
-			</div>
-			</c:forEach>
-			</div>
+				</c:forEach>
+				</div>
 			</div>
 		</div>
 	</div>
