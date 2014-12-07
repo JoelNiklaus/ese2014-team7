@@ -38,8 +38,7 @@
 				href='search?searchId=${search.id}'>
 				<span class="glyphicon glyphicon-search"></span> Search
 			</button>
-			<a class="btn btn-danger" href="removeSearch?id=${search.id}"><span
-				class="glyphicon glyphicon-remove"></span> Delete</a>
+			<a class="btn btn-danger btn-xs pull-right" href="removeSearch?id=${search.id}"><span class="glyphicon glyphicon-remove"></span>delete</a>
 		</div>
 	</div>
 </c:forEach>
