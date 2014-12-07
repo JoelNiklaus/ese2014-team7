@@ -1,6 +1,7 @@
 package org.sample.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -29,18 +30,19 @@ public class Enquiry{
 
 	private int rating;
     private boolean unread;
+    private String enquiryRatingComment;
     
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    private Set<VisitAppointment> visitAppointments;
+    private List<VisitAppointment> visitAppointments;
     
     @Transient
     private Ad ad;
     
-    public Set<VisitAppointment> getVisitAppointments() {
+    public List<VisitAppointment> getVisitAppointments() {
 		return visitAppointments;
 	}
 
-	public void setVisitAppointments(Set<VisitAppointment> visitAppointments) {
+	public void setVisitAppointments(List<VisitAppointment> visitAppointments) {
 		this.visitAppointments = visitAppointments;
 	}
 	
@@ -117,6 +119,14 @@ public class Enquiry{
 
 	public void setUnread(boolean unread) {
 		this.unread = unread;
+	}
+
+	public String getEnquiryRatingComment() {
+		return enquiryRatingComment;
+	}
+
+	public void setEnquiryRatingComment(String enquiryRatingComment) {
+		this.enquiryRatingComment = enquiryRatingComment;
 	}
 
 }

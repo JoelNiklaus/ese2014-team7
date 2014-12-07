@@ -4,7 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <c:import url="template/header.jsp" />
-
+<link href="/Skeleton/lib/kartik-v-bootstrap-star-rating/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/Skeleton/lib/kartik-v-bootstrap-star-rating/js/star-rating.min.js" type="text/javascript"></script>
 <h1>My Enquiries</h1>
 
 	<c:if test="${not empty message}">
@@ -15,7 +16,7 @@
 
 	<h2>Inbox</h2>
 	<c:forEach items="${unreadEnquiries}" var="enquiry">
-		<div class="panel panel-info" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
+		<div class="panel panel-info" onclick="javascript:location.href='createVisitAppointment?enquiryId=${enquiry.enquiryId}'">
 				
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
@@ -40,7 +41,7 @@
 
 
 	<c:forEach items="${newReceivedEnquiries}" var="enquiry">
-		<div class="panel panel-default" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
+		<div class="panel panel-default" onclick="javascript:location.href='createVisitAppointment?enquiryId=${enquiry.enquiryId}'">
 			
 			<div class="panel-heading">
 				<h5>${enquiry.ad.title}</h5>
@@ -65,26 +66,31 @@
 	</c:forEach>
 	
 	<c:forEach items="${ratedReceivedEnquiries}" var="enquiry">
-		<div class="panel panel-default" onclick="javascript:location.href='rateEnquiry?id=${enquiry.enquiryId}'">
+		<div class="panel panel-default" onclick="javascript:location.href='createVisitAppointment?enquiryId=${enquiry.enquiryId}'">
 			
 				<div class="panel-heading">
 					<h5>${enquiry.ad.title}</h5>
 				</div>
 				<div class="panel-body" >
-					<a class="pull-left" >
+					<a class="pull-left" style="padding:1em;">
 			    		<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
 							<c:if test="${loopCount.count eq 1}">
 								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
 							</c:if>
 						</c:forEach>
 			  		</a>
-			  		<p>${enquiry.messageText}</p>
-			  		
+			  		<p style="padding:1em;">${enquiry.messageText}</p>
 				</div>		
 				
-				<div class="panel-footer"
-					><b>My rating:</b> ${enquiry.rating}/10
-					<a class="btn btn-danger btn-xs pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
+				<div class="panel-footer">
+					<div class="row">
+						<div class='col-sm-6'>
+							<input id="ratingStars" type="number" value="${enquiry.rating}" class="rating" data-size="xxs" />
+						</div>
+						<div class='col-sm-6'>
+							<a class="btn btn-danger btn-xs pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
+						</div>
+					</div>
 				</div>
 			</div>
 	</c:forEach>
@@ -115,5 +121,8 @@
 			</div>
 		</div>
 	</c:forEach>
-
+				<script>
+	$("#ratingStars").rating("refresh", {disabled: true, showCaption: false, showClear: false,min: "0", max:"5", step:"1"});
+</script>
+			
 <c:import url="template/footer.jsp" />

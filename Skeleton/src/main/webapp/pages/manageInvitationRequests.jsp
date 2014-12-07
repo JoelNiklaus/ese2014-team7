@@ -24,6 +24,7 @@
 	</div>
 </div>
 <br />
+
 <div style="background-color:#f1f1f1; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
 	<div class="container">
 		<div class='col-sm-6'>

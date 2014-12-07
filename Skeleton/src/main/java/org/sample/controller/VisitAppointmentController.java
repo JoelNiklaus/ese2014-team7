@@ -1,19 +1,20 @@
 package org.sample.controller;
 
-
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.sample.controller.enums.VisitAppointmentState;
+import org.sample.controller.pojos.EnquiryRatingForm;
 import org.sample.controller.pojos.VisitAppointmentForm;
 import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.VisitAppointmentService;
 import org.sample.model.Enquiry;
+import org.sample.model.User;
 import org.sample.model.VisitAppointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,11 +42,22 @@ public class VisitAppointmentController {
 		try{
 			form.setEnquiryId(new Long(enquiryId));
 			Enquiry enquiry = enquiryService.getEnquiryById(new Long(enquiryId));
+			if(enquiry==null)
+				model = new ModelAndView("404");
+			
+			User sender = loginService.findById(enquiry.getSenderId());
+			
+			EnquiryRatingForm ratingForm = new EnquiryRatingForm();
+			ratingForm.setEnquiryId(new Long(enquiryId));
+			ratingForm.setRating(enquiry.getRating());
+			ratingForm.setEnquiryRatingComment(enquiry.getEnquiryRatingComment());
+			
+			model.addObject("sender", sender);
+			model.addObject("ratingForm", ratingForm);
 			model.addObject("visitAppointmentForm", form);
 			model.addObject("enquiry", enquiry);
 			model.addObject("loggedInUser", loginService.getLoggedInUser());
-			if(enquiry==null)
-				model = new ModelAndView("404");
+
 		} catch (Exception e){
 			model = new ModelAndView("404");
 		}
@@ -81,13 +93,13 @@ public class VisitAppointmentController {
     public @ResponseBody ModelAndView removeVisitAppointment(@RequestParam("id") String id, @RequestParam("enquiryId") String enquiryId){
         	
     	Enquiry enquiry = enquiryService.getEnquiryById(new Long(enquiryId));
-    	Set<VisitAppointment> visitAppointments = enquiry.getVisitAppointments();    	
+    	LinkedList<VisitAppointment> visitAppointments = new LinkedList<VisitAppointment>();    
+    	visitAppointments.addAll(enquiry.getVisitAppointments());
     	
     	VisitAppointment tmpVisitApppointment = visitAppointmentService.getVisitAppointment(new Long(id));
     	
-    	System.out.println(tmpVisitApppointment.getComment());
-    	
     	for (VisitAppointment visitAppointment : visitAppointments) {
+    		
 			if(tmpVisitApppointment.getId().equals(visitAppointment.getId())){
 				visitAppointments.remove(visitAppointment);
 			}
