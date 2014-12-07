@@ -11,8 +11,8 @@ public interface AdDao  extends CrudRepository<Ad,Long>{
 
 	
 	List<Ad> findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThan(Long priceMin, Long priceMax, Long roomSizeMin, Long roomSizeMax, String city, Long addCostMax);
-	List<Ad> findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDGreaterThan(Long priceMin, Long priceMax, Long roomSizeMin, Long roomSizeMax, String city, Long addCostMax, Date earliestDateIn);
-	List<Ad> findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDLessThan(Long priceMin, Long priceMax, Long roomSizeMin, Long roomSizeMax, String city, Long addCostMax, Date latestDateIn);
+	List<Ad> findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDGreaterThanEqual(Long priceMin, Long priceMax, Long roomSizeMin, Long roomSizeMax, String city, Long addCostMax, Date earliestDateIn);
+	List<Ad> findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDLessThanEqual(Long priceMin, Long priceMax, Long roomSizeMin, Long roomSizeMax, String city, Long addCostMax, Date latestDateIn);
 	List<Ad> findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDBetween(Long priceMin, Long priceMax, Long roomSizeMin, Long roomSizeMax, String city, Long addCostMax, Date earliestDateIn, Date latestDateIn);
 
 	
