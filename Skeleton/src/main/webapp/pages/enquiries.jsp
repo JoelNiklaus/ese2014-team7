@@ -28,7 +28,7 @@
 		<div class="panel panel-info" onclick="javascript:location.href='createVisitAppointment?enquiryId=${enquiry.enquiryId}'">
 				
 			<div class="panel-heading">
-				<h5>${enquiry.ad.title}</h5>
+				<b>${enquiry.sender.firstName } ${enquiry.sender.firstName }</b><h5>${enquiry.ad.title}</h5>
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" style="padding:1em;" >
@@ -53,7 +53,7 @@
 		<div class="panel panel-default" onclick="javascript:location.href='createVisitAppointment?enquiryId=${enquiry.enquiryId}'">
 			
 			<div class="panel-heading">
-				<h5>${enquiry.ad.title}</h5>
+				<b>${enquiry.sender.firstName } ${enquiry.sender.firstName }</b><h5>${enquiry.ad.title}</h5>
 			</div>
 			<div class="panel-body" >
 				<a class="pull-left" style="padding:1em;" >
@@ -78,7 +78,7 @@
 		<div class="panel panel-default" onclick="javascript:location.href='createVisitAppointment?enquiryId=${enquiry.enquiryId}'">
 			
 				<div class="panel-heading">
-					<h5>${enquiry.ad.title}</h5>
+					<b>${enquiry.sender.firstName } ${enquiry.sender.firstName }</b> ${enquiry.ad.title}
 				</div>
 				<div class="panel-body" >
 					<a class="pull-left" style="padding:1em;">
