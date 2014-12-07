@@ -10,6 +10,8 @@
 <script src="/Skeleton/lib/moment/moment.min.js"></script>
 <script src="/Skeleton/lib/moment/locales.min.js"></script>
 <script src="/Skeleton/lib/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<link href="/Skeleton/lib/kartik-v-bootstrap-star-rating/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/Skeleton/lib/kartik-v-bootstrap-star-rating/js/star-rating.min.js" type="text/javascript"></script>
 
 <div style="background-color:#f1f1f1; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
 	<div class="container">
@@ -20,6 +22,37 @@
 	<div class="container">
 		<div class='col-sm-6'>
 			${enquiry.messageText}
+		</div>
+	</div>
+</div>
+<br />
+<div style="background-color:#f1f1f1; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
+	<div class="container">
+		<div class='col-sm-6'>
+			<h4>Rate Prospect</h4>
+		</div>
+	</div>
+		<!-- 
+${sender.firstName }
+${sender.lastName }
+${sender.email }
+${sender.address.street }
+${sender.address.houseNr }
+${sender.address.zip }
+${sender.address.city } -->
+	<div class="container">
+			<form:form class="form-horizontal" method="post" modelAttribute="ratingForm" action="submitRating" id="ratingForm" autocomplete="off">
+				 	<fieldset>
+						<form:input id="enquiryId" path="enquiryId" type="hidden"/>
+						<form:input id="ratingStars" path="rating" type="number" class="rating" data-size="xs" />
+						<form:textarea id="enquiryRatingComment" path="enquiryRatingComment"/>
+						<div class="form-actions">
+							<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-floppy-save"></span>Save</button>
+						</div>
+				 	</fieldset>
+	 		</form:form>
+		<div class='col-sm-6'>
+
 		</div>
 	</div>
 </div>
@@ -143,7 +176,10 @@
 		</fieldset>
 	</form:form>
 </div>	
+<script>
+	$("#ratingStars").rating("refresh", {disabled: false, showCaption: false, showClear: false,min: "0", max:"5", step:"1"});
 
+</script>
 <c:if test="${page_error != null }">
 	<div class="alert alert-error">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>

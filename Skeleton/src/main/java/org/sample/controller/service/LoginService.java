@@ -60,6 +60,13 @@ public interface LoginService {
 	 * @return User
 	 */
     public User getLoggedInUser();
+    
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public User findById(Long id);
 	
 
 }

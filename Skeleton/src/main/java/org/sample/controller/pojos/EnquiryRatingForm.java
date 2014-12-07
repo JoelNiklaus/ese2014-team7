@@ -7,6 +7,8 @@ public class EnquiryRatingForm {
 	private int rating;
 	private Enquiry enquiry;
 	private long enquiryId;
+	
+	private String enquiryRatingComment;
 
 	public int getRating() {
 		return rating;
@@ -30,6 +32,14 @@ public class EnquiryRatingForm {
 
 	public void setEnquiryId(long enquiryId) {
 		this.enquiryId = enquiryId;
+	}
+
+	public String getEnquiryRatingComment() {
+		return enquiryRatingComment;
+	}
+
+	public void setEnquiryRatingComment(String enquiryRatingComment) {
+		this.enquiryRatingComment = enquiryRatingComment;
 	}
 	
 }

@@ -150,6 +150,10 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
     	
     	return exists;
     }
+    
+    public User findById(Long id){
+    	return userDao.findOne(id);
+    }
 
 	public UserDetails loadUserByUsername(String arg0)
 			throws UsernameNotFoundException {

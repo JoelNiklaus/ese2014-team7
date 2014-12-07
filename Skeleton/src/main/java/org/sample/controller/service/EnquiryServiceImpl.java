@@ -124,6 +124,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 				System.out.println("Service: no enquiry added!");
 		else {
 			enquiry.setRating(form.getRating());
+			enquiry.setEnquiryRatingComment(form.getEnquiryRatingComment());
 			enquiryDao.save(enquiry);
 		}
 		

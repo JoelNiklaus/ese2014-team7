@@ -41,7 +41,7 @@ public class VisitAppointmentServiceImpl implements VisitAppointmentService{
 			vaForm.setId(visitAppointment.getId());
 			
 			
-			Set<VisitAppointment> visitAppointments = enquiry.getVisitAppointments();
+			List<VisitAppointment> visitAppointments = enquiry.getVisitAppointments();
 			visitAppointments.add(visitAppointment);
 			enquiry.setVisitAppointments(visitAppointments);
 			enquiryService.save(enquiry);

@@ -1,5 +1,6 @@
 package org.sample.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.sample.controller.service.LoginService;
 import org.sample.controller.service.UpdateService;
 import org.sample.model.Ad;
 import org.sample.model.Enquiry;
+import org.sample.model.Picture;
 import org.sample.model.User;
 import org.sample.model.dao.AdDao;
 import org.sample.model.dao.EnquiryDao;
@@ -22,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -180,21 +183,19 @@ public class EnquiryController {
 	@RequestMapping(value = "/submitRating", method = RequestMethod.POST)
 	public ModelAndView submitRating(@Valid EnquiryRatingForm form,
 			BindingResult result, RedirectAttributes redirectAttributes) {
-		ModelAndView model = new ModelAndView("enquiries");
-		model.addObject("loggedInUser", loginService.getLoggedInUser());
-		updateService.updateNumberOfUnreadItems(model);
+		ModelAndView model = new ModelAndView("redirect:/createVisitAppointment?enquiryId="+form.getEnquiryId());
+		//model.addObject("loggedInUser", loginService.getLoggedInUser());
+		//updateService.updateNumberOfUnreadItems(model);
+
 
 		if (form != null || !result.hasErrors()) {
 			enquiryService.submitRating(form);
-
-			enquiryViewAddModelAttributes(model);
-		} else {
-			model = new ModelAndView("404");
-			model.addObject("loggedInUser", loginService.getLoggedInUser());
+			//enquiryViewAddModelAttributes(model);
 		}
 
 		return model;
 	}
+
 
 	/**
 	 * Removes enquiry with given id from DB.
