@@ -20,6 +20,7 @@
 		<security:intercept-url pattern="/removeBookmark" access="hasRole('ROLE_USER')" />
 		
 		<security:intercept-url pattern="/enquiries" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/createVisitAppointment" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/sendEnquiry" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/rateEnquiry" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/removeEnquiry" access="hasRole('ROLE_USER')" />
@@ -31,6 +32,8 @@
 		<security:intercept-url pattern="/removeNotification" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/openNotification" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/clearNotifications" access="hasRole('ROLE_USER')" />
+		
+		
 		
 		<security:intercept-url pattern="/register/**" access="isAnonymous()" />
 		<security:intercept-url pattern="/login" access="permitAll" />	

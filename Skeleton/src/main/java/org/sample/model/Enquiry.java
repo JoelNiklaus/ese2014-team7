@@ -1,11 +1,16 @@
 package org.sample.model;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+
 
 
 @Entity
@@ -20,12 +25,25 @@ public class Enquiry{
 	private Long senderId;
     private Long receiverId;
     private String messageText;
-    private int rating;
+
+
+	private int rating;
     private boolean unread;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private Set<VisitAppointment> visitAppointments;
     
     @Transient
     private Ad ad;
     
+    public Set<VisitAppointment> getVisitAppointments() {
+		return visitAppointments;
+	}
+
+	public void setVisitAppointments(Set<VisitAppointment> visitAppointments) {
+		this.visitAppointments = visitAppointments;
+	}
+	
     public Enquiry(){
     }
     

@@ -64,5 +64,12 @@ public interface EnquiryService {
      * @param id
      * @return enquiry
      */
-    public Enquiry getEnyuiryById(Long id);
+    public Enquiry getEnquiryById(Long id);
+    
+    /**
+     * 
+     * @param enquiry
+     * @return enquiry
+     */
+    public Enquiry save(Enquiry enquiry);
 }

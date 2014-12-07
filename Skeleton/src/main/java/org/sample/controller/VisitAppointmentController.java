@@ -1,13 +1,20 @@
 package org.sample.controller;
 
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.sample.controller.enums.VisitAppointmentState;
 import org.sample.controller.pojos.VisitAppointmentForm;
 import org.sample.controller.service.EnquiryService;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.VisitAppointmentService;
 import org.sample.model.Enquiry;
+import org.sample.model.VisitAppointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -27,15 +34,31 @@ public class VisitAppointmentController {
     @Autowired VisitAppointmentService visitAppointmentService;
 	
 	@RequestMapping(value="/createVisitAppointment",method=RequestMethod.GET)
-	public ModelAndView test(HttpServletResponse response, @RequestParam("enquiryId") String enquiryId){
+	public ModelAndView createVisitAppointment(HttpServletResponse response, @RequestParam("enquiryId") String enquiryId){
 		ModelAndView model = new ModelAndView("createVisitAppointment");
 		VisitAppointmentForm form = new VisitAppointmentForm();
 		
 		try{
 			form.setEnquiryId(new Long(enquiryId));
-			Enquiry enquiry = enquiryService.getEnyuiryById(new Long(enquiryId));
-			
+			Enquiry enquiry = enquiryService.getEnquiryById(new Long(enquiryId));
 			model.addObject("visitAppointmentForm", form);
+			model.addObject("enquiry", enquiry);
+			model.addObject("loggedInUser", loginService.getLoggedInUser());
+			if(enquiry==null)
+				model = new ModelAndView("404");
+		} catch (Exception e){
+			model = new ModelAndView("404");
+		}
+		
+		return model;
+	}
+	
+	@RequestMapping(value="/manageInvitationRequests",method=RequestMethod.GET)
+	public ModelAndView manageInvitationRequests(HttpServletResponse response, @RequestParam("enquiryId") String enquiryId){
+		ModelAndView model = new ModelAndView("manageInvitationRequests");
+		
+		try{
+			Enquiry enquiry = enquiryService.getEnquiryById(new Long(enquiryId));
 			model.addObject("enquiry", enquiry);
 			model.addObject("loggedInUser", loginService.getLoggedInUser());
 			if(enquiry==null)
@@ -51,6 +74,44 @@ public class VisitAppointmentController {
     public @ResponseBody ModelAndView createVisitAppointment(@Valid VisitAppointmentForm vaForm,
 			BindingResult result, RedirectAttributes redirectAttributes){
     	visitAppointmentService.save(vaForm);
-    	return new ModelAndView("redirect:/enquiries");
+    	return new ModelAndView("redirect:/createVisitAppointment?enquiryId="+vaForm.getEnquiryId());
+    }
+    
+    @RequestMapping(value="/removeVisitAppointment", method=RequestMethod.GET)
+    public @ResponseBody ModelAndView removeVisitAppointment(@RequestParam("id") String id, @RequestParam("enquiryId") String enquiryId){
+        	
+    	Enquiry enquiry = enquiryService.getEnquiryById(new Long(enquiryId));
+    	Set<VisitAppointment> visitAppointments = enquiry.getVisitAppointments();    	
+    	
+    	VisitAppointment tmpVisitApppointment = visitAppointmentService.getVisitAppointment(new Long(id));
+    	
+    	System.out.println(tmpVisitApppointment.getComment());
+    	
+    	for (VisitAppointment visitAppointment : visitAppointments) {
+			if(tmpVisitApppointment.getId().equals(visitAppointment.getId())){
+				visitAppointments.remove(visitAppointment);
+			}
+		}
+    	enquiry.setVisitAppointments(visitAppointments);
+    	
+    	enquiryService.save(enquiry);
+    	
+    	return new ModelAndView("redirect:/createVisitAppointment?enquiryId="+enquiryId);
+    }
+    
+    @RequestMapping(value="/setVisitAppointmentStateAccepted", method=RequestMethod.GET)
+    public @ResponseBody ModelAndView setVisitAppointmentStateAccepted(@RequestParam("id") String id, @RequestParam("enquiryId") String enquiryId){
+        	
+    	visitAppointmentService.updateState(new Long(id), VisitAppointmentState.ACCEPTED);
+    	
+    	return new ModelAndView("redirect:/manageInvitationRequests?enquiryId="+enquiryId);
+    }
+    
+    @RequestMapping(value="/setVisitAppointmentStateRejected", method=RequestMethod.GET)
+    public @ResponseBody ModelAndView setVisitAppointmentStateRejected(@RequestParam("id") String id, @RequestParam("enquiryId") String enquiryId){
+        	
+    	visitAppointmentService.updateState(new Long(id), VisitAppointmentState.REJECTED);
+    	
+    	return new ModelAndView("redirect:/manageInvitationRequests?enquiryId="+enquiryId);
     }
 }
