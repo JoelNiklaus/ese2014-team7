@@ -32,6 +32,13 @@ public class VisitAppointmentController {
     @Autowired EnquiryService enquiryService;
     @Autowired VisitAppointmentService visitAppointmentService;
 	
+    /**
+     * The page for the adcrator to manage an enquiry
+     * 
+     * @param response
+     * @param enquiryId
+     * @return createVisitAppointment or 404 when the enquiry was not found
+     */
 	@RequestMapping(value="/createVisitAppointment",method=RequestMethod.GET)
 	public ModelAndView createVisitAppointment(HttpServletResponse response, @RequestParam("enquiryId") String enquiryId){
 		ModelAndView model = new ModelAndView("createVisitAppointment");
@@ -63,6 +70,13 @@ public class VisitAppointmentController {
 		return model;
 	}
 	
+	/**
+	 * The page for the ad prospect to manage the enquiry
+	 * 
+	 * @param response
+	 * @param enquiryId
+	 * @return enquiry invitation page or 404 when the enquiry does not exist
+	 */
 	@RequestMapping(value="/manageInvitationRequests",method=RequestMethod.GET)
 	public ModelAndView manageInvitationRequests(HttpServletResponse response, @RequestParam("enquiryId") String enquiryId){
 		ModelAndView model = new ModelAndView("manageInvitationRequests");
@@ -80,6 +94,17 @@ public class VisitAppointmentController {
 		return model;
 	}
 	
+	/**
+	 * Ads a Visit Appointment to the database
+	 * 
+	 * Precondition the form is completed
+	 * Postcondition the visitAppointment is stored
+	 * 
+	 * @param vaForm
+	 * @param result
+	 * @param redirectAttributes
+	 * @return redirect back
+	 */
     @RequestMapping(value="/createVisitAppointment", method=RequestMethod.POST)
     public @ResponseBody ModelAndView createVisitAppointment(@Valid VisitAppointmentForm vaForm,
 			BindingResult result, RedirectAttributes redirectAttributes){
@@ -87,6 +112,16 @@ public class VisitAppointmentController {
     	return new ModelAndView("redirect:/createVisitAppointment?enquiryId="+vaForm.getEnquiryId());
     }
     
+    /**
+     * Removes an Appointment
+     * 
+     * Precondition the appointment exists in the database
+     * Postcondition the appointment is removed from the database
+     * 
+     * @param id of the visitAppointment
+     * @param enquiryId
+     * @return redirect back
+     */
     @RequestMapping(value="/removeVisitAppointment", method=RequestMethod.GET)
     public @ResponseBody ModelAndView removeVisitAppointment(@RequestParam("id") String id, @RequestParam("enquiryId") String enquiryId){
         	
@@ -109,6 +144,16 @@ public class VisitAppointmentController {
     	return new ModelAndView("redirect:/createVisitAppointment?enquiryId="+enquiryId+"#sentInvitationTab");
     }
     
+    /**
+     * Sets the state of an Visit Appointment
+     * 
+     * Precondition the visitAppointment state is NEW
+     * Postcondition the visitAppointment state is set to ACCEPTED
+     * 
+     * @param id of the visitAppointment
+     * @param enquiryId
+     * @return redirect back
+     */
     @RequestMapping(value="/setVisitAppointmentStateAccepted", method=RequestMethod.GET)
     public @ResponseBody ModelAndView setVisitAppointmentStateAccepted(@RequestParam("id") String id, @RequestParam("enquiryId") String enquiryId){
         Enquiry enquiry = enquiryService.getEnquiryById(new Long(enquiryId));
@@ -119,6 +164,16 @@ public class VisitAppointmentController {
     	return new ModelAndView("redirect:/manageInvitationRequests?enquiryId="+enquiryId);
     }
     
+    /**
+     * Sets the state of an Visit Appointment
+     * 
+     * Precondition the visitAppointment state is NEW
+     * Postcondition the visitAppointment state is set to REJECTED
+     * 
+     * @param id of the visitAppointment
+     * @param enquiryId
+     * @return
+     */
     @RequestMapping(value="/setVisitAppointmentStateRejected", method=RequestMethod.GET)
     public @ResponseBody ModelAndView setVisitAppointmentStateRejected(@RequestParam("id") String id, @RequestParam("enquiryId") String enquiryId){
         Enquiry enquiry = enquiryService.getEnquiryById(new Long(enquiryId));

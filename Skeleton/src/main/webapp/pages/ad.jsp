@@ -57,16 +57,18 @@
 		<c:if test="${empty ad.enquiries }">
 			No 	enquiries to this ad yet.
 		</c:if>
+		<c:set var="class" value="list-group-item-danger"/>
+		<c:set var="state" value="No invitation sent"/>
 		<c:forEach items="${ad.enquiries}" var="enquiry" varStatus="loop">
-			<c:set var="class" scope="session" value="list-group-item-danger"/>
+			<c:set var="class" value="list-group-item-danger"/>
 			<c:set var="state" value="No invitation sent"/>
 			<c:if test="${not empty enquiry.visitAppointments }">
-				<c:set var="class" scope="session" value="list-group-item-warning"/>
+				<c:set var="class" value="list-group-item-warning"/>
 				<c:set var="state" value="Wating for Answer"/>
 			</c:if>
 			<c:forEach items="${enquiry.visitAppointments }" var="visitAppointment">
 				<c:if test="${visitAppointment.state eq 'ACCEPTED' }">
-					<c:set var="class" scope="session" value="list-group-item-success"/>
+					<c:set var="class" value="list-group-item-success"/>
 					<c:set var="state" value="Invitation Accepted "/>
 				</c:if>
 			</c:forEach>  				

@@ -66,7 +66,12 @@ public class SearchController {
 		return model;
 	}
 	
-	
+	/**
+	 * Converts searchAttributes to a form
+	 * 
+	 * @param searchAttributes
+	 * @return searchForm
+	 */
 	private SearchForm searchToForm(Search searchAttributes)
 	{
 		SearchForm form = new SearchForm();
