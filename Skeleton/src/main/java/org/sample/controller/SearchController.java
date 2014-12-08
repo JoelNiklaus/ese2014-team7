@@ -62,7 +62,6 @@ public class SearchController {
 		model.addObject("searchAttributes", searchAttributes);
 		if(searchResults != null)
 		{
-			searchService.limitDescriptionLength(searchResults, 64);
 			model.addObject("searchResults", searchResults);
 		}
 			

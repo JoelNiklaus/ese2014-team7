@@ -47,8 +47,7 @@ public interface SearchService {
      * @return Search
      */
 	public Search removeSearch(Search search);
-	
-	public void limitDescriptionLength(Iterable<Ad> ads, int maxLength);
+
 	
 
     

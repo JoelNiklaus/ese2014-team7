@@ -49,23 +49,6 @@ public class SearchServiceImpl implements SearchService {
 		return searchResults;
 	}
 	
-	public void limitDescriptionLength(Iterable<Ad> ads, int maxLength)
-	{
-		for(Ad ad : ads)
-			ad.setDescription(limitStringLength(ad.getDescription(), maxLength));
-	}
-	
-	private String limitStringLength(String input, int maxLength)
-	{
-		String output = "";
-		
-		if(input.length() <= maxLength)
-			output = input;
-		else
-			output = input.substring(0, maxLength-3) + "...";
-		
-		return output;
-	}
 
 	@Transactional
 	public Search saveSearch(SearchForm searchForm) {
