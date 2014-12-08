@@ -105,15 +105,24 @@
 	<br>
 	<form:form method="post" modelAttribute="searchForm" id="searchForm" cssClass="form-horizontal" autocomplete="off">
 		<fieldset>
-			<div class="row">
-				<div class="col-md-2">
+			<div class="form-group">
+				<div class="col-md-2 col-lg-1" style="height:60px;" align="center">
 					<label for="field-price">Rent</label>
 				</div>
-				<div class="col-md-3" id="priceSlider" ></div>
-				<div class="col-md-2 col-md-offset-1">
+				<div class="col-md-3 col-lg-4" style="height:30px;">
+					<div style="width:100%; padding-left:50px; padding-right:50px;">
+						<div id="priceSlider"  ></div>
+					</div>
+				</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-2" style="height:60px;" align="center">
 					<label for="field-rooms">Room Size</label>
 				</div>
-				<div class="col-md-3" id="roomSizeSlider"></div>
+				<div class="col-md-3 col-lg-4">
+					<div style="width:100%; padding-left:50px; padding-right:50px;">
+						<div id="roomSizeSlider"  ></div>
+					</div>
+				</div>
 			</div>				
 			<br>
 
