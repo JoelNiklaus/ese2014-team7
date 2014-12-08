@@ -36,8 +36,13 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
     @Transactional
     public SignupForm saveFrom(SignupForm signupForm) throws InvalidUserException {
 
-    	Picture picture = pictureDao.findOne(new Long(signupForm.getImageId()));
-
+        Picture picture = null;
+        
+        try {
+            picture = pictureDao.findOne(new Long(signupForm.getImageId()));
+        } catch(Exception e) {
+        	
+        }
     	
         String firstName = signupForm.getFirstName();
 
@@ -74,8 +79,14 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
     public SignupForm updateProfile(SignupForm profileForm) throws InvalidUserException {
 
         String firstName = profileForm.getFirstName();
-
-        Picture picture = pictureDao.findOne(new Long(profileForm.getImageId()));
+        
+        Picture picture = null;
+        
+        try {
+            picture = pictureDao.findOne(new Long(profileForm.getImageId()));
+        } catch(Exception e) {
+        	
+        }
         
         if(!StringUtils.isEmpty(firstName) && "ESE".equalsIgnoreCase(firstName)) {
             throw new InvalidUserException("Sorry, ESE is not a valid name");   // throw exception
