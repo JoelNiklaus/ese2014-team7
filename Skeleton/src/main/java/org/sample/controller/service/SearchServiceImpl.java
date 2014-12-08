@@ -45,7 +45,7 @@ public class SearchServiceImpl implements SearchService {
 			searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDGreaterThanEqual(priceMin, priceMax, roomSizeMin, roomSizeMax, city, addCostMax, earliestDateIn);
 		else
 			searchResults = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThanAndDateInDBetween(priceMin, priceMax, roomSizeMin, roomSizeMax, city, addCostMax, earliestDateIn, latestDateIn);
-			
+		
 		return searchResults;
 	}
 
