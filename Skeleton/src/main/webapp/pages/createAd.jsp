@@ -33,36 +33,53 @@
 		<div class="form-group">
 			<div class="col-sm-12">
 				<h3>General Information</h3>
-				<label class="control-label">Title</label>
-				<form:input class="form-control" path="Title" tabindex="1" maxlength="50" placeholder="Title" />
-				<form:errors path="title" cssClass="help-inline" element="span" />
+				<spring:bind path="title">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">Title</label>
+						<form:input class="form-control" path="Title" tabindex="1" maxlength="50" placeholder="Title" />
+						<form:errors path="title" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4">
 				<h3>Address</h3>
+				<spring:bind path="street">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">Street</label>
+						<form:input class="form-control" id="streetInput" path="street" onblur="geocode()" tabindex="2" maxlength="50"
+							placeholder="Street" />
+						<form:errors path="street" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 
-				<label class="control-label">Street</label>
-				<form:input class="form-control" id="streetInput" path="street" onblur="geocode()" tabindex="2" maxlength="50"
-					placeholder="Street" />
-				<form:errors path="street" cssClass="help-inline" element="span" />
+				<spring:bind path="houseNr">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">House Nr.</label>
+						<form:input class="form-control" id="houseNrInput" path="houseNr" onblur="geocode()" tabindex="3" maxlength="50"
+							placeholder="House Nr." />
+						<form:errors path="houseNr" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 
-				<label class="control-label">House Nr.</label>
-				<form:input class="form-control" id="houseNrInput" path="houseNr" onblur="geocode()" tabindex="3" maxlength="50"
-					placeholder="House Nr." />
-				<form:errors path="houseNr" cssClass="help-inline" element="span" />
+				<spring:bind path="zip">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">ZIP</label>
+						<form:input class="form-control" id="zipInput" path="zip" onblur="geocode()" tabindex="4" maxlength="4"
+							placeholder="ZIP" />
+						<form:errors path="zip" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 
-				<label class="control-label">ZIP</label>
-				<form:input class="form-control" id="zipInput" path="zip" onblur="geocode()" tabindex="4" maxlength="4"
-					placeholder="ZIP" />
-				<form:errors path="zip" cssClass="help-inline" element="span" />
-
-
-				<label class="control-label">City</label>
-				<form:input class="form-control" id="cityInput" path="city" onblur="geocode()" tabindex="5" maxlength="50"
-					placeholder="City" />
-				<form:errors path="city" cssClass="help-inline" element="span" />
-				<br>
+				<spring:bind path="city">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">City</label>
+						<form:input class="form-control" id="cityInput" path="city" onblur="geocode()" tabindex="5" maxlength="50"
+							placeholder="City" />
+						<form:errors path="city" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 			</div>
 
 			<div class="col-sm-8">
@@ -82,26 +99,44 @@
 		<div class="form-group">
 			<div class="col-sm-4">
 				<h3>Costs</h3>
-				<label class="control-label">Rent</label>
-				<form:input type="number" class="form-control" path="rent" tabindex="6" maxlength="4" placeholder="Rent" />
-				<form:errors path="rent" cssClass="help-inline" element="span" />
 
-				<label class="control-label">Additional Cost</label>
-				<form:input type="number" class="form-control" path="addCost" tabindex="7" maxlength="3"
-					placeholder="Additional Cost" />
-				<form:errors path="addCost" cssClass="help-inline" element="span" />
+				<spring:bind path="rent">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">Rent</label>
+						<form:input type="number" class="form-control" path="rent" tabindex="6" maxlength="4" placeholder="Rent" />
+						<form:errors path="rent" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
+
+				<spring:bind path="addCost">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">Additional Cost</label>
+						<form:input type="number" class="form-control" path="addCost" tabindex="7" maxlength="3"
+							placeholder="Additional Cost" />
+						<form:errors path="addCost" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 			</div>
 			<div class="col-sm-4">
 				<h3>Availibility</h3>
-				<label class="control-label">Move In Date</label>
-				<form:input readonly="true" style="background-color:white" class="datepicker form-control" path="dateIn"
-					tabindex="8" maxlength="10" placeholder="DD.MM.YYYY" />
-				<form:errors path="dateIn" cssClass="help-inline" element="span" />
 
-				<label class="control-label">Move Out Date</label>
-				<form:input readonly="true" style="background-color:white" class="datepicker form-control" path="dateOut"
-					tabindex="9" maxlength="10" placeholder="DD.MM.YYYY or empty" />
-				<form:errors path="dateOut" cssClass="help-inline" element="span" />
+				<spring:bind path="dateIn">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">Move In Date</label>
+						<form:input readonly="true" style="background-color:white" class="datepicker form-control" path="dateIn"
+							tabindex="8" maxlength="10" placeholder="DD.MM.YYYY" />
+						<form:errors path="dateIn" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
+
+				<spring:bind path="dateOut">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">Move Out Date</label>
+						<form:input readonly="true" style="background-color:white" class="datepicker form-control" path="dateOut"
+							tabindex="9" maxlength="10" placeholder="DD.MM.YYYY or empty" />
+						<form:errors path="dateOut" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 
 				<script type="text/javascript">
 					$('.datepicker').datepicker({
@@ -118,18 +153,31 @@
 			<div class="col-sm-4">
 				<h3>Additional Information</h3>
 
-				<label class="control-label">Room Size</label>
-				<form:input class="form-control" path="roomSize" tabindex="10" maxlength="3" placeholder="Room Size in m2" />
-				<form:errors path="roomSize" cssClass="help-inline" element="span" />
+				<spring:bind path="roomSize">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">Room Size</label>
+						<form:input class="form-control" path="roomSize" tabindex="10" maxlength="3" placeholder="Room Size in m2" />
+						<form:errors path="roomSize" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 
-				<label class="control-label">Distance to Public Transport</label>
-				<form:input class="form-control" path="distanceToPublicTransport" tabindex="11" maxlength="4"
-					placeholder="Distance in m." />
-				<form:errors path="distanceToPublicTransport" cssClass="help-inline" element="span" />
+				<spring:bind path="distanceToPublicTransport">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">Distance to Public Transport</label>
+						<form:input class="form-control" path="distanceToPublicTransport" tabindex="11" maxlength="4"
+							placeholder="Distance in m." />
+						<form:errors path="distanceToPublicTransport" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 
-				<label class="control-label">Distance to Mall or next Grocery</label>
-				<form:input class="form-control" path="distanceToShopping" tabindex="12" maxlength="4" placeholder="Distance in m." />
-				<form:errors path="distanceToShopping" cssClass="help-inline" element="span" />
+				<spring:bind path="distanceToShopping">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">Distance to Mall or next Grocery</label>
+						<form:input class="form-control" path="distanceToShopping" tabindex="12" maxlength="4"
+							placeholder="Distance in m." />
+						<form:errors path="distanceToShopping" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 
 			</div>
 		</div>
@@ -138,25 +186,37 @@
 			<div class="col-sm-6">
 				<h3>Description</h3>
 
-				<label class="control-label">Description</label>
-				<form:textarea class="form-control" path="description" tabindex="13" maxlength="255" rows="6"
-					placeholder="are pets allowed?...is there a balcony?...parking?...smokers?" />
-				<form:errors path="description" cssClass="help-inline" element="span" />
+				<spring:bind path="description">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">Description</label>
+						<form:textarea class="form-control" path="description" tabindex="13" maxlength="255" rows="6"
+							placeholder="are pets allowed?...is there a balcony?...parking?...smokers?" />
+						<form:errors path="description" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 
 			</div>
 
 			<div class="col-sm-6">
 				<h3>Social Information</h3>
 
-				<label class="control-label">We are...</label>
-				<form:textarea class="form-control" path="us" tabindex="14" maxlength="255"
-					placeholder="Write about you and your roomies." />
-				<form:errors path="us" cssClass="help-inline" element="span" />
+				<spring:bind path="us">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">We are...</label>
+						<form:textarea class="form-control" path="us" tabindex="14" maxlength="255"
+							placeholder="Write about you and your roomies." />
+						<form:errors path="us" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 
-				<label class="control-label">Ideal Roomie</label>
-				<form:textarea class="form-control" path="you" tabindex="15" maxlength="255"
-					placeholder="My/Our ideal roomie should be.." />
-				<form:errors path="you" cssClass="help-inline" element="span" />
+				<spring:bind path="you">
+					<div class="${status.error ? 'has-error has-feedback' : ''}">
+						<label class="control-label">Ideal Roomie</label>
+						<form:textarea class="form-control" path="you" tabindex="15" maxlength="255"
+							placeholder="My/Our ideal roomie should be.." />
+						<form:errors path="you" cssClass="help-block" element="span" />
+					</div>
+				</spring:bind>
 			</div>
 		</div>
 

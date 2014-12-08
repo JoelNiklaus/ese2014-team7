@@ -13,31 +13,46 @@ public class AdForm {
 	
 	private Long id;
 	private Timestamp timestamp;
+	
 	@NotNull
 	@Pattern(regexp = "[a-zA-ZäöüÄÖÜ.,;:0-9()\\s]+", message = "Enter a descriptive title\n")
 	private String title;
+	
 	@NotNull
 	@Pattern(regexp = "[a-zA-ZäöüÄÖÜ.,;:0-9()\\s]+", message = "Enter the street of the apartment\n")
 	private String street;
+	
+	@NotNull
 	private Long houseNr;
+	
+	@NotNull
+	private Long zip;
+	
 	@NotNull
 	@Pattern(regexp = "[a-zA-ZäöüÄÖÜ.,;:0-9()\\s]+", message = "Enter the city of the apartment\n")
 	private String city;
-	@NotNull
-	private Long zip;
+	
 	@NotNull
 	private Long rent;
+	
 	private Long addCost;
+	
 	@NotNull
 	private String dateIn;
+	
 	//@Future
 	private String dateOut;
+	
+	@NotNull
 	private Long roomSize;
+	
 	@NotNull
 	@Pattern(regexp = "[a-zA-ZäöüÄÖÜ.,;:0-9()\\s]+", message = "Enter a description about the room\n")
 	private String description;
+	
 	private Long distanceToPublicTransport;
 	private Long distanceToShopping;
+	
 	private String us;
 	private String you;
 	
