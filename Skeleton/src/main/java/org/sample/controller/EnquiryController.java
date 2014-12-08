@@ -183,7 +183,7 @@ public class EnquiryController {
 	@RequestMapping(value = "/submitRating", method = RequestMethod.POST)
 	public ModelAndView submitRating(@Valid EnquiryRatingForm form,
 			BindingResult result, RedirectAttributes redirectAttributes) {
-		ModelAndView model = new ModelAndView("redirect:/createVisitAppointment?enquiryId="+form.getEnquiryId());
+		ModelAndView model = new ModelAndView("redirect:/createVisitAppointment?enquiryId="+form.getEnquiryId()+"#prospectTab");
 		//model.addObject("loggedInUser", loginService.getLoggedInUser());
 		//updateService.updateNumberOfUnreadItems(model);
 

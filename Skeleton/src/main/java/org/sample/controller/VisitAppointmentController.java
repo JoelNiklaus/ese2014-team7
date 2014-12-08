@@ -106,7 +106,7 @@ public class VisitAppointmentController {
     	
     	enquiryService.save(enquiry);
     	
-    	return new ModelAndView("redirect:/createVisitAppointment?enquiryId="+enquiryId);
+    	return new ModelAndView("redirect:/createVisitAppointment?enquiryId="+enquiryId+"#sentInvitationTab");
     }
     
     @RequestMapping(value="/setVisitAppointmentStateAccepted", method=RequestMethod.GET)
