@@ -3,7 +3,6 @@ package org.sample.controller.service;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import org.sample.controller.exceptions.InvalidAdException;
@@ -148,15 +147,18 @@ public class EnquiryServiceImpl implements EnquiryService {
 	@Transactional
 	public Enquiry removeEnquiry(Enquiry enquiry) {
 		Ad ad = adDao.findOne(enquiry.getAdId());
-		Set<Enquiry> enquiries = ad.getEnquiries();
-		for (Enquiry tmpEnquiry : enquiries) {
-			if(tmpEnquiry.getAdId().equals(enquiry.getAdId()))
-				enquiries.remove(tmpEnquiry);
+		try{
+			Set<Enquiry> enquiries = ad.getEnquiries();
+			for (Enquiry tmpEnquiry : enquiries) {
+				if(tmpEnquiry.getAdId().equals(enquiry.getAdId()))
+					enquiries.remove(tmpEnquiry);
+			}
+			ad.setEnquiries(enquiries);
+			adDao.save(ad);
+			enquiryDao.delete(enquiry);
+		} catch(Exception e) {
+			System.out.println(e);
 		}
-		ad.setEnquiries(enquiries);
-		adDao.save(ad);
-		enquiryDao.delete(enquiry);
-		
 		return enquiry;
 	}
 
