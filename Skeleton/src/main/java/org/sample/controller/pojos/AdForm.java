@@ -8,6 +8,7 @@ import javax.validation.constraints.Pattern;
 
 import org.sample.model.Ad;
 import org.sample.model.Picture;
+import org.hibernate.annotations.Columns;
 
 public class AdForm {
 	
