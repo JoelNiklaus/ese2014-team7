@@ -1,8 +1,6 @@
 package org.sample.controller;
 
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -113,7 +111,9 @@ public class VisitAppointmentController {
     
     @RequestMapping(value="/setVisitAppointmentStateAccepted", method=RequestMethod.GET)
     public @ResponseBody ModelAndView setVisitAppointmentStateAccepted(@RequestParam("id") String id, @RequestParam("enquiryId") String enquiryId){
-        	
+        Enquiry enquiry = enquiryService.getEnquiryById(new Long(enquiryId));
+        enquiry.setUnread(true);
+        enquiryService.save(enquiry);
     	visitAppointmentService.updateState(new Long(id), VisitAppointmentState.ACCEPTED);
     	
     	return new ModelAndView("redirect:/manageInvitationRequests?enquiryId="+enquiryId);
@@ -121,7 +121,9 @@ public class VisitAppointmentController {
     
     @RequestMapping(value="/setVisitAppointmentStateRejected", method=RequestMethod.GET)
     public @ResponseBody ModelAndView setVisitAppointmentStateRejected(@RequestParam("id") String id, @RequestParam("enquiryId") String enquiryId){
-        	
+        Enquiry enquiry = enquiryService.getEnquiryById(new Long(enquiryId));
+        enquiry.setUnread(true);
+        enquiryService.save(enquiry);
     	visitAppointmentService.updateState(new Long(id), VisitAppointmentState.REJECTED);
     	
     	return new ModelAndView("redirect:/manageInvitationRequests?enquiryId="+enquiryId);

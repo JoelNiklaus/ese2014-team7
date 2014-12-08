@@ -91,6 +91,9 @@
 <link rel="stylesheet" href="/Skeleton/lib/leaflet-0.7.3/Control.Geocoder.css" />
 <link href="/Skeleton/lib/noUiSlider/jquery.nouislider.css" rel="stylesheet">
 <link href="/Skeleton/css/search.css" rel="stylesheet">
+<link rel="stylesheet" href="/Skeleton/lib/datepicker-1.3.0/css/datepicker.css" />
+<link rel="stylesheet" href="/Skeleton/lib/datepicker-1.3.0/css/datepicker3.css" />
+<script src="/Skeleton/lib/datepicker-1.3.0/js/bootstrap-datepicker.js"></script>
 
 <div class="panel" style="background-color: #fafafa; padding: 5pt; 	border: 1px solid; border-color: #f0f0f0;">
 	
@@ -106,7 +109,7 @@
 	<form:form method="post" modelAttribute="searchForm" id="searchForm" cssClass="form-horizontal" autocomplete="off">
 		<fieldset>
 			<div class="form-group">
-				<div class="col-md-2 col-lg-1" style="height:60px;" align="center">
+				<div class="col-md-2 col-lg-1" style="height:60px; " align="center">
 					<label for="field-price">Rent</label>
 				</div>
 				<div class="col-md-3 col-lg-4" style="height:30px;">
@@ -127,11 +130,6 @@
 			<br>
 
 			<div id="advancedSearchContainer">
-			
-			<link rel="stylesheet" href="/Skeleton/lib/datepicker-1.3.0/css/datepicker.css" />
-			<link rel="stylesheet" href="/Skeleton/lib/datepicker-1.3.0/css/datepicker3.css" />
-			<script src="/Skeleton/lib/datepicker-1.3.0/js/bootstrap-datepicker.js"></script>
-		
 			
 				<div class="row">
 					<div class="col-md-2">
@@ -173,7 +171,6 @@
 					</script>
 				</div>
 			</div>
-			<br />		
 			
 			<form:input type="hidden" path="priceMin" id="field-priceMin" maxlength="45"/>
 			<form:input type="hidden" path="priceMax" id="field-priceMax" maxlength="45"/>
