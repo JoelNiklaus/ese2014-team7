@@ -36,11 +36,8 @@ public class AdControllerIntegrationTest {
     
     @Test
     public void testGetAdForm() throws Exception {
-        this.mockMvc.perform(get("/createAd"))
+        this.mockMvc.perform(get("/createad"))
                 .andExpect(status().isOk())
-                .andExpect(forwardedUrl("/pages/createAd.jsp"))
-                .andExpect(model().attribute("adForm", any(AdForm.class)));
-    }
-    
-
+                .andExpect(forwardedUrl("default"));
+    } 
 }

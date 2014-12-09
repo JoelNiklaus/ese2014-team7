@@ -24,6 +24,8 @@ import static org.mockito.Mockito.when;
 public class AdServiceTest {
 
 		private AdDao adDao;
+		
+		@Autowired
 		private AdService adService;
 		
 	
@@ -61,15 +63,9 @@ public class AdServiceTest {
 
 			assertNull(adForm.getId());
 			
-			
-			adService.saveFrom(adForm);
-			
-			Iterable<Ad> ads = adDao.findAll();
-			Ad ad = new Ad();
-			
-			ad = Iterables.getLast(ads);
+			adForm = adService.saveFrom(adForm);
 		
-			assertNotNull(ad.getId());
-			assertTrue(ad.getId() > 0);			
+			assertNotNull(adForm.getId());
+			assertTrue(adForm.getId() > 0);			
 		}
 }

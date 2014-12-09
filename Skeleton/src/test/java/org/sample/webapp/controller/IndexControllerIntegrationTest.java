@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/config/springMVC.xml","file:src/main/webapp/WEB-INF/config/springData.xml"})
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/config/spring*.xml"})
 public class IndexControllerIntegrationTest {
 
 	@Autowired

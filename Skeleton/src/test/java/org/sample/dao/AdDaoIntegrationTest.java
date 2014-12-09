@@ -12,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/config/spring*.xml"})
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
@@ -57,23 +59,25 @@ public class AdDaoIntegrationTest {
 		
 		adIB = adDao.save(adIB);
 		List<Ad> adIBList = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThan(PRICE_MIN, PRICE_MIN, ROOM_SIZE_MIN, ROOM_SIZE_MAX, CITY, ADD_COST_MAX);
+		assertFalse(adIBList.isEmpty());
 		assert(adIBList.get(0).getRent() > PRICE_MIN);
 		assert(adIBList.get(0).getRent() < PRICE_MAX);
 		assert(adIBList.get(0).getRoomSize() > ROOM_SIZE_MIN);
 		assert(adIBList.get(0).getRoomSize() < ROOM_SIZE_MIN);
-		assertEquals(adIBList.get(0).getCity(), CITY);
+		assertTrue(adIBList.get(0).getCity() == CITY);
 		assert(adIBList.get(0).getAddCost() < ADD_COST_MAX);
 		
 		//adOB --> ad outside of the chosen boundries
 		Ad adOB = new Ad();
 		
-		adIB.setAddCost(10L+1);
+		adIB.setAddCost(15L);
 		adIB.setRent(15L);
 		adIB.setCity("notTestCity");
 		adIB.setRoomSize(15L);
 		
 		adOB = adDao.save(adOB);
 		List<Ad> adOBList = adDao.findByRentBetweenAndRoomSizeBetweenAndCityContainingAndAddCostLessThan(PRICE_MIN, PRICE_MIN, ROOM_SIZE_MIN, ROOM_SIZE_MAX, CITY, ADD_COST_MAX);
+		assertFalse(adOBList.isEmpty());
 		assertFalse(adOBList.get(0).getRent() > PRICE_MIN);
 		assertFalse(adOBList.get(0).getRent() < PRICE_MAX);
 		assert(adIBList.get(0).getRoomSize() < ROOM_SIZE_MIN);
