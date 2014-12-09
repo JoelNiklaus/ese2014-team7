@@ -1,0 +1,456 @@
+\documentclass{scrreprt}
+\usepackage{listings}
+\usepackage{underscore}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[ampersand]{easylist}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\setlist[enumerate]{label*=\arabic*.}
+
+\def\myversion{1.0 }
+\title{%
+\flushright
+\rule{16cm}{5pt}\vskip1cm
+\Huge{SOFTWARE REQUIREMENTS\\ SPECIFICATION}\\
+\vspace{2cm}
+for\\
+\vspace{2cm}
+ESE 2014 Project\\
+\vspace{2cm}
+\LARGE{Version \myversion \\}
+\vspace{2cm}
+S. Berger, J. Niklaus, J. Schaerer, A. Sellathurai \\
+\vfill
+\rule{16cm}{5pt}
+}
+\date{}
+\usepackage{hyperref}
+
+
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter*{Revision History}
+
+\begin{tabular}{|l|l| p{10cm}|}
+\hline 
+\textbf{Version} & \textbf{Date} & \textbf{Revision Description} \\ 
+\hline 
+0.1 & 07.10.2014 & Initial document \\ 
+\hline 
+0.2 & 14.10.2014 & Transfer to LaTeX  \\ 
+\hline 
+0.3 & 25.10.2014 &  Redundant requirements removed, stakeholder added, use cases updated\\ 
+\hline 
+1.0 & 12.11.2014 & v1.0 Release\\ 
+\hline 
+&  &  \\ 
+\hline 
+&   & \\ 
+\hline 
+&  &  \\ 
+\hline 
+&   & \\ 
+\hline 
+&  &  \\ 
+\hline 
+&   & \\ 
+\hline 
+&  &  \\ 
+\hline 
+&   & \\ 
+\hline 
+&  &  \\ 
+\hline 
+&   & \\ 
+\hline 
+\end{tabular} 
+
+
+\chapter{Introduction}
+\section{Purpose}
+This document is the Software Requirements Specification for the ESE 2014 apartment- and shared room search platform project. This software aims to provide a practical and easy to use environment for searching for apartments and shared rooms, as well as placing advertisements for such. \\
+This document is meant for our customer and us, the development team, to deliver a common base and detailed description of all the criteria the software should meet in the end. 
+\section{Stakeholders}
+Bledar Aga, ESE Team 7, students looking for a room to rent
+\section{Definitions}
+\textbf{Searcher:} A person who wants to find a room in a shared apartment.\\
+\textbf{Provider:} A person who wants to find a person for a room in his/her apartment.
+\section{System Overview}
+The purpose is to provide a system where a Searcher can find a shared apartment and a Provider can place an ad for a shared apartment. \\
+Our goal is to out beat the market with further methods for scheduling an appointment for visiting a shared apartment.
+\section{References}
+Concerning main functionalities, such as placing an ad and searching for an apartment or shared room, we will take these following websites as examples:\\
+\begin{itemize}
+\item \url{www.wgzimmer.ch}
+\item \url{www.students.ch/wohnen/} 
+\item \url{www.tutti.ch/ganze-schweiz/immobilien/wg-zimmer} 
+\end{itemize}
+
+We will analyze their features and behavior to filter out good practice and improve their weaknesses.
+ 
+\chapter{Overall Description}
+\section{Use Cases}
+
+\begin{center}
+\includegraphics[scale=.5]{"Use Case Diagram".PNG} 
+\end{center}
+
+\begin{enumerate}
+	\item \textbf{Send Enquiry For interesting Apartment}
+	\begin{enumerate}
+		\item \textbf{Actors}  \\
+			Searcher  \\
+
+		\item \textbf{Description} \\
+			As a searcher I want to search for a shared apartment, bookmark different options and send enquiries to a provider and schedule appointments with the provider.\\
+
+		\item \textbf{Trigger} \\
+			Searcher sends enquiry to provider.\\
+
+		\item \textbf{Pre-conditions} \\
+			There are apartment ads placed by providers\\
+
+		\item \textbf{Post-conditions} \\
+			Provider receives enquiry and a notification\\
+
+		\item \textbf{Main Scenario} \\
+			Provider places an ad\\
+			Searchers searches and finds ad\\
+			Searchers send an enquiry\\
+			Provider checks enquiry\\
+
+		\item \textbf{Alternative Scenarios} \\
+			None.\\
+
+		\item \textbf{Special Requirements} \\
+
+		\item \textbf{Notes}\\
+	\end{enumerate}
+	
+	\item \textbf{Schedule Meetings}
+	\begin{enumerate}
+		\item \textbf{Actors}  \\
+			Provider\\
+
+		\item \textbf{Description} \\
+			As a provider I want to make an ad of my shared apartment, answer to enquiries, rank searchers and schedule appointments with the searcher\\
+
+		\item \textbf{Trigger} \\
+			User checks enquiry inbox.\\
+
+		\item \textbf{Pre-conditions} \\
+			At least one enquiry in inbox.\\
+
+		\item \textbf{Post-conditions} \\
+			Provider schedules an appointment with the searcher or declines enquiry.\\
+
+		\item \textbf{Main Scenario} \\
+			Searcher checks enquiry inbox\\
+			One ore more enquiries available\\
+			Provider accepts enquiry\\
+			Searchers and Provider schedule appointment\\
+			After successful interaction the ad is deleted.\\
+
+		\item \textbf{Alternative Scenarios} \\
+			Searcher checks enquiry inbox\\
+			One ore more enquiries available\\
+			Provider declines enquiry\\
+			Enquiry is deleted from inbox\\
+			
+			Searcher checks enquiry inbox\\
+			No enquiries available\\
+			Page shows message "No enquiries pending"\\
+
+		\item \textbf{Special Requirements} \\
+
+		\item \textbf{Notes} \\
+	\end{enumerate}
+
+	\item \textbf{Registration}
+	\begin{enumerate}
+		\item \textbf{Actors}  \\
+			Searcher \\
+			Provider \\
+
+		\item \textbf{Description} \\
+			As a user, I want to create a personal user account. \\
+			
+		\item \textbf{Trigger} \\
+			User registers\\
+
+		\item \textbf{Pre-conditions} \\
+			Required information (valid e-mail, Name, Address, etc.) is complete\\
+
+		\item \textbf{Post-conditions} \\
+			User account is created, user is redirected to a relevant page.\\
+
+		\item \textbf{Main Scenario} \\
+			User opens registration page \\
+			User fills form and hits send button \\
+			User gets to relevant page \\
+
+		\item \textbf{Alternative Scenarios} \\
+			User doesn't fill in all required fields\\
+			User hits send button\\
+			Required, empty (or invalid) fields are marked\\
+			User enters missing information\\
+			User gets to relevant page\\
+		\item \textbf{Special Requirements} \\
+
+		\item \textbf{Notes} \\
+	\end{enumerate}
+
+	\item \textbf{Login and forgotten password}
+	\begin{enumerate}
+		\item \textbf{Actors}  \\
+			Searcher \\
+			Provider \\
+
+		\item \textbf{Description} \\
+			As a user I want to log in the system to set my profile settings and organize enquiries. \\
+			
+		\item \textbf{Trigger} \\
+			User logs in\\
+
+		\item \textbf{Pre-conditions} \\
+			There is a valid profile to log in to\\
+
+		\item \textbf{Post-conditions} \\
+			User is able to organize enquiries or set/edit profile information.\\
+
+		\item \textbf{Main Scenario} \\
+			User opens login page \\
+			User fills form and logs in \\
+			User gets to relevant page \\
+
+		\item \textbf{Alternative Scenarios} \\
+			User forgot password\\
+			User needs to enter correct Email address\\
+			User gets Email with reactivation code\\
+			User logs in with reactivation code and sets up new password\\
+			User gets to his profile page\\
+		\item \textbf{Special Requirements} \\
+
+		\item \textbf{Notes} \\
+	\end{enumerate}
+
+
+	\item \textbf{Search For Apartment}
+	\begin{enumerate}
+		\item \textbf{Actors}  \\
+			Searcher\\
+
+		\item \textbf{Description} \\
+			The Searcher, an user that searches for certain types of shared apartments finds ads that match his search\\
+			
+		\item \textbf{Trigger} \\
+			Searcher fills in Search Form and Submits\\
+
+		\item \textbf{Pre-conditions} \\
+			There are ads placed that can be browsed.\\
+
+		\item \textbf{Post-conditions} \\
+			Ads that match the search criteria are shown and ready to check out.\\
+
+		\item \textbf{Main Scenario} \\
+			Searcher opens search page\\
+			Fills in his relevant criteria\\
+			Clicks on “Search”\\
+			Is shown relevant ads\\
+
+		\item \textbf{Alternative Scenarios} \\
+
+		\item \textbf{Special Requirements} \\
+
+		\item \textbf{Notes} \\
+			When no relevant ads exist, the search page is shown, with a message "No ads found matching your criteria".\\
+	\end{enumerate}
+
+
+	\item \textbf{Save Search Criteria}
+	\begin{enumerate}
+		\item \textbf{Actors}  \\
+			Searcher\\
+
+		\item \textbf{Description} \\
+			As a searcher I want to be informed about new ads that are relevant to pre-edited search criteria\\
+			
+		\item \textbf{Trigger} \\
+			New ad that matches Searcher profiles search criteria is placed\\
+
+		\item \textbf{Pre-conditions} \\
+			Searcher has set up his search criteria\\
+
+		\item \textbf{Post-conditions} \\
+			Email is sent to Searcher that a new relevant ad has been placed\\
+
+		\item \textbf{Main Scenario} \\
+			Provider posts for a certain Searcher relevant ad\\
+			Searcher gets informed by Email that a new promising ad has been placed.\\
+
+		\item \textbf{Alternative Scenarios} \\
+
+		\item \textbf{Special Requirements} \\
+
+		\item \textbf{Notes} \\
+	\end{enumerate}
+
+	\item \textbf{Bookmark ads}
+	\begin{enumerate}
+		\item \textbf{Actors}  \\
+			Searcher\\
+
+		\item \textbf{Description} \\
+			As a Searcher I want to save certain ads to a personal list\\
+			
+		\item \textbf{Trigger} \\
+			Searcher finds an ad he wants to be informed about\\
+
+		\item \textbf{Pre-conditions} \\
+			There are ads
+
+		\item \textbf{Post-conditions} \\
+			Searcher has a bookmark list with relevant ads he wants to be informed about\\
+
+		\item \textbf{Main Scenario} \\
+			Searcher finds interesting ad\\
+			Searcher adds ad to his bookmark list\\
+
+		\item \textbf{Alternative Scenarios} \\
+
+		\item \textbf{Special Requirements} \\
+
+		\item \textbf{Notes} \\
+	\end{enumerate}
+
+
+	\item \textbf{Place Ad and Auto Delete after certain period}
+	\begin{enumerate}
+		\item \textbf{Actors}  \\
+			Provider
+
+		\item \textbf{Description} \\
+			As a provider I want to place an ad and manage the period of placement
+			
+		\item \textbf{Trigger} \\
+			Provider fills in form for ad and submits the form
+
+		\item \textbf{Pre-conditions} \\
+			An end date of the ad placement is submitted in the form
+
+		\item \textbf{Post-conditions} \\
+			Valid ads are kept in the system
+
+		\item \textbf{Main Scenario} \\
+			Provider fills in ad form
+			Provider submits form
+			Ad is placed
+			One week before ad placement end the provider is informed via Email
+			Provider deletes ad or changes end date
+
+		\item \textbf{Alternative Scenarios} \\
+			Provider fills in ad form
+			Provider submits form
+			Ad is placed
+			One week before ad placement end the provider is informed via Email
+			Provider doesn’t react to Email
+			Ad goes inactive
+		\item \textbf{Special Requirements} \\
+
+		\item \textbf{Notes} \\
+	\end{enumerate}
+
+
+	\item \textbf{Personally Rate Candidates}
+	\begin{enumerate}
+		\item \textbf{Actors}  \\
+			Provider\\
+
+		\item \textbf{Description} \\
+			As a provider I want to rate interesting candidates (Searchers)\\
+			
+		\item \textbf{Trigger} \\
+			Provider accepts enquiry of a searcher\\
+
+		\item \textbf{Pre-conditions} \\
+			The searcher has sent an enquiry\\
+
+		\item \textbf{Post-conditions} \\
+			The provider has a list with ranked interesting candidates\\
+
+		\item \textbf{Main Scenario} \\
+			A Searcher sends an enquiry\\
+			Provider Accepts\\
+			Provider ranks Searcher\\
+
+		\item \textbf{Alternative Scenarios} \\
+			None\\
+		\item \textbf{Special Requirements} \\
+
+		\item \textbf{Notes} \\
+	\end{enumerate}
+
+
+	\item \textbf{Edit Profile}
+	\begin{enumerate}
+		\item \textbf{Actors}  \\
+			Searcher\\
+			Provider\\
+
+		\item \textbf{Description} \\
+			User logs in and is able to edit or update his or her profile.\\
+			
+		\item \textbf{Trigger} \\
+			User logs in.\\
+
+		\item \textbf{Pre-conditions} \\
+			There is a valid profile for said user\\
+
+		\item \textbf{Post-conditions} \\
+			The profile edits or updates are saved\\
+
+		\item \textbf{Main Scenario} \\
+			The User gets to his profile page\\
+			The user gets into editing mode of the profile information’s\\
+			The user saves the changes\\
+
+		\item \textbf{Alternative Scenarios} \\
+			The user gets to his profile page\\
+			Edits profile\\
+			Closes without saving\\
+			No changes are saved\\
+		\item \textbf{Special Requirements} \\
+
+		\item \textbf{Notes} \\
+	\end{enumerate}
+
+
+\end{enumerate}
+
+\chapter{Specific Requirements}
+\section{Functional Requirements}
+\begin{list}{•}
+\item The ad content has certain limits (Description letter limit, Pictures size limit).
+\item The ad form has some spaces that cannot be left empty.
+\item Users have a login, where they get to organize enquiries, rankings and bookmarks.
+\item Searcher gets informed when new ads are placed that matches his set up sear
+\item Social Media linkable	
+\item Posibility to buy a better ranking 
+\end{list}
+
+
+\section{Non-Functional Requirements}
+\begin{list}{•}
+\item The system delivers a UI that makes the main features easily accessible to every user with basic PC experience, with no need for further training.
+\item The application is usable on all platforms and display sizes because responsive webdesign is used (twitter bootstrap).
+\item The performance is good enough to make mobile usage possible.
+\item The user data is kept confidential and not passed on to third parties.
+\item The usage of the application is completely free of charge for both the provider and the searcher.
+\item The most frequently used features (such as bookmarking an object while looking at its profile) are accessible by just one click.
+\item Both database structure and usage are designed to ensure data consistency.
+\end{list}
+\end{document}
