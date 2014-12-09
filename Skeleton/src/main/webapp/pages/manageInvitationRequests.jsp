@@ -12,14 +12,21 @@
 <script src="/Skeleton/lib/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
 <div style="background-color:#fbfbfb; padding:1em; border: 1px solid; border-radius: 5px; border-color:#aaaaaa">
-	<div class="container">
-		<div class='col-sm-6'>
-			<h4>Enquiry Message</h4>
+	<div class="row">
+		<div class="col-sm-1">
+			<c:if test="${not empty enquiry.sender.profileImage}">
+				<img width="80px" class="gallery" src="/Skeleton/img/ad/${enquiry.sender.profileImage.fileName}" />
+			</c:if>
+			<c:if test="${empty enquiry.sender.profileImage}">
+				<img width="80px" class="gallery" src="/Skeleton/img/Profile_Placeholder.jpg" />
+			</c:if>
 		</div>
-	</div>
-	<div class="container">
-		<div class='col-sm-6'>
-			${enquiry.messageText}
+		<div class='col-sm-10'>
+			<h4>Enquiry Message</h4>
+			<p>${enquiry.messageText}</p>
+		</div>
+		<div class='col-sm-1'>
+			<button class="btn btn-info" onclick="javascript:location.href='ad?id=${enquiry.adId}'">view Ad</button>
 		</div>
 	</div>
 </div>
