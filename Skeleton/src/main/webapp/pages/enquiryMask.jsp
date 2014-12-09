@@ -15,7 +15,7 @@
 		
 			<div class="panel-heading"><h5>${ad.title}</h5></div>
 			<div class="panel-body" >
-				<a class="pull-left" >
+				<a class="pull-left" style="padding:1em;" >
 								<c:forEach items="${ad.pictures}" varStatus="loopCount" var="pic">
 								<c:if test="${loopCount.count eq 1}">
 								<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
