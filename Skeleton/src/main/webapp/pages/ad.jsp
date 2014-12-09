@@ -127,15 +127,15 @@
 					</tr>
 					<tr>
 						<td>Room Size&nbsp;&nbsp;
-						<td>${ad.roomSize}
+						<td>${ad.roomSize} m<sup>2</sup>
 					</tr>
 					<tr>
 						<td>Distance To Public Transport
-						<td>${ad.distanceToPublicTransport}
+						<td>${ad.distanceToPublicTransport} m
 					</tr>
 					<tr>
 						<td>Distance To Mall or Grocery
-						<td>${ad.distanceToShopping}
+						<td>${ad.distanceToShopping} m
 					</tr>
 				</table>
 			</div>
