@@ -27,7 +27,7 @@
 			<h5>${bookmark.ad.title}</h5>
 		</div>
 		<div class="panel-body">
-			<a class="pull-left"> <c:forEach items="${ad.pictures}"
+			<a class="pull-left"> <c:forEach items="${bookmark.ad.pictures}"
 					varStatus="loopCount" var="pic">
 					<c:if test="${loopCount.count eq 1}">
 						<img width="150px" class="gallery"
