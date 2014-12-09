@@ -50,7 +50,7 @@ public class VisitAppointmentController {
 			if(enquiry==null)
 				model = new ModelAndView("404");
 			
-			User sender = loginService.findById(enquiry.getSenderId());
+			User sender = loginService.getUser(enquiry.getSenderId());
 			
 			EnquiryRatingForm ratingForm = new EnquiryRatingForm();
 			ratingForm.setEnquiryId(new Long(enquiryId));
@@ -83,6 +83,10 @@ public class VisitAppointmentController {
 		
 		try{
 			Enquiry enquiry = enquiryService.getEnquiryById(new Long(enquiryId));
+			
+			User receiver = loginService.getUser(enquiry.getReceiverId());
+			
+			model.addObject("receiver", receiver);
 			model.addObject("enquiry", enquiry);
 			model.addObject("loggedInUser", loginService.getLoggedInUser());
 			if(enquiry==null)

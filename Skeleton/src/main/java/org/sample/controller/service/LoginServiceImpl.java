@@ -177,8 +177,11 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
     	return exists;
     }
     
-    public User findById(Long id){
-    	return userDao.findOne(id);
+    public User getUser(Long id){
+    	User user = userDao.findOne(id);
+    	if(user == null)
+    		throw new InvalidUserException("No User with this id existing.");
+    	return user;
     }
 
 	public UserDetails loadUserByUsername(String arg0)
