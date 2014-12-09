@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
 public class PictureDaoIntegrationTest {
+	
 	@Autowired
 	PictureDao pictureDao;
 
@@ -30,8 +31,7 @@ public class PictureDaoIntegrationTest {
     	picture.setFilePath(PATH);
     	
         picture =  pictureDao.save(picture);   
-        Picture findPicture = pictureDao.findByFileName(PATH);
-        assertEquals(findPicture.getFileName(), PATH);
+        assertEquals(picture.getFilePath(), PATH);
 	}
 
 }
