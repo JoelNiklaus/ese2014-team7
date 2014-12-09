@@ -6,12 +6,14 @@ import org.sample.controller.exceptions.InvalidUserException;
 import org.sample.controller.pojos.SignupForm;
 import org.sample.controller.service.LoginService;
 import org.sample.controller.service.UpdateService;
+import org.sample.model.Ad;
 import org.sample.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,6 +23,34 @@ public class ProfileController {
     @Autowired LoginService loginService;
     @Autowired UpdateService updateService;
 	
+    /**
+     * Displays the profile view of the user with the given id.
+     * 
+     * @return
+     */
+	@RequestMapping(value="/otherProfileView", method = RequestMethod.GET)
+	public ModelAndView loadOtherProfileView(@RequestParam String id) {
+		ModelAndView model = new ModelAndView("otherProfileView");
+		
+		try{
+			User otherUser = loginService.getUser(new Long(id));
+
+			if(otherUser != null){
+				model.addObject("otherUser", otherUser);
+			} else {  	
+				model = new ModelAndView("404");
+			}	 
+		}catch(NumberFormatException ex){
+			model = new ModelAndView("404");
+		}	
+		
+		User loggedInUser = loginService.getLoggedInUser();
+		model.addObject("loggedInUser", loggedInUser);
+		updateService.updateNumberOfUnreadItems(model);
+		
+		return model;
+	}
+    
     /**
      * Displays the profileForm which enables the user to change his profile information.
      * 

@@ -17,19 +17,20 @@
 <div style="background-color: #fbfbfb; padding: 1em; border: 1px solid; border-radius: 5px; border-color: #aaaaaa">
 	<div class="row">
 		<div class="col-sm-1">
-			<c:if test="${not empty enquiry.sender.profileImage}">
-				<img width="80px" class="gallery" src="/Skeleton/img/ad/${enquiry.sender.profileImage.fileName}" />
+			<c:if test="${not empty sender.profileImage}">
+				<img width="80px" class="gallery" src="/Skeleton/img/ad/${sender.profileImage.fileName}" />
 			</c:if>
-			<c:if test="${empty enquiry.sender.profileImage}">
+			<c:if test="${empty sender.profileImage}">
 				<img width="80px" class="gallery" src="/Skeleton/img/Profile_Placeholder.jpg" />
 			</c:if>
 		</div>
-		<div class='col-sm-10'>
+		<div class='col-sm-9'>
 			<h4>Enquiry Message</h4>
 			<p>${enquiry.messageText}</p>
 		</div>
-		<div class='col-sm-1'>
-			<button class="btn btn-info" onclick="javascript:location.href='ad?id=${enquiry.adId}'">view Ad</button>
+		<div class='col-sm-2'>
+			<button class="btn btn-info" onclick="javascript:location.href='ad?id=${enquiry.adId}'"><span class="glyphicon glyphicon-tag"></span> view Ad</button>
+			<button class="btn btn-info" onclick="javascript:location.href='otherProfileView?id=${sender.id}'"><span class="glyphicon glyphicon-user"></span> Prospects Profile</button>
 		</div>
 	</div>
 </div>
