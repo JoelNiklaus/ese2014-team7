@@ -189,7 +189,7 @@
 				<spring:bind path="description">
 					<div class="${status.error ? 'has-error has-feedback' : ''}">
 						<label class="control-label">Description</label>
-						<form:textarea class="form-control" path="description" tabindex="13" maxlength="255" rows="6"
+						<form:textarea class="form-control" path="description" tabindex="13" maxlength="1000" rows="6"
 							placeholder="are pets allowed?...is there a balcony?...parking?...smokers?" />
 						<form:errors path="description" cssClass="help-block" element="span" />
 					</div>
