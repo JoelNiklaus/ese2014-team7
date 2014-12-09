@@ -62,11 +62,12 @@ public interface LoginService {
     public User getLoggedInUser();
     
 	/**
+	 * Fetches a User by id.
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public User findById(Long id);
+	public User getUser(Long id) throws InvalidUserException;
 	
 
 }

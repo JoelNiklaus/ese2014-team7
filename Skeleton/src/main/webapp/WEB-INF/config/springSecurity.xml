@@ -20,6 +20,7 @@
 		<security:intercept-url pattern="/removeBookmark" access="hasRole('ROLE_USER')" />
 		
 		<security:intercept-url pattern="/enquiries" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/manageInvitationRequests" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/createVisitAppointment" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/sendEnquiry" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/rateEnquiry" access="hasRole('ROLE_USER')" />

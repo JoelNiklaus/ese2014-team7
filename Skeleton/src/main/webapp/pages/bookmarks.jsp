@@ -27,14 +27,18 @@
 			<h5>${bookmark.ad.title}</h5>
 		</div>
 		<div class="panel-body">
-			<a class="pull-left"> <c:forEach items="${bookmark.ad.pictures}"
-					varStatus="loopCount" var="pic">
-					<c:if test="${loopCount.count eq 1}">
-						<img width="150px" class="gallery"
-							src="/Skeleton/img/ad/${pic.fileName}" />
-					</c:if>
-				</c:forEach>
-			</a>
+			<a style="padding:1em;" class="pull-left" >		
+				<c:if test="${not empty bookmark.ad.pictures}">
+					<c:forEach items="${bookmark.ad.pictures}" varStatus="loopCount" var="pic">
+						<c:if test="${loopCount.count eq 1}">
+							<img width="150px;" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
+						</c:if>
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty bookmark.ad.pictures}">
+					<img width="150px" class="gallery" src="/Skeleton/img/Placeholder.png" />
+				</c:if>
+	  		</a>
 			<p style="padding: 10px;">${bookmark.ad.description}</p>
 		</div>
 

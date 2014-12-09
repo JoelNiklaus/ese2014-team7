@@ -80,20 +80,20 @@ public class AdController {
         return model;
     }
     
-    /**
-     * Creates a model displaying all ads available in DB.
-     * 
-     * @return ad view model
-     */
-    @RequestMapping(value = "/adView", method = RequestMethod.GET)
-    public ModelAndView adView() {
-    	ModelAndView model = new ModelAndView("adView");
-    	model.addObject("adView", adService.adCatcher());
-    	model.addObject("loggedInUser", loginService.getLoggedInUser());
-    	updateService.updateNumberOfUnreadItems(model);
-    	return model;
-
-    }
+//    /**
+//     * Creates a model displaying all ads available in DB.
+//     * 
+//     * @return ad view model
+//     */
+//    @RequestMapping(value = "/adView", method = RequestMethod.GET)
+//    public ModelAndView adView() {
+//    	ModelAndView model = new ModelAndView("adView");
+//    	model.addObject("adView", adService.adCatcher());
+//    	model.addObject("loggedInUser", loginService.getLoggedInUser());
+//    	updateService.updateNumberOfUnreadItems(model);
+//    	return model;
+//
+//    }
 
     /**
      * Creates a model displaying ad with given ad id.

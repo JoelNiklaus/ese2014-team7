@@ -22,6 +22,7 @@
 		<c:if test="${loggedInUser.id!=ad.placerId}">
 			<a class="btn btn-info pull-right" href="/Skeleton/bookmark?id=${ad.id}"><span class="glyphicon glyphicon-bookmark"></span> Bookmark Ad</a>
 			<a class="btn btn-info pull-right" href="/Skeleton/sendEnquiry?id=${ad.id}"><span class="glyphicon glyphicon-envelope"></span> Send Enquiry</a>
+			<a class="btn btn-info pull-right" href="/Skeleton/otherProfileView?id=${ad.placerId}"><span class="glyphicon glyphicon-user"></span> view Ad Placers Profile</a>
 		</c:if>
 		<c:if test="${loggedInUser.id==ad.placerId}">
 			<a class="btn btn-info pull-right" href="/Skeleton/editAd?id=${ad.id}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
