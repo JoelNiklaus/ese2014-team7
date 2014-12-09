@@ -50,19 +50,6 @@ public class BookmarkServiceTest {
     	Long adId = 1L;
     	bookmarkService.saveBookmark(adId);
     	
-    	assertEquals(new Long(1), bookmarkDao.findOne(1L).getBookmarkId());
-        
-
+    	assertEquals(new Long(1), bookmarkDao.findOne(1L).getBookmarkId());  
     }
-    
-    @Test
-    public void testFindBookmarks(){
-    	
-    }
-    
-    @Test
-    public void testAlreadyBookmarked(){
-    	
-    }
-    
 }

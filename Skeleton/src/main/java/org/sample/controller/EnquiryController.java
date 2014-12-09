@@ -183,7 +183,7 @@ public class EnquiryController {
 	@RequestMapping(value = "/submitRating", method = RequestMethod.POST)
 	public ModelAndView submitRating(@Valid EnquiryRatingForm form,
 			BindingResult result, RedirectAttributes redirectAttributes) {
-		ModelAndView model = new ModelAndView("redirect:/createVisitAppointment?enquiryId="+form.getEnquiryId());
+		ModelAndView model = new ModelAndView("redirect:/createVisitAppointment?enquiryId="+form.getEnquiryId()+"#prospectTab");
 		//model.addObject("loggedInUser", loginService.getLoggedInUser());
 		//updateService.updateNumberOfUnreadItems(model);
 
@@ -206,19 +206,12 @@ public class EnquiryController {
 	 */
 	@RequestMapping(value = "/removeEnquiry", method = RequestMethod.GET)
 	public ModelAndView removeEnquiry(@RequestParam String id) {
-		ModelAndView model = showEnquiries();
+		ModelAndView model = new ModelAndView("redirect:/enquiries");
 
 		try {
 			long enquiryId = Long.parseLong(id);
 			Enquiry enquiry = enquiryDao.findOne(enquiryId);
-
-			User user = loginService.getLoggedInUser();
 			enquiryService.removeEnquiry(enquiry);
-			model = showEnquiries();
-			model.addObject("loggedInUser", user);
-			updateService.updateNumberOfUnreadItems(model);
-			model.addObject("message", "enquiry successfully deleted.");
-			enquiryViewAddModelAttributes(model);
 		} catch (NumberFormatException ex) {
 			model = new ModelAndView("404");
 		} catch (IllegalArgumentException e) {

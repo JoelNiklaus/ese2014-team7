@@ -27,7 +27,7 @@
 			<h5>${bookmark.ad.title}</h5>
 		</div>
 		<div class="panel-body">
-			<a class="pull-left"> <c:forEach items="${ad.pictures}"
+			<a class="pull-left"> <c:forEach items="${bookmark.ad.pictures}"
 					varStatus="loopCount" var="pic">
 					<c:if test="${loopCount.count eq 1}">
 						<img width="150px" class="gallery"
@@ -35,11 +35,12 @@
 					</c:if>
 				</c:forEach>
 			</a>
+			<p style="padding: 10px;">${bookmark.ad.description}</p>
 		</div>
 
 		<div class="panel-footer">
-			<b>Price:</b> CHF ${bookmark.ad.rent} <b>Room Size:</b>
-			${bookmark.ad.roomSize}m²
+			<b>Area: </b>${bookmark.ad.city}, <b>Rent:</b> CHF ${bookmark.ad.rent}, <b>Room
+							Size:</b> ${bookmark.ad.roomSize}m², <b>Posted: </b>${bookmark.ad.postingDateFormatted}
 			<a class="btn btn-danger btn-xs pull-right" href="removeBookmark?id=${bookmark.bookmarkId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
 		</div>
 	</div>

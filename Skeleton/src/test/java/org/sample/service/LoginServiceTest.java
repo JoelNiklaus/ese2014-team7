@@ -53,31 +53,6 @@ public class LoginServiceTest {
         
         
     }
-    
-    @Test
-    public void testUpdateProfile(){
-    	
-    }
-    
-    @Test
-    public void testGetUserForgotPassword(){
-    	
-    }
-    
-    @Test
-    public void testGetUserLoginForm(){
-    	
-    }
-    
-    @Test
-    public void testFilterResults(){
-    	
-    }
-    
-    @Test
-    public void testEmailAlreadyExists(){
-    	
-    }
 
     @Test(expected = InvalidUserException.class)
     public void testInvalidUserException() {

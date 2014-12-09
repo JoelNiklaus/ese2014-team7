@@ -8,6 +8,8 @@
 		<meta charset="utf-8">
 		<title>Roomiez.</title>
 		
+		<link rel="shortcut icon" href="/Skeleton/img/favicon.ico" >
+		
 		<link rel="stylesheet" type="text/css" href="/Skeleton/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/Skeleton/css/custom.css">
 		

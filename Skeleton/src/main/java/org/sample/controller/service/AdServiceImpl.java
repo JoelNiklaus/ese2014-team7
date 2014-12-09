@@ -37,6 +37,7 @@ public class AdServiceImpl implements AdService {
 	    
     	Ad ad = new Ad();
     	
+    	
     	Set<Picture> pictures = new HashSet<Picture>(0);
     	
     	List<String> pictureIdList = Arrays.asList(adForm.getImageIds().replaceAll(" ", "").split(","));

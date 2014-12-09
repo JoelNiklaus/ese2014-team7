@@ -1,5 +1,6 @@
 package org.sample.controller.pojos;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -29,7 +30,7 @@ public class SignupForm {
 
     @NotNull(message="E-Mail already exists")
     @Email(message="Please enter a valid E-Mail address")
-    @NotEmpty(message="please enter your E-Mail address")
+    @NotEmpty(message="Please enter your E-Mail address")
     private String email;
     
     @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-][a-z0-9!#$%&'*+/=?^_`{|}~-]*", 
@@ -44,9 +45,22 @@ public class SignupForm {
     	    message = "Enter your street")
 	private String street;
     
-    private int houseNr;
+	@Lob
+	@NotNull
+	@Pattern(regexp = "[a-zA-ZäöüÄÖÜ.,;:0-9()\\s]+", message = "Please write something about you")
+    private String description;
     
-    @Pattern(regexp = "[a-zA-Z]+", 
+    public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	private int houseNr;
+    
+    @Pattern(regexp = "[a-zA-Z\\s]+", 
     	    message = "Enter your city")
     private String city;
     

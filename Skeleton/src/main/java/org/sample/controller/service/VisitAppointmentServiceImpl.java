@@ -1,10 +1,8 @@
 package org.sample.controller.service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.sample.controller.enums.VisitAppointmentState;
 import org.sample.controller.pojos.VisitAppointmentForm;

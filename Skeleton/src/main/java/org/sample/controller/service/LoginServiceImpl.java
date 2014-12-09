@@ -54,6 +54,7 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
         user.setFirstName(signupForm.getFirstName());
         user.setEmail(signupForm.getEmail());
         user.setLastName(signupForm.getLastName());
+        user.setDescription(signupForm.getDescription());
         user.setProfileImage(picture);
         
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -96,6 +97,7 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
         user.setFirstName(profileForm.getFirstName());
         user.setEmail(profileForm.getEmail());
         user.setLastName(profileForm.getLastName());
+        user.setDescription(profileForm.getDescription());
         user.setProfileImage(picture);
         System.err.println(user.getEmail()+ "  " + user.getId());
         

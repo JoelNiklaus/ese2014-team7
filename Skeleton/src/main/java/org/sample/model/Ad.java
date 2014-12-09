@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 import org.sample.model.Ad;
@@ -39,7 +42,10 @@ public class Ad {
 	private Date dateOutD;
 	
 	private Long roomSize;
+	
+	@Lob
 	private String description;
+	
 	private Long distanceToPublicTransport;
 	private Long distanceToShopping;
 	private String us;

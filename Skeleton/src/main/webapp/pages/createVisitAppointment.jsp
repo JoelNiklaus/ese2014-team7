@@ -88,7 +88,7 @@
 						       <div class='col-md-6'>
 						            <div class="form-group">
 						                <div class='input-group date' id='startDatePicker'>
-						                    <form:input class="form-control"  path="startDate" maxlength="35"/>
+						                    <form:input class="form-control" onclick="openStartDate()" onblur="saveStartDate()" path="startDate" maxlength="35"/>
 						                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 						                    </span>
 						                </div>
@@ -97,7 +97,7 @@
 						        <div class='col-md-6'>
 						            <div class="form-group">
 						                <div class='input-group date' id='endDatePicker'>
-						                    <form:input class="form-control"  path="endDate" maxlength="35"/>
+						                    <form:input class="form-control" onclick="openEndDate()" onblur="saveEndDate()" path="endDate" maxlength="35"/>
 						                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 						                    </span>
 						                </div>
@@ -227,9 +227,44 @@
     </div>
   </div>
 </div>
-
 <script>
+	$(document).ready(function() {
+	    if(location.hash) {
+	        $('a[href=' + location.hash + ']').tab('show');
+	    }
+	    $(document.body).on("click", "a[data-toggle]", function(event) {
+	        location.hash = this.getAttribute("href");
+	
+	    });
+		
+	    $('#startDatePicker').data("DateTimePicker").setMinDate(moment().format('DD.MM.YYYY HH:mm'));
+	    $('#endDatePicker').data("DateTimePicker").setMinDate(moment().format('DD.MM.YYYY HH:mm'));
+		$('#startDatePicker').data("DateTimePicker").setDate(moment().format('DD.MM.YYYY HH:mm'));
+		$('#endDatePicker').data("DateTimePicker").setDate(moment().add(31,'days').format('DD.MM.YYYY HH:mm'));
+	});
+	$(window).on('popstate', function() {
+	    var anchor = location.hash || $("a[data-toggle=tab]").first().attr("href");
+	    $('a[href=' + anchor + ']').tab('show');
+	});
 	$("#ratingStars").rating("refresh", {disabled: false, showCaption: false, showClear: false,min: "0", max:"5", step:"1"});
+
+	function saveStartDate(){
+		if($('#startDatePicker').value == null)
+			$('#startDatePicker').value = $('#startDatePicker').data("DateTimePicker").setDate(moment().format('DD.MM.YYYY HH:mm'));
+		
+	}
+	function saveEndDate(){
+		if($('#endDatePicker').value == null)
+			$('#endDatePicker').value = $('#endDatePicker').data("DateTimePicker").setDate(moment().add(31,'days').format('DD.MM.YYYY HH:mm'));
+		
+	}
+	function openStartDate(){
+		$('#startDatePicker').data("DateTimePicker").show();
+	}
+	
+	function openEndDate(){
+		$('#endDatePicker').data("DateTimePicker").show();
+	}
 </script>
 <c:if test="${page_error != null }">
 	<div class="alert alert-error">

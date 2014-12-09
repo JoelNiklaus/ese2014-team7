@@ -34,7 +34,9 @@ public class User implements UserDetails{
 	private String lastName;
 
 	private String email;
-	private String password; 
+	private String password;
+	
+	private String description;
 	
 	@OneToOne
 	private Picture profileImage;
@@ -148,5 +150,13 @@ public class User implements UserDetails{
 
 	public void setProfileImage(Picture profileImage) {
 		this.profileImage = profileImage;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

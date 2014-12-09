@@ -112,23 +112,41 @@
 	
 	<h2>Sent</h2>
 	<p>${sentEmpty}</p>
-	<c:forEach items="${sentEnquiries}" var="enquiry">
-		<div class="panel panel-default" onclick="javascript:location.href='ad?id=${enquiry.adId}'">
-			
+	
+	<c:set var="class" value="panel-default"/>
+	<c:set var="state" value="no invitation"/>
+	<c:forEach items="${sentEnquiries}" var="enquiry" varStatus="loop">
+		<c:if test="${not empty enquiry.visitAppointments }">
+			<c:set var="class" value="panel-default"/>
+			<c:set var="state" value="no invitation"/>
+		</c:if>
+		<c:forEach items="${enquiry.visitAppointments }" var="visitAppointment">
+			<c:if test="${visitAppointment.state eq 'NEW' }">
+				<c:set var="class" value="panel-info"/>
+				<c:set var="state" value="new invitation"/>
+			</c:if>
+		</c:forEach> 
+		<c:forEach items="${enquiry.visitAppointments }" var="visitAppointment">
+			<c:if test="${visitAppointment.state eq 'ACCEPTED' }">
+				<c:set var="class" value="panel-success"/>
+				<c:set var="state" value="<b>Date: </b>${visitAppointment.startDate }"/>
+			</c:if>
+		</c:forEach>  
+		<div class="panel ${class }" onclick="javascript:location.href='manageInvitationRequests?enquiryId=${enquiry.enquiryId}'">
 			<div class="panel-heading">
-				<h5>${enquiry.ad.title}</h5>
+				${enquiry.ad.title} <i class="pull-right">${state }</i>
 			</div>
 			<div class="panel-body" >
-				<a class="pull-left" >
+				<a class="pull-left" style="padding:1em;" >
 			    	<c:forEach items="${enquiry.ad.pictures}" varStatus="loopCount" var="pic">
 			    		<c:if test="${loopCount.count eq 1}">
-							<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
+							<img width="100px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}"/>
 						</c:if>
 					</c:forEach>
 		  		</a>			  		
 		  		<p>${enquiry.messageText}</p>
 			</div>
-				
+
 			<div class="panel-footer" style="height:55px">
 				<b>Price:</b> CHF ${enquiry.ad.rent}  <b>Room Size:</b> ${enquiry.ad.roomSize}m²
 				<a class="btn btn-danger pull-right" href="removeEnquiry?id=${enquiry.enquiryId}"><span class="glyphicon glyphicon-remove"></span>delete</a>	
