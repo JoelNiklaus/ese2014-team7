@@ -22,12 +22,13 @@ public class VisitAppointmentServiceTest {
 	
 	@Autowired
 	private VisitAppointmentDao visitAppointmentDao;
-
+	@Autowired
 	private VisitAppointmentService visitAppointmentService;
 	
 	@Before
 	public void doSetup(){
 		visitAppointmentDao = mock(VisitAppointmentDao.class);
+		visitAppointmentService  = mock(VisitAppointmentService.class);
 	}
 
 	@Test

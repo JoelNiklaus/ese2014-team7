@@ -10,9 +10,12 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.sample.controller.pojos.AdForm;
 import org.sample.controller.service.AdService;
+import org.sample.controller.service.AdServiceImpl;
 import org.sample.model.Ad;
 import org.sample.model.dao.AdDao;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.google.common.collect.Iterables;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -21,16 +24,18 @@ import static org.mockito.Mockito.when;
 public class AdServiceTest {
 
 		private AdDao adDao;
-		@Autowired
 		private AdService adService;
+		
 	
 		@Before
 		public void doSetup(){
 			adDao = mock(AdDao.class);
+			adService = mock(AdService.class);
 		}
 		
 		@Test
 		public void testSaveFrom(){
+			
 			AdForm adForm = new AdForm();
 			
 			adForm.setPlacerId(1L);
@@ -53,20 +58,18 @@ public class AdServiceTest {
 			adForm.setYou("testYou");
 			adForm.setLat("testLat");
 			adForm.setLng("testLng");
-			
-			when(adDao.save(any(Ad.class))).thenAnswer(new Answer<Ad>(){
-				public Ad answer(InvocationOnMock invocation) throws Throwable{
-					Ad ad = (Ad) invocation.getArguments()[0];
-					ad.setId(1L);
-					return ad;
-				}
-			});
 
 			assertNull(adForm.getId());
 			
-			adForm = adService.saveFrom(adForm);
+			
+			adService.saveFrom(adForm);
+			
+			Iterable<Ad> ads = adDao.findAll();
+			Ad ad = new Ad();
+			
+			ad = Iterables.getLast(ads);
 		
-			assertNotNull(adForm.getId());
-			assertTrue(adForm.getId() > 0);			
+			assertNotNull(ad.getId());
+			assertTrue(ad.getId() > 0);			
 		}
 }

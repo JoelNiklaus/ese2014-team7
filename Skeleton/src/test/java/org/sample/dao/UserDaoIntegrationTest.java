@@ -14,12 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/config/springMVC.xml","file:src/main/webapp/WEB-INF/config/springData.xml"})
+@ContextConfiguration(locations = {"file:/src/main/webapp/WEB-INF/config/spring*.xml"})
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
 public class UserDaoIntegrationTest {
 
-    @Autowired
+	@Autowired	
     UserDao userDao;
 
     

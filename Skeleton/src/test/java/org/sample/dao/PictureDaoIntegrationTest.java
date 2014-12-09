@@ -22,7 +22,7 @@ public class PictureDaoIntegrationTest {
 
 	@Test
 	public void testFindByFileName() {
-		String PATH =  "/Skeleton/src/main/webapp/img/picturer.jpg";
+		String PATH =  "/Skeleton/src/main/webapp/img/picture.jpg";
     	
     	Picture picture = new Picture();
     	picture.setFilePath(PATH);
