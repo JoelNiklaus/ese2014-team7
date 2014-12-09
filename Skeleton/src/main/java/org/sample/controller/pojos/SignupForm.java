@@ -46,7 +46,7 @@ public class SignupForm {
     
     private int houseNr;
     
-    @Pattern(regexp = "[a-zA-Z]+", 
+    @Pattern(regexp = "[a-zA-Z\\s]+", 
     	    message = "Enter your city")
     private String city;
     
