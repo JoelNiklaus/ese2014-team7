@@ -32,6 +32,7 @@
     
 	<div class="row">
 		<div class="col-md-5">
+		
 			<div class="fotorama" data-ratio="800/600">
 				<c:forEach items="${ad.pictures}" var="pic">
 					<img src="/Skeleton/img/ad/${pic.fileName}" />
@@ -41,7 +42,7 @@
 			
 		</div>
 		<div class="col-md-5"></div>
-		<br />
+		<br />	
 		<div class="col-md-3" id="map"></div>
 
 	</div>
