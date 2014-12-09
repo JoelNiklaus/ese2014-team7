@@ -35,11 +35,12 @@
 					</c:if>
 				</c:forEach>
 			</a>
+			<p style="padding: 10px;">${bookmark.ad.description}</p>
 		</div>
 
 		<div class="panel-footer">
-			<b>Price:</b> CHF ${bookmark.ad.rent} <b>Room Size:</b>
-			${bookmark.ad.roomSize}m²
+			<b>Area: </b>${bookmark.ad.city}, <b>Rent:</b> CHF ${bookmark.ad.rent}, <b>Room
+							Size:</b> ${bookmark.ad.roomSize}m², <b>Posted: </b>${bookmark.ad.postingDateFormatted}
 			<a class="btn btn-danger btn-xs pull-right" href="removeBookmark?id=${bookmark.bookmarkId}"><span class="glyphicon glyphicon-remove"></span>delete</a>
 		</div>
 	</div>

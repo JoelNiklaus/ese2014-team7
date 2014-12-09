@@ -95,8 +95,17 @@
 			</div>
 		</div>
 	</spring:bind>
+	<spring:bind path="description">
+		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
+			<label class="control-label col-sm-3" for="description">Description</label>
+			<div class="col-sm-9">
+				<form:input path="description" class="form-control" id="description" type="text" maxlength="1000" placeholder="Description" value="${loggedInUser.description}"/>
+				<form:errors path="description" class="help-block" element="span" />
+			</div>
+		</div>
+	</spring:bind>
 
-		<div class="row">
+		<div class="form-group">
 			<label class="control-label col-sm-3" for="imageId">Profile Image</label>
 			<div class="col-sm-6">
 		 		<form:input class="form-control" path="imageId" type="hidden" name="file" id="file" value="${loggedInUser.profileImage.id}" />

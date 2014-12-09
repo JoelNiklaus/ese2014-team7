@@ -83,7 +83,7 @@
 		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
 			<label class="control-label col-sm-3" for="houseNr">House Number</label>
 			<div class="col-sm-9">
-				<form:input path="houseNr" class="form-control" id="houseNr" type="text" maxlength="45" placeholder="House Number" value="${loggedInUser.address.houseNr}"/>
+				<form:input path="houseNr" class="form-control" id="houseNr" type="number" maxlength="45" placeholder="House Number" value="${loggedInUser.address.houseNr}"/>
 				<form:errors path="houseNr" class="help-block" element="span" />
 			</div>
 		</div>
@@ -92,7 +92,7 @@
 		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
 			<label class="control-label col-sm-3" for="zip">ZIP-Code</label>
 			<div class="col-sm-9">
-				<form:input path="zip" class="form-control" id="zip" type="text" maxlength="45" placeholder="ZIP-Code" value="${loggedInUser.address.zip}"/>
+				<form:input path="zip" class="form-control" id="zip" type="number" maxlength="45" placeholder="ZIP-Code" value="${loggedInUser.address.zip}"/>
 				<form:errors path="zip" class="help-block" element="span" />
 			</div>
 		</div>
@@ -106,7 +106,16 @@
 			</div>
 		</div>
 	</spring:bind>
-		<div class="row">
+	<spring:bind path="description">
+		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
+			<label class="control-label col-sm-3" for="description">Description</label>
+			<div class="col-sm-9">
+				<form:input path="description" class="form-control" id="description" type="text" maxlength="1000" placeholder="Description" value="${loggedInUser.description}"/>
+				<form:errors path="description" class="help-block" element="span" />
+			</div>
+		</div>
+	</spring:bind>
+		<div class="form-group">
 			<label class="control-label col-sm-3" for="imageId">Profile Image</label>
 			<div class="col-sm-6">
 		 		<form:input class="form-control" path="imageId" type="hidden" name="file" id="file" value="${loggedInUser.profileImage.id}" />
