@@ -6,7 +6,7 @@
 <c:import url="template/header.jsp" />
 
 <div class="jumbotron">
-<h1>${otherUser.firstName }${otherUser.lastName }</h1>
+<h1>${otherUser.firstName } ${otherUser.lastName }</h1>
 <div class="row">
 	<div class="col-sm-4">
 		<c:if test="${not empty otherUser.profileImage}">
