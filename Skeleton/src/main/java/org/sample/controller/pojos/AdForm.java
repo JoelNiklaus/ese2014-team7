@@ -2,6 +2,7 @@ package org.sample.controller.pojos;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -46,6 +47,7 @@ public class AdForm {
 	@NotNull
 	private Long roomSize;
 	
+	@Lob
 	@NotNull
 	@Pattern(regexp = "[a-zA-ZäöüÄÖÜ.,;:0-9()\\s]+", message = "Enter a description about the room\n")
 	private String description;
