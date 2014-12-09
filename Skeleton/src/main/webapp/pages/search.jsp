@@ -207,13 +207,11 @@
 					<div class="panel panel-primary" onclick="javascript:location.href='ad?id=${ad.id}'">
 						<div class="panel-heading" style="min-height: 70px; max-height: 70px"><h5>${ad.title}</h5></div>
 						<div class="panel-body" style="min-height: 300px; max-height: 300px" >
-							<a class="pull-left" style="padding:1em;" >
-							
-										
+							<a style="padding:1em;" >		
 							<c:if test="${not empty ad.pictures}">
 								<c:forEach items="${ad.pictures}" varStatus="loopCount" var="pic">
 									<c:if test="${loopCount.count eq 1}">
-										<img width="150px" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
+										<img width="150px;" class="gallery" src="/Skeleton/img/ad/${pic.fileName}" />
 									</c:if>
 								</c:forEach>
 							</c:if>
