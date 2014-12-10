@@ -11,6 +11,7 @@
 		${success}
 	</div>
 </c:if>
+
 <style>
   .cluster {
     background: #2d84c8;
