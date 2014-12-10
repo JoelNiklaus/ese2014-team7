@@ -49,8 +49,7 @@ public class AdForm {
 	private Long roomSize;
 	
 	@Lob
-	@NotNull
-	@Pattern(regexp = "[a-zA-ZäöüÄÖÜ.,;:0-9()\\s]+", message = "Enter a description about the room\n")
+	@NotNull(message = "Enter a description about the room\n")
 	private String description;
 	
 	private Long distanceToPublicTransport;
