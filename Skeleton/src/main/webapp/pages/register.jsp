@@ -72,7 +72,7 @@
 		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
 			<label class="control-label col-sm-3" for="houseNr">House Number</label>
 			<div class="col-sm-9">
-				<form:input path="houseNr" class="form-control" id="houseNr" type="text" maxlength="45" placeholder="House Number" />
+				<form:input path="houseNr" class="form-control" id="houseNr" type="number" maxlength="45" placeholder="House Number" />
 				<form:errors path="houseNr" class="help-block" element="span" />
 			</div>
 		</div>
@@ -81,7 +81,7 @@
 		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
 			<label class="control-label col-sm-3" for="zip">ZIP-Code</label>
 			<div class="col-sm-9">
-				<form:input path="zip" class="form-control" id="zip" type="text" maxlength="45" placeholder="ZIP-Code" />
+				<form:input path="zip" class="form-control" id="zip" type="number" maxlength="45" placeholder="ZIP-Code" />
 				<form:errors path="zip" class="help-block" element="span" />
 			</div>
 		</div>
@@ -99,7 +99,7 @@
 		<div class="form-group ${status.error ? 'has-error has-feedback' : ''}">
 			<label class="control-label col-sm-3" for="description">Description</label>
 			<div class="col-sm-9">
-				<form:input path="description" class="form-control" id="description" type="text" maxlength="1000" placeholder="Description" value="${loggedInUser.description}"/>
+				<form:textarea path="description" class="form-control" id="description" type="text" maxlength="1000" placeholder="Description" value="${loggedInUser.description}"/>
 				<form:errors path="description" class="help-block" element="span" />
 			</div>
 		</div>
