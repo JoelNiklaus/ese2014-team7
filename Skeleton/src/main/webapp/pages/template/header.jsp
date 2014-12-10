@@ -9,6 +9,7 @@
 		<title>Roomiez.</title>
 		
 		<link rel="shortcut icon" href="/Skeleton/img/favicon.ico" >
+		<link rel="icon" href="/Skeleton/img/favicon.ico" type="image/x-icon">
 		
 		<link rel="stylesheet" type="text/css" href="/Skeleton/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/Skeleton/css/custom.css">

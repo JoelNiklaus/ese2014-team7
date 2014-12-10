@@ -28,31 +28,6 @@ public class LoginServiceTest {
         loginServiceImpl = new LoginServiceImpl();
     }
 
-    @Test
-    public void testSaveForm() {
-
-        SignupForm signupForm = new SignupForm();
-        signupForm.setLastName("formLast");
-        signupForm.setFirstName("formFirst");
-        signupForm.setEmail("form@test.com");
-        signupForm.setPassword("password");
-        signupForm.setPasswordConfirm("password");
-        
-        when(userDao.save(any(User.class)))
-                .thenAnswer(new Answer<User>() {
-                    public User answer(InvocationOnMock invocation) throws Throwable {
-                        User user = (User) invocation.getArguments()[0];
-                        user.setId(1L);
-                        return user;
-                    }
-                });
-
-        assertNull(signupForm.getId());
-        
-        signupForm = loginServiceImpl.saveFrom(signupForm);
-        
-        
-    }
 
     @Test(expected = InvalidUserException.class)
     public void testInvalidUserException() {

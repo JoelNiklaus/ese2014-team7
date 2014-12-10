@@ -194,7 +194,7 @@
 	  	<li role="presentation"><a href="#listTab"><span class="glyphicon glyphicon-list"></span> List</a></li>
 	  	<li role="presentation"><a href="#mapTab"><span class="glyphicon glyphicon-globe"></span> Map</a></li>
 	</ul>
-		
+	<br>	
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="mapTab">
 			<div class="well well-sm"><div id="map"></div></div>
